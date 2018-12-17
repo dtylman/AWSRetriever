@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Amazon;
 using Amazon.Lambda;
 using Amazon.Lambda.Model;
@@ -28,6 +29,9 @@ namespace heaven
             }
 
             foreach (RegionEndpoint region in RegionEndpoint.EnumerableAllRegions) {
+                AWSAPI api = new AWSAPI();
+                List<AWSObject> objects = new List<AWSObject>();
+                api.Read(credentials, region, objects, this._maxItems);
                 try
                 {
                     log.Printf("Reading from {0}...", region);
