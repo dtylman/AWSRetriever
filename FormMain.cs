@@ -34,27 +34,11 @@ namespace heaven
             {
                 credentials = new BasicAWSCredentials(this._accessKey, this._secretKey);
             }
-            CredentialProfile basicProfile;
-            AWSCredentials awsCredentials;
-            var sharedFile = new SharedCredentialsFile();
-            if (!string.IsNullOrEmpty(this._profileName))
+            else
             {
-                if (!string.IsNullOrEmpty(this._profilesLocation))
-                {
-
-                }
-                AWSCredentialsFactory.TryGetAWSCredentials(_profileName, out basicProfile);
+                credentials = FallbackCredentialsFactory.GetCredentials();
             }
-            sharedFile.TryGetProfile(SharedCredentialsFile.DefaultProfileName)
-            if (sharedFile.TryGetProfile("basic_profile", out basicProfile) &&
-                AWSCredentialsFactory.TryGetAWSCredentials(basicProfile, sharedFile, out awsCredentials))
-            {
-                using (var client = new AmazonS3Client(awsCredentials, basicProfile.Region))
-                {
-                    var response = client.ListBuckets();
-                }
-            }
-            var client = new AmazonCloudFormationClient();
+            var client = new AmazonCloudFormationClient(credentials);
             var request = new DescribeStacksRequest();
             var response = client.DescribeStacks(request);
 
