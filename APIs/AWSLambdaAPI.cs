@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Amazon;
 using Amazon.Lambda;
 using Amazon.Lambda.Model;
@@ -24,20 +25,25 @@ namespace heaven.APIs
         public override void Read(AWSCredentials credentials, RegionEndpoint region)
         {
             AmazonLambdaClient client = new AmazonLambdaClient(credentials, region);
-            ListFunctionsResponse resp = new ListFunctionsResponse();
-            ListFunctionsRequest req = new ListFunctionsRequest
-            {
-                Marker = resp.NextMarker,
-                MaxItems = this.maxItems
-            };
+            ListFunctionsResponse resp = new ListFunctionsResponse();                      
             do
             {
+                ListFunctionsRequest req = new ListFunctionsRequest
+                {
+                    Marker = resp.NextMarker,
+                    MaxItems = this.maxItems
+                };
                 resp = client.ListFunctions(req);
+                if (resp.HttpStatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    throw new ApplicationException(resp.ToString());
+                }
                 foreach (FunctionConfiguration func in resp.Functions)
                 {
                     AWSObject awsObject = new AWSObject
                     {
-                        Region = region,
+                        Name = func.FunctionName,
+                        Region = region.SystemName,
                         Arn = func.FunctionArn,
                         Description = func.Description,
                         LastModified = func.LastModified,

@@ -23,6 +23,32 @@ namespace heaven
         {
             InitializeComponent();
             InitializeBackgroundWorker();
+            PopulateListView();
+        }
+
+        private void PopulateListView()
+        {
+            this.listViewObjects.Columns.Clear();
+            this.listViewObjects.Items.Clear();
+            foreach (AWSObject obj in this.resourceLoader.Objects)
+            {
+                ListViewItem item = this.listViewObjects.Items.Add(obj.Type);
+                item.SubItems.Add(obj.Region);
+                item.SubItems.Add(obj.Name);
+                item.SubItems.Add(obj.Arn);
+                item.SubItems.Add(obj.Description);
+                item.SubItems.Add(obj.LastModified);
+                item.SubItems.Add(obj.Role);
+                item.SubItems.Add(obj.Version);
+                item.Tag = obj;
+            }
+            string[] heads = new string[] {
+            "Type", "Region","Name","Arn","Description","Last Modified", "Role","Version"};
+            for (int i = 0; i < heads.Length; i++)
+            {
+                ColumnHeader column = this.listViewObjects.Columns.Add(heads[i]);
+                column.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            }
         }
 
         private void InitializeBackgroundWorker()
@@ -43,14 +69,15 @@ namespace heaven
             if (e.UserState is Exception)
             {
                 Print(e.UserState as Exception);
-            } else
+            }
+            else
             {
                 Print(e.UserState);
             }
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {            
+        {
             if (e.Error != null)
             {
                 Print(e.Error);
@@ -65,29 +92,30 @@ namespace heaven
             {
                 this.statusLabel.Text = "Done";
             }
-            
+
             buttonLoad.Enabled = true;
             buttonStop.Enabled = false;
+            PopulateListView();
         }
 
         private void Print(Exception e)
-        {            
+        {
             Print("Error: " + e.Message);
         }
 
         private void Print(object message)
         {
             this.statusLabel.Text = message.ToString();
-            this.textLog.AppendText(message.ToString() + "\n");            
+            this.textLog.AppendText(message.ToString() + "\n");
         }
 
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {            
+        {
             BackgroundWorker worker = sender as BackgroundWorker;
-            this.resourceLoader.Load(worker, e);            
+            this.resourceLoader.Load(worker, e);
         }
-       
+
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -102,13 +130,13 @@ namespace heaven
         {
             statusLabel.Text = String.Empty;
             this.buttonLoad.Enabled = false;
-            this.buttonStop.Enabled = true;            
+            this.buttonStop.Enabled = true;
             backgroundWorker.RunWorkerAsync();
         }
 
         private void ToolStripButtonStop_Click(object sender, EventArgs e)
-        {            
-            this.backgroundWorker.CancelAsync();            
+        {
+            this.backgroundWorker.CancelAsync();
             buttonStop.Enabled = false;
         }
     }

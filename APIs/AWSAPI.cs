@@ -22,6 +22,7 @@ namespace heaven.APIs
 
         protected void AddObject(AWSObject awsObject)
         {
+            awsObject.Type = Name;
             this.container.Add(awsObject);
         }
     }

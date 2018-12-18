@@ -53,6 +53,12 @@
     <Reference Include="AWSSDK.Lambda">
       <HintPath>packages\AWSSDK.Lambda.3.3.19.4\lib\net45\AWSSDK.Lambda.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.S3">
+      <HintPath>packages\AWSSDK.S3.3.3.31.3\lib\net45\AWSSDK.S3.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormMain.cs">
@@ -89,6 +95,7 @@
     <Compile Include="AWSObject.cs" />
     <Compile Include="APIs\AWSAPI.cs" />
     <Compile Include="APIs\AWSLambdaAPI.cs" />
+    <Compile Include="APIs\AWSS3API.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
