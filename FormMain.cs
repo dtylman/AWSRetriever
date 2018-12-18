@@ -29,7 +29,9 @@ namespace heaven
 
         private void toolStripButtonClose_Click(object sender, EventArgs e)
         {
-            Close();
+            ResourceLister rl = new ResourceLister();
+            rl.List();
+
         }
     }
 }

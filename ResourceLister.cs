@@ -4,69 +4,54 @@ using Amazon;
 using Amazon.Lambda;
 using Amazon.Lambda.Model;
 using Amazon.Runtime;
+using heaven.APIs;
 
 namespace heaven
 {
     internal class ResourceLister
     {
         private AppLogger log = AppLogger.GetLogger();
+        private readonly List<AWSAPI> apis = new List<AWSAPI>();
+        private string accessKey;
+        private string secretKey;
+        private int maxItems = 100;
+        private readonly List<AWSObject> objects = new List<AWSObject>();
 
-        private string _accessKey;
-        private string _secretKey;
-        private int _maxItems = 100;
-
-        internal void List()
+        public ResourceLister()
         {
-            log.Print("Listing...");
-            AWSCredentials credentials = null;
-            if (!string.IsNullOrEmpty(this._accessKey))
-            {
-                credentials = new BasicAWSCredentials(this._accessKey, this._secretKey);
-            }
-            else
-            {
-                credentials = FallbackCredentialsFactory.GetCredentials();
-            }
+            this.apis.Add(new AWSLambdaAPI(this.objects,this.maxItems));
+        }
 
-            foreach (RegionEndpoint region in RegionEndpoint.EnumerableAllRegions) {
-                AWSAPI api = new AWSAPI();
-                List<AWSObject> objects = new List<AWSObject>();
-                api.Read(credentials, region, objects, this._maxItems);
-                try
+        public void List()
+        {
+            this.objects.Clear();
+            AWSCredentials creds = GetCredentials();
+            foreach (AWSAPI api in this.apis)
+            {
+                foreach (RegionEndpoint region in RegionEndpoint.EnumerableAllRegions)
                 {
-                    log.Printf("Reading from {0}...", region);
-                    AmazonLambdaClient client = new AmazonLambdaClient(credentials, region);
-                    ListFunctionsResponse resp = new ListFunctionsResponse();
-                    ListFunctionsRequest req = new ListFunctionsRequest
+                    log.Printf("Fetching {1} from {0}...", api.Name, region);
+                    try
                     {
-                        Marker = resp.NextMarker,
-                        MaxItems = this._maxItems
-                    };
-                    do
-                    {
-                        resp = client.ListFunctions(req);
-                        foreach (FunctionConfiguration func in resp.Functions)
-                        {
-                            AWSObject awsObject = new AWSObject
-                            {
-                                Region = region,
-                                Arn = func.FunctionArn,
-                                Description = func.Description,
-                                LastModified = func.LastModified,
-                                Version = func.Version,
-                                Role = func.Role,
-                                Object = func, 
-                            };
-                            log.Print(awsObject);
-                        }
+                        api.Read(creds, region);
                     }
-                    while (!string.IsNullOrEmpty(resp.NextMarker));
-                }
-                catch (Exception ex)
-                {
-                    log.Print(ex);
+                    catch (Exception ex)
+                    {
+                        log.Print(ex);
+                    }
                 }
             }
         }
+
+        private AWSCredentials GetCredentials()
+        {
+            if (!string.IsNullOrEmpty(this.accessKey))
+            {
+                return new BasicAWSCredentials(this.accessKey, this.secretKey);
+            }
+            return FallbackCredentialsFactory.GetCredentials();
+        }
+
     }
 }
+    

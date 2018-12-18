@@ -2,7 +2,7 @@
 
 namespace heaven
 {
-    internal class AWSObject
+    public class AWSObject
     {
         public string Arn;
         public string Description;

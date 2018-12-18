@@ -21,5 +21,10 @@ namespace heaven
         {
             Print(string.Format(format, arg));
         }
+
+        internal void Printf(string format, object arg, object arg1)
+        {
+            Print(string.Format(format, arg, arg1));
+        }
     }
 }
