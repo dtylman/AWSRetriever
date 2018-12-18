@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Amazon;
 using Amazon.Lambda;
 using Amazon.Lambda.Model;
@@ -8,49 +9,68 @@ using heaven.APIs;
 
 namespace heaven
 {
-    internal class ResourceLister
+    internal class ResourceLoader
     {
-        private AppLogger log = AppLogger.GetLogger();
         private readonly List<AWSAPI> apis = new List<AWSAPI>();
-        private string accessKey;
-        private string secretKey;
+        private string accessKey = "danny";
+        private string secretKey = "bunny";
         private int maxItems = 100;
         private readonly List<AWSObject> objects = new List<AWSObject>();
 
-        public ResourceLister()
-        {
-            this.apis.Add(new AWSLambdaAPI(this.objects,this.maxItems));
+        public string AccessKey { get => accessKey; set => accessKey = value; }
+        public string SecretKey { get => secretKey; set => secretKey = value; }
+        public int MaxItems { get => maxItems; set => maxItems = value; }
+
+        public ResourceLoader()
+        {            
+            this.apis.Add(new AWSLambdaAPI(this.objects,this.MaxItems));
         }
 
-        public void List()
+        internal void Load(BackgroundWorker worker, DoWorkEventArgs e)
         {
             this.objects.Clear();
             AWSCredentials creds = GetCredentials();
+            List<RegionEndpoint> regions = new List<RegionEndpoint>(RegionEndpoint.EnumerableAllRegions);
+            int totalItems = this.apis.Count * regions.Count;
+            int currentItem = 0;
             foreach (AWSAPI api in this.apis)
-            {
-                foreach (RegionEndpoint region in RegionEndpoint.EnumerableAllRegions)
-                {
-                    log.Printf("Fetching {1} from {0}...", api.Name, region);
+            {                
+                foreach (RegionEndpoint region in regions)
+                {                    
+                    int progress = (currentItem * 100 )/ totalItems ;
+                    worker.ReportProgress(progress, string.Format("Fetching '{0}' from {1}", api.Name, region)); 
                     try
                     {
+                        if (worker.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return;
+                        }
                         api.Read(creds, region);
                     }
                     catch (Exception ex)
                     {
-                        log.Print(ex);
+                        worker.ReportProgress(progress, ex);                        
+                    }
+                    finally
+                    {
+                        currentItem++;
                     }
                 }
+                currentItem++;
             }
+            worker.ReportProgress(100, "Done");
         }
 
         private AWSCredentials GetCredentials()
         {
-            if (!string.IsNullOrEmpty(this.accessKey))
+            if (!string.IsNullOrEmpty(this.AccessKey))
             {
-                return new BasicAWSCredentials(this.accessKey, this.secretKey);
+                return new BasicAWSCredentials(this.AccessKey, this.SecretKey);
             }
             return FallbackCredentialsFactory.GetCredentials();
         }
+
 
     }
 }

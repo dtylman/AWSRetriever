@@ -86,7 +86,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ResourceLister.cs" />
-    <Compile Include="AppLogger.cs" />
     <Compile Include="AWSObject.cs" />
     <Compile Include="APIs\AWSAPI.cs" />
     <Compile Include="APIs\AWSLambdaAPI.cs" />
@@ -97,8 +96,6 @@
   <ItemGroup>
     <Analyzer Include="packages\AWSSDK.CloudFormation.3.3.13.4\analyzers\dotnet\cs\AWSSDK.CloudFormation.CodeAnalysis.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="APIs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
