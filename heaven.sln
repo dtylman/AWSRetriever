@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "heaven", "heaven.csproj", "{20B2599D-0678-4501-BCD3-26BEC04FEB93}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "heaven-installer", "heaven-installer\heaven-installer.vdproj", "{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{20B2599D-0678-4501-BCD3-26BEC04FEB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20B2599D-0678-4501-BCD3-26BEC04FEB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20B2599D-0678-4501-BCD3-26BEC04FEB93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}.Debug|Any CPU.ActiveCfg = Debug
+		{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}.Debug|Any CPU.Build.0 = Debug
+		{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}.Release|Any CPU.ActiveCfg = Release
+		{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

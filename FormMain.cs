@@ -122,7 +122,7 @@ namespace heaven
         }
 
         private void ToolStripButtonClose_Click(object sender, EventArgs e)
-        {
+        {            
             Close();
         }
 
@@ -138,6 +138,12 @@ namespace heaven
         {
             this.backgroundWorker.CancelAsync();
             buttonStop.Enabled = false;
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            FormCredentials formCredentials= new FormCredentials();
+            formCredentials.ShowDialog(this);
         }
     }
 }
