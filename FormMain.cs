@@ -1,36 +1,29 @@
-﻿using Amazon.CloudFormation;
-using Amazon.CloudFormation.Model;
-using Amazon.Runtime;
-using Amazon.Runtime.CredentialManagement;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Amazon.Runtime;
+using heaven.APIs;
 
 namespace heaven
 {
     public partial class FormMain : Form
     {
-        private ResourceLoader resourceLoader = new ResourceLoader();
+        private readonly AWSResources awsResources = new AWSResources();
+        private AWSCredentials creds;
 
         public FormMain()
         {
             InitializeComponent();
             InitializeBackgroundWorker();
             PopulateListView();
+
         }
 
         private void PopulateListView()
         {
             this.listViewObjects.Columns.Clear();
             this.listViewObjects.Items.Clear();
-            foreach (AWSObject obj in this.resourceLoader.Objects)
+            foreach (AWSObject obj in this.awsResources.Objects)
             {
                 ListViewItem item = this.listViewObjects.Items.Add(obj.Type);
                 item.SubItems.Add(obj.Region);
@@ -51,16 +44,26 @@ namespace heaven
             }
         }
 
+        private AWSCredentials GetCredentials()
+        {
+            if (this.creds == null)
+            {
+                FormCredentials formCredentials = new FormCredentials();
+                DialogResult dr = formCredentials.ShowDialog(this);
+                if (dr == DialogResult.OK)
+                {
+                    this.creds = formCredentials.Credentials;
+                }
+
+            }
+            return this.creds;
+        }
+
         private void InitializeBackgroundWorker()
         {
-            backgroundWorker.DoWork +=
-                new DoWorkEventHandler(BackgroundWorker_DoWork);
-            backgroundWorker.RunWorkerCompleted +=
-                new RunWorkerCompletedEventHandler(
-            BackgroundWorker_RunWorkerCompleted);
-            backgroundWorker.ProgressChanged +=
-                new ProgressChangedEventHandler(
-            BackgroundWorker_ProgressChanged);
+            backgroundWorker.DoWork += new DoWorkEventHandler(BackgroundWorker_DoWork);
+            backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
+            backgroundWorker.ProgressChanged += new ProgressChangedEventHandler(BackgroundWorker_ProgressChanged);
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -85,7 +88,7 @@ namespace heaven
             }
             else if (e.Cancelled)
             {
-                Print("Canceled");
+                Print("Canceled\n");
                 this.progressBar.Value = 0;
             }
             else
@@ -100,20 +103,20 @@ namespace heaven
 
         private void Print(Exception e)
         {
-            Print("Error: " + e.Message);
+            Print("Error: " + e.Message + "\n");
         }
 
         private void Print(object message)
         {
             this.statusLabel.Text = message.ToString();
-            this.textLog.AppendText(message.ToString() + "\n");
+            this.textLog.AppendText(message.ToString());
         }
 
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            this.resourceLoader.Load(worker, e);
+            this.awsResources.Scan(this.creds, worker, e);
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -122,12 +125,13 @@ namespace heaven
         }
 
         private void ToolStripButtonClose_Click(object sender, EventArgs e)
-        {            
+        {
             Close();
         }
 
         private void ToolStripButtonLoad_Click(object sender, EventArgs e)
         {
+            this.creds = GetCredentials();
             statusLabel.Text = String.Empty;
             this.buttonLoad.Enabled = false;
             this.buttonStop.Enabled = true;
@@ -140,10 +144,5 @@ namespace heaven
             buttonStop.Enabled = false;
         }
 
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-            FormCredentials formCredentials= new FormCredentials();
-            formCredentials.ShowDialog(this);
-        }
     }
 }

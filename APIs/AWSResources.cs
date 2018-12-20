@@ -4,23 +4,17 @@ using System.ComponentModel;
 using System.IO;
 using Amazon;
 using Amazon.Runtime;
-using heaven.APIs;
 using Newtonsoft.Json;
 
-namespace heaven
+namespace heaven.APIs
 {
-    internal class ResourceLoader
+    internal class AWSResources
     {
         private readonly List<AWSAPI> apis = new List<AWSAPI>();
-        private string accessKey;
-        private string secretKey;
-        private int maxItems = 100;
         private readonly List<AWSObject> objects = new List<AWSObject>();
 
-        public string AccessKey { get => accessKey; set => accessKey = value; }
+        private int maxItems = 100;
 
-
-        public string SecretKey { get => secretKey; set => secretKey = value; }
         public int MaxItems { get => maxItems; set => maxItems = value; }
 
         public IEnumerable<AWSObject> Objects
@@ -31,20 +25,29 @@ namespace heaven
             }
         }
 
-        public ResourceLoader()
+        public AWSResources()
         {
             this.apis.Add(new AWSLambdaAPI(this.objects, this.MaxItems));
             this.apis.Add(new AWSS3API(this.objects, this.maxItems));
+
             LoadFromFile();
         }
 
-
-        internal void Load(BackgroundWorker worker, DoWorkEventArgs e)
+        /// <summary>
+        /// Connects to AWS and reads all resources
+        /// </summary>
+        /// <param name="creds">Creds.</param>
+        /// <param name="worker">Worker.</param>
+        /// <param name="e">E.</param>
+        public void Scan(AWSCredentials creds, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            if (creds == null)
+            {
+                throw new ApplicationException("No Credentials are provided");
+            }
             this.objects.Clear();
             try
             {
-                AWSCredentials creds = GetCredentials();
                 List<RegionEndpoint> regions = new List<RegionEndpoint>(RegionEndpoint.EnumerableAllRegions);
                 int totalItems = this.apis.Count * regions.Count;
                 int currentItem = 0;
@@ -53,7 +56,7 @@ namespace heaven
                     foreach (RegionEndpoint region in regions)
                     {
                         int progress = (currentItem * 100) / totalItems;
-                        worker.ReportProgress(progress, string.Format("Fetching '{0}' from {1}", api.Name, region));
+                        worker.ReportProgress(progress, string.Format("Fetching '{0}' from {1}...", api.Name, region));
                         try
                         {
                             if (worker.CancellationPending)
@@ -61,7 +64,9 @@ namespace heaven
                                 e.Cancel = true;
                                 return;
                             }
+                            int before = this.objects.Count;     
                             api.Read(creds, region);
+                            worker.ReportProgress(progress, string.Format("{0} items read.\n", objects.Count - before));
                         }
                         catch (Exception ex)
                         {
@@ -78,10 +83,9 @@ namespace heaven
             finally
             {
                 SaveToFile(); 
-                worker.ReportProgress(100, "Done");
+                worker.ReportProgress(100, "Done\n");
             }
         }
-
 
         private void SaveToFile()
         {
@@ -137,16 +141,5 @@ namespace heaven
                 Console.WriteLine(ex);
             }
         }
-
-        private AWSCredentials GetCredentials()
-        {
-            if (!string.IsNullOrEmpty(this.AccessKey))
-            {
-                return new BasicAWSCredentials(this.AccessKey, this.SecretKey);
-            }
-            return FallbackCredentialsFactory.GetCredentials();
-        }
-
-
     }
 }

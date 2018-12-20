@@ -4,7 +4,6 @@ using Amazon;
 using Amazon.Lambda;
 using Amazon.Lambda.Model;
 using Amazon.Runtime;
-using heaven.APIs;
 
 namespace heaven.APIs
 {
@@ -55,6 +54,7 @@ namespace heaven.APIs
                 }
             }
             while (!string.IsNullOrEmpty(resp.NextMarker));
+
         }
 
     }

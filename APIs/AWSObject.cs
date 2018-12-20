@@ -1,7 +1,6 @@
 ﻿using System;
-using Amazon;
 
-namespace heaven
+namespace heaven.APIs
 {
     [Serializable]
     public class AWSObject

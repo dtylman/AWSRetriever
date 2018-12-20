@@ -59,6 +59,11 @@
     <Reference Include="AWSSDK.S3">
       <HintPath>packages\AWSSDK.S3.3.3.31.3\lib\net45\AWSSDK.S3.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormCredentials.cs">
@@ -100,11 +105,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ResourceLister.cs" />
-    <Compile Include="AWSObject.cs" />
     <Compile Include="APIs\AWSAPI.cs" />
     <Compile Include="APIs\AWSLambdaAPI.cs" />
     <Compile Include="APIs\AWSS3API.cs" />
+    <Compile Include="APIs\AWSResources.cs" />
+    <Compile Include="APIs\AWSObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
