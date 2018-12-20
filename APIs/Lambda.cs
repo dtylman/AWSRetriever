@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Amazon;
 using Amazon.Lambda;
 using Amazon.Lambda.Model;
@@ -7,9 +8,9 @@ using Amazon.Runtime;
 
 namespace heaven.APIs
 {
-    public class AWSLambdaAPI : AWSAPI
+    public class Lambda : AWSService
     {
-        public AWSLambdaAPI(List<AWSObject> container, int maxItems) : base(container, maxItems)
+        public Lambda(List<AWSObject> container, int maxItems) : base(container, maxItems)
         {
         }
 
@@ -17,11 +18,11 @@ namespace heaven.APIs
         {
             get
             {
-                return "Lambda: ListFunctions";
+                return "Lambda";
             }
         }
 
-        public override void Read(AWSCredentials credentials, RegionEndpoint region)
+        public override void Scan(AWSCredentials credentials, RegionEndpoint region, BackgroundWorker worker, int currentProgress)
         {
             AmazonLambdaClient client = new AmazonLambdaClient(credentials, region);
             ListFunctionsResponse resp = new ListFunctionsResponse();                      
@@ -33,10 +34,8 @@ namespace heaven.APIs
                     MaxItems = this.maxItems
                 };
                 resp = client.ListFunctions(req);
-                if (resp.HttpStatusCode != System.Net.HttpStatusCode.OK)
-                {
-                    throw new ApplicationException(resp.ToString());
-                }
+                CheckError(resp.HttpStatusCode, resp);
+
                 foreach (FunctionConfiguration func in resp.Functions)
                 {
                     AWSObject awsObject = new AWSObject
@@ -47,10 +46,9 @@ namespace heaven.APIs
                         Description = func.Description,
                         LastModified = func.LastModified,
                         Version = func.Version,
-                        Role = func.Role,
-                        Object = func,
+                        Role = func.Role
                     };
-                    AddObject(awsObject);
+                    AddObject(awsObject,func);
                 }
             }
             while (!string.IsNullOrEmpty(resp.NextMarker));

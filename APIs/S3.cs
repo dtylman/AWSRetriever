@@ -5,31 +5,30 @@ using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System.Linq;
+using System.ComponentModel;
 
 namespace heaven.APIs
 {
-    internal class AWSS3API : AWSAPI
+    internal class S3 : AWSService
     {
-        public AWSS3API(List<AWSObject> container, int maxItems) : base(container, maxItems)
+        public S3(List<AWSObject> container, int maxItems) : base(container, maxItems)
         {
         }
 
         public override string Name {
             get
             {
-                return "S3: ListBuckets";
+                return "S3";
             }
         }
 
-        public override void Read(AWSCredentials credentials, RegionEndpoint region)
+        public override void Scan(AWSCredentials credentials, RegionEndpoint region, BackgroundWorker worker, int currentProgress)
         {           
             AmazonS3Client client = new AmazonS3Client(credentials, region);            
             ListBucketsResponse resp = client.ListBuckets();
-            if (resp.HttpStatusCode != System.Net.HttpStatusCode.OK)
-            {
-                throw new ApplicationException(resp.ToString());
-            }
-            foreach (var buck in resp.Buckets)
+
+            CheckError(resp.HttpStatusCode, resp);
+            foreach (S3Bucket buck in resp.Buckets)
             {
                 // if bucket already exists, don't add it...
                 AWSObject awsObject = this.list.FirstOrDefault(item => item.Name == buck.BucketName);
@@ -40,9 +39,8 @@ namespace heaven.APIs
                         Name = buck.BucketName,
                         Region = region.SystemName,
                         LastModified = buck.CreationDate.ToString(),
-                        Object = buck
                     };
-                    AddObject(awsObject);
+                    AddObject(awsObject,buck);
                 }
             }
         }

@@ -8,7 +8,7 @@ namespace heaven
 {
     public partial class FormMain : Form
     {
-        private readonly AWSResources awsResources = new AWSResources();
+        private readonly AWSScanner awsScanner = new AWSScanner();
         private AWSCredentials creds;
 
         public FormMain()
@@ -23,9 +23,10 @@ namespace heaven
         {
             this.listViewObjects.Columns.Clear();
             this.listViewObjects.Items.Clear();
-            foreach (AWSObject obj in this.awsResources.Objects)
+            foreach (AWSObject obj in this.awsScanner.Objects)
             {
-                ListViewItem item = this.listViewObjects.Items.Add(obj.Type);
+                ListViewItem item = this.listViewObjects.Items.Add(obj.Service);
+                item.SubItems.Add(obj.Type);
                 item.SubItems.Add(obj.Region);
                 item.SubItems.Add(obj.Name);
                 item.SubItems.Add(obj.Arn);
@@ -36,7 +37,7 @@ namespace heaven
                 item.Tag = obj;
             }
             string[] heads = new string[] {
-            "Type", "Region","Name","Arn","Description","Last Modified", "Role","Version"};
+            "Service", "Type", "Region","Name","Arn","Description","Last Modified", "Role","Version"};
             for (int i = 0; i < heads.Length; i++)
             {
                 ColumnHeader column = this.listViewObjects.Columns.Add(heads[i]);
@@ -106,7 +107,7 @@ namespace heaven
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            this.awsResources.Scan(this.creds, worker, e);
+            this.awsScanner.Scan(this.creds, worker, e);
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)

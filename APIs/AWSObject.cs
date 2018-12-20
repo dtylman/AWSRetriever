@@ -5,6 +5,7 @@ namespace heaven.APIs
     [Serializable]
     public class AWSObject
     {
+        public string Service;
         public string Type;
         public string Region;
         public string Name;

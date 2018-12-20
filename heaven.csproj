@@ -64,6 +64,9 @@
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="AWSSDK.EC2">
+      <HintPath>packages\AWSSDK.EC2.3.3.78\lib\net45\AWSSDK.EC2.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormAbout.cs">
@@ -114,12 +117,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="APIs\AWSAPI.cs" />
-    <Compile Include="APIs\AWSLambdaAPI.cs" />
-    <Compile Include="APIs\AWSS3API.cs" />
-    <Compile Include="APIs\AWSResources.cs" />
+    </Compile>    
+    <Compile Include="APIs\AWSService.cs" />
+    <Compile Include="APIs\Lambda.cs" />
+    <Compile Include="APIs\S3.cs" />
+    <Compile Include="APIs\AWSScanner.cs" />
     <Compile Include="APIs\AWSObject.cs" />
+    <Compile Include="APIs\EC2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

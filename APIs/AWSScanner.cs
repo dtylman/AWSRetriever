@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace heaven.APIs
 {
-    internal class AWSResources
+    internal class AWSScanner
     {        
         private readonly List<AWSObject> objects = new List<AWSObject>();
 
@@ -24,7 +24,7 @@ namespace heaven.APIs
             }
         }
 
-        public AWSResources()
+        public AWSScanner()
         {
             LoadFromFile();
         }
@@ -46,16 +46,16 @@ namespace heaven.APIs
             this.objects.Clear();
             try
             {
-                List<AWSAPI> apis = GetSupportedAPIs();
+                List<AWSService> services = GetSupportedServices();
                 List<RegionEndpoint> regions = new List<RegionEndpoint>(RegionEndpoint.EnumerableAllRegions);
-                int totalItems = apis.Count * regions.Count;
+                int totalItems = services.Count * regions.Count;
                 int currentItem = 0;
-                foreach (AWSAPI api in apis)
+                foreach (AWSService service in services)
                 {
                     foreach (RegionEndpoint region in regions)
                     {
                         int progress = (currentItem * 100) / totalItems;
-                        worker.ReportProgress(progress, string.Format("Fetching '{0}' from {1}...", api.Name, region));
+                        worker.ReportProgress(progress, string.Format("Fetching '{0}' from {1}...", service.Name, region));
                         try
                         {
                             if (worker.CancellationPending)
@@ -63,8 +63,8 @@ namespace heaven.APIs
                                 e.Cancel = true;
                                 return;
                             }
-                            int before = this.objects.Count;     
-                            api.Read(creds, region);
+                            int before = this.objects.Count;
+                            service.Scan(creds, region, worker, progress);
                             worker.ReportProgress(progress, string.Format("{0} items read.\n", objects.Count - before));
                         }
                         catch (Exception ex)
@@ -86,11 +86,14 @@ namespace heaven.APIs
             }
         }
 
-        private List<AWSAPI> GetSupportedAPIs()
+        private List<AWSService> GetSupportedServices()
         {
-            List<AWSAPI> apis = new List<AWSAPI>();
-            apis.Add(new AWSLambdaAPI(this.objects, this.MaxItems));
-            apis.Add(new AWSS3API(this.objects, this.maxItems));
+            List<AWSService> apis = new List<AWSService>
+            {
+                new Lambda(objects, MaxItems),
+                new S3(objects, maxItems),
+                new EC2(objects,maxItems)
+            };
             return apis;            
        }
 
