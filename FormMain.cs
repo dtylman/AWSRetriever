@@ -42,22 +42,7 @@ namespace heaven
                 ColumnHeader column = this.listViewObjects.Columns.Add(heads[i]);
                 column.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             }
-        }
-
-        private AWSCredentials GetCredentials()
-        {
-            if (this.creds == null)
-            {
-                FormCredentials formCredentials = new FormCredentials();
-                DialogResult dr = formCredentials.ShowDialog(this);
-                if (dr == DialogResult.OK)
-                {
-                    this.creds = formCredentials.Credentials;
-                }
-
-            }
-            return this.creds;
-        }
+        }       
 
         private void InitializeBackgroundWorker()
         {
@@ -84,7 +69,7 @@ namespace heaven
             if (e.Error != null)
             {
                 Print(e.Error);
-                MessageBox.Show(e.Error.Message);
+                ShowErrorDiaglog(e.Error);                
             }
             else if (e.Cancelled)
             {
@@ -96,9 +81,14 @@ namespace heaven
                 this.statusLabel.Text = "Done";
             }
 
-            buttonLoad.Enabled = true;
+            buttonScan.Enabled = true;
             buttonStop.Enabled = false;
             PopulateListView();
+        }
+
+        private void ShowErrorDiaglog(Exception e)
+        {
+            MessageBox.Show("Error:" +  e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void Print(Exception e)
@@ -131,9 +121,12 @@ namespace heaven
 
         private void ToolStripButtonLoad_Click(object sender, EventArgs e)
         {
-            this.creds = GetCredentials();
+            if (this.creds == null)
+            {
+                ShowCredentialsDialog();
+            }            
             statusLabel.Text = String.Empty;
-            this.buttonLoad.Enabled = false;
+            this.buttonScan.Enabled = false;
             this.buttonStop.Enabled = true;
             backgroundWorker.RunWorkerAsync();
         }
@@ -144,5 +137,35 @@ namespace heaven
             buttonStop.Enabled = false;
         }
 
+        private void menuItemSetCredentials_Click(object sender, EventArgs e)
+        {
+            ShowCredentialsDialog();
+        }
+
+        private void ShowCredentialsDialog()
+        {
+            FormCredentials formCredentials = new FormCredentials();
+            DialogResult dr = formCredentials.ShowDialog(this);
+            if (dr == DialogResult.OK)
+            {
+                this.creds = formCredentials.Credentials;
+            }
+        }
+
+        private void viewItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowErrorDiaglog(new NotImplementedException());
+        }
+
+        private void menuItemAbout_Click(object sender, EventArgs e)
+        {
+            ShowAboutBox();
+        }
+
+        private void ShowAboutBox()
+        {
+            FormAbout formAbout = new FormAbout();
+            formAbout.ShowDialog();
+        }
     }
 }

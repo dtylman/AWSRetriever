@@ -9,8 +9,7 @@ using Newtonsoft.Json;
 namespace heaven.APIs
 {
     internal class AWSResources
-    {
-        private readonly List<AWSAPI> apis = new List<AWSAPI>();
+    {        
         private readonly List<AWSObject> objects = new List<AWSObject>();
 
         private int maxItems = 100;
@@ -27,9 +26,6 @@ namespace heaven.APIs
 
         public AWSResources()
         {
-            this.apis.Add(new AWSLambdaAPI(this.objects, this.MaxItems));
-            this.apis.Add(new AWSS3API(this.objects, this.maxItems));
-
             LoadFromFile();
         }
 
@@ -45,13 +41,16 @@ namespace heaven.APIs
             {
                 throw new ApplicationException("No Credentials are provided");
             }
+            
+
             this.objects.Clear();
             try
             {
+                List<AWSAPI> apis = GetSupportedAPIs();
                 List<RegionEndpoint> regions = new List<RegionEndpoint>(RegionEndpoint.EnumerableAllRegions);
-                int totalItems = this.apis.Count * regions.Count;
+                int totalItems = apis.Count * regions.Count;
                 int currentItem = 0;
-                foreach (AWSAPI api in this.apis)
+                foreach (AWSAPI api in apis)
                 {
                     foreach (RegionEndpoint region in regions)
                     {
@@ -86,6 +85,14 @@ namespace heaven.APIs
                 worker.ReportProgress(100, "Done\n");
             }
         }
+
+        private List<AWSAPI> GetSupportedAPIs()
+        {
+            List<AWSAPI> apis = new List<AWSAPI>();
+            apis.Add(new AWSLambdaAPI(this.objects, this.MaxItems));
+            apis.Add(new AWSS3API(this.objects, this.maxItems));
+            return apis;            
+       }
 
         private void SaveToFile()
         {

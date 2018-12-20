@@ -17,7 +17,7 @@ namespace heaven
         public FormCredentials()
         {
             InitializeComponent();
-            this.txtProfile.Text = SharedCredentialsFile.DefaultProfileName;
+            this.cmbProfile.Items.AddRange(new SharedCredentialsFile().ListProfileNames().ToArray());
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace heaven
         {
             get
             {
-                return this.txtProfile.Text;
+                return this.cmbProfile.SelectedItem.ToString();
             }
         }
 
@@ -72,11 +72,12 @@ namespace heaven
         {
             if (string.IsNullOrEmpty(txtAccessKey.Text))
             {
-                this.txtProfile.Text = SharedCredentialsFile.DefaultProfileName; 
+                //this.txtProfile.Text = SharedCredentialsFile.DefaultProfileName; 
             } else
             {
-                this.txtProfile.Text = "";
+                //this.txtProfile.Text = "";
             }
         }
+
     }
 }        

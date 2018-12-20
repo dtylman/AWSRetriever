@@ -6,12 +6,12 @@ namespace heaven.APIs
 {
     public abstract class AWSAPI
     {
-        private readonly List<AWSObject> container;
+        protected readonly List<AWSObject> list;
         protected int maxItems;
 
-        protected AWSAPI(List<AWSObject> container, int maxItems)
+        protected AWSAPI(List<AWSObject> list, int maxItems)
         {
-            this.container = container;
+            this.list = list;
             this.maxItems = maxItems;
         }
 
@@ -22,7 +22,7 @@ namespace heaven.APIs
         protected void AddObject(AWSObject awsObject)
         {
             awsObject.Type = Name;
-            this.container.Add(awsObject);
-        }
+            this.list.Add(awsObject);
+        }                
     }
 }

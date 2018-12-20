@@ -4,7 +4,7 @@ using Amazon;
 using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.S3.Model;
-using heaven.APIs;
+using System.Linq;
 
 namespace heaven.APIs
 {
@@ -22,8 +22,8 @@ namespace heaven.APIs
         }
 
         public override void Read(AWSCredentials credentials, RegionEndpoint region)
-        {
-            AmazonS3Client client = new AmazonS3Client(credentials, region);
+        {           
+            AmazonS3Client client = new AmazonS3Client(credentials, region);            
             ListBucketsResponse resp = client.ListBuckets();
             if (resp.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
@@ -31,14 +31,19 @@ namespace heaven.APIs
             }
             foreach (var buck in resp.Buckets)
             {
-                AWSObject awsObject = new AWSObject
+                // if bucket already exists, don't add it...
+                AWSObject awsObject = this.list.FirstOrDefault(item => item.Name == buck.BucketName);
+                if (awsObject == null)
                 {
-                    Name = buck.BucketName,
-                    Region = region.SystemName,
-                    LastModified = buck.CreationDate.ToString(),
-                    Object = buck
-                };
-                AddObject(awsObject);
+                    awsObject = new AWSObject
+                    {
+                        Name = buck.BucketName,
+                        Region = region.SystemName,
+                        LastModified = buck.CreationDate.ToString(),
+                        Object = buck
+                    };
+                    AddObject(awsObject);
+                }
             }
         }
     }

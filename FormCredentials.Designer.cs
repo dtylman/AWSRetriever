@@ -36,7 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtAccessKey = new System.Windows.Forms.TextBox();
             this.txtSecretKey = new System.Windows.Forms.TextBox();
-            this.txtProfile = new System.Windows.Forms.TextBox();
+            this.cmbProfile = new System.Windows.Forms.ComboBox();
             this.panelButtons.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,16 +73,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 9);
+            this.label1.Location = new System.Drawing.Point(12, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "AWS Access Key:";
+            
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 56);
+            this.label2.Location = new System.Drawing.Point(9, 59);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 13);
             this.label2.TabIndex = 3;
@@ -91,7 +92,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 103);
+            this.label3.Location = new System.Drawing.Point(9, 106);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(51, 13);
             this.label3.TabIndex = 5;
@@ -108,18 +109,19 @@
             // 
             // txtSecretKey
             // 
-            this.txtSecretKey.Location = new System.Drawing.Point(119, 53);
+            this.txtSecretKey.Location = new System.Drawing.Point(119, 56);
             this.txtSecretKey.Name = "txtSecretKey";
             this.txtSecretKey.Size = new System.Drawing.Size(297, 20);
             this.txtSecretKey.TabIndex = 7;
             this.txtSecretKey.UseSystemPasswordChar = true;
             // 
-            // txtProfile
+            // cmbProfile
             // 
-            this.txtProfile.Location = new System.Drawing.Point(119, 103);
-            this.txtProfile.Name = "txtProfile";
-            this.txtProfile.Size = new System.Drawing.Size(169, 20);
-            this.txtProfile.TabIndex = 8;
+            this.cmbProfile.FormattingEnabled = true;
+            this.cmbProfile.Location = new System.Drawing.Point(119, 103);
+            this.cmbProfile.Name = "cmbProfile";
+            this.cmbProfile.Size = new System.Drawing.Size(196, 21);
+            this.cmbProfile.TabIndex = 9;
             // 
             // FormCredentials
             // 
@@ -127,7 +129,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(426, 198);
             this.ControlBox = false;
-            this.Controls.Add(this.txtProfile);
+            this.Controls.Add(this.cmbProfile);
             this.Controls.Add(this.txtSecretKey);
             this.Controls.Add(this.txtAccessKey);
             this.Controls.Add(this.label3);
@@ -153,6 +155,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtAccessKey;
         private System.Windows.Forms.TextBox txtSecretKey;
-        private System.Windows.Forms.TextBox txtProfile;
+        private System.Windows.Forms.ComboBox cmbProfile;
     }
 }
