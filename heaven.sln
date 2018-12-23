@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "heaven", "heaven.csproj", "
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "heaven-installer", "heaven-installer\heaven-installer.vdproj", "{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "heave", "heave\heave\heave.csproj", "{27B32244-89A6-458B-A378-AF66AEFEA10F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "etoheaven", "..\etoheaven\etoheaven\etoheaven.csproj", "{0FC8B348-4972-41DB-B3C5-D05EE93D7971}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "heave.Desktop", "heave\heave.Desktop\heave.Desktop.csproj", "{C1A4289E-449B-4020-8E01-FDB0CDFF51A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "etoheaven.Desktop", "..\etoheaven\etoheaven.Desktop\etoheaven.Desktop.csproj", "{736D123C-2319-40A5-A583-BF373049EB01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudOps", "CloudOps\CloudOps.csproj", "{38DC0E7F-AF8D-4A2E-8E7E-E42E3839D2BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +23,22 @@ Global
 		{20B2599D-0678-4501-BCD3-26BEC04FEB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20B2599D-0678-4501-BCD3-26BEC04FEB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20B2599D-0678-4501-BCD3-26BEC04FEB93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27B32244-89A6-458B-A378-AF66AEFEA10F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27B32244-89A6-458B-A378-AF66AEFEA10F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27B32244-89A6-458B-A378-AF66AEFEA10F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27B32244-89A6-458B-A378-AF66AEFEA10F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1A4289E-449B-4020-8E01-FDB0CDFF51A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1A4289E-449B-4020-8E01-FDB0CDFF51A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1A4289E-449B-4020-8E01-FDB0CDFF51A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1A4289E-449B-4020-8E01-FDB0CDFF51A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}.Debug|Any CPU.ActiveCfg = Debug
+		{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}.Debug|Any CPU.Build.0 = Debug
+		{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}.Release|Any CPU.ActiveCfg = Release
+		{C72DAEE1-E9DD-44C7-95BD-12D7841BFD15}.Release|Any CPU.Build.0 = Release
+		{0FC8B348-4972-41DB-B3C5-D05EE93D7971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FC8B348-4972-41DB-B3C5-D05EE93D7971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FC8B348-4972-41DB-B3C5-D05EE93D7971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FC8B348-4972-41DB-B3C5-D05EE93D7971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{736D123C-2319-40A5-A583-BF373049EB01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{736D123C-2319-40A5-A583-BF373049EB01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{736D123C-2319-40A5-A583-BF373049EB01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{736D123C-2319-40A5-A583-BF373049EB01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38DC0E7F-AF8D-4A2E-8E7E-E42E3839D2BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38DC0E7F-AF8D-4A2E-8E7E-E42E3839D2BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38DC0E7F-AF8D-4A2E-8E7E-E42E3839D2BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38DC0E7F-AF8D-4A2E-8E7E-E42E3839D2BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
