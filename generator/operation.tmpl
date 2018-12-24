@@ -7,6 +7,18 @@ namespace CloudOps.Operations
 {
     public class {{.OperationClassName}} : Operation
     {
+        public override string Name => "{{.OperationName}}";
+
+        public override string Description => "{{.OperationDescription}}";
+ 
+        public override string RequestURI => "{{.RequestURI}}";
+
+        public override string Method => "{{.Method}}";
+
+        public override string ServiceName => "{{.ServiceName}}";
+
+        public override string ServiceID => "{{.ServiceID}}";
+
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             {{.ClientClassName}} client = new {{.ClientClassName}}(creds, region);
@@ -19,15 +31,14 @@ namespace CloudOps.Operations
                     {{.PagingationLimitKey}} = maxItems
                 };
                 resp = client.{{.OperationName}}(req);
-                //CheckError(resp.HttpStatusCode, resp);
+                CheckError(resp.HttpStatusCode, "{{.ResponseCode}}");                
 
-                foreach (var item in resp.{{.PaginationResultKey}})
+                foreach (var obj in resp.{{.PaginationResultKey}})
                 {
-                  
+                    AddObject(obj);
                 }
             }
             while (!string.IsNullOrEmpty(resp.{{.PagingationOutputToken}}));
-
         }
     }
 }

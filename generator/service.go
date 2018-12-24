@@ -17,21 +17,26 @@ type Pagination struct {
 
 //Operation ...
 type Operation struct {
-	Parent       *Service
-	Name         string
-	Input        string
-	Output       string
-	ResponseCode string
-	Pagination   *Pagination
+	Parent        *Service
+	Name          string
+	Description   string
+	RequestClass  string
+	ResponseClass string
+	ResponseCode  string
+	Method        string
+	RequestURI    string
+	Pagination    *Pagination
 }
 
 //Service ...
 type Service struct {
-	Filename     string
-	Basefolder   string
-	Abbreviation string
-	FullName     string
-	Operations   []*Operation
+	ServiceID      string
+	EndPointPrefix string
+	Filename       string
+	Basefolder     string
+	Abbreviation   string
+	FullName       string
+	Operations     []*Operation
 }
 
 //HasPagination ...

@@ -9,6 +9,9 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/grokify/html-strip-tags-go"
+	// => strip
 )
 
 //Generator ...
@@ -49,18 +52,22 @@ func (g *Generator) keyAsMap(obj interface{}, key string) map[string]interface{}
 func (g *Generator) processOprations(s *Service, operations map[string]interface{}) error {
 	for k, v := range operations {
 		oper := s.NewOperation(k)
+		oper.Description = fmt.Sprintf("%v", v.(map[string]interface{})["documentation"])
 		input := g.keyAsMap(v, "input")
 		if input != nil && input["shape"] != nil {
-			oper.Input = fmt.Sprintf("%v", input["shape"])
+			oper.RequestClass = fmt.Sprintf("%v", input["shape"])
 		}
 		output := g.keyAsMap(v, "output")
 		if output != nil && output["shape"] != nil {
-			oper.Output = fmt.Sprintf("%v", output["shape"])
+			oper.ResponseClass = fmt.Sprintf("%v", output["shape"])
 		}
 		ht := g.keyAsMap(v, "http")
 		if ht != nil {
 			oper.ResponseCode = fmt.Sprintf("%v", ht["responseCode"])
+			oper.RequestURI = fmt.Sprintf("%v", ht["requestUri"])
+			oper.Method = fmt.Sprintf("%v", ht["method"])
 		}
+
 	}
 	return nil
 }
@@ -130,6 +137,8 @@ func (g *Generator) processAPIFile(path string) error {
 		if metadata["serviceFullName"] != nil {
 			s.FullName = fmt.Sprintf("%v", metadata["serviceFullName"])
 		}
+		s.ServiceID = fmt.Sprintf("%v", metadata["serviceId"])
+		s.EndPointPrefix = fmt.Sprintf("%v", metadata["endpointPrefix"])
 		g.processOprations(s, g.keyAsMap(obj, "operations"))
 	}
 
@@ -139,7 +148,7 @@ func (g *Generator) processAPIFile(path string) error {
 func (g *Generator) walkfunc(path string, info os.FileInfo, err error) error {
 	if !info.IsDir() {
 		log.Printf("Processing %v", path)
-		if strings.HasSuffix(info.Name(), "api.json") {
+		if strings.HasSuffix(info.Name(), ".normal.json") {
 			g.processAPIFile(path)
 		} else if strings.HasSuffix(info.Name(), "paginators.json") {
 			g.processPaginatorFile(path)
@@ -160,15 +169,21 @@ func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
 	defer file.Close()
 	data := make(map[string]interface{})
 	data["ServiceName"] = s.ServiceName()
+	data["ServiceID"] = s.ServiceID
 	data["OperationClassName"] = o.ClassName()
 	data["ClientClassName"] = s.ClientClassName()
-	data["ReqeustClassName"] = o.Input
+	data["ReqeustClassName"] = o.RequestClass
 	data["PagingationInputToken"] = o.Pagination.InputToken
-	data["ResponseClassName"] = o.Output
+	data["ResponseClassName"] = o.ResponseClass
 	data["PagingationOutputToken"] = o.Pagination.OutputToken
 	data["PagingationLimitKey"] = o.Pagination.LimitKey
 	data["PaginationResultKey"] = o.Pagination.ResultKey
 	data["OperationName"] = o.Name
+	data["OperationDescription"] = strip.StripTags(o.Description)
+	data["RequestURI"] = o.RequestURI
+	data["Method"] = o.Method
+	data["ResponseCode"] = o.ResponseCode
+
 	for k, v := range data {
 		if v == nil || v == "" {
 			return fmt.Errorf("Missing value '%v' in %v", k, data)
