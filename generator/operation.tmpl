@@ -1,0 +1,33 @@
+using Amazon;
+using Amazon.{{.ServiceName}};
+using Amazon.{{.ServiceName}}.Model;
+using Amazon.Runtime;
+
+namespace CloudOps.Operations
+{
+    public class {{.OperationClassName}} : Operation
+    {
+        public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+        {
+            {{.ClientClassName}} client = new {{.ClientClassName}}(creds, region);
+            {{.ResponseClassName}} resp = new {{.ResponseClassName}}();
+            do
+            {
+                {{.ReqeustClassName}} req = new {{.ReqeustClassName}}
+                {
+                    {{.PagingationInputToken}} = resp.{{.PagingationOutputToken}},
+                    {{.PagingationLimitKey}} = maxItems
+                };
+                resp = client.{{.OperationName}}(req);
+                //CheckError(resp.HttpStatusCode, resp);
+
+                foreach (var item in resp.{{.PaginationResultKey}})
+                {
+                  
+                }
+            }
+            while (!string.IsNullOrEmpty(resp.{{.PagingationOutputToken}}));
+
+        }
+    }
+}

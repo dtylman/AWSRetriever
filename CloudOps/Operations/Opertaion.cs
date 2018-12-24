@@ -13,6 +13,8 @@ namespace CloudOps.Operations
         }
 
         public abstract void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems);
+    //    public abstract string Name;
+    //    public abstract string Description;
 
     }
 }
