@@ -33,21 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AWSSDK.CloudFormation, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
-      <HintPath>packages\AWSSDK.CloudFormation.3.3.13.6\lib\net45\AWSSDK.CloudFormation.dll</HintPath>
-    </Reference>
-    <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
-      <HintPath>packages\AWSSDK.Core.3.3.30.2\lib\net45\AWSSDK.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="AWSSDK.EC2, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
-      <HintPath>packages\AWSSDK.EC2.3.3.78.2\lib\net45\AWSSDK.EC2.dll</HintPath>
-    </Reference>
-    <Reference Include="AWSSDK.Lambda, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
-      <HintPath>packages\AWSSDK.Lambda.3.3.19.6\lib\net45\AWSSDK.Lambda.dll</HintPath>
-    </Reference>
-    <Reference Include="AWSSDK.S3, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
-      <HintPath>packages\AWSSDK.S3.3.3.31.5\lib\net45\AWSSDK.S3.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -133,10 +118,22 @@
     <None Include="heaven-small.png" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="packages\AWSSDK.CloudFormation.3.3.13.6\analyzers\dotnet\cs\AWSSDK.CloudFormation.CodeAnalysis.dll" />
-    <Analyzer Include="packages\AWSSDK.EC2.3.3.78.2\analyzers\dotnet\cs\AWSSDK.EC2.CodeAnalysis.dll" />
-    <Analyzer Include="packages\AWSSDK.Lambda.3.3.19.6\analyzers\dotnet\cs\AWSSDK.Lambda.CodeAnalysis.dll" />
-    <Analyzer Include="packages\AWSSDK.S3.3.3.31.5\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+    <ProjectReference Include="aws-sdk-net\sdk\src\Core\AWSSDK.Core.Net45.csproj">
+      <Project>{0742b90b-4f9c-47c1-a1f3-c59434987f98}</Project>
+      <Name>AWSSDK.Core.Net45</Name>
+    </ProjectReference>
+    <ProjectReference Include="aws-sdk-net\sdk\src\Services\EC2\AWSSDK.EC2.Net45.csproj">
+      <Project>{fea0a9ac-ab10-420e-be66-673bd43f2b67}</Project>
+      <Name>AWSSDK.EC2.Net45</Name>
+    </ProjectReference>
+    <ProjectReference Include="aws-sdk-net\sdk\src\Services\Lambda\AWSSDK.Lambda.Net45.csproj">
+      <Project>{d1b90855-5c87-41dd-a4a2-8e93ab8370cd}</Project>
+      <Name>AWSSDK.Lambda.Net45</Name>
+    </ProjectReference>
+    <ProjectReference Include="aws-sdk-net\sdk\src\Services\S3\AWSSDK.S3.Net45.csproj">
+      <Project>{2ae044cf-ccb4-4d72-a6d4-df5b6cd0b346}</Project>
+      <Name>AWSSDK.S3.Net45</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,3 @@
+[submodule "aws-sdk-net"]
+	path = aws-sdk-net
+	url = https://github.com/aws/aws-sdk-net.git
