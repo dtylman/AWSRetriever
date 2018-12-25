@@ -36,7 +36,32 @@ namespace CloudOps.Operations
                 resp = client.GetAccountAuthorizationDetails(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.[UserDetailList GroupDetailList RoleDetailList Policies])
+                foreach (var obj in resp.Policies)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.IsTruncated)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.Marker)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.UserDetailList)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.GroupDetailList)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.RoleDetailList)
                 {
                     AddObject(obj);
                 }

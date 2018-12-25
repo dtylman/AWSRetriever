@@ -34,7 +34,17 @@ namespace CloudOps.Operations
                 resp = client.GetOfferingStatus(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.[current nextPeriod])
+                foreach (var obj in resp.current)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.nextPeriod)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.nextToken)
                 {
                     AddObject(obj);
                 }

@@ -36,7 +36,17 @@ namespace CloudOps.Operations
                 resp = client.SearchProducts(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.&lt;nil&gt;)
+                foreach (var obj in resp.ProductViewAggregations)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.NextPageToken)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.ProductViewSummaries)
                 {
                     AddObject(obj);
                 }

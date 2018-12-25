@@ -2,7 +2,9 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
+	"os"
 )
 
 func main() {
@@ -18,5 +20,12 @@ func main() {
 		flag.Usage()
 		return
 	}
+	log.Println("Saving to generator.log")
+	logFile, err := os.Create("generator.log")
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer logFile.Close()
+	log.SetOutput(logFile)
 	log.Println(g.Generate())
 }

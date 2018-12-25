@@ -49,20 +49,7 @@ func (g *Generator) keyAsMap(obj interface{}, key string) map[string]interface{}
 	return val.(map[string]interface{})
 }
 
-func (g Generator) shapreHasRequiredParams(shape string, shapes map[string]interface{}) bool {
-	m := shapes[shape].(map[string]interface{})
-	req, ok := m["required"]
-	if !ok {
-		return false
-	}
-	reqstr := fmt.Sprintf("%v", req)
-	if reqstr == "" || reqstr == "[]" {
-		return false
-	}
-	return true
-}
-
-func (g *Generator) processOprations(s *Service, operations map[string]interface{}, shapes map[string]interface{}) error {
+func (g *Generator) processOperations(s *Service, operations map[string]interface{}) error {
 	for k, v := range operations {
 		oper := s.NewOperation(k)
 		oper.Description = fmt.Sprintf("%v", v.(map[string]interface{})["documentation"])
@@ -73,8 +60,9 @@ func (g *Generator) processOprations(s *Service, operations map[string]interface
 			log.Printf("Operation %v does not have a request class", oper.Name)
 			continue
 		}
-		if g.shapreHasRequiredParams(oper.RequestClass, shapes) {
-			log.Printf("Operation '%v' shape '%v' needs params ", oper.Name, oper.RequestClass)
+		required := s.ShapeRequiredParams(oper.RequestClass)
+		if required != "" {
+			log.Printf("Operation '%v' shape '%v' needs params :'%v'", oper.Name, oper.RequestClass, required)
 			continue
 		}
 		output := g.keyAsMap(v, "output")
@@ -118,26 +106,19 @@ func (g *Generator) processPaginatorFile(path string) error {
 			p.LimitKey = fmt.Sprintf("%v", items["limit_key"])
 		}
 		p.OutputToken = fmt.Sprintf("%v", items["output_token"])
-
-		p.ResultKey = make([]string, 0)
-		resultKey, ok := items["result_key"].([]string)
-		if ok {
-			for _, k := range resultKey {
-				p.ResultKey = append(p.ResultKey, k)
-			}
-		} else {
-			p.ResultKey = append(p.ResultKey, fmt.Sprintf("%v", items["result_key"]))
-		}
-		g.setPagination(p, funcName, serviceFolder)
+		p.SetResultKeys(items["result_key"])
+		g.SetPagination(p, funcName, serviceFolder)
 	}
 	return nil
 }
 
-func (g *Generator) setPagination(p *Pagination, funcName string, serviceFolder string) {
+//SetPagination ...
+func (g *Generator) SetPagination(p *Pagination, funcName string, serviceFolder string) {
 	for i := range g.Services {
 		if g.Services[i].Basefolder == serviceFolder {
 			for j := range g.Services[i].Operations {
 				if g.Services[i].Operations[j].Name == funcName {
+					p.EnsureResultKey(g.Services[i], g.Services[i].Operations[j])
 					g.Services[i].Operations[j].Pagination = p
 				}
 			}
@@ -166,8 +147,8 @@ func (g *Generator) processAPIFile(path string) error {
 	if err != nil {
 		return err
 	}
+	s.shapes = g.keyAsMap(apiObject, "shapes")
 	metadata := g.keyAsMap(apiObject, "metadata")
-	shapes := g.keyAsMap(apiObject, "shapes")
 	operations := g.keyAsMap(apiObject, "operations")
 	if metadata != nil {
 		if metadata["serviceAbbreviation"] != nil {
@@ -178,7 +159,7 @@ func (g *Generator) processAPIFile(path string) error {
 		}
 		s.ServiceID = fmt.Sprintf("%v", metadata["serviceId"])
 		s.EndPointPrefix = fmt.Sprintf("%v", metadata["endpointPrefix"])
-		g.processOprations(s, operations, shapes)
+		g.processOperations(s, operations)
 	}
 
 	return nil
@@ -198,14 +179,6 @@ func (g *Generator) walkfunc(path string, info os.FileInfo, err error) error {
 }
 
 func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
-	//LambaListFunctionsOperation
-	fileName := filepath.Join(g.OutputFolder, fmt.Sprintf("%v.cs", o.ClassName()))
-	log.Printf("generating %v", fileName)
-	file, err := os.Create(fileName)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
 	data := make(map[string]interface{})
 	data["ServiceName"] = s.ServiceName()
 	data["ServiceID"] = s.ServiceID
@@ -234,6 +207,13 @@ func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
 	data["OperationDescription"] = strip.StripTags(o.Description)
 	data["RequestURI"] = o.RequestURI
 	data["Method"] = o.Method
+	fileName := filepath.Join(g.OutputFolder, fmt.Sprintf("%v.cs", o.ClassName()))
+	log.Printf("generating %v", fileName)
+	file, err := os.Create(fileName)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
 	return g.OperationTemplate.Execute(file, data)
 }
 

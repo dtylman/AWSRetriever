@@ -36,7 +36,12 @@ namespace CloudOps.Operations
                 resp = client.ListSigningPlatforms(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.&lt;nil&gt;)
+                foreach (var obj in resp.platforms)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.nextToken)
                 {
                     AddObject(obj);
                 }

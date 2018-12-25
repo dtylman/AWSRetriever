@@ -36,7 +36,12 @@ namespace CloudOps.Operations
                 resp = client.DescribeConnections(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.&lt;nil&gt;)
+                foreach (var obj in resp.Connections)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.Marker)
                 {
                     AddObject(obj);
                 }

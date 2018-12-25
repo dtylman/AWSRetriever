@@ -37,6 +37,7 @@ type Service struct {
 	Abbreviation   string
 	FullName       string
 	Operations     []*Operation
+	shapes         map[string]interface{}
 }
 
 //HasPagination ...
@@ -77,9 +78,53 @@ func (s *Service) NewOperation(opName string) *Operation {
 	return o
 }
 
+//ShapeRequiredParams returns the list of required params for shape
+func (s *Service) ShapeRequiredParams(shape string) string {
+	m := s.shapes[shape].(map[string]interface{})
+	params, ok := m["required"]
+	if !ok {
+		return ""
+	}
+	pstr := fmt.Sprintf("%v", params)
+	if pstr == "" || pstr == "[]" {
+		return ""
+	}
+	return pstr
+}
+
 //ClassName ...
 func (o *Operation) ClassName() string {
 	//LambaListFunctionsOperation
 	return fmt.Sprintf("%v%vOperation", o.Parent.ServiceName(), o.Name)
 
+}
+
+//SetResultKeys sets results keys from map item
+func (p *Pagination) SetResultKeys(item interface{}) {
+	p.ResultKey = make([]string, 0)
+	rkaArray, ok := item.([]string)
+	if ok {
+		for _, k := range rkaArray {
+			p.ResultKey = append(p.ResultKey, k)
+		}
+		return
+	}
+	rkStr, ok := item.(string)
+	if ok {
+		p.ResultKey = append(p.ResultKey, rkStr)
+	}
+}
+
+//EnsureResultKey if results key not found in pagination, try to search for it in shapes.
+func (p *Pagination) EnsureResultKey(s *Service, o *Operation) {
+	if len(p.ResultKey) == 0 {
+		members, ok := s.shapes[o.ResponseClass].(map[string]interface{})
+		if ok {
+			for member := range members["members"].(map[string]interface{}) {
+				if member != "NextToken" && member != "TotalCount" {
+					p.ResultKey = append(p.ResultKey, member)
+				}
+			}
+		}
+	}
 }

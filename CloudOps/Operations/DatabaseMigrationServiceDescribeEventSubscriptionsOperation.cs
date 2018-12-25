@@ -36,7 +36,12 @@ namespace CloudOps.Operations
                 resp = client.DescribeEventSubscriptions(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.&lt;nil&gt;)
+                foreach (var obj in resp.Marker)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.EventSubscriptionsList)
                 {
                     AddObject(obj);
                 }

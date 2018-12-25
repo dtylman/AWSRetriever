@@ -36,7 +36,12 @@ namespace CloudOps.Operations
                 resp = client.ListFindings(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.&lt;nil&gt;)
+                foreach (var obj in resp.findingArns)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.nextToken)
                 {
                     AddObject(obj);
                 }

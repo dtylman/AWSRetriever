@@ -36,7 +36,12 @@ namespace CloudOps.Operations
                 resp = client.ListAssessmentTemplates(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.&lt;nil&gt;)
+                foreach (var obj in resp.assessmentTemplateArns)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.nextToken)
                 {
                     AddObject(obj);
                 }

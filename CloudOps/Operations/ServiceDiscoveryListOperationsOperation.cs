@@ -36,7 +36,7 @@ namespace CloudOps.Operations
                 resp = client.ListOperations(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.&lt;nil&gt;)
+                foreach (var obj in resp.Operations)
                 {
                     AddObject(obj);
                 }

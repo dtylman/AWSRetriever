@@ -36,7 +36,12 @@ namespace CloudOps.Operations
                 resp = client.GetResourceShareInvitations(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.&lt;nil&gt;)
+                foreach (var obj in resp.resourceShareInvitations)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.nextToken)
                 {
                     AddObject(obj);
                 }
