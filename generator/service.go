@@ -121,7 +121,14 @@ func (p *Pagination) EnsureResultKey(s *Service, o *Operation) {
 		members, ok := s.shapes[o.ResponseClass].(map[string]interface{})
 		if ok {
 			for member := range members["members"].(map[string]interface{}) {
-				if member != "NextToken" && member != "TotalCount" {
+				if member != "NextToken" &&
+					member != "TotalCount" &&
+					member != "Marker" &&
+					member != "IsTruncated" &&
+					member != "nextToken" &&
+					member != "MaxResults" &&
+					member != "NextPageToken" &&
+					member != "NextMarker" {
 					p.ResultKey = append(p.ResultKey, member)
 				}
 			}

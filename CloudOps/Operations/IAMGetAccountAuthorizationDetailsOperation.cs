@@ -41,16 +41,6 @@ namespace CloudOps.Operations
                     AddObject(obj);
                 }
                 
-                foreach (var obj in resp.IsTruncated)
-                {
-                    AddObject(obj);
-                }
-                
-                foreach (var obj in resp.Marker)
-                {
-                    AddObject(obj);
-                }
-                
                 foreach (var obj in resp.UserDetailList)
                 {
                     AddObject(obj);

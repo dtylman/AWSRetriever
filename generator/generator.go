@@ -16,25 +16,40 @@ import (
 
 //Generator ...
 type Generator struct {
-	OutputFolder      string
-	SdkRoot           string
-	Services          []*Service
-	OperationTemplate *template.Template
+	OutputFolder            string
+	SdkRoot                 string
+	Services                []*Service
+	OperationTemplate       *template.Template
+	SingleOperationTemplate *template.Template
 }
 
 //NewGenerator ...
 func NewGenerator() (*Generator, error) {
 	g := &Generator{}
 	g.Services = make([]*Service, 0)
-	data, err := ioutil.ReadFile("operation.tmpl")
+	var err error
+	g.OperationTemplate, err = g.readTemplate("operation.tmpl")
 	if err != nil {
 		return nil, err
 	}
-	g.OperationTemplate, err = template.New("operation").Parse(string(data))
+	g.SingleOperationTemplate, err = g.readTemplate("operation_single.tmpl")
 	if err != nil {
 		return nil, err
 	}
 	return g, nil
+}
+
+func (g *Generator) readTemplate(filename string) (*template.Template, error) {
+	data, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+	templateName := filepath.Base(filename)
+	t, err := template.New(templateName).Parse(string(data))
+	if err != nil {
+		return nil, err
+	}
+	return t, nil
 }
 
 func (g *Generator) keyAsMap(obj interface{}, key string) map[string]interface{} {

@@ -41,11 +41,6 @@ namespace CloudOps.Operations
                     AddObject(obj);
                 }
                 
-                foreach (var obj in resp.nextToken)
-                {
-                    AddObject(obj);
-                }
-                
             }
             while (!string.IsNullOrEmpty(resp.nextToken));
         }

@@ -36,11 +36,6 @@ namespace CloudOps.Operations
                 resp = client.ListResolverRules(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.MaxResults)
-                {
-                    AddObject(obj);
-                }
-                
                 foreach (var obj in resp.ResolverRules)
                 {
                     AddObject(obj);

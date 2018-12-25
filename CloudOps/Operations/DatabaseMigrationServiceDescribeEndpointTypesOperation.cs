@@ -36,11 +36,6 @@ namespace CloudOps.Operations
                 resp = client.DescribeEndpointTypes(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.Marker)
-                {
-                    AddObject(obj);
-                }
-                
                 foreach (var obj in resp.SupportedEndpointTypes)
                 {
                     AddObject(obj);

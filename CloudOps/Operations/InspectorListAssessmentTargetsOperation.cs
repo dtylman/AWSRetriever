@@ -36,11 +36,6 @@ namespace CloudOps.Operations
                 resp = client.ListAssessmentTargets(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.nextToken)
-                {
-                    AddObject(obj);
-                }
-                
                 foreach (var obj in resp.assessmentTargetArns)
                 {
                     AddObject(obj);

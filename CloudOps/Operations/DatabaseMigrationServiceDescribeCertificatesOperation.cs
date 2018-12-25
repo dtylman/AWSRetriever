@@ -36,11 +36,6 @@ namespace CloudOps.Operations
                 resp = client.DescribeCertificates(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.Marker)
-                {
-                    AddObject(obj);
-                }
-                
                 foreach (var obj in resp.Certificates)
                 {
                     AddObject(obj);
