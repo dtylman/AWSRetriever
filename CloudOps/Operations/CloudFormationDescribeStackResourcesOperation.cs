@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonCloudFormationClient client = new AmazonCloudFormationClient(creds, region);
             DescribeStackResourcesOutput resp = new DescribeStackResourcesOutput();
-            do
+            DescribeStackResourcesInput req = new DescribeStackResourcesInput
+            {                    
+                                    
+            };
+            resp = client.DescribeStackResources(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.StackResources)
             {
-                DescribeStackResourcesInput req = new DescribeStackResourcesInput
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeStackResources(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.StackResources)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

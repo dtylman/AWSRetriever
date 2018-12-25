@@ -128,7 +128,9 @@ func (p *Pagination) EnsureResultKey(s *Service, o *Operation) {
 					member != "nextToken" &&
 					member != "MaxResults" &&
 					member != "NextPageToken" &&
-					member != "NextMarker" {
+					member != "NextMarker" &&
+					member != "Status" &&
+					member != "PageToken" {
 					p.ResultKey = append(p.ResultKey, member)
 				}
 			}

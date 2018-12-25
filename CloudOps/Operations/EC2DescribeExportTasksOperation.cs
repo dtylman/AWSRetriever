@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonEC2Client client = new AmazonEC2Client(creds, region);
             DescribeExportTasksResult resp = new DescribeExportTasksResult();
-            do
+            DescribeExportTasksRequest req = new DescribeExportTasksRequest
+            {                    
+                                    
+            };
+            resp = client.DescribeExportTasks(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.ExportTasks)
             {
-                DescribeExportTasksRequest req = new DescribeExportTasksRequest
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeExportTasks(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.ExportTasks)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

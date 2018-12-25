@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonCloudTrailClient client = new AmazonCloudTrailClient(creds, region);
             DescribeTrailsResponse resp = new DescribeTrailsResponse();
-            do
+            DescribeTrailsRequest req = new DescribeTrailsRequest
+            {                    
+                                    
+            };
+            resp = client.DescribeTrails(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.trailList)
             {
-                DescribeTrailsRequest req = new DescribeTrailsRequest
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeTrails(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.trailList)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

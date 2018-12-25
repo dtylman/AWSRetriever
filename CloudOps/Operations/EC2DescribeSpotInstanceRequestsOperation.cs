@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonEC2Client client = new AmazonEC2Client(creds, region);
             DescribeSpotInstanceRequestsResult resp = new DescribeSpotInstanceRequestsResult();
-            do
+            DescribeSpotInstanceRequestsRequest req = new DescribeSpotInstanceRequestsRequest
+            {                    
+                                    
+            };
+            resp = client.DescribeSpotInstanceRequests(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.SpotInstanceRequests)
             {
-                DescribeSpotInstanceRequestsRequest req = new DescribeSpotInstanceRequestsRequest
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeSpotInstanceRequests(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.SpotInstanceRequests)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

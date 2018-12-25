@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonEC2Client client = new AmazonEC2Client(creds, region);
             DescribeBundleTasksResult resp = new DescribeBundleTasksResult();
-            do
+            DescribeBundleTasksRequest req = new DescribeBundleTasksRequest
+            {                    
+                                    
+            };
+            resp = client.DescribeBundleTasks(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.BundleTasks)
             {
-                DescribeBundleTasksRequest req = new DescribeBundleTasksRequest
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeBundleTasks(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.BundleTasks)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

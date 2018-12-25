@@ -16,11 +16,11 @@ import (
 
 //Generator ...
 type Generator struct {
-	OutputFolder            string
-	SdkRoot                 string
-	Services                []*Service
-	OperationTemplate       *template.Template
-	SingleOperationTemplate *template.Template
+	OutputFolder                string
+	SdkRoot                     string
+	Services                    []*Service
+	PaginationOperationTemplate *template.Template
+	SingleOperationTemplate     *template.Template
 }
 
 //NewGenerator ...
@@ -28,7 +28,7 @@ func NewGenerator() (*Generator, error) {
 	g := &Generator{}
 	g.Services = make([]*Service, 0)
 	var err error
-	g.OperationTemplate, err = g.readTemplate("operation.tmpl")
+	g.PaginationOperationTemplate, err = g.readTemplate("operation_pagination.tmpl")
 	if err != nil {
 		return nil, err
 	}
@@ -116,11 +116,15 @@ func (g *Generator) processPaginatorFile(path string) error {
 	for funcName, v := range pobject {
 		items := v.(map[string]interface{})
 		p := &Pagination{}
-		p.InputToken = fmt.Sprintf("%v", items["input_token"])
+		if items["input_token"] != nil {
+			p.InputToken = fmt.Sprintf("%v", items["input_token"])
+		}
 		if items["limit_key"] != nil {
 			p.LimitKey = fmt.Sprintf("%v", items["limit_key"])
 		}
-		p.OutputToken = fmt.Sprintf("%v", items["output_token"])
+		if items["output_token"] != nil {
+			p.OutputToken = fmt.Sprintf("%v", items["output_token"])
+		}
 		p.SetResultKeys(items["result_key"])
 		g.SetPagination(p, funcName, serviceFolder)
 	}
@@ -200,9 +204,7 @@ func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
 	data["OperationClassName"] = o.ClassName()
 	data["ClientClassName"] = s.ClientClassName()
 	data["ReqeustClassName"] = o.RequestClass
-	data["PagingationInputToken"] = o.Pagination.InputToken
 	data["ResponseClassName"] = o.ResponseClass
-	data["PagingationOutputToken"] = o.Pagination.OutputToken
 	if o.Pagination.LimitKey != "" {
 		data["PagingationLimitKey"] = o.Pagination.LimitKey
 	}
@@ -229,7 +231,14 @@ func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
 		return err
 	}
 	defer file.Close()
-	return g.OperationTemplate.Execute(file, data)
+
+	if (o.Pagination.InputToken == "") || (o.Pagination.OutputToken == "") {
+		return g.SingleOperationTemplate.Execute(file, data)
+	} else {
+		data["PagingationInputToken"] = o.Pagination.InputToken
+		data["PagingationOutputToken"] = o.Pagination.OutputToken
+		return g.PaginationOperationTemplate.Execute(file, data)
+	}
 }
 
 //Generate ...

@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonEC2Client client = new AmazonEC2Client(creds, region);
             DescribeVpcsResult resp = new DescribeVpcsResult();
-            do
+            DescribeVpcsRequest req = new DescribeVpcsRequest
+            {                    
+                                    
+            };
+            resp = client.DescribeVpcs(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.Vpcs)
             {
-                DescribeVpcsRequest req = new DescribeVpcsRequest
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeVpcs(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.Vpcs)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

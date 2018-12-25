@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonEC2Client client = new AmazonEC2Client(creds, region);
             DescribeAvailabilityZonesResult resp = new DescribeAvailabilityZonesResult();
-            do
+            DescribeAvailabilityZonesRequest req = new DescribeAvailabilityZonesRequest
+            {                    
+                                    
+            };
+            resp = client.DescribeAvailabilityZones(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.AvailabilityZones)
             {
-                DescribeAvailabilityZonesRequest req = new DescribeAvailabilityZonesRequest
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeAvailabilityZones(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.AvailabilityZones)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

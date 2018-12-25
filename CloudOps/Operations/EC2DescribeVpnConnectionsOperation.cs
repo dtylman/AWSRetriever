@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonEC2Client client = new AmazonEC2Client(creds, region);
             DescribeVpnConnectionsResult resp = new DescribeVpnConnectionsResult();
-            do
+            DescribeVpnConnectionsRequest req = new DescribeVpnConnectionsRequest
+            {                    
+                                    
+            };
+            resp = client.DescribeVpnConnections(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.VpnConnections)
             {
-                DescribeVpnConnectionsRequest req = new DescribeVpnConnectionsRequest
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeVpnConnections(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.VpnConnections)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

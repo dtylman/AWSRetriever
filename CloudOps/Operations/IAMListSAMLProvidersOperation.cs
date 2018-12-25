@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonIAMClient client = new AmazonIAMClient(creds, region);
             ListSAMLProvidersResponse resp = new ListSAMLProvidersResponse();
-            do
+            ListSAMLProvidersRequest req = new ListSAMLProvidersRequest
+            {                    
+                                    
+            };
+            resp = client.ListSAMLProviders(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.SAMLProviderList)
             {
-                ListSAMLProvidersRequest req = new ListSAMLProvidersRequest
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.ListSAMLProviders(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.SAMLProviderList)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

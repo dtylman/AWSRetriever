@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonEC2Client client = new AmazonEC2Client(creds, region);
             DescribeCustomerGatewaysResult resp = new DescribeCustomerGatewaysResult();
-            do
+            DescribeCustomerGatewaysRequest req = new DescribeCustomerGatewaysRequest
+            {                    
+                                    
+            };
+            resp = client.DescribeCustomerGateways(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.CustomerGateways)
             {
-                DescribeCustomerGatewaysRequest req = new DescribeCustomerGatewaysRequest
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeCustomerGateways(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.CustomerGateways)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

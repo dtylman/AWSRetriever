@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonElasticLoadBalancingClient client = new AmazonElasticLoadBalancingClient(creds, region);
             DescribeLoadBalancerPoliciesOutput resp = new DescribeLoadBalancerPoliciesOutput();
-            do
+            DescribeLoadBalancerPoliciesInput req = new DescribeLoadBalancerPoliciesInput
+            {                    
+                                    
+            };
+            resp = client.DescribeLoadBalancerPolicies(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.PolicyDescriptions)
             {
-                DescribeLoadBalancerPoliciesInput req = new DescribeLoadBalancerPoliciesInput
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeLoadBalancerPolicies(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.PolicyDescriptions)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

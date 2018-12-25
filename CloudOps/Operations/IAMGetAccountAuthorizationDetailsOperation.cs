@@ -36,11 +36,6 @@ namespace CloudOps.Operations
                 resp = client.GetAccountAuthorizationDetails(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.Policies)
-                {
-                    AddObject(obj);
-                }
-                
                 foreach (var obj in resp.UserDetailList)
                 {
                     AddObject(obj);
@@ -52,6 +47,11 @@ namespace CloudOps.Operations
                 }
                 
                 foreach (var obj in resp.RoleDetailList)
+                {
+                    AddObject(obj);
+                }
+                
+                foreach (var obj in resp.Policies)
                 {
                     AddObject(obj);
                 }

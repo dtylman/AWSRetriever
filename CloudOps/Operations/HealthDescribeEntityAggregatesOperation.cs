@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonHealthClient client = new AmazonHealthClient(creds, region);
             DescribeEntityAggregatesResponse resp = new DescribeEntityAggregatesResponse();
-            do
+            DescribeEntityAggregatesRequest req = new DescribeEntityAggregatesRequest
+            {                    
+                                    
+            };
+            resp = client.DescribeEntityAggregates(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.entityAggregates)
             {
-                DescribeEntityAggregatesRequest req = new DescribeEntityAggregatesRequest
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeEntityAggregates(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.entityAggregates)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

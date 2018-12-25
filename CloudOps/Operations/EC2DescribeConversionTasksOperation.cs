@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonEC2Client client = new AmazonEC2Client(creds, region);
             DescribeConversionTasksResult resp = new DescribeConversionTasksResult();
-            do
+            DescribeConversionTasksRequest req = new DescribeConversionTasksRequest
+            {                    
+                                    
+            };
+            resp = client.DescribeConversionTasks(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.ConversionTasks)
             {
-                DescribeConversionTasksRequest req = new DescribeConversionTasksRequest
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeConversionTasks(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.ConversionTasks)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

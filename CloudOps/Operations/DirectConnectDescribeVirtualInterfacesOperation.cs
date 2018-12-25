@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonDirectConnectClient client = new AmazonDirectConnectClient(creds, region);
             VirtualInterfaces resp = new VirtualInterfaces();
-            do
+            DescribeVirtualInterfacesRequest req = new DescribeVirtualInterfacesRequest
+            {                    
+                                    
+            };
+            resp = client.DescribeVirtualInterfaces(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.virtualInterfaces)
             {
-                DescribeVirtualInterfacesRequest req = new DescribeVirtualInterfacesRequest
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeVirtualInterfaces(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.virtualInterfaces)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

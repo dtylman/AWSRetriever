@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonElasticBeanstalkClient client = new AmazonElasticBeanstalkClient(creds, region);
             EnvironmentDescriptionsMessage resp = new EnvironmentDescriptionsMessage();
-            do
+            DescribeEnvironmentsMessage req = new DescribeEnvironmentsMessage
+            {                    
+                                    
+            };
+            resp = client.DescribeEnvironments(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.Environments)
             {
-                DescribeEnvironmentsMessage req = new DescribeEnvironmentsMessage
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeEnvironments(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.Environments)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

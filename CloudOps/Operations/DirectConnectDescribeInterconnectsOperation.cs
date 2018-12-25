@@ -23,24 +23,18 @@ namespace CloudOps.Operations
         {
             AmazonDirectConnectClient client = new AmazonDirectConnectClient(creds, region);
             Interconnects resp = new Interconnects();
-            do
+            DescribeInterconnectsRequest req = new DescribeInterconnectsRequest
+            {                    
+                                    
+            };
+            resp = client.DescribeInterconnects(req);
+            CheckError(resp.HttpStatusCode, "200");                
+            
+            foreach (var obj in resp.interconnects)
             {
-                DescribeInterconnectsRequest req = new DescribeInterconnectsRequest
-                {
-                    &lt;nil&gt; = resp.&lt;nil&gt;
-                                        
-                };
-
-                resp = client.DescribeInterconnects(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.interconnects)
-                {
-                    AddObject(obj);
-                }
-                
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
+            
         }
     }
 }

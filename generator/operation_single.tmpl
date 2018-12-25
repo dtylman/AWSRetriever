@@ -23,26 +23,20 @@ namespace CloudOps.Operations
         {
             {{.ClientClassName}} client = new {{.ClientClassName}}(creds, region);
             {{.ResponseClassName}} resp = new {{.ResponseClassName}}();
-            do
+            {{.ReqeustClassName}} req = new {{.ReqeustClassName}}
+            {                    
+                {{if .PagingationLimitKey}},
+                {{.PagingationLimitKey}} = maxItems
+                {{end}}                    
+            };
+            resp = client.{{.OperationName}}(req);
+            CheckError(resp.HttpStatusCode, "{{.ResponseCode}}");                
+            {{range .PaginationResultKey}}
+            foreach (var obj in resp.{{.}})
             {
-                {{.ReqeustClassName}} req = new {{.ReqeustClassName}}
-                {
-                    {{.PagingationInputToken}} = resp.{{.PagingationOutputToken}}
-                    {{if .PagingationLimitKey}},
-                    {{.PagingationLimitKey}} = maxItems
-                    {{end}}                    
-                };
-
-                resp = client.{{.OperationName}}(req);
-                CheckError(resp.HttpStatusCode, "{{.ResponseCode}}");                
-                {{range .PaginationResultKey}}
-                foreach (var obj in resp.{{.}})
-                {
-                    AddObject(obj);
-                }
-                {{end}}
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.{{.PagingationOutputToken}}));
+            {{end}}
         }
     }
 }

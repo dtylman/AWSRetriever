@@ -41,11 +41,6 @@ namespace CloudOps.Operations
                     AddObject(obj);
                 }
                 
-                foreach (var obj in resp.PageToken)
-                {
-                    AddObject(obj);
-                }
-                
             }
             while (!string.IsNullOrEmpty(resp.PageToken));
         }

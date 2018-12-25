@@ -36,11 +36,6 @@ namespace CloudOps.Operations
                 resp = client.ListTranscriptionJobs(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.Status)
-                {
-                    AddObject(obj);
-                }
-                
                 foreach (var obj in resp.TranscriptionJobSummaries)
                 {
                     AddObject(obj);
