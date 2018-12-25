@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeSnapshotsRequest req = new DescribeSnapshotsRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxResults = maxItems
+                                        
                 };
-                resp = client.DescribeSnapshots(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeSnapshots(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Snapshots)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

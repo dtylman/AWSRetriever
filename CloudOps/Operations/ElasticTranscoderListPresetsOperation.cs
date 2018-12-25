@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 ListPresetsRequest req = new ListPresetsRequest
                 {
-                    PageToken = resp.NextPageToken,
-                    &lt;nil&gt; = maxItems
+                    PageToken = resp.NextPageToken
+                                        
                 };
-                resp = client.ListPresets(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListPresets(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Presets)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextPageToken));
         }

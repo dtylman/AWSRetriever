@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeNotificationConfigurationsType req = new DescribeNotificationConfigurationsType
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeNotificationConfigurations(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeNotificationConfigurations(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.NotificationConfigurations)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

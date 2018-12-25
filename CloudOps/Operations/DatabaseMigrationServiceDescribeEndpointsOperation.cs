@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeEndpointsMessage req = new DescribeEndpointsMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeEndpoints(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeEndpoints(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.&lt;nil&gt;)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

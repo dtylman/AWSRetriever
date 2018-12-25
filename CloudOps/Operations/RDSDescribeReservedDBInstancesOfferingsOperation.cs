@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeReservedDBInstancesOfferingsMessage req = new DescribeReservedDBInstancesOfferingsMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeReservedDBInstancesOfferings(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeReservedDBInstancesOfferings(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.ReservedDBInstancesOfferings)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListReservationsRequest req = new ListReservationsRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxResults = maxItems
+                                        
                 };
+
                 resp = client.ListReservations(req);
                 CheckError(resp.HttpStatusCode, "200");                
-
+                
                 foreach (var obj in resp.Reservations)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

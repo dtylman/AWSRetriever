@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeAlarmHistoryInput req = new DescribeAlarmHistoryInput
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeAlarmHistory(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeAlarmHistory(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.AlarmHistoryItems)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 SearchProductsAsAdminInput req = new SearchProductsAsAdminInput
                 {
-                    PageToken = resp.NextPageToken,
+                    PageToken = resp.NextPageToken
+                    ,
                     PageSize = maxItems
+                                        
                 };
-                resp = client.SearchProductsAsAdmin(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.SearchProductsAsAdmin(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.&lt;nil&gt;)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextPageToken));
         }

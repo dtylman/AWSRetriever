@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListTagOptionsInput req = new ListTagOptionsInput
                 {
-                    PageToken = resp.PageToken,
+                    PageToken = resp.PageToken
+                    ,
                     PageSize = maxItems
+                                        
                 };
-                resp = client.ListTagOptions(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListTagOptions(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.&lt;nil&gt;)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.PageToken));
         }

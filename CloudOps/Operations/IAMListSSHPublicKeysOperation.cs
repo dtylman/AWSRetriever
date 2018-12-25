@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListSSHPublicKeysRequest req = new ListSSHPublicKeysRequest
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
-                resp = client.ListSSHPublicKeys(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListSSHPublicKeys(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.SSHPublicKeys)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

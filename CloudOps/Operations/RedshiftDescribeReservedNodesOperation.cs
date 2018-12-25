@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeReservedNodesMessage req = new DescribeReservedNodesMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeReservedNodes(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeReservedNodes(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.ReservedNodes)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListPortfoliosInput req = new ListPortfoliosInput
                 {
-                    PageToken = resp.NextPageToken,
+                    PageToken = resp.NextPageToken
+                    ,
                     PageSize = maxItems
+                                        
                 };
-                resp = client.ListPortfolios(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListPortfolios(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.&lt;nil&gt;)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextPageToken));
         }

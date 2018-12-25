@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListStreamsInput req = new ListStreamsInput
                 {
-                    ExclusiveStartStreamName = resp.StreamNames[-1],
+                    ExclusiveStartStreamName = resp.StreamNames[-1]
+                    ,
                     Limit = maxItems
+                                        
                 };
-                resp = client.ListStreams(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListStreams(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.StreamNames)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.StreamNames[-1]));
         }

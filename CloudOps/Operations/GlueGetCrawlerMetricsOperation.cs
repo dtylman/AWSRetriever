@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 GetCrawlerMetricsRequest req = new GetCrawlerMetricsRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxResults = maxItems
+                                        
                 };
-                resp = client.GetCrawlerMetrics(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.GetCrawlerMetrics(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.&lt;nil&gt;)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

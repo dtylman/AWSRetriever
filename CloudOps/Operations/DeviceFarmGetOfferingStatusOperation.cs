@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 GetOfferingStatusRequest req = new GetOfferingStatusRequest
                 {
-                    nextToken = resp.nextToken,
-                    &lt;nil&gt; = maxItems
+                    nextToken = resp.nextToken
+                                        
                 };
-                resp = client.GetOfferingStatus(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.GetOfferingStatus(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.[current nextPeriod])
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.nextToken));
         }

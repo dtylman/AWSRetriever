@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeCacheSubnetGroupsMessage req = new DescribeCacheSubnetGroupsMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeCacheSubnetGroups(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeCacheSubnetGroups(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.CacheSubnetGroups)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

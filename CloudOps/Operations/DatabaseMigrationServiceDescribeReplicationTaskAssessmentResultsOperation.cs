@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeReplicationTaskAssessmentResultsMessage req = new DescribeReplicationTaskAssessmentResultsMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeReplicationTaskAssessmentResults(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeReplicationTaskAssessmentResults(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.&lt;nil&gt;)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

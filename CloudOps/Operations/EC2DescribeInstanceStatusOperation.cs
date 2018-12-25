@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeInstanceStatusRequest req = new DescribeInstanceStatusRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxResults = maxItems
+                                        
                 };
-                resp = client.DescribeInstanceStatus(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeInstanceStatus(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.InstanceStatuses)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

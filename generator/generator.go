@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/grokify/html-strip-tags-go"
+	strip "github.com/grokify/html-strip-tags-go"
 	// => strip
 )
 
@@ -49,13 +49,33 @@ func (g *Generator) keyAsMap(obj interface{}, key string) map[string]interface{}
 	return val.(map[string]interface{})
 }
 
-func (g *Generator) processOprations(s *Service, operations map[string]interface{}) error {
+func (g Generator) shapreHasRequiredParams(shape string, shapes map[string]interface{}) bool {
+	m := shapes[shape].(map[string]interface{})
+	req, ok := m["required"]
+	if !ok {
+		return false
+	}
+	reqstr := fmt.Sprintf("%v", req)
+	if reqstr == "" || reqstr == "[]" {
+		return false
+	}
+	return true
+}
+
+func (g *Generator) processOprations(s *Service, operations map[string]interface{}, shapes map[string]interface{}) error {
 	for k, v := range operations {
 		oper := s.NewOperation(k)
 		oper.Description = fmt.Sprintf("%v", v.(map[string]interface{})["documentation"])
 		input := g.keyAsMap(v, "input")
 		if input != nil && input["shape"] != nil {
 			oper.RequestClass = fmt.Sprintf("%v", input["shape"])
+		} else {
+			log.Printf("Operation %v does not have a request class", oper.Name)
+			continue
+		}
+		if g.shapreHasRequiredParams(oper.RequestClass, shapes) {
+			log.Printf("Operation '%v' shape '%v' needs params ", oper.Name, oper.RequestClass)
+			continue
 		}
 		output := g.keyAsMap(v, "output")
 		if output != nil && output["shape"] != nil {
@@ -63,7 +83,12 @@ func (g *Generator) processOprations(s *Service, operations map[string]interface
 		}
 		ht := g.keyAsMap(v, "http")
 		if ht != nil {
-			oper.ResponseCode = fmt.Sprintf("%v", ht["responseCode"])
+			rc := ht["responseCode"]
+			if rc == nil {
+				oper.ResponseCode = "200"
+			} else {
+				oper.ResponseCode = fmt.Sprintf("%v", ht["responseCode"])
+			}
 			oper.RequestURI = fmt.Sprintf("%v", ht["requestUri"])
 			oper.Method = fmt.Sprintf("%v", ht["method"])
 		}
@@ -89,9 +114,20 @@ func (g *Generator) processPaginatorFile(path string) error {
 		items := v.(map[string]interface{})
 		p := &Pagination{}
 		p.InputToken = fmt.Sprintf("%v", items["input_token"])
-		p.LimitKey = fmt.Sprintf("%v", items["limit_key"])
+		if items["limit_key"] != nil {
+			p.LimitKey = fmt.Sprintf("%v", items["limit_key"])
+		}
 		p.OutputToken = fmt.Sprintf("%v", items["output_token"])
-		p.ResultKey = fmt.Sprintf("%v", items["result_key"])
+
+		p.ResultKey = make([]string, 0)
+		resultKey, ok := items["result_key"].([]string)
+		if ok {
+			for _, k := range resultKey {
+				p.ResultKey = append(p.ResultKey, k)
+			}
+		} else {
+			p.ResultKey = append(p.ResultKey, fmt.Sprintf("%v", items["result_key"]))
+		}
 		g.setPagination(p, funcName, serviceFolder)
 	}
 	return nil
@@ -124,12 +160,15 @@ func (g *Generator) processAPIFile(path string) error {
 	if err != nil {
 		return err
 	}
-	var obj map[string]interface{}
-	err = json.Unmarshal(data, &obj)
+
+	var apiObject map[string]interface{}
+	err = json.Unmarshal(data, &apiObject)
 	if err != nil {
 		return err
 	}
-	metadata := g.keyAsMap(obj, "metadata")
+	metadata := g.keyAsMap(apiObject, "metadata")
+	shapes := g.keyAsMap(apiObject, "shapes")
+	operations := g.keyAsMap(apiObject, "operations")
 	if metadata != nil {
 		if metadata["serviceAbbreviation"] != nil {
 			s.Abbreviation = fmt.Sprintf("%v", metadata["serviceAbbreviation"])
@@ -139,7 +178,7 @@ func (g *Generator) processAPIFile(path string) error {
 		}
 		s.ServiceID = fmt.Sprintf("%v", metadata["serviceId"])
 		s.EndPointPrefix = fmt.Sprintf("%v", metadata["endpointPrefix"])
-		g.processOprations(s, g.keyAsMap(obj, "operations"))
+		g.processOprations(s, operations, shapes)
 	}
 
 	return nil
@@ -176,19 +215,25 @@ func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
 	data["PagingationInputToken"] = o.Pagination.InputToken
 	data["ResponseClassName"] = o.ResponseClass
 	data["PagingationOutputToken"] = o.Pagination.OutputToken
-	data["PagingationLimitKey"] = o.Pagination.LimitKey
+	if o.Pagination.LimitKey != "" {
+		data["PagingationLimitKey"] = o.Pagination.LimitKey
+	}
 	data["PaginationResultKey"] = o.Pagination.ResultKey
 	data["OperationName"] = o.Name
-	data["OperationDescription"] = strip.StripTags(o.Description)
-	data["RequestURI"] = o.RequestURI
-	data["Method"] = o.Method
-	data["ResponseCode"] = o.ResponseCode
+	if o.ResponseCode == "" {
+		data["ResponseCode"] = "200"
+	} else {
+		data["ResponseCode"] = o.ResponseCode
+	}
 
 	for k, v := range data {
 		if v == nil || v == "" {
 			return fmt.Errorf("Missing value '%v' in %v", k, data)
 		}
 	}
+	data["OperationDescription"] = strip.StripTags(o.Description)
+	data["RequestURI"] = o.RequestURI
+	data["Method"] = o.Method
 	return g.OperationTemplate.Execute(file, data)
 }
 

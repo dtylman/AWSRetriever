@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 ListStacksInput req = new ListStacksInput
                 {
-                    NextToken = resp.NextToken,
-                    &lt;nil&gt; = maxItems
+                    NextToken = resp.NextToken
+                                        
                 };
-                resp = client.ListStacks(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListStacks(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.StackSummaries)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

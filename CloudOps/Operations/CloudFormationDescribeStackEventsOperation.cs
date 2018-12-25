@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 DescribeStackEventsInput req = new DescribeStackEventsInput
                 {
-                    NextToken = resp.NextToken,
-                    &lt;nil&gt; = maxItems
+                    NextToken = resp.NextToken
+                                        
                 };
-                resp = client.DescribeStackEvents(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeStackEvents(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.StackEvents)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

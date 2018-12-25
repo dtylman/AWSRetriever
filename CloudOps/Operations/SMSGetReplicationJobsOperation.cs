@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 GetReplicationJobsRequest req = new GetReplicationJobsRequest
                 {
-                    nextToken = resp.nextToken,
+                    nextToken = resp.nextToken
+                    ,
                     maxResults = maxItems
+                                        
                 };
-                resp = client.GetReplicationJobs(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.GetReplicationJobs(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.replicationJobList)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.nextToken));
         }

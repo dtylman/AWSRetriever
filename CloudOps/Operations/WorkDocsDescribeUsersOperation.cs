@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeUsersRequest req = new DescribeUsersRequest
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     Limit = maxItems
+                                        
                 };
+
                 resp = client.DescribeUsers(req);
                 CheckError(resp.HttpStatusCode, "200");                
-
+                
                 foreach (var obj in resp.Users)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

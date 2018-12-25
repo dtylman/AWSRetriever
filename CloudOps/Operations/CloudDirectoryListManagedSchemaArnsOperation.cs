@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListManagedSchemaArnsRequest req = new ListManagedSchemaArnsRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxResults = maxItems
+                                        
                 };
+
                 resp = client.ListManagedSchemaArns(req);
                 CheckError(resp.HttpStatusCode, "200");                
-
+                
                 foreach (var obj in resp.&lt;nil&gt;)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

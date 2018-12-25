@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeScalingActivitiesType req = new DescribeScalingActivitiesType
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeScalingActivities(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeScalingActivities(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Activities)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

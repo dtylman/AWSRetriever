@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 ListMetricsInput req = new ListMetricsInput
                 {
-                    NextToken = resp.NextToken,
-                    &lt;nil&gt; = maxItems
+                    NextToken = resp.NextToken
+                                        
                 };
-                resp = client.ListMetrics(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListMetrics(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Metrics)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

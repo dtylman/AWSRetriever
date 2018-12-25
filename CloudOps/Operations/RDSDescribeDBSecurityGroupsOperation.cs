@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeDBSecurityGroupsMessage req = new DescribeDBSecurityGroupsMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeDBSecurityGroups(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeDBSecurityGroups(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.DBSecurityGroups)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

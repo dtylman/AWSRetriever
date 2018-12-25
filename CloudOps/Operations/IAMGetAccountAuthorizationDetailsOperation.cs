@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 GetAccountAuthorizationDetailsRequest req = new GetAccountAuthorizationDetailsRequest
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
-                resp = client.GetAccountAuthorizationDetails(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.GetAccountAuthorizationDetails(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.[UserDetailList GroupDetailList RoleDetailList Policies])
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

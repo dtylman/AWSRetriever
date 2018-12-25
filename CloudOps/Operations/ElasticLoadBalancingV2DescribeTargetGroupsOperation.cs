@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 DescribeTargetGroupsInput req = new DescribeTargetGroupsInput
                 {
-                    Marker = resp.NextMarker,
-                    &lt;nil&gt; = maxItems
+                    Marker = resp.NextMarker
+                                        
                 };
-                resp = client.DescribeTargetGroups(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeTargetGroups(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.TargetGroups)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextMarker));
         }

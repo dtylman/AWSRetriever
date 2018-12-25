@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 DescribeConfigurationOptionsMessage req = new DescribeConfigurationOptionsMessage
                 {
-                    &lt;nil&gt; = resp.&lt;nil&gt;,
-                    &lt;nil&gt; = maxItems
+                    &lt;nil&gt; = resp.&lt;nil&gt;
+                                        
                 };
-                resp = client.DescribeConfigurationOptions(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeConfigurationOptions(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Options)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
         }

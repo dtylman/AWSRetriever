@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListDedicatedIpPoolsRequest req = new ListDedicatedIpPoolsRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     PageSize = maxItems
+                                        
                 };
-                resp = client.ListDedicatedIpPools(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListDedicatedIpPools(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.&lt;nil&gt;)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

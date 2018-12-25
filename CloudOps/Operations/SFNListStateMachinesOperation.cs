@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListStateMachinesInput req = new ListStateMachinesInput
                 {
-                    nextToken = resp.nextToken,
+                    nextToken = resp.nextToken
+                    ,
                     maxResults = maxItems
+                                        
                 };
-                resp = client.ListStateMachines(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListStateMachines(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.stateMachines)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.nextToken));
         }

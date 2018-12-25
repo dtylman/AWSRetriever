@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 GetDedicatedIpsRequest req = new GetDedicatedIpsRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     PageSize = maxItems
+                                        
                 };
-                resp = client.GetDedicatedIps(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.GetDedicatedIps(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.&lt;nil&gt;)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

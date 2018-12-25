@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListAccessKeysRequest req = new ListAccessKeysRequest
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
-                resp = client.ListAccessKeys(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListAccessKeys(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.AccessKeyMetadata)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

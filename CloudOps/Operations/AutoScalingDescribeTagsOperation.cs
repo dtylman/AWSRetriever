@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeTagsType req = new DescribeTagsType
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeTags(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeTags(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Tags)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

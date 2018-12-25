@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeOptionGroupsMessage req = new DescribeOptionGroupsMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeOptionGroups(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeOptionGroups(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.OptionGroupsList)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

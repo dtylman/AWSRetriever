@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeHsmConfigurationsMessage req = new DescribeHsmConfigurationsMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeHsmConfigurations(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeHsmConfigurations(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.HsmConfigurations)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

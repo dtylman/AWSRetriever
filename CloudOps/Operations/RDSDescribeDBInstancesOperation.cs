@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeDBInstancesMessage req = new DescribeDBInstancesMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeDBInstances(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeDBInstances(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.DBInstances)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

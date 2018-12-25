@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListAccountAliasesRequest req = new ListAccountAliasesRequest
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
-                resp = client.ListAccountAliases(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListAccountAliases(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.AccountAliases)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

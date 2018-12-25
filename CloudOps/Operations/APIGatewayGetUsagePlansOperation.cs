@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 GetUsagePlansRequest req = new GetUsagePlansRequest
                 {
-                    position = resp.position,
+                    position = resp.position
+                    ,
                     limit = maxItems
+                                        
                 };
-                resp = client.GetUsagePlans(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.GetUsagePlans(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.items)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.position));
         }

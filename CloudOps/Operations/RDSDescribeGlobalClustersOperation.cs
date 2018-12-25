@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeGlobalClustersMessage req = new DescribeGlobalClustersMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeGlobalClusters(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeGlobalClusters(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.GlobalClusters)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

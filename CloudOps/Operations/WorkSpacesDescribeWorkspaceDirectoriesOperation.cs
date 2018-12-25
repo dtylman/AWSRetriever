@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 DescribeWorkspaceDirectoriesRequest req = new DescribeWorkspaceDirectoriesRequest
                 {
-                    NextToken = resp.NextToken,
-                    &lt;nil&gt; = maxItems
+                    NextToken = resp.NextToken
+                                        
                 };
-                resp = client.DescribeWorkspaceDirectories(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeWorkspaceDirectories(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Directories)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

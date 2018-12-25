@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeNatGatewaysRequest req = new DescribeNatGatewaysRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxResults = maxItems
+                                        
                 };
-                resp = client.DescribeNatGateways(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeNatGateways(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.NatGateways)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

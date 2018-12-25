@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribePoliciesType req = new DescribePoliciesType
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribePolicies(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribePolicies(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.ScalingPolicies)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeClusterParameterGroupsMessage req = new DescribeClusterParameterGroupsMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeClusterParameterGroups(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeClusterParameterGroups(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.ParameterGroups)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

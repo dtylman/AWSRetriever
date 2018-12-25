@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 GetRestApisRequest req = new GetRestApisRequest
                 {
-                    position = resp.position,
+                    position = resp.position
+                    ,
                     limit = maxItems
+                                        
                 };
-                resp = client.GetRestApis(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.GetRestApis(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.items)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.position));
         }

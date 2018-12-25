@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListApplicationsRequest req = new ListApplicationsRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxItems = maxItems
+                                        
                 };
+
                 resp = client.ListApplications(req);
                 CheckError(resp.HttpStatusCode, "200");                
-
+                
                 foreach (var obj in resp.&lt;nil&gt;)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

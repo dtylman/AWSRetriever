@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListTaskDefinitionsRequest req = new ListTaskDefinitionsRequest
                 {
-                    nextToken = resp.nextToken,
+                    nextToken = resp.nextToken
+                    ,
                     maxResults = maxItems
+                                        
                 };
-                resp = client.ListTaskDefinitions(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListTaskDefinitions(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.taskDefinitionArns)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.nextToken));
         }

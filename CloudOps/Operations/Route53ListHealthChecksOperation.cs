@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListHealthChecksRequest req = new ListHealthChecksRequest
                 {
-                    Marker = resp.NextMarker,
+                    Marker = resp.NextMarker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
-                resp = client.ListHealthChecks(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListHealthChecks(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.HealthChecks)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextMarker));
         }

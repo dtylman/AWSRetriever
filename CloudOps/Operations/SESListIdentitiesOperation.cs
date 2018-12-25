@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListIdentitiesRequest req = new ListIdentitiesRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxItems = maxItems
+                                        
                 };
-                resp = client.ListIdentities(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListIdentities(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Identities)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

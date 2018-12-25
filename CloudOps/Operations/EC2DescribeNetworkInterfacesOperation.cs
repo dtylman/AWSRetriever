@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeNetworkInterfacesRequest req = new DescribeNetworkInterfacesRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxResults = maxItems
+                                        
                 };
-                resp = client.DescribeNetworkInterfaces(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeNetworkInterfaces(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.NetworkInterfaces)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

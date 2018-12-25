@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeCacheClustersMessage req = new DescribeCacheClustersMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeCacheClusters(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeCacheClusters(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.CacheClusters)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

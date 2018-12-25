@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeDBClustersMessage req = new DescribeDBClustersMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeDBClusters(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeDBClusters(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.DBClusters)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

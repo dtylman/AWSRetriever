@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListMeshesInput req = new ListMeshesInput
                 {
-                    nextToken = resp.nextToken,
+                    nextToken = resp.nextToken
+                    ,
                     limit = maxItems
+                                        
                 };
+
                 resp = client.ListMeshes(req);
                 CheckError(resp.HttpStatusCode, "200");                
-
+                
                 foreach (var obj in resp.meshes)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.nextToken));
         }

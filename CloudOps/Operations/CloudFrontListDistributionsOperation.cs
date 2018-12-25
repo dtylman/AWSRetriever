@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListDistributionsRequest req = new ListDistributionsRequest
                 {
-                    Marker = resp.DistributionList.NextMarker,
+                    Marker = resp.DistributionList.NextMarker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
-                resp = client.ListDistributions(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListDistributions(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.DistributionList.Items)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.DistributionList.NextMarker));
         }

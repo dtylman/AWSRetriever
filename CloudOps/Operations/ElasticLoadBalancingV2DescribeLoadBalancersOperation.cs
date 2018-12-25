@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 DescribeLoadBalancersInput req = new DescribeLoadBalancersInput
                 {
-                    Marker = resp.NextMarker,
-                    &lt;nil&gt; = maxItems
+                    Marker = resp.NextMarker
+                                        
                 };
-                resp = client.DescribeLoadBalancers(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeLoadBalancers(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.LoadBalancers)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextMarker));
         }

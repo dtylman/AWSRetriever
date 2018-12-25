@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListEmailIdentitiesRequest req = new ListEmailIdentitiesRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     PageSize = maxItems
+                                        
                 };
-                resp = client.ListEmailIdentities(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListEmailIdentities(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.&lt;nil&gt;)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

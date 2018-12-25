@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 ListTopicsInput req = new ListTopicsInput
                 {
-                    NextToken = resp.NextToken,
-                    &lt;nil&gt; = maxItems
+                    NextToken = resp.NextToken
+                                        
                 };
-                resp = client.ListTopics(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListTopics(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Topics)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

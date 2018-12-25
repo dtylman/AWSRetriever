@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeDBSnapshotsMessage req = new DescribeDBSnapshotsMessage
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeDBSnapshots(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeDBSnapshots(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.DBSnapshots)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

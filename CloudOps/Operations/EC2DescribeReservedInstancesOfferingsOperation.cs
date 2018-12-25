@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeReservedInstancesOfferingsRequest req = new DescribeReservedInstancesOfferingsRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxResults = maxItems
+                                        
                 };
-                resp = client.DescribeReservedInstancesOfferings(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeReservedInstancesOfferings(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.ReservedInstancesOfferings)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

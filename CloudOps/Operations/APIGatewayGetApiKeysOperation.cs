@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 GetApiKeysRequest req = new GetApiKeysRequest
                 {
-                    position = resp.position,
+                    position = resp.position
+                    ,
                     limit = maxItems
+                                        
                 };
-                resp = client.GetApiKeys(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.GetApiKeys(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.items)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.position));
         }

@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListHostedZonesRequest req = new ListHostedZonesRequest
                 {
-                    Marker = resp.NextMarker,
+                    Marker = resp.NextMarker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
-                resp = client.ListHostedZones(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListHostedZones(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.HostedZones)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextMarker));
         }

@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeEventsRequest req = new DescribeEventsRequest
                 {
-                    nextToken = resp.nextToken,
+                    nextToken = resp.nextToken
+                    ,
                     maxResults = maxItems
+                                        
                 };
-                resp = client.DescribeEvents(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeEvents(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.events)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.nextToken));
         }

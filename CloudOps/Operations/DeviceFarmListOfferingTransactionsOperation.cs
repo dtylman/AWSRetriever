@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 ListOfferingTransactionsRequest req = new ListOfferingTransactionsRequest
                 {
-                    nextToken = resp.nextToken,
-                    &lt;nil&gt; = maxItems
+                    nextToken = resp.nextToken
+                                        
                 };
-                resp = client.ListOfferingTransactions(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListOfferingTransactions(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.offeringTransactions)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.nextToken));
         }

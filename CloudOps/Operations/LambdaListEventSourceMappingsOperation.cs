@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListEventSourceMappingsRequest req = new ListEventSourceMappingsRequest
                 {
-                    Marker = resp.NextMarker,
+                    Marker = resp.NextMarker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
+
                 resp = client.ListEventSourceMappings(req);
                 CheckError(resp.HttpStatusCode, "200");                
-
+                
                 foreach (var obj in resp.EventSourceMappings)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextMarker));
         }

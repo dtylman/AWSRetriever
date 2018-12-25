@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListSigningCertificatesRequest req = new ListSigningCertificatesRequest
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
-                resp = client.ListSigningCertificates(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListSigningCertificates(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Certificates)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

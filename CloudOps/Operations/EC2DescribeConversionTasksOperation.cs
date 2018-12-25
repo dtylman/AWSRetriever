@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 DescribeConversionTasksRequest req = new DescribeConversionTasksRequest
                 {
-                    &lt;nil&gt; = resp.&lt;nil&gt;,
-                    &lt;nil&gt; = maxItems
+                    &lt;nil&gt; = resp.&lt;nil&gt;
+                                        
                 };
-                resp = client.DescribeConversionTasks(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeConversionTasks(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.ConversionTasks)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
         }

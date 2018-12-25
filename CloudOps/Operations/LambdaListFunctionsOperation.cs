@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListFunctionsRequest req = new ListFunctionsRequest
                 {
-                    Marker = resp.NextMarker,
+                    Marker = resp.NextMarker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
+
                 resp = client.ListFunctions(req);
                 CheckError(resp.HttpStatusCode, "200");                
-
+                
                 foreach (var obj in resp.Functions)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextMarker));
         }

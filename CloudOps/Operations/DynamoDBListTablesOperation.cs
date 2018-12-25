@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListTablesInput req = new ListTablesInput
                 {
-                    ExclusiveStartTableName = resp.LastEvaluatedTableName,
+                    ExclusiveStartTableName = resp.LastEvaluatedTableName
+                    ,
                     Limit = maxItems
+                                        
                 };
-                resp = client.ListTables(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListTables(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.TableNames)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.LastEvaluatedTableName));
         }

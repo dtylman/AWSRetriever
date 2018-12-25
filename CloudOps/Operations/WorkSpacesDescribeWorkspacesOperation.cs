@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeWorkspacesRequest req = new DescribeWorkspacesRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     Limit = maxItems
+                                        
                 };
-                resp = client.DescribeWorkspaces(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeWorkspaces(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Workspaces)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

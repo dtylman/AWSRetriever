@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListCloudFrontOriginAccessIdentitiesRequest req = new ListCloudFrontOriginAccessIdentitiesRequest
                 {
-                    Marker = resp.CloudFrontOriginAccessIdentityList.NextMarker,
+                    Marker = resp.CloudFrontOriginAccessIdentityList.NextMarker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
-                resp = client.ListCloudFrontOriginAccessIdentities(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListCloudFrontOriginAccessIdentities(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.CloudFrontOriginAccessIdentityList.Items)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.CloudFrontOriginAccessIdentityList.NextMarker));
         }

@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListInstanceProfilesRequest req = new ListInstanceProfilesRequest
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
-                resp = client.ListInstanceProfiles(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListInstanceProfiles(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.InstanceProfiles)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

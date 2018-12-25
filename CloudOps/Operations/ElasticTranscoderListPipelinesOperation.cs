@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 ListPipelinesRequest req = new ListPipelinesRequest
                 {
-                    PageToken = resp.NextPageToken,
-                    &lt;nil&gt; = maxItems
+                    PageToken = resp.NextPageToken
+                                        
                 };
-                resp = client.ListPipelines(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListPipelines(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Pipelines)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextPageToken));
         }

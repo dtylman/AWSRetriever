@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeRepositoriesRequest req = new DescribeRepositoriesRequest
                 {
-                    nextToken = resp.nextToken,
+                    nextToken = resp.nextToken
+                    ,
                     maxResults = maxItems
+                                        
                 };
-                resp = client.DescribeRepositories(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeRepositories(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.repositories)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.nextToken));
         }

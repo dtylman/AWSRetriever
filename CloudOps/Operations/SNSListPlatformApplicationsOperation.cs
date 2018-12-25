@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 ListPlatformApplicationsInput req = new ListPlatformApplicationsInput
                 {
-                    NextToken = resp.NextToken,
-                    &lt;nil&gt; = maxItems
+                    NextToken = resp.NextToken
+                                        
                 };
-                resp = client.ListPlatformApplications(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListPlatformApplications(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.PlatformApplications)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

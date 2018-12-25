@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 DescribeAccountAttributesRequest req = new DescribeAccountAttributesRequest
                 {
-                    &lt;nil&gt; = resp.&lt;nil&gt;,
-                    &lt;nil&gt; = maxItems
+                    &lt;nil&gt; = resp.&lt;nil&gt;
+                                        
                 };
-                resp = client.DescribeAccountAttributes(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeAccountAttributes(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.AccountAttributes)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.&lt;nil&gt;));
         }

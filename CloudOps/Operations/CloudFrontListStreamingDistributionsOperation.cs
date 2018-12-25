@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListStreamingDistributionsRequest req = new ListStreamingDistributionsRequest
                 {
-                    Marker = resp.StreamingDistributionList.NextMarker,
+                    Marker = resp.StreamingDistributionList.NextMarker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
-                resp = client.ListStreamingDistributions(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListStreamingDistributions(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.StreamingDistributionList.Items)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.StreamingDistributionList.NextMarker));
         }

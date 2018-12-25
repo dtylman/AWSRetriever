@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 DescribeWorkspaceBundlesRequest req = new DescribeWorkspaceBundlesRequest
                 {
-                    NextToken = resp.NextToken,
-                    &lt;nil&gt; = maxItems
+                    NextToken = resp.NextToken
+                                        
                 };
-                resp = client.DescribeWorkspaceBundles(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeWorkspaceBundles(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Bundles)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

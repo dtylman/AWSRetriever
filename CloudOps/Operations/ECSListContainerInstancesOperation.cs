@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListContainerInstancesRequest req = new ListContainerInstancesRequest
                 {
-                    nextToken = resp.nextToken,
+                    nextToken = resp.nextToken
+                    ,
                     maxResults = maxItems
+                                        
                 };
-                resp = client.ListContainerInstances(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListContainerInstances(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.containerInstanceArns)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.nextToken));
         }

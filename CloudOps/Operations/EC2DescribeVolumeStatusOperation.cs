@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeVolumeStatusRequest req = new DescribeVolumeStatusRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxResults = maxItems
+                                        
                 };
-                resp = client.DescribeVolumeStatus(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeVolumeStatus(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.VolumeStatuses)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

@@ -27,16 +27,18 @@ namespace CloudOps.Operations
             {
                 ListDeploymentConfigsInput req = new ListDeploymentConfigsInput
                 {
-                    nextToken = resp.nextToken,
-                    &lt;nil&gt; = maxItems
+                    nextToken = resp.nextToken
+                                        
                 };
-                resp = client.ListDeploymentConfigs(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListDeploymentConfigs(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.deploymentConfigsList)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.nextToken));
         }

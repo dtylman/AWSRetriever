@@ -12,7 +12,7 @@ type Pagination struct {
 	InputToken  string
 	LimitKey    string
 	OutputToken string
-	ResultKey   string
+	ResultKey   []string
 }
 
 //Operation ...

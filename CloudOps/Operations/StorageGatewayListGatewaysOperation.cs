@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListGatewaysInput req = new ListGatewaysInput
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     Limit = maxItems
+                                        
                 };
-                resp = client.ListGateways(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListGateways(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.Gateways)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

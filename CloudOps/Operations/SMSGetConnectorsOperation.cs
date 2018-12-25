@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 GetConnectorsRequest req = new GetConnectorsRequest
                 {
-                    nextToken = resp.nextToken,
+                    nextToken = resp.nextToken
+                    ,
                     maxResults = maxItems
+                                        
                 };
-                resp = client.GetConnectors(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.GetConnectors(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.connectorList)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.nextToken));
         }

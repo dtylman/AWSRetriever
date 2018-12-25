@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListServiceActionsInput req = new ListServiceActionsInput
                 {
-                    PageToken = resp.NextPageToken,
+                    PageToken = resp.NextPageToken
+                    ,
                     PageSize = maxItems
+                                        
                 };
-                resp = client.ListServiceActions(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListServiceActions(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.&lt;nil&gt;)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextPageToken));
         }

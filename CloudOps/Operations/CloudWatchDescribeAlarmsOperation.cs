@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeAlarmsInput req = new DescribeAlarmsInput
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxRecords = maxItems
+                                        
                 };
-                resp = client.DescribeAlarms(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeAlarms(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.MetricAlarms)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

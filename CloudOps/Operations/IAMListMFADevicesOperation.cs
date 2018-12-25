@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListMFADevicesRequest req = new ListMFADevicesRequest
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     MaxItems = maxItems
+                                        
                 };
-                resp = client.ListMFADevices(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListMFADevices(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.MFADevices)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 SearchProvisionedProductsInput req = new SearchProvisionedProductsInput
                 {
-                    PageToken = resp.NextPageToken,
+                    PageToken = resp.NextPageToken
+                    ,
                     PageSize = maxItems
+                                        
                 };
-                resp = client.SearchProvisionedProducts(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.SearchProvisionedProducts(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.&lt;nil&gt;)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextPageToken));
         }

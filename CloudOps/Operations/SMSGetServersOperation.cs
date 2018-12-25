@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 GetServersRequest req = new GetServersRequest
                 {
-                    nextToken = resp.nextToken,
+                    nextToken = resp.nextToken
+                    ,
                     maxResults = maxItems
+                                        
                 };
-                resp = client.GetServers(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.GetServers(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.serverList)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.nextToken));
         }

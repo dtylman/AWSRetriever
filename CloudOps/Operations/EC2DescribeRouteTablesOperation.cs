@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeRouteTablesRequest req = new DescribeRouteTablesRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxResults = maxItems
+                                        
                 };
-                resp = client.DescribeRouteTables(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeRouteTables(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.RouteTables)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

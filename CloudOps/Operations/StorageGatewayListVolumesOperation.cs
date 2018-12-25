@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 ListVolumesInput req = new ListVolumesInput
                 {
-                    Marker = resp.Marker,
+                    Marker = resp.Marker
+                    ,
                     Limit = maxItems
+                                        
                 };
-                resp = client.ListVolumes(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.ListVolumes(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.VolumeInfos)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.Marker));
         }

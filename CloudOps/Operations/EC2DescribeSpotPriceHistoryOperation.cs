@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeSpotPriceHistoryRequest req = new DescribeSpotPriceHistoryRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxResults = maxItems
+                                        
                 };
-                resp = client.DescribeSpotPriceHistory(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeSpotPriceHistory(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.SpotPriceHistory)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

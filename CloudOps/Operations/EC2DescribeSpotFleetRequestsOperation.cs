@@ -27,16 +27,20 @@ namespace CloudOps.Operations
             {
                 DescribeSpotFleetRequestsRequest req = new DescribeSpotFleetRequestsRequest
                 {
-                    NextToken = resp.NextToken,
+                    NextToken = resp.NextToken
+                    ,
                     MaxResults = maxItems
+                                        
                 };
-                resp = client.DescribeSpotFleetRequests(req);
-                CheckError(resp.HttpStatusCode, "&lt;nil&gt;");                
 
+                resp = client.DescribeSpotFleetRequests(req);
+                CheckError(resp.HttpStatusCode, "200");                
+                
                 foreach (var obj in resp.SpotFleetRequestConfigs)
                 {
                     AddObject(obj);
                 }
+                
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }
