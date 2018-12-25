@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 ListPipelinesRequest req = new ListPipelinesRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.ListPipelines(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.pipelineSummaries)
+                foreach (var obj in resp.PipelineSummaries)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

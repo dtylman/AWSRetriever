@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonCloudFormationClient client = new AmazonCloudFormationClient(creds, region);
-            DescribeStacksOutput resp = new DescribeStacksOutput();
+            DescribeStacksResponse resp = new DescribeStacksResponse();
             do
             {
-                DescribeStacksInput req = new DescribeStacksInput
+                DescribeStacksRequest req = new DescribeStacksRequest
                 {
                     NextToken = resp.NextToken
                                         

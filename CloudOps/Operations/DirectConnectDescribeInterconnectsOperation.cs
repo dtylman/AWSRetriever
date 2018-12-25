@@ -22,7 +22,7 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonDirectConnectClient client = new AmazonDirectConnectClient(creds, region);
-            Interconnects resp = new Interconnects();
+            InterconnectsResponse resp = new InterconnectsResponse();
             DescribeInterconnectsRequest req = new DescribeInterconnectsRequest
             {                    
                                     
@@ -30,7 +30,7 @@ namespace CloudOps.Operations
             resp = client.DescribeInterconnects(req);
             CheckError(resp.HttpStatusCode, "200");                
             
-            foreach (var obj in resp.interconnects)
+            foreach (var obj in resp.Interconnects)
             {
                 AddObject(obj);
             }

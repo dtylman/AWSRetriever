@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 ListDatastoresRequest req = new ListDatastoresRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.ListDatastores(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.datastoreSummaries)
+                foreach (var obj in resp.DatastoreSummaries)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

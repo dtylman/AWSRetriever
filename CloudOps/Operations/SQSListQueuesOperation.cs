@@ -22,7 +22,7 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonSQSClient client = new AmazonSQSClient(creds, region);
-            ListQueuesResult resp = new ListQueuesResult();
+            ListQueuesResultResponse resp = new ListQueuesResultResponse();
             ListQueuesRequest req = new ListQueuesRequest
             {                    
                                     

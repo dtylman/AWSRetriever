@@ -25,7 +25,7 @@ namespace CloudOps.Operations
             DescribeConnectionsResponse resp = new DescribeConnectionsResponse();
             do
             {
-                DescribeConnectionsMessage req = new DescribeConnectionsMessage
+                DescribeConnectionsMessageRequest req = new DescribeConnectionsMessageRequest
                 {
                     Marker = resp.Marker
                     ,

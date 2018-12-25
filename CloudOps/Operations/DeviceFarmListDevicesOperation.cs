@@ -22,25 +22,25 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonDeviceFarmClient client = new AmazonDeviceFarmClient(creds, region);
-            ListDevicesResult resp = new ListDevicesResult();
+            ListDevicesResultResponse resp = new ListDevicesResultResponse();
             do
             {
                 ListDevicesRequest req = new ListDevicesRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                                         
                 };
 
                 resp = client.ListDevices(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.devices)
+                foreach (var obj in resp.Devices)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

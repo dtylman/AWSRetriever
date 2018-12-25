@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonAutoScalingClient client = new AmazonAutoScalingClient(creds, region);
-            PoliciesType resp = new PoliciesType();
+            PoliciesTypeResponse resp = new PoliciesTypeResponse();
             do
             {
-                DescribePoliciesType req = new DescribePoliciesType
+                DescribePoliciesTypeRequest req = new DescribePoliciesTypeRequest
                 {
                     NextToken = resp.NextToken
                     ,

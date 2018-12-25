@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonStorageGatewayClient client = new AmazonStorageGatewayClient(creds, region);
-            ListGatewaysOutput resp = new ListGatewaysOutput();
+            ListGatewaysResponse resp = new ListGatewaysResponse();
             do
             {
-                ListGatewaysInput req = new ListGatewaysInput
+                ListGatewaysRequest req = new ListGatewaysRequest
                 {
                     Marker = resp.Marker
                     ,

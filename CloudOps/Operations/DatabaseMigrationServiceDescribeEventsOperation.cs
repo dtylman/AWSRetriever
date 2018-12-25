@@ -25,7 +25,7 @@ namespace CloudOps.Operations
             DescribeEventsResponse resp = new DescribeEventsResponse();
             do
             {
-                DescribeEventsMessage req = new DescribeEventsMessage
+                DescribeEventsMessageRequest req = new DescribeEventsMessageRequest
                 {
                     Marker = resp.Marker
                     ,

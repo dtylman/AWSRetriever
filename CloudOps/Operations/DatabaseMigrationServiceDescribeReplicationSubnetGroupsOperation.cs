@@ -25,7 +25,7 @@ namespace CloudOps.Operations
             DescribeReplicationSubnetGroupsResponse resp = new DescribeReplicationSubnetGroupsResponse();
             do
             {
-                DescribeReplicationSubnetGroupsMessage req = new DescribeReplicationSubnetGroupsMessage
+                DescribeReplicationSubnetGroupsMessageRequest req = new DescribeReplicationSubnetGroupsMessageRequest
                 {
                     Marker = resp.Marker
                     ,

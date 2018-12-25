@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 ListDatasetsRequest req = new ListDatasetsRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.ListDatasets(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.datasetSummaries)
+                foreach (var obj in resp.DatasetSummaries)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

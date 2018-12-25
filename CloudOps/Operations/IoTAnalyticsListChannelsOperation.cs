@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 ListChannelsRequest req = new ListChannelsRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.ListChannels(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.channelSummaries)
+                foreach (var obj in resp.ChannelSummaries)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

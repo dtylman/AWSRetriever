@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 ListFindingsRequest req = new ListFindingsRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.ListFindings(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.findingArns)
+                foreach (var obj in resp.FindingArns)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

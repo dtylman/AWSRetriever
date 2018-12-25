@@ -22,12 +22,12 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonKinesisClient client = new AmazonKinesisClient(creds, region);
-            ListStreamsOutput resp = new ListStreamsOutput();
+            ListStreamsResponse resp = new ListStreamsResponse();
             do
             {
-                ListStreamsInput req = new ListStreamsInput
+                ListStreamsRequest req = new ListStreamsRequest
                 {
-                    ExclusiveStartStreamName = resp.StreamNames[-1]
+                    ExclusiveStartStreamName = resp.StreamNames1
                     ,
                     Limit = maxItems
                                         
@@ -42,7 +42,7 @@ namespace CloudOps.Operations
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.StreamNames[-1]));
+            while (!string.IsNullOrEmpty(resp.StreamNames1));
         }
     }
 }

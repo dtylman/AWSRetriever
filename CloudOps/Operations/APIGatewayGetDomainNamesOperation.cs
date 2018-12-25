@@ -22,27 +22,27 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonAPIGatewayClient client = new AmazonAPIGatewayClient(creds, region);
-            DomainNames resp = new DomainNames();
+            DomainNamesResponse resp = new DomainNamesResponse();
             do
             {
                 GetDomainNamesRequest req = new GetDomainNamesRequest
                 {
-                    position = resp.position
+                    Position = resp.Position
                     ,
-                    limit = maxItems
+                    Limit = maxItems
                                         
                 };
 
                 resp = client.GetDomainNames(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.items)
+                foreach (var obj in resp.Items)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.position));
+            while (!string.IsNullOrEmpty(resp.Position));
         }
     }
 }

@@ -25,7 +25,7 @@ namespace CloudOps.Operations
             DescribeReplicationInstancesResponse resp = new DescribeReplicationInstancesResponse();
             do
             {
-                DescribeReplicationInstancesMessage req = new DescribeReplicationInstancesMessage
+                DescribeReplicationInstancesMessageRequest req = new DescribeReplicationInstancesMessageRequest
                 {
                     Marker = resp.Marker
                     ,

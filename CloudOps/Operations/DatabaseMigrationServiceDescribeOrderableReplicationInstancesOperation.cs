@@ -25,7 +25,7 @@ namespace CloudOps.Operations
             DescribeOrderableReplicationInstancesResponse resp = new DescribeOrderableReplicationInstancesResponse();
             do
             {
-                DescribeOrderableReplicationInstancesMessage req = new DescribeOrderableReplicationInstancesMessage
+                DescribeOrderableReplicationInstancesMessageRequest req = new DescribeOrderableReplicationInstancesMessageRequest
                 {
                     Marker = resp.Marker
                     ,

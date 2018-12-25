@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 ListSigningPlatformsRequest req = new ListSigningPlatformsRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.ListSigningPlatforms(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.platforms)
+                foreach (var obj in resp.Platforms)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

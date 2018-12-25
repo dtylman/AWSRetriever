@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonServiceCatalogClient client = new AmazonServiceCatalogClient(creds, region);
-            ListAcceptedPortfolioSharesOutput resp = new ListAcceptedPortfolioSharesOutput();
+            ListAcceptedPortfolioSharesResponse resp = new ListAcceptedPortfolioSharesResponse();
             do
             {
-                ListAcceptedPortfolioSharesInput req = new ListAcceptedPortfolioSharesInput
+                ListAcceptedPortfolioSharesRequest req = new ListAcceptedPortfolioSharesRequest
                 {
                     PageToken = resp.NextPageToken
                     ,

@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonServiceCatalogClient client = new AmazonServiceCatalogClient(creds, region);
-            SearchProductsAsAdminOutput resp = new SearchProductsAsAdminOutput();
+            SearchProductsAsAdminResponse resp = new SearchProductsAsAdminResponse();
             do
             {
-                SearchProductsAsAdminInput req = new SearchProductsAsAdminInput
+                SearchProductsAsAdminRequest req = new SearchProductsAsAdminRequest
                 {
                     PageToken = resp.NextPageToken
                     ,

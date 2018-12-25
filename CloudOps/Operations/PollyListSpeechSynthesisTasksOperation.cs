@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonPollyClient client = new AmazonPollyClient(creds, region);
-            ListSpeechSynthesisTasksOutput resp = new ListSpeechSynthesisTasksOutput();
+            ListSpeechSynthesisTasksResponse resp = new ListSpeechSynthesisTasksResponse();
             do
             {
-                ListSpeechSynthesisTasksInput req = new ListSpeechSynthesisTasksInput
+                ListSpeechSynthesisTasksRequest req = new ListSpeechSynthesisTasksRequest
                 {
                     NextToken = resp.NextToken
                     ,

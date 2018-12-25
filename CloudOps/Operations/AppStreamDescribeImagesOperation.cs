@@ -22,7 +22,7 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonAppStreamClient client = new AmazonAppStreamClient(creds, region);
-            DescribeImagesResult resp = new DescribeImagesResult();
+            DescribeImagesResultResponse resp = new DescribeImagesResultResponse();
             do
             {
                 DescribeImagesRequest req = new DescribeImagesRequest

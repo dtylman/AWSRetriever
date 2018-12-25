@@ -22,7 +22,7 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonWorkSpacesClient client = new AmazonWorkSpacesClient(creds, region);
-            DescribeWorkspaceDirectoriesResult resp = new DescribeWorkspaceDirectoriesResult();
+            DescribeWorkspaceDirectoriesResultResponse resp = new DescribeWorkspaceDirectoriesResultResponse();
             do
             {
                 DescribeWorkspaceDirectoriesRequest req = new DescribeWorkspaceDirectoriesRequest

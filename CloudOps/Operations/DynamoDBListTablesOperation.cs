@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonDynamoDBClient client = new AmazonDynamoDBClient(creds, region);
-            ListTablesOutput resp = new ListTablesOutput();
+            ListTablesResponse resp = new ListTablesResponse();
             do
             {
-                ListTablesInput req = new ListTablesInput
+                ListTablesRequest req = new ListTablesRequest
                 {
                     ExclusiveStartTableName = resp.LastEvaluatedTableName
                     ,

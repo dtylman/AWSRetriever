@@ -22,8 +22,8 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonElasticLoadBalancingClient client = new AmazonElasticLoadBalancingClient(creds, region);
-            DescribeLoadBalancerPolicyTypesOutput resp = new DescribeLoadBalancerPolicyTypesOutput();
-            DescribeLoadBalancerPolicyTypesInput req = new DescribeLoadBalancerPolicyTypesInput
+            DescribeLoadBalancerPolicyTypesResponse resp = new DescribeLoadBalancerPolicyTypesResponse();
+            DescribeLoadBalancerPolicyTypesRequest req = new DescribeLoadBalancerPolicyTypesRequest
             {                    
                                     
             };

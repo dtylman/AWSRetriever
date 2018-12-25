@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonSageMakerClient client = new AmazonSageMakerClient(creds, region);
-            ListNotebookInstancesOutput resp = new ListNotebookInstancesOutput();
+            ListNotebookInstancesResponse resp = new ListNotebookInstancesResponse();
             do
             {
-                ListNotebookInstancesInput req = new ListNotebookInstancesInput
+                ListNotebookInstancesRequest req = new ListNotebookInstancesRequest
                 {
                     NextToken = resp.NextToken
                     ,

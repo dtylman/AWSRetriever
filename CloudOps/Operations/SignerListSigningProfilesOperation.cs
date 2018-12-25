@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 ListSigningProfilesRequest req = new ListSigningProfilesRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.ListSigningProfiles(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.profiles)
+                foreach (var obj in resp.Profiles)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

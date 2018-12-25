@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonElasticLoadBalancingClient client = new AmazonElasticLoadBalancingClient(creds, region);
-            DescribeAccessPointsOutput resp = new DescribeAccessPointsOutput();
+            DescribeAccessPointsResponse resp = new DescribeAccessPointsResponse();
             do
             {
-                DescribeAccessPointsInput req = new DescribeAccessPointsInput
+                DescribeAccessPointsRequest req = new DescribeAccessPointsRequest
                 {
                     Marker = resp.NextMarker
                                         

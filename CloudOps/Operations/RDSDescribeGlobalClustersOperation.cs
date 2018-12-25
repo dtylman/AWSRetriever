@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonRDSClient client = new AmazonRDSClient(creds, region);
-            GlobalClustersMessage resp = new GlobalClustersMessage();
+            GlobalClustersMessageResponse resp = new GlobalClustersMessageResponse();
             do
             {
-                DescribeGlobalClustersMessage req = new DescribeGlobalClustersMessage
+                DescribeGlobalClustersMessageRequest req = new DescribeGlobalClustersMessageRequest
                 {
                     Marker = resp.Marker
                     ,

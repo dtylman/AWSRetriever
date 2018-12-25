@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonElastiCacheClient client = new AmazonElastiCacheClient(creds, region);
-            CacheParameterGroupsMessage resp = new CacheParameterGroupsMessage();
+            CacheParameterGroupsMessageResponse resp = new CacheParameterGroupsMessageResponse();
             do
             {
-                DescribeCacheParameterGroupsMessage req = new DescribeCacheParameterGroupsMessage
+                DescribeCacheParameterGroupsMessageRequest req = new DescribeCacheParameterGroupsMessageRequest
                 {
                     Marker = resp.Marker
                     ,

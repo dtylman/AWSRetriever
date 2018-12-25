@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 ListAssessmentRunsRequest req = new ListAssessmentRunsRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.ListAssessmentRuns(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.assessmentRunArns)
+                foreach (var obj in resp.AssessmentRunArns)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

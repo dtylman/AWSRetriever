@@ -25,7 +25,7 @@ namespace CloudOps.Operations
             DescribeCertificatesResponse resp = new DescribeCertificatesResponse();
             do
             {
-                DescribeCertificatesMessage req = new DescribeCertificatesMessage
+                DescribeCertificatesMessageRequest req = new DescribeCertificatesMessageRequest
                 {
                     Marker = resp.Marker
                     ,

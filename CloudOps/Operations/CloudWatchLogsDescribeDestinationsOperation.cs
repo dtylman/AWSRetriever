@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 DescribeDestinationsRequest req = new DescribeDestinationsRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    limit = maxItems
+                    Limit = maxItems
                                         
                 };
 
                 resp = client.DescribeDestinations(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.destinations)
+                foreach (var obj in resp.Destinations)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

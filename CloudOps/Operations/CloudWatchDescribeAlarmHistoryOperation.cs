@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonCloudWatchClient client = new AmazonCloudWatchClient(creds, region);
-            DescribeAlarmHistoryOutput resp = new DescribeAlarmHistoryOutput();
+            DescribeAlarmHistoryResponse resp = new DescribeAlarmHistoryResponse();
             do
             {
-                DescribeAlarmHistoryInput req = new DescribeAlarmHistoryInput
+                DescribeAlarmHistoryRequest req = new DescribeAlarmHistoryRequest
                 {
                     NextToken = resp.NextToken
                     ,

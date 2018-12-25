@@ -30,7 +30,7 @@ namespace CloudOps.Operations
             resp = client.DescribeTrails(req);
             CheckError(resp.HttpStatusCode, "200");                
             
-            foreach (var obj in resp.trailList)
+            foreach (var obj in resp.TrailList)
             {
                 AddObject(obj);
             }

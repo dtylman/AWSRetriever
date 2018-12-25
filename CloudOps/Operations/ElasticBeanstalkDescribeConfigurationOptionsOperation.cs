@@ -22,8 +22,8 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonElasticBeanstalkClient client = new AmazonElasticBeanstalkClient(creds, region);
-            ConfigurationOptionsDescription resp = new ConfigurationOptionsDescription();
-            DescribeConfigurationOptionsMessage req = new DescribeConfigurationOptionsMessage
+            ConfigurationOptionsDescriptionResponse resp = new ConfigurationOptionsDescriptionResponse();
+            DescribeConfigurationOptionsMessageRequest req = new DescribeConfigurationOptionsMessageRequest
             {                    
                                     
             };

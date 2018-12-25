@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 ListAssessmentTemplatesRequest req = new ListAssessmentTemplatesRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.ListAssessmentTemplates(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.assessmentTemplateArns)
+                foreach (var obj in resp.AssessmentTemplateArns)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

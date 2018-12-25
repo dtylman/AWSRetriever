@@ -25,7 +25,7 @@ namespace CloudOps.Operations
             DescribeEndpointTypesResponse resp = new DescribeEndpointTypesResponse();
             do
             {
-                DescribeEndpointTypesMessage req = new DescribeEndpointTypesMessage
+                DescribeEndpointTypesMessageRequest req = new DescribeEndpointTypesMessageRequest
                 {
                     Marker = resp.Marker
                     ,

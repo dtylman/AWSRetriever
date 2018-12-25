@@ -22,12 +22,12 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonCloudFrontClient client = new AmazonCloudFrontClient(creds, region);
-            ListStreamingDistributionsResult resp = new ListStreamingDistributionsResult();
+            ListStreamingDistributionsResultResponse resp = new ListStreamingDistributionsResultResponse();
             do
             {
                 ListStreamingDistributionsRequest req = new ListStreamingDistributionsRequest
                 {
-                    Marker = resp.StreamingDistributionList.NextMarker
+                    Marker = resp.StreamingDistributionListNextMarker
                     ,
                     MaxItems = maxItems
                                         
@@ -36,13 +36,13 @@ namespace CloudOps.Operations
                 resp = client.ListStreamingDistributions(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.StreamingDistributionList.Items)
+                foreach (var obj in resp.StreamingDistributionListItems)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.StreamingDistributionList.NextMarker));
+            while (!string.IsNullOrEmpty(resp.StreamingDistributionListNextMarker));
         }
     }
 }

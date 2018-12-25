@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonRedshiftClient client = new AmazonRedshiftClient(creds, region);
-            HsmConfigurationMessage resp = new HsmConfigurationMessage();
+            HsmConfigurationMessageResponse resp = new HsmConfigurationMessageResponse();
             do
             {
-                DescribeHsmConfigurationsMessage req = new DescribeHsmConfigurationsMessage
+                DescribeHsmConfigurationsMessageRequest req = new DescribeHsmConfigurationsMessageRequest
                 {
                     Marker = resp.Marker
                     ,

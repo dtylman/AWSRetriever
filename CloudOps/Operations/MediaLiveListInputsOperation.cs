@@ -25,7 +25,7 @@ namespace CloudOps.Operations
             ListInputsResponse resp = new ListInputsResponse();
             do
             {
-                ListInputsRequest req = new ListInputsRequest
+                ListRequestsRequest req = new ListRequestsRequest
                 {
                     NextToken = resp.NextToken
                     ,

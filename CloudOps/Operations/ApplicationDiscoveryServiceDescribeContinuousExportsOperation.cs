@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 DescribeContinuousExportsRequest req = new DescribeContinuousExportsRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.DescribeContinuousExports(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.descriptions)
+                foreach (var obj in resp.Descriptions)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

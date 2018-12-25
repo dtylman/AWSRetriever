@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 DescribeLogGroupsRequest req = new DescribeLogGroupsRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    limit = maxItems
+                    Limit = maxItems
                                         
                 };
 
                 resp = client.DescribeLogGroups(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.logGroups)
+                foreach (var obj in resp.LogGroups)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

@@ -22,7 +22,7 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonEC2Client client = new AmazonEC2Client(creds, region);
-            DescribeVolumesResult resp = new DescribeVolumesResult();
+            DescribeVolumesResultResponse resp = new DescribeVolumesResultResponse();
             do
             {
                 DescribeVolumesRequest req = new DescribeVolumesRequest

@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonRDSClient client = new AmazonRDSClient(creds, region);
-            ReservedDBInstancesOfferingMessage resp = new ReservedDBInstancesOfferingMessage();
+            ReservedDBInstancesOfferingMessageResponse resp = new ReservedDBInstancesOfferingMessageResponse();
             do
             {
-                DescribeReservedDBInstancesOfferingsMessage req = new DescribeReservedDBInstancesOfferingsMessage
+                DescribeReservedDBInstancesOfferingsMessageRequest req = new DescribeReservedDBInstancesOfferingsMessageRequest
                 {
                     Marker = resp.Marker
                     ,

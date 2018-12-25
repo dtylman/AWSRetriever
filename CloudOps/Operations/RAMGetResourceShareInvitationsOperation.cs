@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 GetResourceShareInvitationsRequest req = new GetResourceShareInvitationsRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.GetResourceShareInvitations(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.resourceShareInvitations)
+                foreach (var obj in resp.ResourceShareInvitations)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

@@ -22,7 +22,7 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonDirectConnectClient client = new AmazonDirectConnectClient(creds, region);
-            VirtualInterfaces resp = new VirtualInterfaces();
+            VirtualInterfacesResponse resp = new VirtualInterfacesResponse();
             DescribeVirtualInterfacesRequest req = new DescribeVirtualInterfacesRequest
             {                    
                                     
@@ -30,7 +30,7 @@ namespace CloudOps.Operations
             resp = client.DescribeVirtualInterfaces(req);
             CheckError(resp.HttpStatusCode, "200");                
             
-            foreach (var obj in resp.virtualInterfaces)
+            foreach (var obj in resp.VirtualInterfaces)
             {
                 AddObject(obj);
             }

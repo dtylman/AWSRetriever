@@ -25,7 +25,7 @@ namespace CloudOps.Operations
             ListInputSecurityGroupsResponse resp = new ListInputSecurityGroupsResponse();
             do
             {
-                ListInputSecurityGroupsRequest req = new ListInputSecurityGroupsRequest
+                ListRequestSecurityGroupsRequest req = new ListRequestSecurityGroupsRequest
                 {
                     NextToken = resp.NextToken
                     ,

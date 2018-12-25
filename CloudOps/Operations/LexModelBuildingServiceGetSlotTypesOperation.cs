@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 GetSlotTypesRequest req = new GetSlotTypesRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.GetSlotTypes(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.slotTypes)
+                foreach (var obj in resp.SlotTypes)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

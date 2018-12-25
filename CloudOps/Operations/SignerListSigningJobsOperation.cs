@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 ListSigningJobsRequest req = new ListSigningJobsRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.ListSigningJobs(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.jobs)
+                foreach (var obj in resp.Jobs)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

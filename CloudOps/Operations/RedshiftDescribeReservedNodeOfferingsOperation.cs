@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonRedshiftClient client = new AmazonRedshiftClient(creds, region);
-            ReservedNodeOfferingsMessage resp = new ReservedNodeOfferingsMessage();
+            ReservedNodeOfferingsMessageResponse resp = new ReservedNodeOfferingsMessageResponse();
             do
             {
-                DescribeReservedNodeOfferingsMessage req = new DescribeReservedNodeOfferingsMessage
+                DescribeReservedNodeOfferingsMessageRequest req = new DescribeReservedNodeOfferingsMessageRequest
                 {
                     Marker = resp.Marker
                     ,

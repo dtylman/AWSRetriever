@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonResourceGroupsClient client = new AmazonResourceGroupsClient(creds, region);
-            ListGroupsOutput resp = new ListGroupsOutput();
+            ListGroupsResponse resp = new ListGroupsResponse();
             do
             {
-                ListGroupsInput req = new ListGroupsInput
+                ListGroupsRequest req = new ListGroupsRequest
                 {
                     NextToken = resp.NextToken
                     ,

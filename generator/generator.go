@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	strip "github.com/grokify/html-strip-tags-go"
+	"github.com/iancoleman/strcase"
 	// => strip
 )
 
@@ -203,10 +204,10 @@ func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
 	data["ServiceID"] = s.ServiceID
 	data["OperationClassName"] = o.ClassName()
 	data["ClientClassName"] = s.ClientClassName()
-	data["ReqeustClassName"] = o.RequestClass
-	data["ResponseClassName"] = o.ResponseClass
+	data["ReqeustClassName"] = o.RequestClassName()
+	data["ResponseClassName"] = o.ResponseClassName()
 	if o.Pagination.LimitKey != "" {
-		data["PagingationLimitKey"] = o.Pagination.LimitKey
+		data["PagingationLimitKey"] = strcase.ToCamel(o.Pagination.LimitKey)
 	}
 	data["PaginationResultKey"] = o.Pagination.ResultKey
 	data["OperationName"] = o.Name
@@ -235,8 +236,8 @@ func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
 	if (o.Pagination.InputToken == "") || (o.Pagination.OutputToken == "") {
 		return g.SingleOperationTemplate.Execute(file, data)
 	} else {
-		data["PagingationInputToken"] = o.Pagination.InputToken
-		data["PagingationOutputToken"] = o.Pagination.OutputToken
+		data["PagingationInputToken"] = strcase.ToCamel(o.Pagination.InputToken)
+		data["PagingationOutputToken"] = strcase.ToCamel(o.Pagination.OutputToken)
 		return g.PaginationOperationTemplate.Execute(file, data)
 	}
 }

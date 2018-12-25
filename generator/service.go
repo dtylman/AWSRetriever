@@ -60,7 +60,28 @@ func (s *Service) ServiceName() string {
 	}
 	serviceName = strings.Replace(serviceName, "AWS", "", -1)
 	serviceName = strings.Replace(serviceName, "Amazon", "", -1)
-	return serviceName
+	switch serviceName {
+	case "ElasticsearchService":
+		return "Elasticsearch"
+	case "Health":
+		return "AWSHealth"
+	case "IAM":
+		return "IdentityManagement"
+	case "KMS":
+		return "KeyManagementService"
+	case "SES":
+		return "SimpleEmail"
+	case "SFN":
+		return "StepFunctions"
+	case "SMS":
+		return "ServerMigrationService"
+	case "SNS":
+		return "SimpleNotificationService"
+	case "SSM":
+		return "SimpleSystemsManagement"
+	default:
+		return serviceName
+	}
 }
 
 //ClientClassName ...
@@ -99,19 +120,37 @@ func (o *Operation) ClassName() string {
 
 }
 
+//RequestClassName normalizes the request clsas name
+func (o *Operation) RequestClassName() string {
+	res := strings.Replace(o.RequestClass, "Input", "Request", 1)
+	if !strings.HasSuffix(res, "Request") {
+		res += "Request"
+	}
+	return res
+}
+
+//ResponseClassName normalizes the ResponseClassName
+func (o *Operation) ResponseClassName() string {
+	res := strings.Replace(o.ResponseClass, "Output", "Response", 1)
+	if !strings.HasSuffix(res, "Response") {
+		res += "Response"
+	}
+	return res
+}
+
 //SetResultKeys sets results keys from map item
 func (p *Pagination) SetResultKeys(item interface{}) {
 	p.ResultKey = make([]string, 0)
 	rkaArray, ok := item.([]string)
 	if ok {
 		for _, k := range rkaArray {
-			p.ResultKey = append(p.ResultKey, k)
+			p.ResultKey = append(p.ResultKey, strcase.ToCamel(k))
 		}
 		return
 	}
 	rkStr, ok := item.(string)
 	if ok {
-		p.ResultKey = append(p.ResultKey, rkStr)
+		p.ResultKey = append(p.ResultKey, strcase.ToCamel(rkStr))
 	}
 }
 
@@ -130,8 +169,9 @@ func (p *Pagination) EnsureResultKey(s *Service, o *Operation) {
 					member != "NextPageToken" &&
 					member != "NextMarker" &&
 					member != "Status" &&
-					member != "PageToken" {
-					p.ResultKey = append(p.ResultKey, member)
+					member != "PageToken" &&
+					member != "TotalResultsCount" {
+					p.ResultKey = append(p.ResultKey, strcase.ToCamel(member))
 				}
 			}
 		}

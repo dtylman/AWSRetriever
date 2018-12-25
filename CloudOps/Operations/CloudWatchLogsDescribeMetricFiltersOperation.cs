@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 DescribeMetricFiltersRequest req = new DescribeMetricFiltersRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    limit = maxItems
+                    Limit = maxItems
                                         
                 };
 
                 resp = client.DescribeMetricFilters(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.metricFilters)
+                foreach (var obj in resp.MetricFilters)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

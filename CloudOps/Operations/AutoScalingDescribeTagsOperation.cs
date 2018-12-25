@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonAutoScalingClient client = new AmazonAutoScalingClient(creds, region);
-            TagsType resp = new TagsType();
+            TagsTypeResponse resp = new TagsTypeResponse();
             do
             {
-                DescribeTagsType req = new DescribeTagsType
+                DescribeTagsTypeRequest req = new DescribeTagsTypeRequest
                 {
                     NextToken = resp.NextToken
                     ,

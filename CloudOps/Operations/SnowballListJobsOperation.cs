@@ -22,7 +22,7 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonSnowballClient client = new AmazonSnowballClient(creds, region);
-            ListJobsResult resp = new ListJobsResult();
+            ListJobsResultResponse resp = new ListJobsResultResponse();
             do
             {
                 ListJobsRequest req = new ListJobsRequest

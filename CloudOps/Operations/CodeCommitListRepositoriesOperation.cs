@@ -22,25 +22,25 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonCodeCommitClient client = new AmazonCodeCommitClient(creds, region);
-            ListRepositoriesOutput resp = new ListRepositoriesOutput();
+            ListRepositoriesResponse resp = new ListRepositoriesResponse();
             do
             {
-                ListRepositoriesInput req = new ListRepositoriesInput
+                ListRepositoriesRequest req = new ListRepositoriesRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                                         
                 };
 
                 resp = client.ListRepositories(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.repositories)
+                foreach (var obj in resp.Repositories)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonElasticBeanstalkClient client = new AmazonElasticBeanstalkClient(creds, region);
-            EventDescriptionsMessage resp = new EventDescriptionsMessage();
+            EventDescriptionsMessageResponse resp = new EventDescriptionsMessageResponse();
             do
             {
-                DescribeEventsMessage req = new DescribeEventsMessage
+                DescribeEventsMessageRequest req = new DescribeEventsMessageRequest
                 {
                     NextToken = resp.NextToken
                     ,

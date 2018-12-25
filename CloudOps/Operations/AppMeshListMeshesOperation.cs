@@ -22,27 +22,27 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonAppMeshClient client = new AmazonAppMeshClient(creds, region);
-            ListMeshesOutput resp = new ListMeshesOutput();
+            ListMeshesResponse resp = new ListMeshesResponse();
             do
             {
-                ListMeshesInput req = new ListMeshesInput
+                ListMeshesRequest req = new ListMeshesRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    limit = maxItems
+                    Limit = maxItems
                                         
                 };
 
                 resp = client.ListMeshes(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.meshes)
+                foreach (var obj in resp.Meshes)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

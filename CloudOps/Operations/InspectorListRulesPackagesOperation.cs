@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 ListRulesPackagesRequest req = new ListRulesPackagesRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.ListRulesPackages(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.rulesPackageArns)
+                foreach (var obj in resp.RulesPackageArns)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

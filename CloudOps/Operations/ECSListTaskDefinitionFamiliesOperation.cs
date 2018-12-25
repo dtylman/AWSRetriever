@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 ListTaskDefinitionFamiliesRequest req = new ListTaskDefinitionFamiliesRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.ListTaskDefinitionFamilies(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.families)
+                foreach (var obj in resp.Families)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

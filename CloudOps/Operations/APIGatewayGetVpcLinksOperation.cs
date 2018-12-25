@@ -22,27 +22,27 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonAPIGatewayClient client = new AmazonAPIGatewayClient(creds, region);
-            VpcLinks resp = new VpcLinks();
+            VpcLinksResponse resp = new VpcLinksResponse();
             do
             {
                 GetVpcLinksRequest req = new GetVpcLinksRequest
                 {
-                    position = resp.position
+                    Position = resp.Position
                     ,
-                    limit = maxItems
+                    Limit = maxItems
                                         
                 };
 
                 resp = client.GetVpcLinks(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.items)
+                foreach (var obj in resp.Items)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.position));
+            while (!string.IsNullOrEmpty(resp.Position));
         }
     }
 }

@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonAthenaClient client = new AmazonAthenaClient(creds, region);
-            ListQueryExecutionsOutput resp = new ListQueryExecutionsOutput();
+            ListQueryExecutionsResponse resp = new ListQueryExecutionsResponse();
             do
             {
-                ListQueryExecutionsInput req = new ListQueryExecutionsInput
+                ListQueryExecutionsRequest req = new ListQueryExecutionsRequest
                 {
                     NextToken = resp.NextToken
                     ,

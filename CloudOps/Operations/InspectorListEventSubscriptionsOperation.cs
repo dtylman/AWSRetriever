@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 ListEventSubscriptionsRequest req = new ListEventSubscriptionsRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.ListEventSubscriptions(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.subscriptions)
+                foreach (var obj in resp.Subscriptions)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

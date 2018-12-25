@@ -22,25 +22,25 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonCodeDeployClient client = new AmazonCodeDeployClient(creds, region);
-            ListApplicationsOutput resp = new ListApplicationsOutput();
+            ListApplicationsResponse resp = new ListApplicationsResponse();
             do
             {
-                ListApplicationsInput req = new ListApplicationsInput
+                ListApplicationsRequest req = new ListApplicationsRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                                         
                 };
 
                 resp = client.ListApplications(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.applications)
+                foreach (var obj in resp.Applications)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

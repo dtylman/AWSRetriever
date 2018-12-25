@@ -27,22 +27,22 @@ namespace CloudOps.Operations
             {
                 GetBuiltinIntentsRequest req = new GetBuiltinIntentsRequest
                 {
-                    nextToken = resp.nextToken
+                    NextToken = resp.NextToken
                     ,
-                    maxResults = maxItems
+                    MaxResults = maxItems
                                         
                 };
 
                 resp = client.GetBuiltinIntents(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.intents)
+                foreach (var obj in resp.Intents)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.nextToken));
+            while (!string.IsNullOrEmpty(resp.NextToken));
         }
     }
 }

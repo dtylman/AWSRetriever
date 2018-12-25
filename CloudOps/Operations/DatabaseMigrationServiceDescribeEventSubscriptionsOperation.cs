@@ -25,7 +25,7 @@ namespace CloudOps.Operations
             DescribeEventSubscriptionsResponse resp = new DescribeEventSubscriptionsResponse();
             do
             {
-                DescribeEventSubscriptionsMessage req = new DescribeEventSubscriptionsMessage
+                DescribeEventSubscriptionsMessageRequest req = new DescribeEventSubscriptionsMessageRequest
                 {
                     Marker = resp.Marker
                     ,

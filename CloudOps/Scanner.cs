@@ -16,7 +16,7 @@ namespace CloudOps
         {
             this.operations = new List<Operation>
             {
-                new LambaListFunctionsOperation()
+                new LambdaListFunctionsOperation()
             };
         }
 

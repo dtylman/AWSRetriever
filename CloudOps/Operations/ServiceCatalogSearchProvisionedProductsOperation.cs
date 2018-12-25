@@ -22,10 +22,10 @@ namespace CloudOps.Operations
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonServiceCatalogClient client = new AmazonServiceCatalogClient(creds, region);
-            SearchProvisionedProductsOutput resp = new SearchProvisionedProductsOutput();
+            SearchProvisionedProductsResponse resp = new SearchProvisionedProductsResponse();
             do
             {
-                SearchProvisionedProductsInput req = new SearchProvisionedProductsInput
+                SearchProvisionedProductsRequest req = new SearchProvisionedProductsRequest
                 {
                     PageToken = resp.NextPageToken
                     ,
@@ -37,11 +37,6 @@ namespace CloudOps.Operations
                 CheckError(resp.HttpStatusCode, "200");                
                 
                 foreach (var obj in resp.ProvisionedProducts)
-                {
-                    AddObject(obj);
-                }
-                
-                foreach (var obj in resp.TotalResultsCount)
                 {
                     AddObject(obj);
                 }
