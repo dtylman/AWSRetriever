@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloudObject.cs" />
     <Compile Include="Generated\RDS\DescribeEventsOperation.cs" />
     <Compile Include="Generated\RDS\DescribeEventSubscriptionsOperation.cs" />
     <Compile Include="Generated\SecurityHub\GetFindingsOperation.cs" />
@@ -366,10 +367,13 @@
     <Compile Include="Generated\EC2\DescribeNatGatewaysOperation.cs" />
     <Compile Include="Generated\ECS\ListTasksOperation.cs" />
     <Compile Include="Generated\Inspector\ListAssessmentTemplatesOperation.cs" />
+    <Compile Include="InvokationResult.cs" />
     <Compile Include="OperationFactory.cs" />
+    <Compile Include="OperationInvokation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scanner.cs" />
     <Compile Include="Operation.cs" />
+    <Compile Include="ScannerProgress.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aws-sdk-net\sdk\src\Core\AWSSDK.Core.Net45.csproj">

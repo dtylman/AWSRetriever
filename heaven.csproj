@@ -103,12 +103,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="APIs\AWSService.cs" />
-    <Compile Include="APIs\Lambda.cs" />
-    <Compile Include="APIs\S3.cs" />
-    <Compile Include="APIs\AWSScanner.cs" />
-    <Compile Include="APIs\AWSObject.cs" />
-    <Compile Include="APIs\EC2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -118,6 +112,10 @@
     <None Include="heaven-small.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="aws-sdk-net\sdk\src\Core\AWSSDK.Core.Net45.csproj">
+      <Project>{0742b90b-4f9c-47c1-a1f3-c59434987f98}</Project>
+      <Name>AWSSDK.Core.Net45</Name>
+    </ProjectReference>
     <ProjectReference Include="CloudOps\CloudOps.csproj">
       <Project>{38dc0e7f-af8d-4a2e-8e7e-e42e3839d2bb}</Project>
       <Name>CloudOps</Name>

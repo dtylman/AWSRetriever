@@ -2,7 +2,7 @@
 
 namespace CloudOps
 {
-    class OperationFactory
+    public class OperationFactory
     {
         public static List<Operation> All()
         {

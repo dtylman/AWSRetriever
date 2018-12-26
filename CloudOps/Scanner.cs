@@ -1,35 +1,109 @@
 ﻿using System;
 using System.Collections.Generic;
-using Amazon;
-using Amazon.Runtime;
+using System.Collections.Concurrent;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace CloudOps
 {
     public class Scanner
-    {        
-        public Scanner()
+    {
+        private readonly ConcurrentQueue<OperationInvokation> invokations = new ConcurrentQueue<OperationInvokation>();
+        private readonly ScannerProgress progress = new ScannerProgress();
+        private CancellationTokenSource cancellation;
+        private int maxTasks = 10;
+        private readonly ConcurrentBag<CloudObject> collectedObjects = new ConcurrentBag<CloudObject>();
+        private readonly List<Task> tasks = new List<Task>();
+        
+
+        public ConcurrentQueue<OperationInvokation> Invokations => invokations;
+
+        public int MaxTasks { get => maxTasks; set => maxTasks = value; }
+        public int TimeOut { get; set; } = 1000 * 60 * 60;
+        public ScannerProgress Progress { get => progress;  }
+
+        public ConcurrentBag<CloudObject> CollectedObjects => collectedObjects;
+
+        void Queue(OperationInvokation operation)
         {
-            
+            this.Invokations.Enqueue(operation);
         }
 
-        void Scan(AWSCredentials creds,int maxItems =100)
+        public void Cancel()
         {
-            List<RegionEndpoint> regions = new List<RegionEndpoint>(RegionEndpoint.EnumerableAllRegions);
-            foreach (Operation op in OperationFactory.All())
+            while (!this.invokations.IsEmpty)
             {
-                foreach (RegionEndpoint region in regions)
+                OperationInvokation op;
+                this.invokations.TryDequeue(out op);
+            }
+            this.cancellation.Cancel();
+        }
+
+        public void Scan()
+        {
+            if (this.tasks.Count > 0)
+            {
+                throw new ApplicationException("Scan already running");
+            }
+            while (!this.collectedObjects.IsEmpty) //clean items!
+            {
+                CloudObject obj;
+                this.collectedObjects.TryTake(out obj);
+            }
+            try
+            {                
+                this.cancellation = new CancellationTokenSource();
+                try
                 {
-                    if (op.SupportsRegion(region))
+                    for (int i = 0; i < this.MaxTasks; i++)
                     {
-                        try
-                        {
-                            op.Invoke(creds, region, maxItems);
-                        } catch(Exception ex)
-                        {
-                            Console.WriteLine(ex);
-                        }
+                        this.tasks.Add(StartScanning());
                     }
                 }
+                finally
+                {
+                    Task.WaitAll(tasks.ToArray(), this.TimeOut, this.cancellation.Token);
+                }
+            }
+            finally
+            {
+                this.tasks.Clear();
+            }                                    
+        }
+
+        private Task StartScanning()
+        {            
+            return Task.Factory.StartNew(() =>
+            {
+                this.cancellation.Token.ThrowIfCancellationRequested();
+                while (!this.invokations.IsEmpty)
+                {
+                    if (this.cancellation.Token.IsCancellationRequested)
+                    {
+                        this.cancellation.Token.ThrowIfCancellationRequested();
+                    }
+
+                    OperationInvokation invokation;
+                    if (this.invokations.TryDequeue(out invokation))
+                    {
+                        InvokationResult result = invokation.Invoke(this.cancellation.Token);
+                        foreach (CloudObject cloudObject in result.Operation.CollectedObjects)
+                        {
+                            this.CollectedObjects.Add(cloudObject);
+                        }
+                        ReportProgress(result);
+                    }
+                }                
+            }, this.cancellation.Token);
+        }
+        
+
+        private void ReportProgress(InvokationResult result)
+        {
+            if (this.progress != null)
+            {
+                this.progress.Report(result);
             }
         }
     }
