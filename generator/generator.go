@@ -22,6 +22,7 @@ type Generator struct {
 	Services                    []*Service
 	PaginationOperationTemplate *template.Template
 	SingleOperationTemplate     *template.Template
+	OperationFactoryTemplate    *template.Template
 }
 
 //NewGenerator ...
@@ -34,6 +35,10 @@ func NewGenerator() (*Generator, error) {
 		return nil, err
 	}
 	g.SingleOperationTemplate, err = g.readTemplate("operation_single.tmpl")
+	if err != nil {
+		return nil, err
+	}
+	g.OperationFactoryTemplate, err = g.readTemplate("operation_factory.tmpl")
 	if err != nil {
 		return nil, err
 	}
@@ -254,6 +259,17 @@ func (g *Generator) skipOperation(service string, operation string) bool {
 	return false
 }
 
+func (g *Generator) renderCProjItemGroup(itemgroup map[string]bool) {
+	text := ""
+	for k := range itemgroup {
+		text += k
+	}
+	err := ioutil.WriteFile("itemgroup.txt", []byte(text), 0755)
+	if err != nil {
+		log.Println(err)
+	}
+}
+
 //Generate ...
 func (g *Generator) Generate() error {
 	modelPath := filepath.Join(g.SdkRoot, "generator", "ServiceModels")
@@ -290,30 +306,35 @@ func (g *Generator) Generate() error {
 					errors++
 				} else {
 					itemgroup[fmt.Sprintf(`<Compile Include="Generated\%s\%s.cs" />`+"\n", s.ServiceName(), o.ClassName())] = true
-					container[fmt.Sprintf("new %s.%s();\n", s.ServiceName(), o.ClassName())] = true
+					container[fmt.Sprintf("new %s.%s()", s.ServiceName(), o.ClassName())] = true
 				}
 			}
 		}
 	}
 
-	text := ""
-	for k := range itemgroup {
-		text += k
-	}
-	err = ioutil.WriteFile("itemgroup.txt", []byte(text), 0755)
+	g.renderCProjItemGroup(itemgroup)
+	err = g.renderOpertaionFactoryClass(container)
 	if err != nil {
 		log.Println(err)
 	}
-	text = ""
-	for k := range container {
-		text += k
-	}
-	err = ioutil.WriteFile("container.txt", []byte(text), 0755)
-	if err != nil {
-		log.Println(err)
-	}
+
 	generated := len(itemgroup)
 	fmt.Printf("Total %v services and %v operations evaluated (%v skipped):\n", len(g.Services), totalOperations, skipped)
-	fmt.Printf("Generated %v classes (%v errors) at %v, log file, itemgroup.txt and container.txt\n", generated, errors, g.OutputFolder)
+	fmt.Printf("Generated %v classes (%v errors) at %v, log file, itemgroup.txt and OperationFactory.cs\n", generated, errors, g.OutputFolder)
 	return err
+}
+
+func (g *Generator) renderOpertaionFactoryClass(container map[string]bool) error {
+	classNames := make([]string, 0)
+	for k := range container {
+		classNames = append(classNames, k)
+	}
+	outFile, err := os.Create("OperationFactory.cs")
+	if err != nil {
+		return err
+	}
+	defer outFile.Close()
+	data := make(map[string]interface{})
+	data["ClassNames"] = classNames
+	return g.OperationFactoryTemplate.Execute(outFile, data)
 }

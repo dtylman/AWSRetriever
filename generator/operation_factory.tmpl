@@ -1,0 +1,14 @@
+using System.Collections.Generic;
+
+namespace CloudOps
+{
+    class OperationFactory
+    {
+        public static List<Operation> All(){
+            return new List<Operation>{
+                {{range .ClassNames}}
+                {{.}},{{end}}                
+            };
+        }
+    }
+}

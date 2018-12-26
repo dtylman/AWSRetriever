@@ -6,29 +6,28 @@ using Amazon.Runtime;
 namespace CloudOps
 {
     public class Scanner
-    {
-        private readonly List<Operation> operations;
-        private readonly AWSCredentials creds;
-        private readonly int maxItems = 100;
-
+    {        
         public Scanner()
         {
-            this.operations = new List<Operation>
-            {
-                new Lambda.ListFunctionsOperation()
-            };
+            
         }
 
-        void Scan()
+        void Scan(AWSCredentials creds,int maxItems =100)
         {
             List<RegionEndpoint> regions = new List<RegionEndpoint>(RegionEndpoint.EnumerableAllRegions);
-            foreach (Operation op in this.operations)
+            foreach (Operation op in OperationFactory.All())
             {
                 foreach (RegionEndpoint region in regions)
                 {
                     if (op.SupportsRegion(region))
                     {
-                        op.Invoke(this.creds, region, this.maxItems);
+                        try
+                        {
+                            op.Invoke(creds, region, maxItems);
+                        } catch(Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
                     }
                 }
             }
