@@ -116,13 +116,14 @@ func (s *Service) ShapeRequiredParams(shape string) string {
 //ClassName ...
 func (o *Operation) ClassName() string {
 	//LambaListFunctionsOperation
-	return fmt.Sprintf("%v%vOperation", o.Parent.ServiceName(), o.Name)
+	return fmt.Sprintf("%vOperation", o.Name)
 
 }
 
 //RequestClassName normalizes the request clsas name
 func (o *Operation) RequestClassName() string {
 	res := strings.Replace(o.RequestClass, "Input", "Request", 1)
+	res = strings.Replace(res, "Message", "Request", 1)
 	if !strings.HasSuffix(res, "Request") {
 		res += "Request"
 	}
@@ -132,6 +133,14 @@ func (o *Operation) RequestClassName() string {
 //ResponseClassName normalizes the ResponseClassName
 func (o *Operation) ResponseClassName() string {
 	res := strings.Replace(o.ResponseClass, "Output", "Response", 1)
+	res = strings.Replace(res, "Result", "Response", 1)
+	res = strings.Replace(res, "Message", "Response", 1)
+
+	if strings.HasPrefix(o.Name, "Describe") {
+		if !strings.HasPrefix(res, "Describe") {
+			res = "Describe" + res
+		}
+	}
 	if !strings.HasSuffix(res, "Response") {
 		res += "Response"
 	}

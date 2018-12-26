@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Amazon;
 using Amazon.Runtime;
-using CloudOps.Operations;
 
 namespace CloudOps
 {
@@ -16,7 +15,7 @@ namespace CloudOps
         {
             this.operations = new List<Operation>
             {
-                new LambdaListFunctionsOperation()
+                new Lambda.ListFunctionsOperation()
             };
         }
 

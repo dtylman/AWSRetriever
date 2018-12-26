@@ -199,11 +199,19 @@ func (g *Generator) walkfunc(path string, info os.FileInfo, err error) error {
 }
 
 func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
+	dir := filepath.Join(g.OutputFolder, s.ServiceName())
+	err := os.MkdirAll(dir, 0755)
+	if err != nil {
+		return err
+	}
 	data := make(map[string]interface{})
 	data["ServiceName"] = s.ServiceName()
 	data["ServiceID"] = s.ServiceID
 	data["OperationClassName"] = o.ClassName()
 	data["ClientClassName"] = s.ClientClassName()
+	if (o.RequestClass == "") || (o.ResponseClass == "") {
+		return fmt.Errorf("Operation %v %v has no response or request class", s.ServiceName(), o.Name)
+	}
 	data["ReqeustClassName"] = o.RequestClassName()
 	data["ResponseClassName"] = o.ResponseClassName()
 	if o.Pagination.LimitKey != "" {
@@ -225,7 +233,7 @@ func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
 	data["OperationDescription"] = strip.StripTags(o.Description)
 	data["RequestURI"] = o.RequestURI
 	data["Method"] = o.Method
-	fileName := filepath.Join(g.OutputFolder, fmt.Sprintf("%v.cs", o.ClassName()))
+	fileName := filepath.Join(dir, fmt.Sprintf("%v.cs", o.ClassName()))
 	log.Printf("generating %v", fileName)
 	file, err := os.Create(fileName)
 	if err != nil {
@@ -242,6 +250,10 @@ func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
 	}
 }
 
+func (g *Generator) skipOperation(service string, operation string) bool {
+	return false
+}
+
 //Generate ...
 func (g *Generator) Generate() error {
 	modelPath := filepath.Join(g.SdkRoot, "generator", "ServiceModels")
@@ -253,19 +265,55 @@ func (g *Generator) Generate() error {
 	if err != nil {
 		return err
 	}
+	g.OutputFolder = filepath.Join(g.OutputFolder, "Generated")
 	err = os.MkdirAll(g.OutputFolder, 0755)
 	if err != nil {
 		return err
 	}
+	itemgroup := make(map[string]bool)
+	container := make(map[string]bool)
+	totalOperations := 0
+	skipped := 0
+	errors := 0
 	for _, s := range g.Services {
 		for _, o := range s.Operations {
+			totalOperations++
+			if g.skipOperation(s.ServiceName(), o.Name) {
+				log.Printf("Skipping %v %v", s.ServiceName(), o.Name)
+				skipped++
+				continue
+			}
 			if o.Pagination != nil {
 				err = g.renderOperationClass(s, o)
 				if err != nil {
 					log.Println(err)
+					errors++
+				} else {
+					itemgroup[fmt.Sprintf(`<Compile Include="Generated\%s\%s.cs" />`+"\n", s.ServiceName(), o.ClassName())] = true
+					container[fmt.Sprintf("new %s.%s();\n", s.ServiceName(), o.ClassName())] = true
 				}
 			}
 		}
 	}
+
+	text := ""
+	for k := range itemgroup {
+		text += k
+	}
+	err = ioutil.WriteFile("itemgroup.txt", []byte(text), 0755)
+	if err != nil {
+		log.Println(err)
+	}
+	text = ""
+	for k := range container {
+		text += k
+	}
+	err = ioutil.WriteFile("container.txt", []byte(text), 0755)
+	if err != nil {
+		log.Println(err)
+	}
+	generated := len(itemgroup)
+	fmt.Printf("Total %v services and %v operations evaluated (%v skipped):\n", len(g.Services), totalOperations, skipped)
+	fmt.Printf("Generated %v classes (%v errors) at %v, log file, itemgroup.txt and container.txt\n", generated, errors, g.OutputFolder)
 	return err
 }
