@@ -10,7 +10,7 @@ namespace CloudOps
     public class Scanner
     {
         private readonly ConcurrentQueue<OperationInvokation> invokations = new ConcurrentQueue<OperationInvokation>();
-        private readonly ScannerProgress progress = new ScannerProgress();
+        private readonly ScannerProgress progress = new ScannerProgress();        
         private CancellationTokenSource cancellation;
         private int maxTasks = 10;
         private readonly ConcurrentBag<CloudObject> collectedObjects = new ConcurrentBag<CloudObject>();
@@ -48,11 +48,11 @@ namespace CloudOps
             }
             while (!this.collectedObjects.IsEmpty) //clean items!
             {
-                CloudObject obj;
-                this.collectedObjects.TryTake(out obj);
+                collectedObjects.TryTake(out CloudObject obj);
             }
             try
-            {                
+            {
+                this.progress.Total = this.invokations.Count;
                 this.cancellation = new CancellationTokenSource();
                 try
                 {
@@ -103,7 +103,7 @@ namespace CloudOps
         {
             if (this.progress != null)
             {
-                this.progress.Report(result);
+                this.progress.Report(this.invokations.Count, result);
             }
         }
     }

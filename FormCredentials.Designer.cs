@@ -78,7 +78,6 @@
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "AWS Access Key:";
-            
             // 
             // label2
             // 

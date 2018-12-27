@@ -18,14 +18,28 @@ namespace CloudOps
             this.ex = ex;
         }
 
-        public override string ToString()
+        public string ResultText()
         {
-            return string.Format("{0} {1}", this.operation.Name, this.ex);
+            string message = String.Format("{0} {1} {2}: ", operation.Name, operation.ServiceName, operation.Region.DisplayName);
+            if (IsError())
+            {
+                message += string.Format("Error: {0}", this.ex.Message);
+            } else
+            {
+                message += string.Format("{0} items retrieved", this.operation.CollectedObjects.Count);
+            }
+            return message;
         }
+
         public Operation Operation { get => operation; set => operation = value; }
 
         public Exception Ex => ex;
 
-        
+        public int Progress { get; internal set; }
+
+        public bool IsError()
+        {
+            return this.ex != null;
+        }
     }
 }

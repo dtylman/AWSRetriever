@@ -19,7 +19,7 @@ namespace CloudOps
         private RegionEndpoint region;
         public CancellationToken CancellationToken { get; internal set; }        
 
-        internal List<CloudObject> CollectedObjects => collectedObjects;
+        public List<CloudObject> CollectedObjects => collectedObjects;
 
         public RegionEndpoint Region { get => region; set => region = value; }
 

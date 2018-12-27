@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Highlight, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Highlight.4.0.0\lib\net40\Highlight.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -109,6 +112,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="heaven-2027161_960_720.jpg" />
+    <None Include="images\icons8-private-50.png" />
+    <None Include="images\icons8-save-50.png" />
+    <None Include="images\icons8-output-50.png" />
+    <None Include="images\icons8-object-50.png" />
+    <None Include="images\icons8-menu-50.png" />
+    <None Include="images\icons8-list-50.png" />
+    <None Include="images\icons8-help-50.png" />
+    <None Include="images\icons8-gear-50.png" />
+    <None Include="images\icons8-form-50.png" />
+    <None Include="images\icons8-error-50.png" />
+    <None Include="images\icons8-close-window-50.png" />
+    <None Include="images\icons8-checkmark-50.png" />
+    <None Include="images\icons8-process-50.png" />
     <None Include="heaven-small.png" />
   </ItemGroup>
   <ItemGroup>

@@ -1,68 +1,98 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using Amazon;
 using Amazon.Runtime;
 using CloudOps;
+using Highlight;
+using Highlight.Engines;
+using Newtonsoft.Json;
 
 namespace heaven
 {
     public partial class FormMain : Form
     {        
-        private AWSCredentials creds;        
-        private Scanner scanner = new CloudOps.Scanner();
-        private readonly int pageSize = 100;
+        private AWSCredentials creds;
+        private Scanner scanner;
+        private readonly int pageSize = 10;
 
         public FormMain()
         {
             InitializeComponent();
             InitializeBackgroundWorker();
-            PopulateListView();
 
+            scanner = new Scanner
+            {
+                MaxTasks = 10
+            };
+            scanner.Progress.ProgressChanged += Scanner_ProgressChanged;
         }
 
-        private void PopulateListView()
-        {
-            this.listViewObjects.Columns.Clear();
-            this.listViewObjects.Items.Clear();
-            foreach (CloudObject obj in this.scanner.CollectedObjects)
-            {
-                ListViewItem item = this.listViewObjects.Items.Add(obj.ObjectType);
-                item.SubItems.Add(obj.Region.SystemName);
-                item.SubItems.Add(obj.Service);                
-                item.Tag = obj;
-            }
-            string[] heads = new string[] {
-            "Type", "Region", "Service" };
-            for (int i = 0; i < heads.Length; i++)
-            {
-                ColumnHeader column = this.listViewObjects.Columns.Add(heads[i]);
-                column.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            }
-        }       
-
+        
         private void InitializeBackgroundWorker()
         {
-            backgroundWorker.DoWork += new DoWorkEventHandler(BackgroundWorker_DoWork);
+            backgroundWorker.DoWork += new DoWorkEventHandler(BackgroundWorker_DoWork);            
             backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
             backgroundWorker.ProgressChanged += new ProgressChangedEventHandler(BackgroundWorker_ProgressChanged);
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            if (this.progressBar.Maximum < e.ProgressPercentage)
+        {                     
+            if (e.UserState is InvokationResult ir)
             {
-                this.progressBar.Maximum = e.ProgressPercentage;
+                UpdateObjectGrid(ir);
+                UpdateMessagesGrid(ir);
+                UpdateStatusBar(ir);
+                UpdateObjectsFile(ir);
+            } else
+            {
+                //?!
+                Console.WriteLine(e);
             }
-            this.progressBar.Value = e.ProgressPercentage;
-            if (e.UserState is Exception)
+        }
+
+        private void UpdateObjectsFile(InvokationResult ir)
+        {
+            // this objects file save...
+        }
+
+        private void UpdateStatusBar(InvokationResult ir)
+        {
+            this.progressBar.Value = ir.Progress;
+            this.statusLabel.Text = ir.ResultText();
+        }
+
+        private void UpdateMessagesGrid(InvokationResult ir)
+        {
+            ListViewItem item = listViewMessages.Items.Add(ir.Operation.Name);            
+            item.SubItems.Add(ir.Operation.ServiceName);
+            item.SubItems.Add(ir.Operation.Region.ToString());
+            if (ir.IsError())
             {
-                Print(e.UserState as Exception);
+                item.SubItems.Add(ir.Ex.Message);
+                item.ImageIndex = 2;
+                
             }
             else
             {
-                Print(e.UserState);
+                item.SubItems.Add(ir.Operation.CollectedObjects.Count.ToString());
+                item.ImageIndex = 0;
+            }
+        }
+
+        private void UpdateObjectGrid(InvokationResult ir)
+        {
+            if (ir.IsError())
+            {
+                return;
+            }
+            foreach (CloudObject obj in ir.Operation.CollectedObjects)
+            {
+                ListViewItem item = this.listViewFound.Items.Add(obj.ObjectType);
+                item.SubItems.Add(obj.Service);
+                item.SubItems.Add(obj.Region.SystemName);
+                item.SubItems.Add(obj.ToString());
+                item.Tag = obj;
             }
         }
 
@@ -85,7 +115,6 @@ namespace heaven
 
             buttonScan.Enabled = true;
             buttonStop.Enabled = false;
-            PopulateListView();
         }
 
         private void ShowErrorDiaglog(Exception e)
@@ -101,7 +130,7 @@ namespace heaven
         private void Print(object message)
         {
             this.statusLabel.Text = message.ToString();
-            this.textLog.AppendText(message.ToString());
+            
         }
 
 
@@ -111,31 +140,37 @@ namespace heaven
             {
                 throw new ApplicationException("No Credentials are provided");
             }
-            
+
             try
             {
-                this.backgroundWorker.ReportProgress(0, "Queuing items...");
-                
-                scanner.MaxTasks = 1;
-                scanner.Progress.ProgressChanged += Progress_ProgressChanged;
-                foreach (CloudOps.Operation op in CloudOps.OperationFactory.All())
+                backgroundWorker.ReportProgress(0, "Queuing items...");
+                foreach (Operation op in OperationFactory.All())
                 {
+
                     foreach (var region in RegionEndpoint.EnumerableAllRegions)
                     {
-                        scanner.Invokations.Enqueue(new CloudOps.OperationInvokation(op, region, creds, this.pageSize));
+                 //       scanner.Invokations.Enqueue(new OperationInvokation(new CloudOps.Lambda.ListFunctionsOperation(), region, creds, this.pageSize));
+                        scanner.Invokations.Enqueue(new OperationInvokation(op, region, creds, this.pageSize));
                     }
                 }
-                scanner.Scan();                
+                scanner.Scan();
             }
             finally
-            {                
-                backgroundWorker.ReportProgress(100, "Done\n");
+            {
+                backgroundWorker.ReportProgress(100, "Done");
             }
         }
 
-        private void Progress_ProgressChanged(object sender, InvokationResult e)
+        private void Scanner_ProgressChanged(object sender, InvokationResult e)
         {
-            backgroundWorker.ReportProgress(this.scanner.Invokations.Count, e.ToString());
+            if (backgroundWorker.CancellationPending)
+            {
+                return;
+            }
+            if (backgroundWorker.IsBusy) // only when it is working...
+            {
+                backgroundWorker.ReportProgress(e.Progress, e);
+            }            
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -165,7 +200,7 @@ namespace heaven
             this.scanner.Cancel();            
         }
 
-        private void menuItemSetCredentials_Click(object sender, EventArgs e)
+        private void MenuItemSetCredentials_Click(object sender, EventArgs e)
         {
             ShowCredentialsDialog();
         }
@@ -180,12 +215,12 @@ namespace heaven
             }
         }
 
-        private void viewItemToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowErrorDiaglog(new NotImplementedException());
         }
 
-        private void menuItemAbout_Click(object sender, EventArgs e)
+        private void MenuItemAbout_Click(object sender, EventArgs e)
         {
             ShowAboutBox();
         }
@@ -195,5 +230,22 @@ namespace heaven
             FormAbout formAbout = new FormAbout();
             formAbout.ShowDialog();
         }
+
+        private void listViewFound_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listViewFound.SelectedItems.Count > 0)
+            {
+                CloudObject clobo = listViewFound.SelectedItems[0].Tag as CloudObject;
+                if (clobo != null)
+                {
+                    Highlighter highlighter = new Highlighter(new RtfEngine());
+                    string source = JsonConvert.SerializeObject(clobo.Source, Formatting.Indented);
+                    this.rtbObject.Text = source;
+                    //this.rtbObject.Rtf = highlighter.Highlight("JavaScript", source);
+                }
+            }
+        }
+
+
     }
 }
