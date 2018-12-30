@@ -40,8 +40,10 @@ namespace CloudOps.ResourceGroups
                 {
                     AddObject(obj);
                 }
-                
+
+#pragma warning disable CS0618 // Type or member is obsolete
                 foreach (var obj in resp.Groups)
+#pragma warning restore CS0618 // Type or member is obsolete
                 {
                     AddObject(obj);
                 }

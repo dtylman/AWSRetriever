@@ -49,6 +49,10 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.lblFilter = new System.Windows.Forms.ToolStripLabel();
             this.txtFilter = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.cmbProfiles = new System.Windows.Forms.ToolStripComboBox();
+            this.btnManageProfiles = new System.Windows.Forms.ToolStripButton();
             this.splitContainerFront = new System.Windows.Forms.SplitContainer();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.listViewFound = new System.Windows.Forms.ListView();
@@ -182,10 +186,14 @@
             this.buttonScan,
             this.buttonStop,
             this.toolStripSeparator1,
-            this.toolStripButtonClose,
-            this.toolStripSeparator2,
             this.lblFilter,
-            this.txtFilter});
+            this.txtFilter,
+            this.toolStripSeparator3,
+            this.toolStripLabel1,
+            this.cmbProfiles,
+            this.btnManageProfiles,
+            this.toolStripSeparator2,
+            this.toolStripButtonClose});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(884, 25);
@@ -241,6 +249,31 @@
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Size = new System.Drawing.Size(200, 25);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(44, 22);
+            this.toolStripLabel1.Text = "Profile:";
+            // 
+            // cmbProfiles
+            // 
+            this.cmbProfiles.Name = "cmbProfiles";
+            this.cmbProfiles.Size = new System.Drawing.Size(121, 25);
+            // 
+            // btnManageProfiles
+            // 
+            this.btnManageProfiles.Image = global::heaven.Properties.Resources.icons8_term_50;
+            this.btnManageProfiles.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnManageProfiles.Name = "btnManageProfiles";
+            this.btnManageProfiles.Size = new System.Drawing.Size(72, 22);
+            this.btnManageProfiles.Text = "Profiles..";
+            this.btnManageProfiles.Click += new System.EventHandler(this.BtnManageProfiles_Click);
+            // 
             // splitContainerFront
             // 
             this.splitContainerFront.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -285,7 +318,7 @@
             this.listViewFound.TabIndex = 0;
             this.listViewFound.UseCompatibleStateImageBehavior = false;
             this.listViewFound.View = System.Windows.Forms.View.Details;
-            this.listViewFound.SelectedIndexChanged += new System.EventHandler(this.listViewFound_SelectedIndexChanged);
+            this.listViewFound.SelectedIndexChanged += new System.EventHandler(this.ListViewFound_SelectedIndexChanged);
             // 
             // ColumnType
             // 
@@ -449,6 +482,7 @@
             this.Name = "FormMain";
             this.Text = "Heaven";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
@@ -515,6 +549,10 @@
         private System.Windows.Forms.ColumnHeader ColumnService;
         private System.Windows.Forms.ColumnHeader ColumnRegion;
         private System.Windows.Forms.ColumnHeader ColumnDetails;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripComboBox cmbProfiles;
+        private System.Windows.Forms.ToolStripButton btnManageProfiles;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
     }
 }
 

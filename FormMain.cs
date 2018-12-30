@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Windows.Forms;
 using Amazon;
 using Amazon.Runtime;
@@ -23,11 +25,38 @@ namespace heaven
 
             scanner = new Scanner
             {
-                MaxTasks = 10
+                MaxTasks = 25
             };
             scanner.Progress.ProgressChanged += Scanner_ProgressChanged;
         }
 
+        #region background worker
+
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (creds == null)
+            {
+                throw new ApplicationException("No Credentials are provided");
+            }
+
+            try
+            {
+                backgroundWorker.ReportProgress(0, "Queuing items...");
+                foreach (Operation op in OperationFactory.All())
+                {
+
+                    foreach (var region in RegionEndpoint.EnumerableAllRegions)
+                    {
+                        scanner.Invokations.Enqueue(new OperationInvokation(op, region, creds, this.pageSize));
+                    }
+                }
+                scanner.Scan();
+            }
+            finally
+            {
+                backgroundWorker.ReportProgress(100, "Done");
+            }
+        }
         
         private void InitializeBackgroundWorker()
         {
@@ -42,8 +71,7 @@ namespace heaven
             {
                 UpdateObjectGrid(ir);
                 UpdateMessagesGrid(ir);
-                UpdateStatusBar(ir);
-                UpdateObjectsFile(ir);
+                UpdateStatusBar(ir);                
             } else
             {
                 //?!
@@ -51,10 +79,31 @@ namespace heaven
             }
         }
 
-        private void UpdateObjectsFile(InvokationResult ir)
+
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            // this objects file save...
+            if (e.Error != null)
+            {
+                SetStatus(e.Error);
+                ShowErrorDiaglog(e.Error);
+            }
+            else if (e.Cancelled)
+            {
+                SetStatus("Canceled");
+                this.progressBar.Value = 0;
+            }
+            else
+            {
+                SetStatus("Done");
+            }
+
+            buttonScan.Enabled = true;
+            buttonStop.Enabled = false;
+
+            SaveObjectsFile();
         }
+
+        #endregion
 
         private void UpdateStatusBar(InvokationResult ir)
         {
@@ -86,35 +135,20 @@ namespace heaven
             {
                 return;
             }
-            foreach (CloudObject obj in ir.Operation.CollectedObjects)
+            AddItemsFromCollectedObjects(ir.Operation.CollectedObjects);
+            
+        }
+
+        private void AddItemsFromCollectedObjects(List<CloudObject> collectedObjects)
+        {
+            foreach (CloudObject obj in collectedObjects)
             {
-                ListViewItem item = this.listViewFound.Items.Add(obj.ObjectType);
+                ListViewItem item = this.listViewFound.Items.Add(obj.TypeName);
                 item.SubItems.Add(obj.Service);
-                item.SubItems.Add(obj.Region.SystemName);
+                item.SubItems.Add(obj.Region);
                 item.SubItems.Add(obj.ToString());
                 item.Tag = obj;
             }
-        }
-
-        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                Print(e.Error);
-                ShowErrorDiaglog(e.Error);                
-            }
-            else if (e.Cancelled)
-            {
-                Print("Canceled\n");
-                this.progressBar.Value = 0;
-            }
-            else
-            {
-                this.statusLabel.Text = "Done";
-            }
-
-            buttonScan.Enabled = true;
-            buttonStop.Enabled = false;
         }
 
         private void ShowErrorDiaglog(Exception e)
@@ -122,45 +156,16 @@ namespace heaven
             MessageBox.Show("Error:" +  e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void Print(Exception e)
+        private void SetStatus(Exception e)
         {
-            Print("Error: " + e.Message + "\n");
+            SetStatus("Error: " + e.Message);
         }
 
-        private void Print(object message)
+        private void SetStatus(string message)
         {
-            this.statusLabel.Text = message.ToString();
+            this.statusLabel.Text = message;
             
         }
-
-
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            if (creds == null)
-            {
-                throw new ApplicationException("No Credentials are provided");
-            }
-
-            try
-            {
-                backgroundWorker.ReportProgress(0, "Queuing items...");
-                foreach (Operation op in OperationFactory.All())
-                {
-
-                    foreach (var region in RegionEndpoint.EnumerableAllRegions)
-                    {
-                 //       scanner.Invokations.Enqueue(new OperationInvokation(new CloudOps.Lambda.ListFunctionsOperation(), region, creds, this.pageSize));
-                        scanner.Invokations.Enqueue(new OperationInvokation(op, region, creds, this.pageSize));
-                    }
-                }
-                scanner.Scan();
-            }
-            finally
-            {
-                backgroundWorker.ReportProgress(100, "Done");
-            }
-        }
-
         private void Scanner_ProgressChanged(object sender, InvokationResult e)
         {
             if (backgroundWorker.CancellationPending)
@@ -192,6 +197,8 @@ namespace heaven
             statusLabel.Text = String.Empty;
             this.buttonScan.Enabled = false;
             this.buttonStop.Enabled = true;
+            this.listViewFound.Clear();
+            this.listViewMessages.Clear();
             backgroundWorker.RunWorkerAsync();
         }
 
@@ -231,12 +238,11 @@ namespace heaven
             formAbout.ShowDialog();
         }
 
-        private void listViewFound_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListViewFound_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.listViewFound.SelectedItems.Count > 0)
             {
-                CloudObject clobo = listViewFound.SelectedItems[0].Tag as CloudObject;
-                if (clobo != null)
+                if (listViewFound.SelectedItems[0].Tag is CloudObject clobo)
                 {
                     Highlighter highlighter = new Highlighter(new RtfEngine());
                     string source = JsonConvert.SerializeObject(clobo.Source, Formatting.Indented);
@@ -246,6 +252,66 @@ namespace heaven
             }
         }
 
+        private void BtnManageProfiles_Click(object sender, EventArgs e)
+        {
+            FormProfiles formProfiles = new FormProfiles();
+            formProfiles.ShowDialog();
+        }
 
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            LoadObjectsFromFile();
+        }
+
+        #region ObjectsFile
+        private void SaveObjectsFile()
+        {
+            SetStatus("Saving...");
+            try
+            {
+                List<CloudObject> objects = new List<CloudObject>();
+                foreach (ListViewItem item in this.listViewFound.Items)
+                {
+                    objects.Add((CloudObject)item.Tag);
+                }
+                using (StreamWriter sw = new StreamWriter("objects.json"))
+                {
+                    using (JsonWriter writer = new JsonTextWriter(sw))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(writer, objects);
+                    }
+                }
+                SetStatus("Done");
+            }
+            catch (Exception ex)
+            {
+                SetStatus(ex);
+            }
+                  
+        }
+
+        private void LoadObjectsFromFile()
+        {
+            SetStatus("Loading...");
+            try
+            {
+                using (StreamReader sr = new StreamReader("objects.json"))
+                {
+                    using (JsonReader reader = new JsonTextReader(sr))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        List<CloudObject> objects = serializer.Deserialize<List<CloudObject>>(reader);
+                        AddItemsFromCollectedObjects(objects);
+                    }
+                }
+                SetStatus("Done");
+            }
+            catch(Exception ex)
+            {
+                SetStatus(ex);
+            }            
+        }
+        #endregion
     }
 }
