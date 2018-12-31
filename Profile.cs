@@ -5,39 +5,33 @@ using CloudOps;
 
 namespace heaven
 {
-    public class Profile
+    public class Profile : List<ProfileRecord>
     {
-        private readonly Dictionary<string, ProfileService> services = new Dictionary<string, ProfileService>();
+        public string Name { get; private set; }
 
-        public Profile()
+        public static Profile AllServices()
         {
-            
-        }
-
-        public Dictionary<string, ProfileService> Services => services;
-
-        public void Set(string serviceName, Operation op, string region, bool enabled)
-        {
-            if (this.services.ContainsKey(serviceName))
+            Profile p = new Profile()
             {
-                this.services[serviceName].Set(op, region, enabled);
-            } else
-            {
-                this.services.Add(serviceName, new ProfileService(op, region, enabled));
-            }
-        }
-
-        public static Profile Everything()
-        {
-            Profile p = new Profile();
+                Name = "Default"
+            };            
+            var regions = string.Join(" ", RegionEndpoint.EnumerableAllRegions);            
             foreach (Operation op in OperationFactory.All())
             {
-                foreach (RegionEndpoint region in RegionEndpoint.EnumerableAllRegions)
-                {
-                    p.Set(op.ServiceName, op, region.SystemName, true);
-                }
+                p.Add(new ProfileRecord(op.ServiceName, op.Name, regions));
             }
+
             return p;
+        }
+
+        public IEnumerable<string> Services()
+        {
+            HashSet<string> items = new HashSet<string>();
+            foreach (ProfileRecord profileRecord in this)
+            {
+                items.Add(profileRecord.ServiceName);
+            }
+            return items;
         }
     }
 }

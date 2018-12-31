@@ -25,7 +25,7 @@ namespace heaven
 
             scanner = new Scanner
             {
-                MaxTasks = 25
+                MaxTasks = 1
             };
             scanner.Progress.ProgressChanged += Scanner_ProgressChanged;
         }

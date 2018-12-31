@@ -82,8 +82,7 @@
       <DependentUpon>FormProfiles.cs</DependentUpon>
     </Compile>
     <Compile Include="Profile.cs" />
-    <Compile Include="ProfileOperation.cs" />
-    <Compile Include="ProfileService.cs" />
+    <Compile Include="ProfileRecord.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAbout.resx">

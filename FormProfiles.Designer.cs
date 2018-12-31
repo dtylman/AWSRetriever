@@ -28,26 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listBoxServices = new System.Windows.Forms.ListBox();
             this.groupBoxAPIs = new System.Windows.Forms.GroupBox();
             this.panelOperations = new System.Windows.Forms.Panel();
-            this.dataGrid = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtDescription = new System.Windows.Forms.RichTextBox();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.listViewServices = new System.Windows.Forms.ListView();
+            this.columnService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.gridBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBoxAPIs.SuspendLayout();
-            this.panelOperations.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -70,7 +71,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.listBoxServices);
+            this.groupBox1.Controls.Add(this.listViewServices);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
@@ -78,19 +79,6 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Services";
-            // 
-            // listBoxServices
-            // 
-            this.listBoxServices.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxServices.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxServices.FormattingEnabled = true;
-            this.listBoxServices.ItemHeight = 16;
-            this.listBoxServices.Location = new System.Drawing.Point(3, 16);
-            this.listBoxServices.Name = "listBoxServices";
-            this.listBoxServices.Size = new System.Drawing.Size(222, 710);
-            this.listBoxServices.Sorted = true;
-            this.listBoxServices.TabIndex = 0;
-            this.listBoxServices.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
             // 
             // groupBoxAPIs
             // 
@@ -107,29 +95,12 @@
             // panelOperations
             // 
             this.panelOperations.AutoScroll = true;
-            this.panelOperations.Controls.Add(this.dataGrid);
             this.panelOperations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelOperations.Location = new System.Drawing.Point(3, 16);
             this.panelOperations.Margin = new System.Windows.Forms.Padding(4);
             this.panelOperations.Name = "panelOperations";
             this.panelOperations.Size = new System.Drawing.Size(774, 582);
             this.panelOperations.TabIndex = 0;
-            // 
-            // dataGrid
-            // 
-            this.dataGrid.AllowUserToAddRows = false;
-            this.dataGrid.AllowUserToDeleteRows = false;
-            this.dataGrid.AllowUserToOrderColumns = true;
-            this.dataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGrid.Location = new System.Drawing.Point(0, 0);
-            this.dataGrid.Name = "dataGrid";
-            this.dataGrid.ReadOnly = true;
-            this.dataGrid.ShowEditingIcon = false;
-            this.dataGrid.Size = new System.Drawing.Size(774, 582);
-            this.dataGrid.TabIndex = 0;
-            this.dataGrid.Click += new System.EventHandler(this.dataGrid_Click);
             // 
             // panel1
             // 
@@ -172,6 +143,26 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(47, 15);
             this.toolStripLabel1.Text = "Toggle:";
             // 
+            // listViewServices
+            // 
+            this.listViewServices.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnService});
+            this.listViewServices.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewServices.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewServices.Location = new System.Drawing.Point(3, 16);
+            this.listViewServices.MultiSelect = false;
+            this.listViewServices.Name = "listViewServices";
+            this.listViewServices.Size = new System.Drawing.Size(222, 710);
+            this.listViewServices.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.listViewServices.TabIndex = 0;
+            this.listViewServices.UseCompatibleStateImageBehavior = false;
+            this.listViewServices.View = System.Windows.Forms.View.Details;
+            this.listViewServices.SelectedIndexChanged += new System.EventHandler(this.ListViewServices_SelectedIndexChanged);
+            // 
+            // columnService
+            // 
+            this.columnService.Text = "Service";
+            // 
             // FormProfiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -191,11 +182,10 @@
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBoxAPIs.ResumeLayout(false);
-            this.panelOperations.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
             this.panel1.ResumeLayout(false);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -204,13 +194,14 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListBox listBoxServices;
         private System.Windows.Forms.GroupBox groupBoxAPIs;
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.Panel panelOperations;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RichTextBox txtDescription;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.DataGridView dataGrid;
+        private System.Windows.Forms.ListView listViewServices;
+        private System.Windows.Forms.ColumnHeader columnService;
+        private System.Windows.Forms.BindingSource gridBindingSource;
     }
 }
