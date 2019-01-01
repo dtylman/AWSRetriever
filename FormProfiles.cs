@@ -1,4 +1,5 @@
 ﻿using Amazon;
+using CloudOps;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,20 +19,17 @@ namespace heaven
         public FormProfiles()
         {
             InitializeComponent();
-            PopulateGridColumns();
             PopulateToolBar();
             PopulateFromProfile();            
-        }
-
-        private void PopulateGridColumns()
-        {
         }
 
         private void PopulateToolBar()
         {
             foreach (RegionEndpoint region in RegionEndpoint.EnumerableAllRegions)
-            {
+            {                
                 ToolStripButton button = new ToolStripButton(region.SystemName);
+                button.CheckOnClick = true;
+                button.CheckState = CheckState.Checked;
                 this.toolStrip.Items.Add(button);
                 button.ToolTipText = String.Format("Toggle {0} for the entire system.", region.DisplayName);
                 button.Tag = region.SystemName;
@@ -43,7 +41,8 @@ namespace heaven
         private void RegionButtoneClicked(object sender, EventArgs e)
         {
             ToolStripButton button = (sender as ToolStripButton);
-            string region = button.Tag.ToString();        
+            string region = button.Tag.ToString();
+            profile.EnableRegion(region, button.Checked);
             PopulateSelectedServiceOperations();
         }
 
@@ -73,7 +72,56 @@ namespace heaven
 
         private void PopulateOperations(string serviceName)
         {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                this.panelOperations.Controls.Clear();
+                foreach (ProfileRecord p in this.profile)
+                {
+                    if (p.ServiceName == serviceName)
+                    {
+                        AddProfilePanel(p);
+                    }
+                }
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
 
+            }
+        }
+
+        private void AddProfilePanel(ProfileRecord p)
+        {                        
+            Operation op = Profile.FindOpeartion(p);
+            if (op != null)
+            {
+                ProfileRecordControl rc = new ProfileRecordControl();
+                rc.Dock = DockStyle.Top;
+                rc.AutoSize = true;
+                rc.CheckBox.Checked = p.Enabled;                
+                rc.LinkLabel.Text = op.Name;
+                rc.LinkLabel.Tag = op.Description;
+                rc.LinkLabel.Click += LinkLabel_Click;
+                rc.RegionsTextbox.Regions = p.Regions;                
+                this.panelOperations.Controls.Add(rc);
+                rc.Tag = p;
+                rc.Leave += Rc_Leave;
+            }
+        }
+
+        private void Rc_Leave(object sender, EventArgs e)
+        {
+            ProfileRecordControl recordControl = sender as ProfileRecordControl;
+            ProfileRecord p = recordControl.Tag as ProfileRecord;
+            p.Enabled = recordControl.CheckBox.Checked;
+            p.Regions = recordControl.RegionsTextbox.Regions;
+            this.profile.Set(p);
+        }
+
+        private void LinkLabel_Click(object sender, EventArgs e)
+        {
+            this.txtDescription.Text = (sender as LinkLabel).Tag.ToString();
         }
 
         private void ListViewServices_SelectedIndexChanged(object sender, EventArgs e)

@@ -63,9 +63,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap heaven_small {
+        internal static System.Drawing.Bitmap CheckMark50 {
             get {
-                object obj = ResourceManager.GetObject("heaven-small", resourceCulture);
+                object obj = ResourceManager.GetObject("CheckMark50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_checkmark_50 {
+        internal static System.Drawing.Bitmap CloseWindow50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-checkmark-50", resourceCulture);
+                object obj = ResourceManager.GetObject("CloseWindow50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_close_window_50 {
+        internal static System.Drawing.Bitmap Error50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-close-window-50", resourceCulture);
+                object obj = ResourceManager.GetObject("Error50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_error_50 {
+        internal static System.Drawing.Bitmap Form50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-error-50", resourceCulture);
+                object obj = ResourceManager.GetObject("Form50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_form_50 {
+        internal static System.Drawing.Bitmap Gear50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-form-50", resourceCulture);
+                object obj = ResourceManager.GetObject("Gear50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_gear_50 {
+        internal static System.Drawing.Bitmap Help50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-gear-50", resourceCulture);
+                object obj = ResourceManager.GetObject("Help50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_help_50 {
+        internal static System.Drawing.Bitmap List50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-help-50", resourceCulture);
+                object obj = ResourceManager.GetObject("List50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +133,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_list_50 {
+        internal static System.Drawing.Bitmap Menu23 {
             get {
-                object obj = ResourceManager.GetObject("icons8-list-50", resourceCulture);
+                object obj = ResourceManager.GetObject("Menu23", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +143,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_menu_50 {
+        internal static System.Drawing.Bitmap Menu50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-menu-50", resourceCulture);
+                object obj = ResourceManager.GetObject("Menu50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +153,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_object_50 {
+        internal static System.Drawing.Bitmap Objecto50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-object-50", resourceCulture);
+                object obj = ResourceManager.GetObject("Objecto50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +163,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_output_50 {
+        internal static System.Drawing.Bitmap Output50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-output-50", resourceCulture);
+                object obj = ResourceManager.GetObject("Output50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +173,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_private_50 {
+        internal static System.Drawing.Bitmap Private50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-private-50", resourceCulture);
+                object obj = ResourceManager.GetObject("Private50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,9 +183,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_process_50 {
+        internal static System.Drawing.Bitmap Process50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-process-50", resourceCulture);
+                object obj = ResourceManager.GetObject("Process50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,9 +193,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_process_501 {
+        internal static System.Drawing.Bitmap Save50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-process-501", resourceCulture);
+                object obj = ResourceManager.GetObject("Save50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,19 +203,9 @@ namespace heaven.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_save_50 {
+        internal static System.Drawing.Bitmap Term50 {
             get {
-                object obj = ResourceManager.GetObject("icons8-save-50", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_term_50 {
-            get {
-                object obj = ResourceManager.GetObject("icons8-term-50", resourceCulture);
+                object obj = ResourceManager.GetObject("Term50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

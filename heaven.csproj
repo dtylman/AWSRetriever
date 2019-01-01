@@ -81,10 +81,23 @@
     <Compile Include="FormProfiles.Designer.cs">
       <DependentUpon>FormProfiles.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OperationControl.Designer.cs">
+      <DependentUpon>OperationControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Profile.cs" />
     <Compile Include="ProfileRecord.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegionsString.cs" />
+    <Compile Include="RegionsTextbox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RegionsTextbox.Designer.cs">
+      <DependentUpon>RegionsTextbox.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </EmbeddedResource>
@@ -97,6 +110,9 @@
     <EmbeddedResource Include="FormProfiles.resx">
       <DependentUpon>FormProfiles.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OperationControl.resx">
+      <DependentUpon>OperationControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -107,6 +123,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RegionsTextbox.resx">
+      <DependentUpon>RegionsTextbox.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -123,6 +142,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="heaven-2027161_960_720.jpg" />
+    <None Include="images\icons8-menu-23.png" />
+    <None Include="images\icons8-menu-32.png" />
     <None Include="images\icons8-term-50.png" />
     <None Include="images\icons8-private-50.png" />
     <None Include="images\icons8-save-50.png" />

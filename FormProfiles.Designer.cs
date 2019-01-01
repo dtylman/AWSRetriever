@@ -31,14 +31,14 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listViewServices = new System.Windows.Forms.ListView();
+            this.columnService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBoxAPIs = new System.Windows.Forms.GroupBox();
             this.panelOperations = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtDescription = new System.Windows.Forms.RichTextBox();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.listViewServices = new System.Windows.Forms.ListView();
-            this.columnService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gridBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -65,8 +65,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBoxAPIs);
             this.splitContainer1.Panel2.Controls.Add(this.toolStrip);
-            this.splitContainer1.Size = new System.Drawing.Size(1012, 729);
-            this.splitContainer1.SplitterDistance = 228;
+            this.splitContainer1.Size = new System.Drawing.Size(1339, 729);
+            this.splitContainer1.SplitterDistance = 301;
             this.splitContainer1.TabIndex = 0;
             // 
             // groupBox1
@@ -75,10 +75,30 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(228, 729);
+            this.groupBox1.Size = new System.Drawing.Size(301, 729);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Services";
+            // 
+            // listViewServices
+            // 
+            this.listViewServices.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnService});
+            this.listViewServices.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewServices.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewServices.Location = new System.Drawing.Point(3, 16);
+            this.listViewServices.MultiSelect = false;
+            this.listViewServices.Name = "listViewServices";
+            this.listViewServices.Size = new System.Drawing.Size(295, 710);
+            this.listViewServices.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.listViewServices.TabIndex = 0;
+            this.listViewServices.UseCompatibleStateImageBehavior = false;
+            this.listViewServices.View = System.Windows.Forms.View.Details;
+            this.listViewServices.SelectedIndexChanged += new System.EventHandler(this.ListViewServices_SelectedIndexChanged);
+            // 
+            // columnService
+            // 
+            this.columnService.Text = "Service";
             // 
             // groupBoxAPIs
             // 
@@ -87,7 +107,7 @@
             this.groupBoxAPIs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxAPIs.Location = new System.Drawing.Point(0, 26);
             this.groupBoxAPIs.Name = "groupBoxAPIs";
-            this.groupBoxAPIs.Size = new System.Drawing.Size(780, 703);
+            this.groupBoxAPIs.Size = new System.Drawing.Size(1034, 703);
             this.groupBoxAPIs.TabIndex = 0;
             this.groupBoxAPIs.TabStop = false;
             this.groupBoxAPIs.Text = "APIs";
@@ -99,7 +119,7 @@
             this.panelOperations.Location = new System.Drawing.Point(3, 16);
             this.panelOperations.Margin = new System.Windows.Forms.Padding(4);
             this.panelOperations.Name = "panelOperations";
-            this.panelOperations.Size = new System.Drawing.Size(774, 582);
+            this.panelOperations.Size = new System.Drawing.Size(1028, 582);
             this.panelOperations.TabIndex = 0;
             // 
             // panel1
@@ -108,7 +128,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(3, 598);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(774, 102);
+            this.panel1.Size = new System.Drawing.Size(1028, 102);
             this.panel1.TabIndex = 3;
             // 
             // txtDescription
@@ -119,7 +139,7 @@
             this.txtDescription.Location = new System.Drawing.Point(0, 0);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.ReadOnly = true;
-            this.txtDescription.Size = new System.Drawing.Size(774, 102);
+            this.txtDescription.Size = new System.Drawing.Size(1028, 102);
             this.txtDescription.TabIndex = 0;
             this.txtDescription.Text = "";
             // 
@@ -132,7 +152,7 @@
             this.toolStrip.Margin = new System.Windows.Forms.Padding(4);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip.Size = new System.Drawing.Size(780, 26);
+            this.toolStrip.Size = new System.Drawing.Size(1034, 26);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -143,31 +163,11 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(47, 15);
             this.toolStripLabel1.Text = "Toggle:";
             // 
-            // listViewServices
-            // 
-            this.listViewServices.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnService});
-            this.listViewServices.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewServices.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewServices.Location = new System.Drawing.Point(3, 16);
-            this.listViewServices.MultiSelect = false;
-            this.listViewServices.Name = "listViewServices";
-            this.listViewServices.Size = new System.Drawing.Size(222, 710);
-            this.listViewServices.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.listViewServices.TabIndex = 0;
-            this.listViewServices.UseCompatibleStateImageBehavior = false;
-            this.listViewServices.View = System.Windows.Forms.View.Details;
-            this.listViewServices.SelectedIndexChanged += new System.EventHandler(this.ListViewServices_SelectedIndexChanged);
-            // 
-            // columnService
-            // 
-            this.columnService.Text = "Service";
-            // 
             // FormProfiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1012, 729);
+            this.ClientSize = new System.Drawing.Size(1339, 729);
             this.Controls.Add(this.splitContainer1);
             this.MinimizeBox = false;
             this.Name = "FormProfiles";

@@ -45,14 +45,14 @@
             this.buttonScan = new System.Windows.Forms.ToolStripButton();
             this.buttonStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonClose = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.lblFilter = new System.Windows.Forms.ToolStripLabel();
             this.txtFilter = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cmbProfiles = new System.Windows.Forms.ToolStripComboBox();
             this.btnManageProfiles = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonClose = new System.Windows.Forms.ToolStripButton();
             this.splitContainerFront = new System.Windows.Forms.SplitContainer();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.listViewFound = new System.Windows.Forms.ListView();
@@ -74,6 +74,7 @@
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.splitContainerBack = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.rtbObject = new System.Windows.Forms.RichTextBox();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -101,7 +102,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(884, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1153, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -161,10 +162,10 @@
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.progressBar,
             this.statusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 362);
+            this.statusStrip.Location = new System.Drawing.Point(0, 545);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip.Size = new System.Drawing.Size(884, 31);
+            this.statusStrip.Size = new System.Drawing.Size(1153, 31);
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -196,13 +197,13 @@
             this.toolStripButtonClose});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(884, 25);
+            this.toolStrip.Size = new System.Drawing.Size(1153, 25);
             this.toolStrip.TabIndex = 2;
             this.toolStrip.Text = "toolStrip";
             // 
             // buttonScan
             // 
-            this.buttonScan.Image = global::heaven.Properties.Resources.icons8_process_50;
+            this.buttonScan.Image = global::heaven.Properties.Resources.Process50;
             this.buttonScan.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonScan.Name = "buttonScan";
             this.buttonScan.Size = new System.Drawing.Size(61, 22);
@@ -212,7 +213,7 @@
             // buttonStop
             // 
             this.buttonStop.Enabled = false;
-            this.buttonStop.Image = global::heaven.Properties.Resources.icons8_private_50;
+            this.buttonStop.Image = global::heaven.Properties.Resources.Private50;
             this.buttonStop.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(51, 22);
@@ -223,20 +224,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButtonClose
-            // 
-            this.toolStripButtonClose.Image = global::heaven.Properties.Resources.icons8_close_window_50;
-            this.toolStripButtonClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonClose.Name = "toolStripButtonClose";
-            this.toolStripButtonClose.Size = new System.Drawing.Size(56, 22);
-            this.toolStripButtonClose.Text = "Close";
-            this.toolStripButtonClose.Click += new System.EventHandler(this.ToolStripButtonClose_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // lblFilter
             // 
@@ -267,12 +254,26 @@
             // 
             // btnManageProfiles
             // 
-            this.btnManageProfiles.Image = global::heaven.Properties.Resources.icons8_term_50;
+            this.btnManageProfiles.Image = global::heaven.Properties.Resources.Term50;
             this.btnManageProfiles.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnManageProfiles.Name = "btnManageProfiles";
             this.btnManageProfiles.Size = new System.Drawing.Size(72, 22);
             this.btnManageProfiles.Text = "Profiles..";
             this.btnManageProfiles.Click += new System.EventHandler(this.BtnManageProfiles_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonClose
+            // 
+            this.toolStripButtonClose.Image = global::heaven.Properties.Resources.CloseWindow50;
+            this.toolStripButtonClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonClose.Name = "toolStripButtonClose";
+            this.toolStripButtonClose.Size = new System.Drawing.Size(56, 22);
+            this.toolStripButtonClose.Text = "Close";
+            this.toolStripButtonClose.Click += new System.EventHandler(this.ToolStripButtonClose_Click);
             // 
             // splitContainerFront
             // 
@@ -288,8 +289,8 @@
             // splitContainerFront.Panel2
             // 
             this.splitContainerFront.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainerFront.Size = new System.Drawing.Size(636, 313);
-            this.splitContainerFront.SplitterDistance = 201;
+            this.splitContainerFront.Size = new System.Drawing.Size(829, 496);
+            this.splitContainerFront.SplitterDistance = 318;
             this.splitContainerFront.SplitterWidth = 5;
             this.splitContainerFront.TabIndex = 3;
             // 
@@ -299,7 +300,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(636, 201);
+            this.groupBox3.Size = new System.Drawing.Size(829, 318);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Found";
@@ -314,7 +315,7 @@
             this.listViewFound.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewFound.Location = new System.Drawing.Point(3, 20);
             this.listViewFound.Name = "listViewFound";
-            this.listViewFound.Size = new System.Drawing.Size(630, 178);
+            this.listViewFound.Size = new System.Drawing.Size(823, 295);
             this.listViewFound.TabIndex = 0;
             this.listViewFound.UseCompatibleStateImageBehavior = false;
             this.listViewFound.View = System.Windows.Forms.View.Details;
@@ -342,7 +343,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(636, 107);
+            this.groupBox1.Size = new System.Drawing.Size(829, 173);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Messages";
@@ -358,7 +359,7 @@
             this.listViewMessages.LargeImageList = this.imageList;
             this.listViewMessages.Location = new System.Drawing.Point(3, 20);
             this.listViewMessages.Name = "listViewMessages";
-            this.listViewMessages.Size = new System.Drawing.Size(630, 84);
+            this.listViewMessages.Size = new System.Drawing.Size(823, 150);
             this.listViewMessages.SmallImageList = this.imageList;
             this.listViewMessages.TabIndex = 0;
             this.listViewMessages.UseCompatibleStateImageBehavior = false;
@@ -443,20 +444,29 @@
             // splitContainerBack.Panel2
             // 
             this.splitContainerBack.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainerBack.Size = new System.Drawing.Size(884, 313);
-            this.splitContainerBack.SplitterDistance = 636;
+            this.splitContainerBack.Size = new System.Drawing.Size(1153, 496);
+            this.splitContainerBack.SplitterDistance = 829;
             this.splitContainerBack.TabIndex = 4;
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Controls.Add(this.rtbObject);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(244, 313);
+            this.groupBox2.Size = new System.Drawing.Size(320, 496);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Object";
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 20);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(314, 473);
+            this.panel1.TabIndex = 1;
             // 
             // rtbObject
             // 
@@ -464,7 +474,7 @@
             this.rtbObject.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbObject.Location = new System.Drawing.Point(3, 20);
             this.rtbObject.Name = "rtbObject";
-            this.rtbObject.Size = new System.Drawing.Size(238, 290);
+            this.rtbObject.Size = new System.Drawing.Size(314, 473);
             this.rtbObject.TabIndex = 0;
             this.rtbObject.Text = "";
             // 
@@ -472,7 +482,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 393);
+            this.ClientSize = new System.Drawing.Size(1153, 576);
             this.Controls.Add(this.splitContainerBack);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.statusStrip);
@@ -553,6 +563,7 @@
         private System.Windows.Forms.ToolStripComboBox cmbProfiles;
         private System.Windows.Forms.ToolStripButton btnManageProfiles;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
