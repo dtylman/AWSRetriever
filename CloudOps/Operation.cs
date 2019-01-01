@@ -52,7 +52,7 @@ namespace CloudOps
         {
             Type t = obj.GetType();
             this.collectedObjects.Add(new CloudObject(this.Region.SystemName, this.ServiceName,
-                t.Name, t.ReflectedType.Name, obj));
+                t.Name, t.AssemblyQualifiedName, obj));
         }
     }
 }

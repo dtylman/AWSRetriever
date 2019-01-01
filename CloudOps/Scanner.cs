@@ -84,8 +84,7 @@ namespace CloudOps
                         this.cancellation.Token.ThrowIfCancellationRequested();
                     }
 
-                    OperationInvokation invokation;
-                    if (this.invokations.TryDequeue(out invokation))
+                    if (invokations.TryDequeue(out OperationInvokation invokation))
                     {
                         InvokationResult result = invokation.Invoke(this.cancellation.Token);
                         foreach (CloudObject cloudObject in result.Operation.CollectedObjects)

@@ -74,7 +74,8 @@
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.splitContainerBack = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.splitContainerObject = new System.Windows.Forms.SplitContainer();
+            this.propertyGridObject = new System.Windows.Forms.PropertyGrid();
             this.rtbObject = new System.Windows.Forms.RichTextBox();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -91,6 +92,10 @@
             this.splitContainerBack.Panel2.SuspendLayout();
             this.splitContainerBack.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerObject)).BeginInit();
+            this.splitContainerObject.Panel1.SuspendLayout();
+            this.splitContainerObject.Panel2.SuspendLayout();
+            this.splitContainerObject.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -249,16 +254,19 @@
             // 
             // cmbProfiles
             // 
+            this.cmbProfiles.Items.AddRange(new object[] {
+            "Default"});
             this.cmbProfiles.Name = "cmbProfiles";
             this.cmbProfiles.Size = new System.Drawing.Size(121, 25);
+            this.cmbProfiles.Text = "Default";
             // 
             // btnManageProfiles
             // 
             this.btnManageProfiles.Image = global::heaven.Properties.Resources.Term50;
             this.btnManageProfiles.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnManageProfiles.Name = "btnManageProfiles";
-            this.btnManageProfiles.Size = new System.Drawing.Size(72, 22);
-            this.btnManageProfiles.Text = "Profiles..";
+            this.btnManageProfiles.Size = new System.Drawing.Size(84, 22);
+            this.btnManageProfiles.Text = "Edit Profile";
             this.btnManageProfiles.Click += new System.EventHandler(this.BtnManageProfiles_Click);
             // 
             // toolStripSeparator2
@@ -289,7 +297,7 @@
             // splitContainerFront.Panel2
             // 
             this.splitContainerFront.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainerFront.Size = new System.Drawing.Size(829, 496);
+            this.splitContainerFront.Size = new System.Drawing.Size(828, 496);
             this.splitContainerFront.SplitterDistance = 318;
             this.splitContainerFront.SplitterWidth = 5;
             this.splitContainerFront.TabIndex = 3;
@@ -300,22 +308,25 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(829, 318);
+            this.groupBox3.Size = new System.Drawing.Size(828, 318);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Found";
             // 
             // listViewFound
             // 
+            this.listViewFound.AllowColumnReorder = true;
             this.listViewFound.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnType,
             this.ColumnService,
             this.ColumnRegion,
             this.ColumnDetails});
             this.listViewFound.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewFound.FullRowSelect = true;
             this.listViewFound.Location = new System.Drawing.Point(3, 20);
+            this.listViewFound.MultiSelect = false;
             this.listViewFound.Name = "listViewFound";
-            this.listViewFound.Size = new System.Drawing.Size(823, 295);
+            this.listViewFound.Size = new System.Drawing.Size(822, 295);
             this.listViewFound.TabIndex = 0;
             this.listViewFound.UseCompatibleStateImageBehavior = false;
             this.listViewFound.View = System.Windows.Forms.View.Details;
@@ -343,23 +354,27 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(829, 173);
+            this.groupBox1.Size = new System.Drawing.Size(828, 173);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Messages";
             // 
             // listViewMessages
             // 
+            this.listViewMessages.AllowColumnReorder = true;
             this.listViewMessages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
             this.listViewMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewMessages.FullRowSelect = true;
+            this.listViewMessages.GridLines = true;
             this.listViewMessages.LargeImageList = this.imageList;
             this.listViewMessages.Location = new System.Drawing.Point(3, 20);
+            this.listViewMessages.MultiSelect = false;
             this.listViewMessages.Name = "listViewMessages";
-            this.listViewMessages.Size = new System.Drawing.Size(823, 150);
+            this.listViewMessages.Size = new System.Drawing.Size(822, 150);
             this.listViewMessages.SmallImageList = this.imageList;
             this.listViewMessages.TabIndex = 0;
             this.listViewMessages.UseCompatibleStateImageBehavior = false;
@@ -445,38 +460,55 @@
             // 
             this.splitContainerBack.Panel2.Controls.Add(this.groupBox2);
             this.splitContainerBack.Size = new System.Drawing.Size(1153, 496);
-            this.splitContainerBack.SplitterDistance = 829;
+            this.splitContainerBack.SplitterDistance = 828;
             this.splitContainerBack.TabIndex = 4;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.panel1);
-            this.groupBox2.Controls.Add(this.rtbObject);
+            this.groupBox2.Controls.Add(this.splitContainerObject);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(320, 496);
+            this.groupBox2.Size = new System.Drawing.Size(321, 496);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Object";
             // 
-            // panel1
+            // splitContainerObject
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 20);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(314, 473);
-            this.panel1.TabIndex = 1;
+            this.splitContainerObject.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerObject.Location = new System.Drawing.Point(3, 20);
+            this.splitContainerObject.Name = "splitContainerObject";
+            this.splitContainerObject.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerObject.Panel1
+            // 
+            this.splitContainerObject.Panel1.Controls.Add(this.rtbObject);
+            // 
+            // splitContainerObject.Panel2
+            // 
+            this.splitContainerObject.Panel2.Controls.Add(this.propertyGridObject);
+            this.splitContainerObject.Size = new System.Drawing.Size(315, 473);
+            this.splitContainerObject.SplitterDistance = 235;
+            this.splitContainerObject.TabIndex = 3;
+            // 
+            // propertyGridObject
+            // 
+            this.propertyGridObject.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGridObject.Location = new System.Drawing.Point(0, 0);
+            this.propertyGridObject.Name = "propertyGridObject";
+            this.propertyGridObject.Size = new System.Drawing.Size(315, 234);
+            this.propertyGridObject.TabIndex = 2;
             // 
             // rtbObject
             // 
             this.rtbObject.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbObject.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbObject.Location = new System.Drawing.Point(3, 20);
+            this.rtbObject.Location = new System.Drawing.Point(0, 0);
             this.rtbObject.Name = "rtbObject";
-            this.rtbObject.Size = new System.Drawing.Size(314, 473);
+            this.rtbObject.Size = new System.Drawing.Size(315, 235);
             this.rtbObject.TabIndex = 0;
-            this.rtbObject.Text = "";
+            this.rtbObject.Text = "trte";
             // 
             // FormMain
             // 
@@ -511,6 +543,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerBack)).EndInit();
             this.splitContainerBack.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.splitContainerObject.Panel1.ResumeLayout(false);
+            this.splitContainerObject.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerObject)).EndInit();
+            this.splitContainerObject.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -563,7 +599,8 @@
         private System.Windows.Forms.ToolStripComboBox cmbProfiles;
         private System.Windows.Forms.ToolStripButton btnManageProfiles;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.SplitContainer splitContainerObject;
+        private System.Windows.Forms.PropertyGrid propertyGridObject;
     }
 }
 

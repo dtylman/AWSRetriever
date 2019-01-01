@@ -16,6 +16,8 @@ namespace heaven
     {
         private Profile profile;
 
+        public Profile Profile { get => profile; set => profile = value; }
+
         public FormProfiles()
         {
             InitializeComponent();
