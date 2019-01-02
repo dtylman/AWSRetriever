@@ -101,7 +101,10 @@ func (s *Service) NewOperation(opName string) *Operation {
 
 //ShapeRequiredParams returns the list of required params for shape
 func (s *Service) ShapeRequiredParams(shape string) string {
-	m := s.shapes[shape].(map[string]interface{})
+	m, ok := s.shapes[shape].(map[string]interface{})
+	if !ok {
+		return ""
+	}
 	params, ok := m["required"]
 	if !ok {
 		return ""
@@ -113,38 +116,91 @@ func (s *Service) ShapeRequiredParams(shape string) string {
 	return pstr
 }
 
+//FileName generated filename for operation
+func (o *Operation) FileName() string {
+	return fmt.Sprintf("%v.cs", o.ClassName())
+}
+
 //ClassName ...
 func (o *Operation) ClassName() string {
-	//LambaListFunctionsOperation
 	return fmt.Sprintf("%vOperation", o.Name)
-
 }
 
 //RequestClassName normalizes the request clsas name
-func (o *Operation) RequestClassName() string {
+func (o *Operation) RequestClassName(c *Classes) (string, error) {
+	if c.Has(o.RequestClass) {
+		return o.RequestClass, nil
+	}
+	if o.RequestClass == "" {
+		o.RequestClass = o.Name
+	}
 	res := strings.Replace(o.RequestClass, "Input", "Request", 1)
+	if c.Has(res) {
+		return res, nil
+	}
 	res = strings.Replace(res, "Message", "Request", 1)
+	if c.Has(res) {
+		return res, nil
+	}
 	if !strings.HasSuffix(res, "Request") {
 		res += "Request"
 	}
-	return res
+	if c.Has(res) {
+		return res, nil
+	}
+	res = fmt.Sprintf("%vRequest", o.Name)
+	if c.Has(res) {
+		return res, nil
+	}
+	res = fmt.Sprintf("%vsRequest", o.Name)
+	if c.Has(res) {
+		return res, nil
+	}
+
+	return "", fmt.Errorf("No request class found for: '%v'", o.Name)
+
 }
 
 //ResponseClassName normalizes the ResponseClassName
-func (o *Operation) ResponseClassName() string {
+func (o *Operation) ResponseClassName(c *Classes) (string, error) {
+	if c.Has(o.ResponseClass) {
+		return o.ResponseClass, nil
+	}
 	res := strings.Replace(o.ResponseClass, "Output", "Response", 1)
+	if c.Has(res) {
+		return res, nil
+	}
 	res = strings.Replace(res, "Result", "Response", 1)
+	if c.Has(res) {
+		return res, nil
+	}
 	res = strings.Replace(res, "Message", "Response", 1)
-
+	if c.Has(res) {
+		return res, nil
+	}
 	if strings.HasPrefix(o.Name, "Describe") {
 		if !strings.HasPrefix(res, "Describe") {
 			res = "Describe" + res
 		}
 	}
+	if c.Has(res) {
+		return res, nil
+	}
 	if !strings.HasSuffix(res, "Response") {
 		res += "Response"
 	}
-	return res
+	if c.Has(res) {
+		return res, nil
+	}
+	res = fmt.Sprintf("%vResponse", o.Name)
+	if c.Has(res) {
+		return res, nil
+	}
+	res = fmt.Sprintf("%vsResponse", o.Name)
+	if c.Has(res) {
+		return res, nil
+	}
+	return "", fmt.Errorf("No response class found for: '%v'", o.Name)
 }
 
 //SetResultKeys sets results keys from map item

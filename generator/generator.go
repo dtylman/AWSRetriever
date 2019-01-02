@@ -19,7 +19,9 @@ import (
 type Generator struct {
 	OutputFolder                string
 	SdkRoot                     string
+	SkipExisting                bool
 	Services                    []*Service
+	AllClasses                  Classes
 	PaginationOperationTemplate *template.Template
 	SingleOperationTemplate     *template.Template
 	OperationFactoryTemplate    *template.Template
@@ -71,19 +73,22 @@ func (g *Generator) keyAsMap(obj interface{}, key string) map[string]interface{}
 }
 
 func (g *Generator) processOperations(s *Service, operations map[string]interface{}) error {
+
 	for k, v := range operations {
 		oper := s.NewOperation(k)
 		oper.Description = fmt.Sprintf("%v", v.(map[string]interface{})["documentation"])
 		input := g.keyAsMap(v, "input")
 		if input != nil && input["shape"] != nil {
 			oper.RequestClass = fmt.Sprintf("%v", input["shape"])
-		} else {
-			log.Printf("Operation %v does not have a request class", oper.Name)
+		}
+		requestClassName, err := oper.RequestClassName(&g.AllClasses)
+		if err != nil {
+			log.Printf("Operation '%v:%v' no request class found (value found: '%v'", s.ServiceName(), oper.Name, oper.RequestClass)
 			continue
 		}
-		required := s.ShapeRequiredParams(oper.RequestClass)
+		required := s.ShapeRequiredParams(requestClassName)
 		if required != "" {
-			log.Printf("Operation '%v' shape '%v' needs params :'%v'", oper.Name, oper.RequestClass, required)
+			log.Printf("Operation '%v:%v' shape '%v' needs params :'%v'", s.ServiceName(), oper.Name, oper.RequestClass, required)
 			continue
 		}
 		output := g.keyAsMap(v, "output")
@@ -213,12 +218,21 @@ func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
 	data["ServiceName"] = s.ServiceName()
 	data["ServiceID"] = s.ServiceID
 	data["OperationClassName"] = o.ClassName()
+	if err != nil {
+		return err
+	}
 	data["ClientClassName"] = s.ClientClassName()
 	if (o.RequestClass == "") || (o.ResponseClass == "") {
 		return fmt.Errorf("Operation %v %v has no response or request class", s.ServiceName(), o.Name)
 	}
-	data["ReqeustClassName"] = o.RequestClassName()
-	data["ResponseClassName"] = o.ResponseClassName()
+	data["ReqeustClassName"], err = o.RequestClassName(&g.AllClasses)
+	if err != nil {
+		return err
+	}
+	data["ResponseClassName"], err = o.ResponseClassName(&g.AllClasses)
+	if err != nil {
+		return err
+	}
 	if o.Pagination.LimitKey != "" {
 		data["PagingationLimitKey"] = strcase.ToCamel(o.Pagination.LimitKey)
 	}
@@ -238,8 +252,14 @@ func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
 	data["OperationDescription"] = strip.StripTags(o.Description)
 	data["RequestURI"] = o.RequestURI
 	data["Method"] = o.Method
-	fileName := filepath.Join(dir, fmt.Sprintf("%v.cs", o.ClassName()))
+	fileName := filepath.Join(dir, o.FileName())
 	log.Printf("generating %v", fileName)
+	_, err = os.Stat(fileName)
+	if err == nil {
+		if g.SkipExisting {
+			return fmt.Errorf("File '%v' already exists", fileName)
+		}
+	}
 	file, err := os.Create(fileName)
 	if err != nil {
 		return err
@@ -248,11 +268,10 @@ func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
 
 	if (o.Pagination.InputToken == "") || (o.Pagination.OutputToken == "") {
 		return g.SingleOperationTemplate.Execute(file, data)
-	} else {
-		data["PagingationInputToken"] = strcase.ToCamel(o.Pagination.InputToken)
-		data["PagingationOutputToken"] = strcase.ToCamel(o.Pagination.OutputToken)
-		return g.PaginationOperationTemplate.Execute(file, data)
 	}
+	data["PagingationInputToken"] = strcase.ToCamel(o.Pagination.InputToken)
+	data["PagingationOutputToken"] = strcase.ToCamel(o.Pagination.OutputToken)
+	return g.PaginationOperationTemplate.Execute(file, data)
 }
 
 func (g *Generator) skipOperation(service string, operation string) bool {
@@ -272,8 +291,12 @@ func (g *Generator) renderCProjItemGroup(itemgroup map[string]bool) {
 
 //Generate ...
 func (g *Generator) Generate() error {
+	err := g.AllClasses.buildList(g.SdkRoot)
+	if err != nil {
+		return err
+	}
 	modelPath := filepath.Join(g.SdkRoot, "generator", "ServiceModels")
-	_, err := os.Stat(modelPath)
+	_, err = os.Stat(modelPath)
 	if err != nil {
 		return err
 	}
@@ -305,8 +328,9 @@ func (g *Generator) Generate() error {
 					log.Println(err)
 					errors++
 				} else {
-					itemgroup[fmt.Sprintf(`<Compile Include="Generated\%s\%s.cs" />`+"\n", s.ServiceName(), o.ClassName())] = true
-					container[fmt.Sprintf("new %s.%s()", s.ServiceName(), o.ClassName())] = true
+					className := o.ClassName()
+					itemgroup[fmt.Sprintf(`<Compile Include="Generated\%s\%s.cs" />`+"\n", s.ServiceName(), className)] = true
+					container[fmt.Sprintf("new %s.%s()", s.ServiceName(), className)] = true
 				}
 			}
 		}

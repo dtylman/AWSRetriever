@@ -14,6 +14,7 @@ func main() {
 	}
 	flag.StringVar(&g.OutputFolder, "output", "generated", "the path to generate output files")
 	flag.StringVar(&g.SdkRoot, "sdkroot", "", "path to aws dotnet sdk sources root")
+	flag.BoolVar(&g.SkipExisting, "skip", true, "skip existing file")
 	flag.Parse()
 
 	if g.SdkRoot == "" {

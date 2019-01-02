@@ -332,3 +332,5 @@ ASALocalRun/
 #generator
 generator/generator
 generator/generator.exe
+generator/OperationFactory.cs
+generator/itemgroup.txt

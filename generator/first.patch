@@ -1,0 +1,978 @@
+diff -Naur /tmp/Generated/Generated/APIGateway/GetApiKeysOperation.cs ../CloudOps/Generated/APIGateway/GetApiKeysOperation.cs
+--- /tmp/Generated/Generated/APIGateway/GetApiKeysOperation.cs	2019-01-02 14:30:22.854207859 +0200
++++ ../CloudOps/Generated/APIGateway/GetApiKeysOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAPIGatewayClient client = new AmazonAPIGatewayClient(creds, region);
+-            ApiKeysResponse resp = new ApiKeysResponse();
++            GetApiKeysResponse resp = new GetApiKeysResponse();
+             do
+             {
+                 GetApiKeysRequest req = new GetApiKeysRequest
+diff -Naur /tmp/Generated/Generated/APIGateway/GetClientCertificatesOperation.cs ../CloudOps/Generated/APIGateway/GetClientCertificatesOperation.cs
+--- /tmp/Generated/Generated/APIGateway/GetClientCertificatesOperation.cs	2019-01-02 14:30:22.854207859 +0200
++++ ../CloudOps/Generated/APIGateway/GetClientCertificatesOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAPIGatewayClient client = new AmazonAPIGatewayClient(creds, region);
+-            ClientCertificatesResponse resp = new ClientCertificatesResponse();
++            GetClientCertificatesResponse resp = new GetClientCertificatesResponse();
+             do
+             {
+                 GetClientCertificatesRequest req = new GetClientCertificatesRequest
+diff -Naur /tmp/Generated/Generated/APIGateway/GetDomainNamesOperation.cs ../CloudOps/Generated/APIGateway/GetDomainNamesOperation.cs
+--- /tmp/Generated/Generated/APIGateway/GetDomainNamesOperation.cs	2019-01-02 14:30:22.854207859 +0200
++++ ../CloudOps/Generated/APIGateway/GetDomainNamesOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAPIGatewayClient client = new AmazonAPIGatewayClient(creds, region);
+-            DomainNamesResponse resp = new DomainNamesResponse();
++            GetDomainNamesResponse resp = new GetDomainNamesResponse();
+             do
+             {
+                 GetDomainNamesRequest req = new GetDomainNamesRequest
+diff -Naur /tmp/Generated/Generated/APIGateway/GetRestApisOperation.cs ../CloudOps/Generated/APIGateway/GetRestApisOperation.cs
+--- /tmp/Generated/Generated/APIGateway/GetRestApisOperation.cs	2019-01-02 14:30:22.854207859 +0200
++++ ../CloudOps/Generated/APIGateway/GetRestApisOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAPIGatewayClient client = new AmazonAPIGatewayClient(creds, region);
+-            RestApisResponse resp = new RestApisResponse();
++            GetRestApisResponse resp = new GetRestApisResponse();
+             do
+             {
+                 GetRestApisRequest req = new GetRestApisRequest
+diff -Naur /tmp/Generated/Generated/APIGateway/GetUsagePlansOperation.cs ../CloudOps/Generated/APIGateway/GetUsagePlansOperation.cs
+--- /tmp/Generated/Generated/APIGateway/GetUsagePlansOperation.cs	2019-01-02 14:30:22.854207859 +0200
++++ ../CloudOps/Generated/APIGateway/GetUsagePlansOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAPIGatewayClient client = new AmazonAPIGatewayClient(creds, region);
+-            UsagePlansResponse resp = new UsagePlansResponse();
++            GetUsagePlansResponse resp = new GetUsagePlansResponse();
+             do
+             {
+                 GetUsagePlansRequest req = new GetUsagePlansRequest
+diff -Naur /tmp/Generated/Generated/APIGateway/GetVpcLinksOperation.cs ../CloudOps/Generated/APIGateway/GetVpcLinksOperation.cs
+--- /tmp/Generated/Generated/APIGateway/GetVpcLinksOperation.cs	2019-01-02 14:30:22.854207859 +0200
++++ ../CloudOps/Generated/APIGateway/GetVpcLinksOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAPIGatewayClient client = new AmazonAPIGatewayClient(creds, region);
+-            VpcLinksResponse resp = new VpcLinksResponse();
++            GetVpcLinksResponse resp = new GetVpcLinksResponse();
+             do
+             {
+                 GetVpcLinksRequest req = new GetVpcLinksRequest
+diff -Naur /tmp/Generated/Generated/AutoScaling/DescribeAutoScalingGroupsOperation.cs ../CloudOps/Generated/AutoScaling/DescribeAutoScalingGroupsOperation.cs
+--- /tmp/Generated/Generated/AutoScaling/DescribeAutoScalingGroupsOperation.cs	2019-01-02 14:30:22.858207880 +0200
++++ ../CloudOps/Generated/AutoScaling/DescribeAutoScalingGroupsOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,10 +22,10 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAutoScalingClient client = new AmazonAutoScalingClient(creds, region);
+-            DescribeAutoScalingGroupsTypeResponse resp = new DescribeAutoScalingGroupsTypeResponse();
++            DescribeAutoScalingGroupsResponse resp = new DescribeAutoScalingGroupsResponse();
+             do
+             {
+-                AutoScalingGroupNamesTypeRequest req = new AutoScalingGroupNamesTypeRequest
++                DescribeAutoScalingGroupsRequest req = new DescribeAutoScalingGroupsRequest
+                 {
+                     NextToken = resp.NextToken
+                     ,
+diff -Naur /tmp/Generated/Generated/AutoScaling/DescribeAutoScalingInstancesOperation.cs ../CloudOps/Generated/AutoScaling/DescribeAutoScalingInstancesOperation.cs
+--- /tmp/Generated/Generated/AutoScaling/DescribeAutoScalingInstancesOperation.cs	2019-01-02 14:30:22.854207859 +0200
++++ ../CloudOps/Generated/AutoScaling/DescribeAutoScalingInstancesOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,10 +22,10 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAutoScalingClient client = new AmazonAutoScalingClient(creds, region);
+-            DescribeAutoScalingInstancesTypeResponse resp = new DescribeAutoScalingInstancesTypeResponse();
++            DescribeAutoScalingInstancesResponse resp = new DescribeAutoScalingInstancesResponse();
+             do
+             {
+-                DescribeAutoScalingInstancesTypeRequest req = new DescribeAutoScalingInstancesTypeRequest
++                DescribeAutoScalingInstancesRequest req = new DescribeAutoScalingInstancesRequest
+                 {
+                     NextToken = resp.NextToken
+                     ,
+diff -Naur /tmp/Generated/Generated/AutoScaling/DescribeLaunchConfigurationsOperation.cs ../CloudOps/Generated/AutoScaling/DescribeLaunchConfigurationsOperation.cs
+--- /tmp/Generated/Generated/AutoScaling/DescribeLaunchConfigurationsOperation.cs	2019-01-02 14:30:22.858207880 +0200
++++ ../CloudOps/Generated/AutoScaling/DescribeLaunchConfigurationsOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,10 +22,10 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAutoScalingClient client = new AmazonAutoScalingClient(creds, region);
+-            DescribeLaunchConfigurationsTypeResponse resp = new DescribeLaunchConfigurationsTypeResponse();
++            DescribeLaunchConfigurationsResponse resp = new DescribeLaunchConfigurationsResponse();
+             do
+             {
+-                LaunchConfigurationNamesTypeRequest req = new LaunchConfigurationNamesTypeRequest
++                DescribeLaunchConfigurationsRequest req = new DescribeLaunchConfigurationsRequest
+                 {
+                     NextToken = resp.NextToken
+                     ,
+diff -Naur /tmp/Generated/Generated/AutoScaling/DescribeNotificationConfigurationsOperation.cs ../CloudOps/Generated/AutoScaling/DescribeNotificationConfigurationsOperation.cs
+--- /tmp/Generated/Generated/AutoScaling/DescribeNotificationConfigurationsOperation.cs	2019-01-02 14:30:22.858207880 +0200
++++ ../CloudOps/Generated/AutoScaling/DescribeNotificationConfigurationsOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,10 +22,10 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAutoScalingClient client = new AmazonAutoScalingClient(creds, region);
+-            DescribeNotificationConfigurationsAnswerResponse resp = new DescribeNotificationConfigurationsAnswerResponse();
++            DescribeNotificationConfigurationsResponse resp = new DescribeNotificationConfigurationsResponse();
+             do
+             {
+-                DescribeNotificationConfigurationsTypeRequest req = new DescribeNotificationConfigurationsTypeRequest
++                DescribeNotificationConfigurationsRequest req = new DescribeNotificationConfigurationsRequest
+                 {
+                     NextToken = resp.NextToken
+                     ,
+diff -Naur /tmp/Generated/Generated/AutoScaling/DescribePoliciesOperation.cs ../CloudOps/Generated/AutoScaling/DescribePoliciesOperation.cs
+--- /tmp/Generated/Generated/AutoScaling/DescribePoliciesOperation.cs	2019-01-02 14:30:22.854207859 +0200
++++ ../CloudOps/Generated/AutoScaling/DescribePoliciesOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,10 +22,10 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAutoScalingClient client = new AmazonAutoScalingClient(creds, region);
+-            DescribePoliciesTypeResponse resp = new DescribePoliciesTypeResponse();
++            DescribePoliciesResponse resp = new DescribePoliciesResponse();
+             do
+             {
+-                DescribePoliciesTypeRequest req = new DescribePoliciesTypeRequest
++                DescribePoliciesRequest req = new DescribePoliciesRequest
+                 {
+                     NextToken = resp.NextToken
+                     ,
+diff -Naur /tmp/Generated/Generated/AutoScaling/DescribeScalingActivitiesOperation.cs ../CloudOps/Generated/AutoScaling/DescribeScalingActivitiesOperation.cs
+--- /tmp/Generated/Generated/AutoScaling/DescribeScalingActivitiesOperation.cs	2019-01-02 14:30:22.854207859 +0200
++++ ../CloudOps/Generated/AutoScaling/DescribeScalingActivitiesOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,10 +22,10 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAutoScalingClient client = new AmazonAutoScalingClient(creds, region);
+-            DescribeActivitiesTypeResponse resp = new DescribeActivitiesTypeResponse();
++            DescribeScalingActivitiesResponse resp = new DescribeScalingActivitiesResponse();
+             do
+             {
+-                DescribeScalingActivitiesTypeRequest req = new DescribeScalingActivitiesTypeRequest
++                DescribeScalingActivitiesRequest req = new DescribeScalingActivitiesRequest
+                 {
+                     NextToken = resp.NextToken
+                     ,
+diff -Naur /tmp/Generated/Generated/AutoScaling/DescribeScheduledActionsOperation.cs ../CloudOps/Generated/AutoScaling/DescribeScheduledActionsOperation.cs
+--- /tmp/Generated/Generated/AutoScaling/DescribeScheduledActionsOperation.cs	2019-01-02 14:30:22.854207859 +0200
++++ ../CloudOps/Generated/AutoScaling/DescribeScheduledActionsOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,10 +22,10 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAutoScalingClient client = new AmazonAutoScalingClient(creds, region);
+-            DescribeScheduledActionsTypeResponse resp = new DescribeScheduledActionsTypeResponse();
++            DescribeScheduledActionsResponse resp = new DescribeScheduledActionsResponse();
+             do
+             {
+-                DescribeScheduledActionsTypeRequest req = new DescribeScheduledActionsTypeRequest
++                DescribeScheduledActionsRequest req = new DescribeScheduledActionsRequest
+                 {
+                     NextToken = resp.NextToken
+                     ,
+diff -Naur /tmp/Generated/Generated/AutoScaling/DescribeTagsOperation.cs ../CloudOps/Generated/AutoScaling/DescribeTagsOperation.cs
+--- /tmp/Generated/Generated/AutoScaling/DescribeTagsOperation.cs	2019-01-02 14:30:22.858207880 +0200
++++ ../CloudOps/Generated/AutoScaling/DescribeTagsOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -22,10 +22,10 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonAutoScalingClient client = new AmazonAutoScalingClient(creds, region);
+-            DescribeTagsTypeResponse resp = new DescribeTagsTypeResponse();
++            DescribeTagsResponse resp = new DescribeTagsResponse();
+             do
+             {
+-                DescribeTagsTypeRequest req = new DescribeTagsTypeRequest
++                DescribeTagsRequest req = new DescribeTagsRequest
+                 {
+                     NextToken = resp.NextToken
+                     ,
+diff -Naur /tmp/Generated/Generated/CloudFront/ListCloudFrontOriginAccessIdentitiesOperation.cs ../CloudOps/Generated/CloudFront/ListCloudFrontOriginAccessIdentitiesOperation.cs
+--- /tmp/Generated/Generated/CloudFront/ListCloudFrontOriginAccessIdentitiesOperation.cs	2019-01-02 14:30:22.858207880 +0200
++++ ../CloudOps/Generated/CloudFront/ListCloudFrontOriginAccessIdentitiesOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -27,22 +27,22 @@
+             {
+                 ListCloudFrontOriginAccessIdentitiesRequest req = new ListCloudFrontOriginAccessIdentitiesRequest
+                 {
+-                    Marker = resp.CloudFrontOriginAccessIdentityListNextMarker
++                    Marker = resp.CloudFrontOriginAccessIdentityList.NextMarker
+                     ,
+-                    MaxItems = maxItems
++                    MaxItems = maxItems.ToString()
+                                         
+                 };
+ 
+                 resp = client.ListCloudFrontOriginAccessIdentities(req);
+                 CheckError(resp.HttpStatusCode, "200");                
+                 
+-                foreach (var obj in resp.CloudFrontOriginAccessIdentityListItems)
++                foreach (var obj in resp.CloudFrontOriginAccessIdentityList.Items)
+                 {
+                     AddObject(obj);
+                 }
+                 
+             }
+-            while (!string.IsNullOrEmpty(resp.CloudFrontOriginAccessIdentityListNextMarker));
++            while (!string.IsNullOrEmpty(resp.CloudFrontOriginAccessIdentityList.NextMarker));
+         }
+     }
+ }
+\ No newline at end of file
+diff -Naur /tmp/Generated/Generated/CloudFront/ListDistributionsOperation.cs ../CloudOps/Generated/CloudFront/ListDistributionsOperation.cs
+--- /tmp/Generated/Generated/CloudFront/ListDistributionsOperation.cs	2019-01-02 14:30:22.858207880 +0200
++++ ../CloudOps/Generated/CloudFront/ListDistributionsOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -27,22 +27,22 @@
+             {
+                 ListDistributionsRequest req = new ListDistributionsRequest
+                 {
+-                    Marker = resp.DistributionListNextMarker
++                    Marker = resp.DistributionList.NextMarker
+                     ,
+-                    MaxItems = maxItems
++                    MaxItems = maxItems.ToString()
+                                         
+                 };
+ 
+                 resp = client.ListDistributions(req);
+                 CheckError(resp.HttpStatusCode, "200");                
+                 
+-                foreach (var obj in resp.DistributionListItems)
++                foreach (var obj in resp.DistributionList.Items)
+                 {
+                     AddObject(obj);
+                 }
+                 
+             }
+-            while (!string.IsNullOrEmpty(resp.DistributionListNextMarker));
++            while (!string.IsNullOrEmpty(resp.DistributionList.NextMarker));
+         }
+     }
+ }
+\ No newline at end of file
+diff -Naur /tmp/Generated/Generated/CloudFront/ListStreamingDistributionsOperation.cs ../CloudOps/Generated/CloudFront/ListStreamingDistributionsOperation.cs
+--- /tmp/Generated/Generated/CloudFront/ListStreamingDistributionsOperation.cs	2019-01-02 14:30:22.858207880 +0200
++++ ../CloudOps/Generated/CloudFront/ListStreamingDistributionsOperation.cs	2018-12-26 10:49:31.630194488 +0200
+@@ -27,22 +27,23 @@
+             {
+                 ListStreamingDistributionsRequest req = new ListStreamingDistributionsRequest
+                 {
+-                    Marker = resp.StreamingDistributionListNextMarker
++                    
++                    Marker = resp.StreamingDistributionList.NextMarker
+                     ,
+-                    MaxItems = maxItems
++                    MaxItems = maxItems.ToString()
+                                         
+                 };
+-
++                
+                 resp = client.ListStreamingDistributions(req);
+                 CheckError(resp.HttpStatusCode, "200");                
+                 
+-                foreach (var obj in resp.StreamingDistributionListItems)
++                foreach (var obj in resp.StreamingDistributionList.Items)
+                 {
+                     AddObject(obj);
+                 }
+                 
+             }
+-            while (!string.IsNullOrEmpty(resp.StreamingDistributionListNextMarker));
++            while (!string.IsNullOrEmpty(resp.StreamingDistributionList.NextMarker));
+         }
+     }
+ }
+\ No newline at end of file
+diff -Naur /tmp/Generated/Generated/DatabaseMigrationService/DescribeReplicationTaskAssessmentResultsOperation.cs ../CloudOps/Generated/DatabaseMigrationService/DescribeReplicationTaskAssessmentResultsOperation.cs
+--- /tmp/Generated/Generated/DatabaseMigrationService/DescribeReplicationTaskAssessmentResultsOperation.cs	2019-01-02 14:30:22.866207921 +0200
++++ ../CloudOps/Generated/DatabaseMigrationService/DescribeReplicationTaskAssessmentResultsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonDatabaseMigrationServiceClient client = new AmazonDatabaseMigrationServiceClient(creds, region);
+-            DescribeReplicationTaskAssessmentResponsesResponse resp = new DescribeReplicationTaskAssessmentResponsesResponse();
++            DescribeReplicationTaskAssessmentResultsResponse resp = new DescribeReplicationTaskAssessmentResultsResponse();
+             do
+             {
+                 DescribeReplicationTaskAssessmentResultsRequest req = new DescribeReplicationTaskAssessmentResultsRequest
+diff -Naur /tmp/Generated/Generated/DynamoDB/ListTablesOperation.cs ../CloudOps/Generated/DynamoDB/ListTablesOperation.cs
+--- /tmp/Generated/Generated/DynamoDB/ListTablesOperation.cs	2019-01-02 14:30:22.866207921 +0200
++++ ../CloudOps/Generated/DynamoDB/ListTablesOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -1,6 +1,6 @@
+ using Amazon;
+-using Amazon.DynamoDB;
+-using Amazon.DynamoDB.Model;
++using Amazon.DynamoDBv2;
++using Amazon.DynamoDBv2.Model;
+ using Amazon.Runtime;
+ 
+ namespace CloudOps.DynamoDB
+diff -Naur /tmp/Generated/Generated/ElastiCache/DescribeCacheClustersOperation.cs ../CloudOps/Generated/ElastiCache/DescribeCacheClustersOperation.cs
+--- /tmp/Generated/Generated/ElastiCache/DescribeCacheClustersOperation.cs	2019-01-02 14:30:22.874207962 +0200
++++ ../CloudOps/Generated/ElastiCache/DescribeCacheClustersOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElastiCacheClient client = new AmazonElastiCacheClient(creds, region);
+-            DescribeCacheClusterResponse resp = new DescribeCacheClusterResponse();
++            DescribeCacheClustersResponse resp = new DescribeCacheClustersResponse();
+             do
+             {
+                 DescribeCacheClustersRequest req = new DescribeCacheClustersRequest
+diff -Naur /tmp/Generated/Generated/ElastiCache/DescribeCacheEngineVersionsOperation.cs ../CloudOps/Generated/ElastiCache/DescribeCacheEngineVersionsOperation.cs
+--- /tmp/Generated/Generated/ElastiCache/DescribeCacheEngineVersionsOperation.cs	2019-01-02 14:30:22.874207962 +0200
++++ ../CloudOps/Generated/ElastiCache/DescribeCacheEngineVersionsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElastiCacheClient client = new AmazonElastiCacheClient(creds, region);
+-            DescribeCacheEngineVersionResponse resp = new DescribeCacheEngineVersionResponse();
++            DescribeCacheEngineVersionsResponse resp = new DescribeCacheEngineVersionsResponse();
+             do
+             {
+                 DescribeCacheEngineVersionsRequest req = new DescribeCacheEngineVersionsRequest
+diff -Naur /tmp/Generated/Generated/ElastiCache/DescribeCacheSecurityGroupsOperation.cs ../CloudOps/Generated/ElastiCache/DescribeCacheSecurityGroupsOperation.cs
+--- /tmp/Generated/Generated/ElastiCache/DescribeCacheSecurityGroupsOperation.cs	2019-01-02 14:30:22.874207962 +0200
++++ ../CloudOps/Generated/ElastiCache/DescribeCacheSecurityGroupsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElastiCacheClient client = new AmazonElastiCacheClient(creds, region);
+-            DescribeCacheSecurityGroupResponse resp = new DescribeCacheSecurityGroupResponse();
++            DescribeCacheSecurityGroupsResponse resp = new DescribeCacheSecurityGroupsResponse();
+             do
+             {
+                 DescribeCacheSecurityGroupsRequest req = new DescribeCacheSecurityGroupsRequest
+diff -Naur /tmp/Generated/Generated/ElastiCache/DescribeCacheSubnetGroupsOperation.cs ../CloudOps/Generated/ElastiCache/DescribeCacheSubnetGroupsOperation.cs
+--- /tmp/Generated/Generated/ElastiCache/DescribeCacheSubnetGroupsOperation.cs	2019-01-02 14:30:22.874207962 +0200
++++ ../CloudOps/Generated/ElastiCache/DescribeCacheSubnetGroupsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElastiCacheClient client = new AmazonElastiCacheClient(creds, region);
+-            DescribeCacheSubnetGroupResponse resp = new DescribeCacheSubnetGroupResponse();
++            DescribeCacheSubnetGroupsResponse resp = new DescribeCacheSubnetGroupsResponse();
+             do
+             {
+                 DescribeCacheSubnetGroupsRequest req = new DescribeCacheSubnetGroupsRequest
+diff -Naur /tmp/Generated/Generated/ElastiCache/DescribeReplicationGroupsOperation.cs ../CloudOps/Generated/ElastiCache/DescribeReplicationGroupsOperation.cs
+--- /tmp/Generated/Generated/ElastiCache/DescribeReplicationGroupsOperation.cs	2019-01-02 14:30:22.874207962 +0200
++++ ../CloudOps/Generated/ElastiCache/DescribeReplicationGroupsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElastiCacheClient client = new AmazonElastiCacheClient(creds, region);
+-            DescribeReplicationGroupResponse resp = new DescribeReplicationGroupResponse();
++            DescribeReplicationGroupsResponse resp = new DescribeReplicationGroupsResponse();
+             do
+             {
+                 DescribeReplicationGroupsRequest req = new DescribeReplicationGroupsRequest
+diff -Naur /tmp/Generated/Generated/ElastiCache/DescribeReservedCacheNodesOfferingsOperation.cs ../CloudOps/Generated/ElastiCache/DescribeReservedCacheNodesOfferingsOperation.cs
+--- /tmp/Generated/Generated/ElastiCache/DescribeReservedCacheNodesOfferingsOperation.cs	2019-01-02 14:30:22.874207962 +0200
++++ ../CloudOps/Generated/ElastiCache/DescribeReservedCacheNodesOfferingsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElastiCacheClient client = new AmazonElastiCacheClient(creds, region);
+-            DescribeReservedCacheNodesOfferingResponse resp = new DescribeReservedCacheNodesOfferingResponse();
++            DescribeReservedCacheNodesOfferingsResponse resp = new DescribeReservedCacheNodesOfferingsResponse();
+             do
+             {
+                 DescribeReservedCacheNodesOfferingsRequest req = new DescribeReservedCacheNodesOfferingsRequest
+diff -Naur /tmp/Generated/Generated/ElastiCache/DescribeReservedCacheNodesOperation.cs ../CloudOps/Generated/ElastiCache/DescribeReservedCacheNodesOperation.cs
+--- /tmp/Generated/Generated/ElastiCache/DescribeReservedCacheNodesOperation.cs	2019-01-02 14:30:22.874207962 +0200
++++ ../CloudOps/Generated/ElastiCache/DescribeReservedCacheNodesOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElastiCacheClient client = new AmazonElastiCacheClient(creds, region);
+-            DescribeReservedCacheNodeResponse resp = new DescribeReservedCacheNodeResponse();
++            DescribeReservedCacheNodesResponse resp = new DescribeReservedCacheNodesResponse();
+             do
+             {
+                 DescribeReservedCacheNodesRequest req = new DescribeReservedCacheNodesRequest
+diff -Naur /tmp/Generated/Generated/ElastiCache/DescribeSnapshotsOperation.cs ../CloudOps/Generated/ElastiCache/DescribeSnapshotsOperation.cs
+--- /tmp/Generated/Generated/ElastiCache/DescribeSnapshotsOperation.cs	2019-01-02 14:30:22.874207962 +0200
++++ ../CloudOps/Generated/ElastiCache/DescribeSnapshotsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElastiCacheClient client = new AmazonElastiCacheClient(creds, region);
+-            DescribeSnapshotsListResponse resp = new DescribeSnapshotsListResponse();
++            DescribeSnapshotsResponse resp = new DescribeSnapshotsResponse();
+             do
+             {
+                 DescribeSnapshotsRequest req = new DescribeSnapshotsRequest
+diff -Naur /tmp/Generated/Generated/ElasticBeanstalk/DescribeApplicationsOperation.cs ../CloudOps/Generated/ElasticBeanstalk/DescribeApplicationsOperation.cs
+--- /tmp/Generated/Generated/ElasticBeanstalk/DescribeApplicationsOperation.cs	2019-01-02 14:30:22.878207983 +0200
++++ ../CloudOps/Generated/ElasticBeanstalk/DescribeApplicationsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElasticBeanstalkClient client = new AmazonElasticBeanstalkClient(creds, region);
+-            DescribeApplicationDescriptionsResponse resp = new DescribeApplicationDescriptionsResponse();
++            DescribeApplicationsResponse resp = new DescribeApplicationsResponse();
+             DescribeApplicationsRequest req = new DescribeApplicationsRequest
+             {                    
+                                     
+diff -Naur /tmp/Generated/Generated/ElasticBeanstalk/DescribeApplicationVersionsOperation.cs ../CloudOps/Generated/ElasticBeanstalk/DescribeApplicationVersionsOperation.cs
+--- /tmp/Generated/Generated/ElasticBeanstalk/DescribeApplicationVersionsOperation.cs	2019-01-02 14:30:22.878207983 +0200
++++ ../CloudOps/Generated/ElasticBeanstalk/DescribeApplicationVersionsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElasticBeanstalkClient client = new AmazonElasticBeanstalkClient(creds, region);
+-            DescribeApplicationVersionDescriptionsResponse resp = new DescribeApplicationVersionDescriptionsResponse();
++            DescribeApplicationVersionsResponse resp = new DescribeApplicationVersionsResponse();
+             DescribeApplicationVersionsRequest req = new DescribeApplicationVersionsRequest
+             {                    
+                                     
+diff -Naur /tmp/Generated/Generated/ElasticBeanstalk/DescribeConfigurationOptionsOperation.cs ../CloudOps/Generated/ElasticBeanstalk/DescribeConfigurationOptionsOperation.cs
+--- /tmp/Generated/Generated/ElasticBeanstalk/DescribeConfigurationOptionsOperation.cs	2019-01-02 14:30:22.878207983 +0200
++++ ../CloudOps/Generated/ElasticBeanstalk/DescribeConfigurationOptionsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElasticBeanstalkClient client = new AmazonElasticBeanstalkClient(creds, region);
+-            DescribeConfigurationOptionsDescriptionResponse resp = new DescribeConfigurationOptionsDescriptionResponse();
++            DescribeConfigurationOptionsResponse resp = new DescribeConfigurationOptionsResponse();
+             DescribeConfigurationOptionsRequest req = new DescribeConfigurationOptionsRequest
+             {                    
+                                     
+diff -Naur /tmp/Generated/Generated/ElasticBeanstalk/DescribeEnvironmentsOperation.cs ../CloudOps/Generated/ElasticBeanstalk/DescribeEnvironmentsOperation.cs
+--- /tmp/Generated/Generated/ElasticBeanstalk/DescribeEnvironmentsOperation.cs	2019-01-02 14:30:22.878207983 +0200
++++ ../CloudOps/Generated/ElasticBeanstalk/DescribeEnvironmentsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElasticBeanstalkClient client = new AmazonElasticBeanstalkClient(creds, region);
+-            DescribeEnvironmentDescriptionsResponse resp = new DescribeEnvironmentDescriptionsResponse();
++            DescribeEnvironmentsResponse resp = new DescribeEnvironmentsResponse();
+             DescribeEnvironmentsRequest req = new DescribeEnvironmentsRequest
+             {                    
+                                     
+diff -Naur /tmp/Generated/Generated/ElasticBeanstalk/DescribeEventsOperation.cs ../CloudOps/Generated/ElasticBeanstalk/DescribeEventsOperation.cs
+--- /tmp/Generated/Generated/ElasticBeanstalk/DescribeEventsOperation.cs	2019-01-02 14:30:22.878207983 +0200
++++ ../CloudOps/Generated/ElasticBeanstalk/DescribeEventsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElasticBeanstalkClient client = new AmazonElasticBeanstalkClient(creds, region);
+-            DescribeEventDescriptionsResponse resp = new DescribeEventDescriptionsResponse();
++            DescribeEventsResponse resp = new DescribeEventsResponse();
+             do
+             {
+                 DescribeEventsRequest req = new DescribeEventsRequest
+diff -Naur /tmp/Generated/Generated/ElasticLoadBalancing/DescribeLoadBalancersOperation.cs ../CloudOps/Generated/ElasticLoadBalancing/DescribeLoadBalancersOperation.cs
+--- /tmp/Generated/Generated/ElasticLoadBalancing/DescribeLoadBalancersOperation.cs	2019-01-02 14:30:22.878207983 +0200
++++ ../CloudOps/Generated/ElasticLoadBalancing/DescribeLoadBalancersOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -22,13 +22,13 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonElasticLoadBalancingClient client = new AmazonElasticLoadBalancingClient(creds, region);
+-            DescribeAccessPointsResponse resp = new DescribeAccessPointsResponse();
++            DescribeLoadBalancersResponse resp = new DescribeLoadBalancersResponse();            
+             do
+             {
+-                DescribeAccessPointsRequest req = new DescribeAccessPointsRequest
++                DescribeLoadBalancersRequest req = new DescribeLoadBalancersRequest
+                 {
+-                    Marker = resp.NextMarker
+-                                        
++                    Marker = resp.NextMarker,
++                    PageSize = maxItems                                        
+                 };
+ 
+                 resp = client.DescribeLoadBalancers(req);
+diff -Naur /tmp/Generated/Generated/IdentityManagement/GetAccountAuthorizationDetailsOperation.cs ../CloudOps/Generated/IdentityManagement/GetAccountAuthorizationDetailsOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/GetAccountAuthorizationDetailsOperation.cs	2019-01-02 14:30:22.882208003 +0200
++++ ../CloudOps/Generated/IdentityManagement/GetAccountAuthorizationDetailsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             GetAccountAuthorizationDetailsResponse resp = new GetAccountAuthorizationDetailsResponse();
+             do
+             {
+@@ -36,22 +36,22 @@
+                 resp = client.GetAccountAuthorizationDetails(req);
+                 CheckError(resp.HttpStatusCode, "200");                
+                 
+-                foreach (var obj in resp.UserDetailList)
++                foreach (var obj in resp.RoleDetailList)
+                 {
+                     AddObject(obj);
+                 }
+                 
+-                foreach (var obj in resp.GroupDetailList)
++                foreach (var obj in resp.Policies)
+                 {
+                     AddObject(obj);
+                 }
+                 
+-                foreach (var obj in resp.RoleDetailList)
++                foreach (var obj in resp.UserDetailList)
+                 {
+                     AddObject(obj);
+                 }
+                 
+-                foreach (var obj in resp.Policies)
++                foreach (var obj in resp.GroupDetailList)
+                 {
+                     AddObject(obj);
+                 }
+diff -Naur /tmp/Generated/Generated/IdentityManagement/ListAccessKeysOperation.cs ../CloudOps/Generated/IdentityManagement/ListAccessKeysOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/ListAccessKeysOperation.cs	2019-01-02 14:30:22.886208024 +0200
++++ ../CloudOps/Generated/IdentityManagement/ListAccessKeysOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             ListAccessKeysResponse resp = new ListAccessKeysResponse();
+             do
+             {
+diff -Naur /tmp/Generated/Generated/IdentityManagement/ListAccountAliasesOperation.cs ../CloudOps/Generated/IdentityManagement/ListAccountAliasesOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/ListAccountAliasesOperation.cs	2019-01-02 14:30:22.886208024 +0200
++++ ../CloudOps/Generated/IdentityManagement/ListAccountAliasesOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             ListAccountAliasesResponse resp = new ListAccountAliasesResponse();
+             do
+             {
+diff -Naur /tmp/Generated/Generated/IdentityManagement/ListGroupsOperation.cs ../CloudOps/Generated/IdentityManagement/ListGroupsOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/ListGroupsOperation.cs	2019-01-02 14:30:22.882208003 +0200
++++ ../CloudOps/Generated/IdentityManagement/ListGroupsOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             ListGroupsResponse resp = new ListGroupsResponse();
+             do
+             {
+diff -Naur /tmp/Generated/Generated/IdentityManagement/ListInstanceProfilesOperation.cs ../CloudOps/Generated/IdentityManagement/ListInstanceProfilesOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/ListInstanceProfilesOperation.cs	2019-01-02 14:30:22.886208024 +0200
++++ ../CloudOps/Generated/IdentityManagement/ListInstanceProfilesOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             ListInstanceProfilesResponse resp = new ListInstanceProfilesResponse();
+             do
+             {
+diff -Naur /tmp/Generated/Generated/IdentityManagement/ListMFADevicesOperation.cs ../CloudOps/Generated/IdentityManagement/ListMFADevicesOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/ListMFADevicesOperation.cs	2019-01-02 14:30:22.882208003 +0200
++++ ../CloudOps/Generated/IdentityManagement/ListMFADevicesOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             ListMFADevicesResponse resp = new ListMFADevicesResponse();
+             do
+             {
+diff -Naur /tmp/Generated/Generated/IdentityManagement/ListPoliciesOperation.cs ../CloudOps/Generated/IdentityManagement/ListPoliciesOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/ListPoliciesOperation.cs	2019-01-02 14:30:22.882208003 +0200
++++ ../CloudOps/Generated/IdentityManagement/ListPoliciesOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             ListPoliciesResponse resp = new ListPoliciesResponse();
+             do
+             {
+diff -Naur /tmp/Generated/Generated/IdentityManagement/ListRolesOperation.cs ../CloudOps/Generated/IdentityManagement/ListRolesOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/ListRolesOperation.cs	2019-01-02 14:30:22.886208024 +0200
++++ ../CloudOps/Generated/IdentityManagement/ListRolesOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             ListRolesResponse resp = new ListRolesResponse();
+             do
+             {
+diff -Naur /tmp/Generated/Generated/IdentityManagement/ListSAMLProvidersOperation.cs ../CloudOps/Generated/IdentityManagement/ListSAMLProvidersOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/ListSAMLProvidersOperation.cs	2019-01-02 14:30:22.886208024 +0200
++++ ../CloudOps/Generated/IdentityManagement/ListSAMLProvidersOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             ListSAMLProvidersResponse resp = new ListSAMLProvidersResponse();
+             ListSAMLProvidersRequest req = new ListSAMLProvidersRequest
+             {                    
+diff -Naur /tmp/Generated/Generated/IdentityManagement/ListServerCertificatesOperation.cs ../CloudOps/Generated/IdentityManagement/ListServerCertificatesOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/ListServerCertificatesOperation.cs	2019-01-02 14:30:22.882208003 +0200
++++ ../CloudOps/Generated/IdentityManagement/ListServerCertificatesOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             ListServerCertificatesResponse resp = new ListServerCertificatesResponse();
+             do
+             {
+diff -Naur /tmp/Generated/Generated/IdentityManagement/ListSigningCertificatesOperation.cs ../CloudOps/Generated/IdentityManagement/ListSigningCertificatesOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/ListSigningCertificatesOperation.cs	2019-01-02 14:30:22.882208003 +0200
++++ ../CloudOps/Generated/IdentityManagement/ListSigningCertificatesOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             ListSigningCertificatesResponse resp = new ListSigningCertificatesResponse();
+             do
+             {
+diff -Naur /tmp/Generated/Generated/IdentityManagement/ListSSHPublicKeysOperation.cs ../CloudOps/Generated/IdentityManagement/ListSSHPublicKeysOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/ListSSHPublicKeysOperation.cs	2019-01-02 14:30:22.882208003 +0200
++++ ../CloudOps/Generated/IdentityManagement/ListSSHPublicKeysOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             ListSSHPublicKeysResponse resp = new ListSSHPublicKeysResponse();
+             do
+             {
+diff -Naur /tmp/Generated/Generated/IdentityManagement/ListUsersOperation.cs ../CloudOps/Generated/IdentityManagement/ListUsersOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/ListUsersOperation.cs	2019-01-02 14:30:22.882208003 +0200
++++ ../CloudOps/Generated/IdentityManagement/ListUsersOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             ListUsersResponse resp = new ListUsersResponse();
+             do
+             {
+diff -Naur /tmp/Generated/Generated/IdentityManagement/ListVirtualMFADevicesOperation.cs ../CloudOps/Generated/IdentityManagement/ListVirtualMFADevicesOperation.cs
+--- /tmp/Generated/Generated/IdentityManagement/ListVirtualMFADevicesOperation.cs	2019-01-02 14:30:22.882208003 +0200
++++ ../CloudOps/Generated/IdentityManagement/ListVirtualMFADevicesOperation.cs	2018-12-26 10:49:31.634194523 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonIdentityManagementClient client = new AmazonIdentityManagementClient(creds, region);
++            AmazonIdentityManagementServiceClient client = new AmazonIdentityManagementServiceClient(creds, region);
+             ListVirtualMFADevicesResponse resp = new ListVirtualMFADevicesResponse();
+             do
+             {
+diff -Naur /tmp/Generated/Generated/Kinesis/ListStreamsOperation.cs ../CloudOps/Generated/Kinesis/ListStreamsOperation.cs
+--- /tmp/Generated/Generated/Kinesis/ListStreamsOperation.cs	2019-01-02 14:30:22.886208024 +0200
++++ ../CloudOps/Generated/Kinesis/ListStreamsOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -23,12 +23,13 @@
+         {
+             AmazonKinesisClient client = new AmazonKinesisClient(creds, region);
+             ListStreamsResponse resp = new ListStreamsResponse();
++            string lastStream = "";
+             do
+             {
++                
+                 ListStreamsRequest req = new ListStreamsRequest
+                 {
+-                    ExclusiveStartStreamName = resp.StreamNames1
+-                    ,
++                    ExclusiveStartStreamName = lastStream,
+                     Limit = maxItems
+                                         
+                 };
+@@ -40,9 +41,9 @@
+                 {
+                     AddObject(obj);
+                 }
+-                
++                lastStream = resp.StreamNames[resp.StreamNames.Count];
+             }
+-            while (!string.IsNullOrEmpty(resp.StreamNames1));
++            while (resp.HasMoreStreams);
+         }
+     }
+ }
+\ No newline at end of file
+diff -Naur /tmp/Generated/Generated/MediaLive/ListInputSecurityGroupsOperation.cs ../CloudOps/Generated/MediaLive/ListInputSecurityGroupsOperation.cs
+--- /tmp/Generated/Generated/MediaLive/ListInputSecurityGroupsOperation.cs	2019-01-02 14:30:22.890208044 +0200
++++ ../CloudOps/Generated/MediaLive/ListInputSecurityGroupsOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -25,7 +25,7 @@
+             ListInputSecurityGroupsResponse resp = new ListInputSecurityGroupsResponse();
+             do
+             {
+-                ListRequestSecurityGroupsRequest req = new ListRequestSecurityGroupsRequest
++                ListInputSecurityGroupsRequest req = new ListInputSecurityGroupsRequest
+                 {
+                     NextToken = resp.NextToken
+                     ,
+diff -Naur /tmp/Generated/Generated/MediaLive/ListInputsOperation.cs ../CloudOps/Generated/MediaLive/ListInputsOperation.cs
+--- /tmp/Generated/Generated/MediaLive/ListInputsOperation.cs	2019-01-02 14:30:22.890208044 +0200
++++ ../CloudOps/Generated/MediaLive/ListInputsOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -25,7 +25,7 @@
+             ListInputsResponse resp = new ListInputsResponse();
+             do
+             {
+-                ListRequestsRequest req = new ListRequestsRequest
++                ListInputsRequest req = new ListInputsRequest
+                 {
+                     NextToken = resp.NextToken
+                     ,
+diff -Naur /tmp/Generated/Generated/RDS/DescribeDBClustersOperation.cs ../CloudOps/Generated/RDS/DescribeDBClustersOperation.cs
+--- /tmp/Generated/Generated/RDS/DescribeDBClustersOperation.cs	2019-01-02 14:30:22.906208127 +0200
++++ ../CloudOps/Generated/RDS/DescribeDBClustersOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRDSClient client = new AmazonRDSClient(creds, region);
+-            DescribeDBClusterResponse resp = new DescribeDBClusterResponse();
++            DescribeDBClustersResponse resp = new DescribeDBClustersResponse();
+             do
+             {
+                 DescribeDBClustersRequest req = new DescribeDBClustersRequest
+diff -Naur /tmp/Generated/Generated/RDS/DescribeDBEngineVersionsOperation.cs ../CloudOps/Generated/RDS/DescribeDBEngineVersionsOperation.cs
+--- /tmp/Generated/Generated/RDS/DescribeDBEngineVersionsOperation.cs	2019-01-02 14:30:22.902208106 +0200
++++ ../CloudOps/Generated/RDS/DescribeDBEngineVersionsOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRDSClient client = new AmazonRDSClient(creds, region);
+-            DescribeDBEngineVersionResponse resp = new DescribeDBEngineVersionResponse();
++            DescribeDBEngineVersionsResponse resp = new DescribeDBEngineVersionsResponse();
+             do
+             {
+                 DescribeDBEngineVersionsRequest req = new DescribeDBEngineVersionsRequest
+diff -Naur /tmp/Generated/Generated/RDS/DescribeDBInstanceAutomatedBackupsOperation.cs ../CloudOps/Generated/RDS/DescribeDBInstanceAutomatedBackupsOperation.cs
+--- /tmp/Generated/Generated/RDS/DescribeDBInstanceAutomatedBackupsOperation.cs	2019-01-02 14:30:22.902208106 +0200
++++ ../CloudOps/Generated/RDS/DescribeDBInstanceAutomatedBackupsOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRDSClient client = new AmazonRDSClient(creds, region);
+-            DescribeDBInstanceAutomatedBackupResponse resp = new DescribeDBInstanceAutomatedBackupResponse();
++            DescribeDBInstanceAutomatedBackupsResponse resp = new DescribeDBInstanceAutomatedBackupsResponse();
+             do
+             {
+                 DescribeDBInstanceAutomatedBackupsRequest req = new DescribeDBInstanceAutomatedBackupsRequest
+diff -Naur /tmp/Generated/Generated/RDS/DescribeDBInstancesOperation.cs ../CloudOps/Generated/RDS/DescribeDBInstancesOperation.cs
+--- /tmp/Generated/Generated/RDS/DescribeDBInstancesOperation.cs	2019-01-02 14:30:22.906208127 +0200
++++ ../CloudOps/Generated/RDS/DescribeDBInstancesOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRDSClient client = new AmazonRDSClient(creds, region);
+-            DescribeDBInstanceResponse resp = new DescribeDBInstanceResponse();
++            DescribeDBInstancesResponse resp = new DescribeDBInstancesResponse();
+             do
+             {
+                 DescribeDBInstancesRequest req = new DescribeDBInstancesRequest
+diff -Naur /tmp/Generated/Generated/RDS/DescribeDBSecurityGroupsOperation.cs ../CloudOps/Generated/RDS/DescribeDBSecurityGroupsOperation.cs
+--- /tmp/Generated/Generated/RDS/DescribeDBSecurityGroupsOperation.cs	2019-01-02 14:30:22.902208106 +0200
++++ ../CloudOps/Generated/RDS/DescribeDBSecurityGroupsOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRDSClient client = new AmazonRDSClient(creds, region);
+-            DescribeDBSecurityGroupResponse resp = new DescribeDBSecurityGroupResponse();
++            DescribeDBSecurityGroupsResponse resp = new DescribeDBSecurityGroupsResponse();
+             do
+             {
+                 DescribeDBSecurityGroupsRequest req = new DescribeDBSecurityGroupsRequest
+diff -Naur /tmp/Generated/Generated/RDS/DescribeDBSnapshotsOperation.cs ../CloudOps/Generated/RDS/DescribeDBSnapshotsOperation.cs
+--- /tmp/Generated/Generated/RDS/DescribeDBSnapshotsOperation.cs	2019-01-02 14:30:22.906208127 +0200
++++ ../CloudOps/Generated/RDS/DescribeDBSnapshotsOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRDSClient client = new AmazonRDSClient(creds, region);
+-            DescribeDBSnapshotResponse resp = new DescribeDBSnapshotResponse();
++            DescribeDBSnapshotsResponse resp = new DescribeDBSnapshotsResponse();
+             do
+             {
+                 DescribeDBSnapshotsRequest req = new DescribeDBSnapshotsRequest
+diff -Naur /tmp/Generated/Generated/RDS/DescribeDBSubnetGroupsOperation.cs ../CloudOps/Generated/RDS/DescribeDBSubnetGroupsOperation.cs
+--- /tmp/Generated/Generated/RDS/DescribeDBSubnetGroupsOperation.cs	2019-01-02 14:30:22.906208127 +0200
++++ ../CloudOps/Generated/RDS/DescribeDBSubnetGroupsOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRDSClient client = new AmazonRDSClient(creds, region);
+-            DescribeDBSubnetGroupResponse resp = new DescribeDBSubnetGroupResponse();
++            DescribeDBSubnetGroupsResponse resp = new DescribeDBSubnetGroupsResponse();
+             do
+             {
+                 DescribeDBSubnetGroupsRequest req = new DescribeDBSubnetGroupsRequest
+diff -Naur /tmp/Generated/Generated/RDS/DescribeReservedDBInstancesOfferingsOperation.cs ../CloudOps/Generated/RDS/DescribeReservedDBInstancesOfferingsOperation.cs
+--- /tmp/Generated/Generated/RDS/DescribeReservedDBInstancesOfferingsOperation.cs	2019-01-02 14:30:22.906208127 +0200
++++ ../CloudOps/Generated/RDS/DescribeReservedDBInstancesOfferingsOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRDSClient client = new AmazonRDSClient(creds, region);
+-            DescribeReservedDBInstancesOfferingResponse resp = new DescribeReservedDBInstancesOfferingResponse();
++            DescribeReservedDBInstancesOfferingsResponse resp = new DescribeReservedDBInstancesOfferingsResponse();
+             do
+             {
+                 DescribeReservedDBInstancesOfferingsRequest req = new DescribeReservedDBInstancesOfferingsRequest
+diff -Naur /tmp/Generated/Generated/RDS/DescribeReservedDBInstancesOperation.cs ../CloudOps/Generated/RDS/DescribeReservedDBInstancesOperation.cs
+--- /tmp/Generated/Generated/RDS/DescribeReservedDBInstancesOperation.cs	2019-01-02 14:30:22.902208106 +0200
++++ ../CloudOps/Generated/RDS/DescribeReservedDBInstancesOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRDSClient client = new AmazonRDSClient(creds, region);
+-            DescribeReservedDBInstanceResponse resp = new DescribeReservedDBInstanceResponse();
++            DescribeReservedDBInstancesResponse resp = new DescribeReservedDBInstancesResponse();
+             do
+             {
+                 DescribeReservedDBInstancesRequest req = new DescribeReservedDBInstancesRequest
+diff -Naur /tmp/Generated/Generated/Redshift/DescribeClusterSecurityGroupsOperation.cs ../CloudOps/Generated/Redshift/DescribeClusterSecurityGroupsOperation.cs
+--- /tmp/Generated/Generated/Redshift/DescribeClusterSecurityGroupsOperation.cs	2019-01-02 14:30:22.906208127 +0200
++++ ../CloudOps/Generated/Redshift/DescribeClusterSecurityGroupsOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRedshiftClient client = new AmazonRedshiftClient(creds, region);
+-            DescribeClusterSecurityGroupResponse resp = new DescribeClusterSecurityGroupResponse();
++            DescribeClusterSecurityGroupsResponse resp = new DescribeClusterSecurityGroupsResponse();
+             do
+             {
+                 DescribeClusterSecurityGroupsRequest req = new DescribeClusterSecurityGroupsRequest
+diff -Naur /tmp/Generated/Generated/Redshift/DescribeClusterSnapshotsOperation.cs ../CloudOps/Generated/Redshift/DescribeClusterSnapshotsOperation.cs
+--- /tmp/Generated/Generated/Redshift/DescribeClusterSnapshotsOperation.cs	2019-01-02 14:30:22.906208127 +0200
++++ ../CloudOps/Generated/Redshift/DescribeClusterSnapshotsOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRedshiftClient client = new AmazonRedshiftClient(creds, region);
+-            DescribeSnapshotResponse resp = new DescribeSnapshotResponse();
++            DescribeClusterSnapshotsResponse resp = new DescribeClusterSnapshotsResponse();
+             do
+             {
+                 DescribeClusterSnapshotsRequest req = new DescribeClusterSnapshotsRequest
+diff -Naur /tmp/Generated/Generated/Redshift/DescribeClusterSubnetGroupsOperation.cs ../CloudOps/Generated/Redshift/DescribeClusterSubnetGroupsOperation.cs
+--- /tmp/Generated/Generated/Redshift/DescribeClusterSubnetGroupsOperation.cs	2019-01-02 14:30:22.906208127 +0200
++++ ../CloudOps/Generated/Redshift/DescribeClusterSubnetGroupsOperation.cs	2018-12-26 10:49:31.638194558 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRedshiftClient client = new AmazonRedshiftClient(creds, region);
+-            DescribeClusterSubnetGroupResponse resp = new DescribeClusterSubnetGroupResponse();
++            DescribeClusterSubnetGroupsResponse resp = new DescribeClusterSubnetGroupsResponse();
+             do
+             {
+                 DescribeClusterSubnetGroupsRequest req = new DescribeClusterSubnetGroupsRequest
+diff -Naur /tmp/Generated/Generated/Redshift/DescribeHsmClientCertificatesOperation.cs ../CloudOps/Generated/Redshift/DescribeHsmClientCertificatesOperation.cs
+--- /tmp/Generated/Generated/Redshift/DescribeHsmClientCertificatesOperation.cs	2019-01-02 14:30:22.906208127 +0200
++++ ../CloudOps/Generated/Redshift/DescribeHsmClientCertificatesOperation.cs	2018-12-26 10:49:31.642194592 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRedshiftClient client = new AmazonRedshiftClient(creds, region);
+-            DescribeHsmClientCertificateResponse resp = new DescribeHsmClientCertificateResponse();
++            DescribeHsmClientCertificatesResponse resp = new DescribeHsmClientCertificatesResponse();
+             do
+             {
+                 DescribeHsmClientCertificatesRequest req = new DescribeHsmClientCertificatesRequest
+diff -Naur /tmp/Generated/Generated/Redshift/DescribeHsmConfigurationsOperation.cs ../CloudOps/Generated/Redshift/DescribeHsmConfigurationsOperation.cs
+--- /tmp/Generated/Generated/Redshift/DescribeHsmConfigurationsOperation.cs	2019-01-02 14:30:22.906208127 +0200
++++ ../CloudOps/Generated/Redshift/DescribeHsmConfigurationsOperation.cs	2018-12-26 10:49:31.642194592 +0200
+@@ -22,7 +22,7 @@
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+             AmazonRedshiftClient client = new AmazonRedshiftClient(creds, region);
+-            DescribeHsmConfigurationResponse resp = new DescribeHsmConfigurationResponse();
++            DescribeHsmConfigurationsResponse resp = new DescribeHsmConfigurationsResponse();
+             do
+             {
+                 DescribeHsmConfigurationsRequest req = new DescribeHsmConfigurationsRequest
+diff -Naur /tmp/Generated/Generated/ResourceGroups/ListGroupsOperation.cs ../CloudOps/Generated/ResourceGroups/ListGroupsOperation.cs
+--- /tmp/Generated/Generated/ResourceGroups/ListGroupsOperation.cs	2019-01-02 14:30:22.910208147 +0200
++++ ../CloudOps/Generated/ResourceGroups/ListGroupsOperation.cs	2019-01-02 14:29:05.941821143 +0200
+@@ -40,8 +40,10 @@
+                 {
+                     AddObject(obj);
+                 }
+-                
++
++#pragma warning disable CS0618 // Type or member is obsolete
+                 foreach (var obj in resp.Groups)
++#pragma warning restore CS0618 // Type or member is obsolete
+                 {
+                     AddObject(obj);
+                 }
+diff -Naur /tmp/Generated/Generated/Route53/ListHealthChecksOperation.cs ../CloudOps/Generated/Route53/ListHealthChecksOperation.cs
+--- /tmp/Generated/Generated/Route53/ListHealthChecksOperation.cs	2019-01-02 14:30:22.910208147 +0200
++++ ../CloudOps/Generated/Route53/ListHealthChecksOperation.cs	2018-12-26 10:49:31.642194592 +0200
+@@ -29,7 +29,7 @@
+                 {
+                     Marker = resp.NextMarker
+                     ,
+-                    MaxItems = maxItems
++                    MaxItems = maxItems.ToString()
+                                         
+                 };
+ 
+diff -Naur /tmp/Generated/Generated/Route53/ListHostedZonesOperation.cs ../CloudOps/Generated/Route53/ListHostedZonesOperation.cs
+--- /tmp/Generated/Generated/Route53/ListHostedZonesOperation.cs	2019-01-02 14:30:22.910208147 +0200
++++ ../CloudOps/Generated/Route53/ListHostedZonesOperation.cs	2018-12-26 10:49:31.642194592 +0200
+@@ -29,7 +29,7 @@
+                 {
+                     Marker = resp.NextMarker
+                     ,
+-                    MaxItems = maxItems
++                    MaxItems = maxItems.ToString()
+                                         
+                 };
+ 
+diff -Naur /tmp/Generated/Generated/SimpleEmail/ListCustomVerificationEmailTemplatesOperation.cs ../CloudOps/Generated/SimpleEmail/ListCustomVerificationEmailTemplatesOperation.cs
+--- /tmp/Generated/Generated/SimpleEmail/ListCustomVerificationEmailTemplatesOperation.cs	2019-01-02 14:30:22.878207983 +0200
++++ ../CloudOps/Generated/SimpleEmail/ListCustomVerificationEmailTemplatesOperation.cs	2018-12-26 10:49:31.642194592 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonSimpleEmailClient client = new AmazonSimpleEmailClient(creds, region);
++            AmazonSimpleEmailServiceClient client = new AmazonSimpleEmailServiceClient(creds, region);
+             ListCustomVerificationEmailTemplatesResponse resp = new ListCustomVerificationEmailTemplatesResponse();
+             do
+             {
+diff -Naur /tmp/Generated/Generated/SimpleEmail/ListIdentitiesOperation.cs ../CloudOps/Generated/SimpleEmail/ListIdentitiesOperation.cs
+--- /tmp/Generated/Generated/SimpleEmail/ListIdentitiesOperation.cs	2019-01-02 14:30:22.878207983 +0200
++++ ../CloudOps/Generated/SimpleEmail/ListIdentitiesOperation.cs	2018-12-26 10:49:31.642194592 +0200
+@@ -21,7 +21,7 @@
+ 
+         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
+         {
+-            AmazonSimpleEmailClient client = new AmazonSimpleEmailClient(creds, region);
++            AmazonSimpleEmailServiceClient client = new AmazonSimpleEmailServiceClient(creds, region);
+             ListIdentitiesResponse resp = new ListIdentitiesResponse();
+             do
+             {
