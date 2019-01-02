@@ -27,7 +27,7 @@ namespace CloudOps.Redshift
             {
                 DescribeDefaultClusterParametersRequest req = new DescribeDefaultClusterParametersRequest
                 {
-                    Marker = resp.DefaultClusterParametersMarker
+                    Marker = resp.DefaultClusterParameters.Marker
                     ,
                     MaxRecords = maxItems
                                         
@@ -36,13 +36,13 @@ namespace CloudOps.Redshift
                 resp = client.DescribeDefaultClusterParameters(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.DefaultClusterParametersParameters)
+                foreach (var obj in resp.DefaultClusterParameters.Parameters)
                 {
                     AddObject(obj);
                 }
                 
             }
-            while (!string.IsNullOrEmpty(resp.DefaultClusterParametersMarker));
+            while (!string.IsNullOrEmpty(resp.DefaultClusterParameters.Marker));
         }
     }
 }

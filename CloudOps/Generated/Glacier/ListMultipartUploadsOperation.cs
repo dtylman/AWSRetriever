@@ -27,8 +27,6 @@ namespace CloudOps.Glacier
             {
                 ListMultipartUploadsRequest req = new ListMultipartUploadsRequest
                 {
-                    Marker = resp.Marker
-                    ,
                     Limit = maxItems
                                         
                 };

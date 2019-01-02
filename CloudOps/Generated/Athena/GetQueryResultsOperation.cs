@@ -36,12 +36,7 @@ namespace CloudOps.Athena
                 resp = client.GetQueryResults(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.UpdateCount)
-                {
-                    AddObject(obj);
-                }
-                
-                foreach (var obj in resp.ResultSet)
+                foreach (var obj in resp.ResultSet.Rows)
                 {
                     AddObject(obj);
                 }

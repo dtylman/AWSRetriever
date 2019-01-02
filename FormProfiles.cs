@@ -21,8 +21,7 @@ namespace heaven
         public FormProfiles()
         {
             InitializeComponent();
-            PopulateToolBar();
-            PopulateFromProfile();            
+            PopulateToolBar();            
         }
 
         private void PopulateToolBar()
@@ -50,17 +49,37 @@ namespace heaven
 
         private void PopulateFromProfile()
         {
-            if (this.profile == null)
-            {
-                this.profile = Profile.AllServices();
-            }
-            
             foreach (string serviceName in this.profile.Services())
             {
-                    ListViewItem item = listViewServices.Items.Add(serviceName);                    
-                
+                ListViewItem item = listViewServices.Items.Add(serviceName);
             }
             this.listViewServices.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+            foreach (ProfileRecord profileRecord in this.profile)
+            {
+                ListViewItem item = listViewProfileRecords.Items.Add(profileRecord.ServiceName);                
+                if (!profileRecord.Enabled)
+                {
+                    item.Checked = profileRecord.Enabled;
+                }
+                item.Checked = profileRecord.Enabled;
+                item.Tag = profileRecord;
+                item.SubItems.Add(profileRecord.Name);                                
+                Operation op = Profile.FindOpeartion(profileRecord);
+                if (op != null)
+                {
+                    string desc = op.Description;
+                    string[] sentences = desc.Split('.');
+                    string caption = desc;
+                    if (sentences.Length > 0)
+                    {
+                        caption = sentences[0];
+                    }
+                    item.SubItems.Add(caption);
+                    item.ToolTipText = desc;
+                }
+            }
+            this.listViewProfileRecords.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
         private void PopulateSelectedServiceOperations()
@@ -129,6 +148,21 @@ namespace heaven
         private void ListViewServices_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateSelectedServiceOperations();
+        }
+
+        private void ListViewProfileRecords_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            ProfileRecord profileRecord = e.Item.Tag as ProfileRecord;
+            if (profileRecord != null)
+            {
+                profileRecord.Enabled = e.Item.Checked;
+                this.profile.Set(profileRecord);
+            }
+        }
+
+        private void FormProfiles_Load(object sender, EventArgs e)
+        {
+            PopulateFromProfile();
         }
     }
 }

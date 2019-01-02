@@ -7,13 +7,15 @@ namespace heaven
 {
     public class Profile : List<ProfileRecord>
     {
-        public string Name { get; private set; }
+        private string name;
+
+        public string Name { get => name; set => name = value; }
 
         public static Profile AllServices()
         {
             Profile p = new Profile()
             {
-                Name = "Default"
+                name = "Default"
             };
             string regions = RegionsString.All().Text();
             foreach (Operation op in OperationFactory.All())

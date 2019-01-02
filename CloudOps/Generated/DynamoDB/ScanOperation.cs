@@ -1,6 +1,6 @@
 using Amazon;
-using Amazon.DynamoDB;
-using Amazon.DynamoDB.Model;
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.Model;
 using Amazon.Runtime;
 
 namespace CloudOps.DynamoDB
@@ -23,26 +23,23 @@ namespace CloudOps.DynamoDB
         {
             AmazonDynamoDBClient client = new AmazonDynamoDBClient(creds, region);
             ScanResponse resp = new ScanResponse();
-            do
+            ScanRequest req = new ScanRequest
             {
-                ScanRequest req = new ScanRequest
-                {
-                    ExclusiveStartKey = resp.LastEvaluatedKey
-                    ,
-                    Limit = maxItems
-                                        
-                };
+                ExclusiveStartKey = resp.LastEvaluatedKey
+                ,
+                Limit = maxItems
 
-                resp = client.Scan(req);
-                CheckError(resp.HttpStatusCode, "200");                
-                
-                foreach (var obj in resp.Items)
-                {
-                    AddObject(obj);
-                }
-                
+            };
+
+            resp = client.Scan(req);
+            CheckError(resp.HttpStatusCode, "200");
+
+            foreach (var obj in resp.Items)
+            {
+                AddObject(obj);
             }
-            while (!string.IsNullOrEmpty(resp.LastEvaluatedKey));
+
+
         }
     }
 }

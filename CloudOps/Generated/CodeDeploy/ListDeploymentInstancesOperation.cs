@@ -22,19 +22,19 @@ namespace CloudOps.CodeDeploy
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
             AmazonCodeDeployClient client = new AmazonCodeDeployClient(creds, region);
-            ListDeploymentInstancesResponse resp = new ListDeploymentInstancesResponse();
+            ListDeploymentTargetsResponse resp = new ListDeploymentTargetsResponse();
             do
             {
-                ListDeploymentInstancesRequest req = new ListDeploymentInstancesRequest
+                ListDeploymentTargetsRequest req = new ListDeploymentTargetsRequest
                 {
                     NextToken = resp.NextToken
                                         
                 };
 
-                resp = client.ListDeploymentInstances(req);
+                resp = client.ListDeploymentTargets(req);
                 CheckError(resp.HttpStatusCode, "200");                
                 
-                foreach (var obj in resp.InstancesList)
+                foreach (var obj in resp.TargetIds)
                 {
                     AddObject(obj);
                 }

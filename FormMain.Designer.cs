@@ -75,8 +75,8 @@
             this.splitContainerBack = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.splitContainerObject = new System.Windows.Forms.SplitContainer();
-            this.propertyGridObject = new System.Windows.Forms.PropertyGrid();
             this.rtbObject = new System.Windows.Forms.RichTextBox();
+            this.propertyGridObject = new System.Windows.Forms.PropertyGrid();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -106,8 +106,8 @@
             this.menuItemHelp});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1153, 24);
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip.Size = new System.Drawing.Size(1318, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -167,10 +167,10 @@
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.progressBar,
             this.statusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 545);
+            this.statusStrip.Location = new System.Drawing.Point(0, 655);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1153, 31);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 18, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1318, 36);
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -202,7 +202,7 @@
             this.toolStripButtonClose});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1153, 25);
+            this.toolStrip.Size = new System.Drawing.Size(1318, 25);
             this.toolStrip.TabIndex = 2;
             this.toolStrip.Text = "toolStrip";
             // 
@@ -287,6 +287,7 @@
             // 
             this.splitContainerFront.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerFront.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerFront.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.splitContainerFront.Name = "splitContainerFront";
             this.splitContainerFront.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -297,9 +298,9 @@
             // splitContainerFront.Panel2
             // 
             this.splitContainerFront.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainerFront.Size = new System.Drawing.Size(828, 496);
-            this.splitContainerFront.SplitterDistance = 318;
-            this.splitContainerFront.SplitterWidth = 5;
+            this.splitContainerFront.Size = new System.Drawing.Size(946, 606);
+            this.splitContainerFront.SplitterDistance = 388;
+            this.splitContainerFront.SplitterWidth = 6;
             this.splitContainerFront.TabIndex = 3;
             // 
             // groupBox3
@@ -307,8 +308,10 @@
             this.groupBox3.Controls.Add(this.listViewFound);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(828, 318);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox3.Size = new System.Drawing.Size(946, 388);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Found";
@@ -323,10 +326,11 @@
             this.ColumnDetails});
             this.listViewFound.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewFound.FullRowSelect = true;
-            this.listViewFound.Location = new System.Drawing.Point(3, 20);
+            this.listViewFound.Location = new System.Drawing.Point(3, 23);
+            this.listViewFound.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listViewFound.MultiSelect = false;
             this.listViewFound.Name = "listViewFound";
-            this.listViewFound.Size = new System.Drawing.Size(822, 295);
+            this.listViewFound.Size = new System.Drawing.Size(940, 361);
             this.listViewFound.TabIndex = 0;
             this.listViewFound.UseCompatibleStateImageBehavior = false;
             this.listViewFound.View = System.Windows.Forms.View.Details;
@@ -353,8 +357,10 @@
             this.groupBox1.Controls.Add(this.listViewMessages);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(828, 173);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Size = new System.Drawing.Size(946, 212);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Messages";
@@ -371,10 +377,11 @@
             this.listViewMessages.FullRowSelect = true;
             this.listViewMessages.GridLines = true;
             this.listViewMessages.LargeImageList = this.imageList;
-            this.listViewMessages.Location = new System.Drawing.Point(3, 20);
+            this.listViewMessages.Location = new System.Drawing.Point(3, 23);
+            this.listViewMessages.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listViewMessages.MultiSelect = false;
             this.listViewMessages.Name = "listViewMessages";
-            this.listViewMessages.Size = new System.Drawing.Size(822, 150);
+            this.listViewMessages.Size = new System.Drawing.Size(940, 185);
             this.listViewMessages.SmallImageList = this.imageList;
             this.listViewMessages.TabIndex = 0;
             this.listViewMessages.UseCompatibleStateImageBehavior = false;
@@ -450,6 +457,7 @@
             // 
             this.splitContainerBack.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerBack.Location = new System.Drawing.Point(0, 49);
+            this.splitContainerBack.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.splitContainerBack.Name = "splitContainerBack";
             // 
             // splitContainerBack.Panel1
@@ -459,8 +467,9 @@
             // splitContainerBack.Panel2
             // 
             this.splitContainerBack.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainerBack.Size = new System.Drawing.Size(1153, 496);
-            this.splitContainerBack.SplitterDistance = 828;
+            this.splitContainerBack.Size = new System.Drawing.Size(1318, 606);
+            this.splitContainerBack.SplitterDistance = 946;
+            this.splitContainerBack.SplitterWidth = 5;
             this.splitContainerBack.TabIndex = 4;
             // 
             // groupBox2
@@ -468,8 +477,10 @@
             this.groupBox2.Controls.Add(this.splitContainerObject);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(321, 496);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Size = new System.Drawing.Size(367, 606);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Object";
@@ -477,7 +488,8 @@
             // splitContainerObject
             // 
             this.splitContainerObject.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerObject.Location = new System.Drawing.Point(3, 20);
+            this.splitContainerObject.Location = new System.Drawing.Point(3, 23);
+            this.splitContainerObject.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.splitContainerObject.Name = "splitContainerObject";
             this.splitContainerObject.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -488,39 +500,43 @@
             // splitContainerObject.Panel2
             // 
             this.splitContainerObject.Panel2.Controls.Add(this.propertyGridObject);
-            this.splitContainerObject.Size = new System.Drawing.Size(315, 473);
-            this.splitContainerObject.SplitterDistance = 235;
+            this.splitContainerObject.Size = new System.Drawing.Size(361, 579);
+            this.splitContainerObject.SplitterDistance = 287;
+            this.splitContainerObject.SplitterWidth = 5;
             this.splitContainerObject.TabIndex = 3;
-            // 
-            // propertyGridObject
-            // 
-            this.propertyGridObject.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGridObject.Location = new System.Drawing.Point(0, 0);
-            this.propertyGridObject.Name = "propertyGridObject";
-            this.propertyGridObject.Size = new System.Drawing.Size(315, 234);
-            this.propertyGridObject.TabIndex = 2;
             // 
             // rtbObject
             // 
             this.rtbObject.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbObject.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbObject.Location = new System.Drawing.Point(0, 0);
+            this.rtbObject.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rtbObject.Name = "rtbObject";
-            this.rtbObject.Size = new System.Drawing.Size(315, 235);
+            this.rtbObject.Size = new System.Drawing.Size(361, 287);
             this.rtbObject.TabIndex = 0;
             this.rtbObject.Text = "trte";
             // 
+            // propertyGridObject
+            // 
+            this.propertyGridObject.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGridObject.Location = new System.Drawing.Point(0, 0);
+            this.propertyGridObject.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.propertyGridObject.Name = "propertyGridObject";
+            this.propertyGridObject.Size = new System.Drawing.Size(361, 287);
+            this.propertyGridObject.TabIndex = 2;
+            // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1153, 576);
+            this.ClientSize = new System.Drawing.Size(1318, 691);
             this.Controls.Add(this.splitContainerBack);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
-            this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuStrip = this.menuStrip;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormMain";
             this.Text = "Heaven";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
