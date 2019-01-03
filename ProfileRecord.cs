@@ -10,6 +10,11 @@ namespace heaven
         private string regions;
         private bool enabled;
 
+        public ProfileRecord()
+        {
+
+        }
+
         public ProfileRecord(string serviceName, string name, string regions, bool enabled )
         {
             this.serviceName = serviceName;

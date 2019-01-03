@@ -11,6 +11,11 @@ namespace heaven
 
         public string Name { get => name; set => name = value; }
 
+        public Profile()
+        {
+
+        }
+
         public static Profile AllServices()
         {
             Profile p = new Profile()
@@ -45,6 +50,21 @@ namespace heaven
                     if (op.Name == p.Name)
                     {
                         return op;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public ProfileRecord Find(string service, string operation)
+        {
+            foreach (ProfileRecord pr in this)
+            {
+                if (pr.ServiceName == service)
+                {
+                    if (pr.Name == operation)
+                    {
+                        return pr;
                     }
                 }
             }

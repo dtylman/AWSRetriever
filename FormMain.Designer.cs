@@ -43,6 +43,7 @@
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.buttonScan = new System.Windows.Forms.ToolStripButton();
+            this.buttonRun = new System.Windows.Forms.ToolStripButton();
             this.buttonStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lblFilter = new System.Windows.Forms.ToolStripLabel();
@@ -59,18 +60,21 @@
             this.ColumnType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnRegion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnOwnerId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnDetails = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuObjects = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listViewMessages = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuMessages = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.saveMessagesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.contextMenuObjects = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.viewItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.splitContainerBack = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -85,8 +89,9 @@
             this.splitContainerFront.Panel2.SuspendLayout();
             this.splitContainerFront.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.contextMenuObjects.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.contextMenuMessages.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerBack)).BeginInit();
             this.splitContainerBack.Panel1.SuspendLayout();
             this.splitContainerBack.Panel2.SuspendLayout();
@@ -167,10 +172,10 @@
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.progressBar,
             this.statusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 655);
+            this.statusStrip.Location = new System.Drawing.Point(0, 660);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 18, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1318, 36);
+            this.statusStrip.Size = new System.Drawing.Size(1318, 31);
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -190,6 +195,7 @@
             // 
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonScan,
+            this.buttonRun,
             this.buttonStop,
             this.toolStripSeparator1,
             this.lblFilter,
@@ -214,6 +220,15 @@
             this.buttonScan.Size = new System.Drawing.Size(61, 22);
             this.buttonScan.Text = "Scan...";
             this.buttonScan.Click += new System.EventHandler(this.ToolStripButtonLoad_Click);
+            // 
+            // buttonRun
+            // 
+            this.buttonRun.Image = global::heaven.Properties.Resources.RepeatOne50;
+            this.buttonRun.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRun.Name = "buttonRun";
+            this.buttonRun.Size = new System.Drawing.Size(57, 22);
+            this.buttonRun.Text = "Run...";
+            this.buttonRun.Click += new System.EventHandler(this.ToolStripButton1_Click);
             // 
             // buttonStop
             // 
@@ -298,8 +313,8 @@
             // splitContainerFront.Panel2
             // 
             this.splitContainerFront.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainerFront.Size = new System.Drawing.Size(946, 606);
-            this.splitContainerFront.SplitterDistance = 388;
+            this.splitContainerFront.Size = new System.Drawing.Size(946, 611);
+            this.splitContainerFront.SplitterDistance = 391;
             this.splitContainerFront.SplitterWidth = 6;
             this.splitContainerFront.TabIndex = 3;
             // 
@@ -311,7 +326,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox3.Size = new System.Drawing.Size(946, 388);
+            this.groupBox3.Size = new System.Drawing.Size(946, 391);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Found";
@@ -323,14 +338,16 @@
             this.ColumnType,
             this.ColumnService,
             this.ColumnRegion,
+            this.ColumnOwnerId,
             this.ColumnDetails});
+            this.listViewFound.ContextMenuStrip = this.contextMenuObjects;
             this.listViewFound.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewFound.FullRowSelect = true;
             this.listViewFound.Location = new System.Drawing.Point(3, 23);
             this.listViewFound.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listViewFound.MultiSelect = false;
             this.listViewFound.Name = "listViewFound";
-            this.listViewFound.Size = new System.Drawing.Size(940, 361);
+            this.listViewFound.Size = new System.Drawing.Size(940, 364);
             this.listViewFound.TabIndex = 0;
             this.listViewFound.UseCompatibleStateImageBehavior = false;
             this.listViewFound.View = System.Windows.Forms.View.Details;
@@ -348,78 +365,15 @@
             // 
             this.ColumnRegion.Text = "Region";
             // 
+            // ColumnOwnerId
+            // 
+            this.ColumnOwnerId.DisplayIndex = 4;
+            this.ColumnOwnerId.Text = "Owner";
+            // 
             // ColumnDetails
             // 
+            this.ColumnDetails.DisplayIndex = 3;
             this.ColumnDetails.Text = "Details";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.listViewMessages);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(946, 212);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Messages";
-            // 
-            // listViewMessages
-            // 
-            this.listViewMessages.AllowColumnReorder = true;
-            this.listViewMessages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4});
-            this.listViewMessages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewMessages.FullRowSelect = true;
-            this.listViewMessages.GridLines = true;
-            this.listViewMessages.LargeImageList = this.imageList;
-            this.listViewMessages.Location = new System.Drawing.Point(3, 23);
-            this.listViewMessages.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.listViewMessages.MultiSelect = false;
-            this.listViewMessages.Name = "listViewMessages";
-            this.listViewMessages.Size = new System.Drawing.Size(940, 185);
-            this.listViewMessages.SmallImageList = this.imageList;
-            this.listViewMessages.TabIndex = 0;
-            this.listViewMessages.UseCompatibleStateImageBehavior = false;
-            this.listViewMessages.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "API";
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Service";
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Region";
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Result";
-            // 
-            // imageList
-            // 
-            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
-            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList.Images.SetKeyName(0, "icons8-checkmark-50.png");
-            this.imageList.Images.SetKeyName(1, "icons8-close-window-50.png");
-            this.imageList.Images.SetKeyName(2, "icons8-error-50.png");
-            this.imageList.Images.SetKeyName(3, "icons8-form-50.png");
-            this.imageList.Images.SetKeyName(4, "icons8-gear-50.png");
-            this.imageList.Images.SetKeyName(5, "icons8-help-50.png");
-            this.imageList.Images.SetKeyName(6, "icons8-list-50.png");
-            this.imageList.Images.SetKeyName(7, "icons8-menu-50.png");
-            this.imageList.Images.SetKeyName(8, "icons8-object-50.png");
-            this.imageList.Images.SetKeyName(9, "icons8-output-50.png");
-            this.imageList.Images.SetKeyName(10, "icons8-process-50.png");
-            this.imageList.Images.SetKeyName(11, "icons8-save-50.png");
-            this.imageList.Images.SetKeyName(12, "icons8-private-50.png");
             // 
             // contextMenuObjects
             // 
@@ -448,6 +402,90 @@
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.deleteToolStripMenuItem.Text = "&Delete";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.listViewMessages);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Size = new System.Drawing.Size(946, 214);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Messages";
+            // 
+            // listViewMessages
+            // 
+            this.listViewMessages.AllowColumnReorder = true;
+            this.listViewMessages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.listViewMessages.ContextMenuStrip = this.contextMenuMessages;
+            this.listViewMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewMessages.FullRowSelect = true;
+            this.listViewMessages.GridLines = true;
+            this.listViewMessages.LargeImageList = this.imageList;
+            this.listViewMessages.Location = new System.Drawing.Point(3, 23);
+            this.listViewMessages.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listViewMessages.MultiSelect = false;
+            this.listViewMessages.Name = "listViewMessages";
+            this.listViewMessages.Size = new System.Drawing.Size(940, 187);
+            this.listViewMessages.SmallImageList = this.imageList;
+            this.listViewMessages.TabIndex = 0;
+            this.listViewMessages.UseCompatibleStateImageBehavior = false;
+            this.listViewMessages.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "API";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Service";
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Region";
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Result";
+            // 
+            // contextMenuMessages
+            // 
+            this.contextMenuMessages.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveMessagesMenuItem});
+            this.contextMenuMessages.Name = "contextMenuMessages";
+            this.contextMenuMessages.Size = new System.Drawing.Size(99, 26);
+            // 
+            // saveMessagesMenuItem
+            // 
+            this.saveMessagesMenuItem.Name = "saveMessagesMenuItem";
+            this.saveMessagesMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.saveMessagesMenuItem.Text = "&Save";
+            this.saveMessagesMenuItem.Click += new System.EventHandler(this.SaveMessagesMenuItem_Click);
+            // 
+            // imageList
+            // 
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "icons8-checkmark-50.png");
+            this.imageList.Images.SetKeyName(1, "icons8-close-window-50.png");
+            this.imageList.Images.SetKeyName(2, "icons8-error-50.png");
+            this.imageList.Images.SetKeyName(3, "icons8-form-50.png");
+            this.imageList.Images.SetKeyName(4, "icons8-gear-50.png");
+            this.imageList.Images.SetKeyName(5, "icons8-help-50.png");
+            this.imageList.Images.SetKeyName(6, "icons8-list-50.png");
+            this.imageList.Images.SetKeyName(7, "icons8-menu-50.png");
+            this.imageList.Images.SetKeyName(8, "icons8-object-50.png");
+            this.imageList.Images.SetKeyName(9, "icons8-output-50.png");
+            this.imageList.Images.SetKeyName(10, "icons8-process-50.png");
+            this.imageList.Images.SetKeyName(11, "icons8-save-50.png");
+            this.imageList.Images.SetKeyName(12, "icons8-private-50.png");
+            // 
             // backgroundWorker
             // 
             this.backgroundWorker.WorkerReportsProgress = true;
@@ -467,7 +505,7 @@
             // splitContainerBack.Panel2
             // 
             this.splitContainerBack.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainerBack.Size = new System.Drawing.Size(1318, 606);
+            this.splitContainerBack.Size = new System.Drawing.Size(1318, 611);
             this.splitContainerBack.SplitterDistance = 946;
             this.splitContainerBack.SplitterWidth = 5;
             this.splitContainerBack.TabIndex = 4;
@@ -480,7 +518,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(367, 606);
+            this.groupBox2.Size = new System.Drawing.Size(367, 611);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Object";
@@ -500,8 +538,8 @@
             // splitContainerObject.Panel2
             // 
             this.splitContainerObject.Panel2.Controls.Add(this.propertyGridObject);
-            this.splitContainerObject.Size = new System.Drawing.Size(361, 579);
-            this.splitContainerObject.SplitterDistance = 287;
+            this.splitContainerObject.Size = new System.Drawing.Size(361, 584);
+            this.splitContainerObject.SplitterDistance = 289;
             this.splitContainerObject.SplitterWidth = 5;
             this.splitContainerObject.TabIndex = 3;
             // 
@@ -512,7 +550,7 @@
             this.rtbObject.Location = new System.Drawing.Point(0, 0);
             this.rtbObject.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rtbObject.Name = "rtbObject";
-            this.rtbObject.Size = new System.Drawing.Size(361, 287);
+            this.rtbObject.Size = new System.Drawing.Size(361, 289);
             this.rtbObject.TabIndex = 0;
             this.rtbObject.Text = "trte";
             // 
@@ -522,7 +560,7 @@
             this.propertyGridObject.Location = new System.Drawing.Point(0, 0);
             this.propertyGridObject.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.propertyGridObject.Name = "propertyGridObject";
-            this.propertyGridObject.Size = new System.Drawing.Size(361, 287);
+            this.propertyGridObject.Size = new System.Drawing.Size(361, 290);
             this.propertyGridObject.TabIndex = 2;
             // 
             // FormMain
@@ -552,8 +590,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFront)).EndInit();
             this.splitContainerFront.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.contextMenuObjects.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.contextMenuMessages.ResumeLayout(false);
             this.splitContainerBack.Panel1.ResumeLayout(false);
             this.splitContainerBack.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerBack)).EndInit();
@@ -617,6 +656,10 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.SplitContainer splitContainerObject;
         private System.Windows.Forms.PropertyGrid propertyGridObject;
+        private System.Windows.Forms.ColumnHeader ColumnOwnerId;
+        private System.Windows.Forms.ContextMenuStrip contextMenuMessages;
+        private System.Windows.Forms.ToolStripMenuItem saveMessagesMenuItem;
+        private System.Windows.Forms.ToolStripButton buttonRun;
     }
 }
 

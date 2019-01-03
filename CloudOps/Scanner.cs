@@ -20,6 +20,7 @@ namespace CloudOps
         public ConcurrentQueue<OperationInvokation> Invokations => invokations;
 
         public int MaxTasks { get => maxTasks; set => maxTasks = value; }
+        //in milliseconds
         public int TimeOut { get; set; } = 1000 * 60 * 60;
         public ScannerProgress Progress { get => progress;  }
 

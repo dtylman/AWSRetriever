@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows.Forms;
 using Amazon;
 using Amazon.Runtime;
 using CloudOps;
+using KellermanSoftware.CompareNetObjects;
 using Newtonsoft.Json;
 
 namespace heaven
@@ -17,6 +19,7 @@ namespace heaven
         private Scanner scanner;
         private readonly int pageSize = 10;
         private Profile profile;
+        private AppSerializer serializer = new AppSerializer();
 
         public FormMain()
         {
@@ -24,7 +27,8 @@ namespace heaven
             InitializeBackgroundWorker();
             scanner = new Scanner
             {
-                MaxTasks = 15
+                MaxTasks = 15,
+                TimeOut = 15 * 60 * 1000, // 15 minutes
             };
             scanner.Progress.ProgressChanged += Scanner_ProgressChanged;
         }
@@ -39,24 +43,10 @@ namespace heaven
             }
 
             try
-            {
-                backgroundWorker.ReportProgress(0, "Queuing items...");
-
-                foreach (ProfileRecord p in this.profile)
-                {
-                    if (p.Enabled)
-                    {
-                        Operation op = Profile.FindOpeartion(p);
-                        if (op != null)
-                        {                            
-                            foreach (RegionEndpoint region in RegionsString.ParseSystemNames(p.Regions).Items)
-                            {
-                                scanner.Invokations.Enqueue(new OperationInvokation(op, region, creds, this.pageSize));
-                            }
-                        }
-                    }
-                }
+            {              
                 scanner.Scan();
+                // TODO: make sure all background events are processed (don't sure where i am missing a mutex...)                
+                Thread.Sleep(1000);
             }
             finally
             {
@@ -78,7 +68,8 @@ namespace heaven
                 UpdateObjectGrid(ir);
                 UpdateMessagesGrid(ir);
                 UpdateStatusBar(ir);
-            } else
+            }
+            else
             {
                 //?!
                 Console.WriteLine(e);
@@ -114,7 +105,7 @@ namespace heaven
         private void UpdateStatusBar(InvokationResult ir)
         {
             this.progressBar.Value = ir.Progress;
-            this.statusLabel.Text = ir.ResultText();            
+            this.statusLabel.Text = ir.ResultText();
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -133,7 +124,7 @@ namespace heaven
             {
                 item.SubItems.Add(ir.Operation.CollectedObjects.Count.ToString());
                 item.ImageIndex = 0;
-            }            
+            }
             listViewMessages.EnsureVisible(listViewMessages.Items.Count - 1);
         }
 
@@ -149,15 +140,24 @@ namespace heaven
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         private void AddItemsFromCollectedObjects(List<CloudObject> collectedObjects)
-        {            
+        {
             foreach (CloudObject obj in collectedObjects)
             {
-                ListViewItem item = this.listViewFound.Items.Add(obj.TypeName);
+                string key = obj.TypeName;
+                foreach (var existingItem in this.listViewMessages.Items.Find(key, false))
+                {
+                    if (CompareLogic.Equals(obj.Source, existingItem.Tag))
+                    {
+                        continue;
+                    }
+                }
+                ListViewItem item = this.listViewFound.Items.Add(key);
                 item.SubItems.Add(obj.Service);
                 item.SubItems.Add(obj.Region);
+                item.SubItems.Add(obj.FindPropertyValue("ownerid"));
                 item.SubItems.Add(obj.ToString());
-                item.Tag = obj;
-            }            
+                item.Tag = obj;                
+            }
         }
 
         private void ShowErrorDiaglog(Exception e)
@@ -175,6 +175,8 @@ namespace heaven
             this.statusLabel.Text = message;
 
         }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private void Scanner_ProgressChanged(object sender, InvokationResult e)
         {
             if (backgroundWorker.CancellationPending)
@@ -208,7 +210,30 @@ namespace heaven
             this.buttonStop.Enabled = true;
             this.listViewFound.Items.Clear();
             this.listViewMessages.Items.Clear();
-            backgroundWorker.RunWorkerAsync();
+            QueueItems();
+            if (!backgroundWorker.IsBusy)
+            {
+                backgroundWorker.RunWorkerAsync();
+            }
+        }
+
+        private void QueueItems()
+        {
+            backgroundWorker.ReportProgress(0, "Queuing items...");
+            foreach (ProfileRecord p in this.profile)
+            {
+                if (p.Enabled)
+                {
+                    Operation op = Profile.FindOpeartion(p);
+                    if (op != null)
+                    {
+                        foreach (RegionEndpoint region in RegionsString.ParseSystemNames(p.Regions).Items)
+                        {
+                            scanner.Invokations.Enqueue(new OperationInvokation(op, region, creds, this.pageSize));
+                        }
+                    }
+                }
+            }
         }
 
         private void ToolStripButtonStop_Click(object sender, EventArgs e)
@@ -257,7 +282,7 @@ namespace heaven
                     this.propertyGridObject.SelectedObject = clobo;
                     string source = JsonConvert.SerializeObject(clobo.Source, Formatting.Indented);
                     this.rtbObject.Text = source;
-                    
+
                     //this.rtbObject.Rtf = highlighter.Highlight("JavaScript", source);
                 }
             }
@@ -273,22 +298,26 @@ namespace heaven
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            LoadProfileFromFile();
-            LoadObjectsFromFile();
+            SetStatus("Loading saved state...");
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                LoadProfileFromFile();
+                LoadObjectsFromFile();
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+                SetStatus("Ready");
+            }
         }
 
         private void SaveProfileToFile()
         {
             SetStatus("Saving...");
             try
-            { using (StreamWriter sw = new StreamWriter("profile.json"))
-                {
-                    using (JsonWriter writer = new JsonTextWriter(sw))
-                    {
-                        JsonSerializer serializer = new JsonSerializer();
-                        serializer.Serialize(writer, this.profile);
-                    }
-                }
+            {
+                this.serializer.SaveProfile(profile);
                 SetStatus(String.Format("Profile {0} saved", profile.Name));
             }
             catch (Exception ex)
@@ -297,7 +326,7 @@ namespace heaven
             }
         }
 
-        private void LoadProfileFromFile()
+        private void LoadProfileFromFile2()
         {
             try
             {
@@ -318,6 +347,19 @@ namespace heaven
             }
         }
 
+        private void LoadProfileFromFile()
+        {
+            try
+            {                
+                this.profile = this.serializer.LoadProfile();             
+            }
+            catch (Exception ex)
+            {
+                SetStatus(String.Format("Failed to load profile: %v, creating new", ex.Message));
+                this.profile = Profile.AllServices();
+            }
+        }
+
         #region ObjectsFile
         private void SaveObjectsFile()
         {
@@ -329,15 +371,7 @@ namespace heaven
                 {
                     objects.Add((CloudObject)item.Tag);
                 }
-                using (StreamWriter sw = new StreamWriter("objects.json"))
-                {
-                    using (JsonWriter writer = new JsonTextWriter(sw))
-                    {
-                        JsonSerializer serializer = new JsonSerializer();
-                        serializer.Serialize(writer, objects);
-                    }
-                }
-                SetStatus("Done");
+                this.serializer.SaveCloudObjects(objects);                
             }
             catch (Exception ex)
             {
@@ -351,15 +385,8 @@ namespace heaven
             SetStatus("Loading...");
             try
             {
-                using (StreamReader sr = new StreamReader("objects.json"))
-                {
-                    using (JsonReader reader = new JsonTextReader(sr))
-                    {
-                        JsonSerializer serializer = new JsonSerializer();
-                        List<CloudObject> objects = serializer.Deserialize<List<CloudObject>>(reader);
-                        AddItemsFromCollectedObjects(objects);
-                    }
-                }
+                List<CloudObject> objects = this.serializer.LoadCloudObjects();
+                AddItemsFromCollectedObjects(objects);
                 SetStatus("Done");
             }
             catch (Exception ex)
@@ -367,8 +394,52 @@ namespace heaven
                 SetStatus(ex);
             }
         }
+
         #endregion
 
-      
+        private void SaveMessagesMenuItem_Click(object sender, EventArgs e)
+        {
+            string filename = "";
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.Title = "SaveFileDialog Export2File";
+            sfd.Filter = "Text File (.txt) | *.txt";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                filename = sfd.FileName.ToString();
+                if (filename != "")
+                {
+                    this.serializer.SaveListView(filename, listViewMessages);                    
+                }
+            }
+        }
+
+        private void ToolStripButton1_Click(object sender, EventArgs e)
+        {
+            FormRun form = new FormRun();
+            form.Profile = this.profile;
+            DialogResult dr = form.ShowDialog();
+            if (form.Operation == null)
+            {
+                SetStatus(new ApplicationException("No opeation selected"));
+                return;
+            }
+            if (dr == DialogResult.OK)
+            {
+                if (this.creds == null)
+                {
+                    ShowCredentialsDialog();
+                }
+                foreach (var region in form.SelectedRegions)
+                {                      
+                    scanner.Invokations.Enqueue(new OperationInvokation(form.Operation, region, this.creds, this.pageSize));
+                }                                    
+                if (!backgroundWorker.IsBusy)
+                {
+                    backgroundWorker.RunWorkerAsync();
+                }
+            }
+        }
     }
 }

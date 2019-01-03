@@ -51,8 +51,8 @@ namespace CloudOps
         protected virtual void AddObject(Object obj)
         {
             Type t = obj.GetType();
-            this.collectedObjects.Add(new CloudObject(this.Region.SystemName, this.ServiceName,
-                t.Name, t.AssemblyQualifiedName, obj));
+            collectedObjects.Add(new CloudObject(Name,region: Region.SystemName, service: ServiceName,
+                typeName: t.Name, typeFullName: t.AssemblyQualifiedName, source: obj));
         }
     }
 }
