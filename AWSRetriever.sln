@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "heaven", "heaven.csproj", "{20B2599D-0678-4501-BCD3-26BEC04FEB93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retriever", "Retriever.csproj", "{20B2599D-0678-4501-BCD3-26BEC04FEB93}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudOps", "CloudOps\CloudOps.csproj", "{38DC0E7F-AF8D-4A2E-8E7E-E42E3839D2BB}"
 EndProject
@@ -345,6 +345,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AWSSDK.WorkSpaces.Net45", "aws-sdk-net\sdk\src\Services\WorkSpaces\AWSSDK.WorkSpaces.Net45.csproj", "{2EE8960F-659D-485D-9673-1C8691E65691}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AWSSDK.XRay.Net45", "aws-sdk-net\sdk\src\Services\XRay\AWSSDK.XRay.Net45.csproj", "{08180D9B-00D5-4F9F-9B4C-0377EF1F7439}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AWSRetriver.Controls", "AWSRetriver.Controls\AWSRetriver.Controls.csproj", "{984EF6D3-AA85-4D8F-86FA-9BE685C4F456}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1036,6 +1038,10 @@ Global
 		{08180D9B-00D5-4F9F-9B4C-0377EF1F7439}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08180D9B-00D5-4F9F-9B4C-0377EF1F7439}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08180D9B-00D5-4F9F-9B4C-0377EF1F7439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{984EF6D3-AA85-4D8F-86FA-9BE685C4F456}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{984EF6D3-AA85-4D8F-86FA-9BE685C4F456}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{984EF6D3-AA85-4D8F-86FA-9BE685C4F456}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{984EF6D3-AA85-4D8F-86FA-9BE685C4F456}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

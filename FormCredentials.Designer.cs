@@ -1,4 +1,4 @@
-﻿namespace heaven
+﻿namespace Retriever
 {
     partial class FormCredentials
     {
@@ -37,6 +37,7 @@
             this.txtAccessKey = new System.Windows.Forms.TextBox();
             this.txtSecretKey = new System.Windows.Forms.TextBox();
             this.cmbProfile = new System.Windows.Forms.ComboBox();
+            this.checkBoxSave = new System.Windows.Forms.CheckBox();
             this.panelButtons.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,15 +46,15 @@
             this.panelButtons.Controls.Add(this.buttonCancel);
             this.panelButtons.Controls.Add(this.buttonOK);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelButtons.Location = new System.Drawing.Point(0, 174);
+            this.panelButtons.Location = new System.Drawing.Point(0, 203);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(497, 54);
+            this.panelButtons.Size = new System.Drawing.Size(499, 54);
             this.panelButtons.TabIndex = 0;
             // 
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(280, 14);
+            this.buttonCancel.Location = new System.Drawing.Point(280, 15);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(87, 27);
             this.buttonCancel.TabIndex = 1;
@@ -69,6 +70,7 @@
             this.buttonOK.TabIndex = 0;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // label1
             // 
@@ -104,7 +106,6 @@
             this.txtAccessKey.Size = new System.Drawing.Size(346, 23);
             this.txtAccessKey.TabIndex = 6;
             this.txtAccessKey.UseSystemPasswordChar = true;
-            this.txtAccessKey.TextChanged += new System.EventHandler(this.txtAccessKey_TextChanged);
             // 
             // txtSecretKey
             // 
@@ -122,12 +123,23 @@
             this.cmbProfile.Size = new System.Drawing.Size(228, 23);
             this.cmbProfile.TabIndex = 9;
             // 
+            // checkBoxSave
+            // 
+            this.checkBoxSave.AutoSize = true;
+            this.checkBoxSave.Location = new System.Drawing.Point(13, 167);
+            this.checkBoxSave.Name = "checkBoxSave";
+            this.checkBoxSave.Size = new System.Drawing.Size(116, 19);
+            this.checkBoxSave.TabIndex = 10;
+            this.checkBoxSave.Text = "Save Credentials";
+            this.checkBoxSave.UseVisualStyleBackColor = true;
+            // 
             // FormCredentials
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(497, 228);
+            this.ClientSize = new System.Drawing.Size(499, 257);
             this.ControlBox = false;
+            this.Controls.Add(this.checkBoxSave);
             this.Controls.Add(this.cmbProfile);
             this.Controls.Add(this.txtSecretKey);
             this.Controls.Add(this.txtAccessKey);
@@ -139,6 +151,7 @@
             this.Name = "FormCredentials";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AWS Credentials";
+            this.Load += new System.EventHandler(this.FormCredentials_Load);
             this.panelButtons.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -156,5 +169,6 @@
         private System.Windows.Forms.TextBox txtAccessKey;
         private System.Windows.Forms.TextBox txtSecretKey;
         private System.Windows.Forms.ComboBox cmbProfile;
+        private System.Windows.Forms.CheckBox checkBoxSave;
     }
 }

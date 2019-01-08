@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using Amazon;
 
-namespace heaven
+namespace AWSRetriver.Controls
 {
     public partial class RegionsTextbox : UserControl
     {

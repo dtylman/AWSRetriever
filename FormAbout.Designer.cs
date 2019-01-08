@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace heaven
+namespace Retriever
 {
     partial class FormAbout : Form
     {

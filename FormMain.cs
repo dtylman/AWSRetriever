@@ -7,19 +7,20 @@ using System.Threading;
 using System.Windows.Forms;
 using Amazon;
 using Amazon.Runtime;
+using AWSRetriver.Controls;
 using CloudOps;
-using KellermanSoftware.CompareNetObjects;
-using Newtonsoft.Json;
+using Retriever.Model;
+using Retriever.Properties;
 
-namespace heaven
+namespace Retriever
 {
     public partial class FormMain : Form
     {
         private AWSCredentials creds;
-        private Scanner scanner;
-        private readonly int pageSize = 10;
+        private Scanner scanner;        
         private Profile profile;
-        private AppSerializer serializer = new AppSerializer();
+        private CloudObjects cloudObjects = new CloudObjects();
+        private ProgressMessages progressMessages = new ProgressMessages();
 
         public FormMain()
         {
@@ -27,8 +28,8 @@ namespace heaven
             InitializeBackgroundWorker();
             scanner = new Scanner
             {
-                MaxTasks = 15,
-                TimeOut = 15 * 60 * 1000, // 15 minutes
+                MaxTasks = Settings.Default.ConcurrentConnecitons,
+                TimeOut = Settings.Default.Timeout // 15 minutes default
             };
             scanner.Progress.ProgressChanged += Scanner_ProgressChanged;
         }
@@ -65,8 +66,11 @@ namespace heaven
         {
             if (e.UserState is InvokationResult ir)
             {
-                UpdateObjectGrid(ir);
-                UpdateMessagesGrid(ir);
+                this.cloudObjects.Update(ir);
+                this.listViewFound.VirtualListSize = this.cloudObjects.Count;
+                this.progressMessages.Add(ir);
+                this.listViewMessages.VirtualListSize = this.progressMessages.Count;
+                listViewMessages.EnsureVisible(this.progressMessages.Count);
                 UpdateStatusBar(ir);
             }
             else
@@ -97,7 +101,7 @@ namespace heaven
             buttonScan.Enabled = true;
             buttonStop.Enabled = false;
 
-            SaveObjectsFile();
+            FormAction("Saving objects...", cloudObjects.Save);
         }
 
         #endregion
@@ -106,58 +110,6 @@ namespace heaven
         {
             this.progressBar.Value = ir.Progress;
             this.statusLabel.Text = ir.ResultText();
-        }
-
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        private void UpdateMessagesGrid(InvokationResult ir)
-        {
-            ListViewItem item = listViewMessages.Items.Add(ir.Operation.Name);
-            item.SubItems.Add(ir.Operation.ServiceName);
-            item.SubItems.Add(ir.Operation.Region.ToString());
-            if (ir.IsError())
-            {
-                item.SubItems.Add(ir.Ex.Message);
-                item.ImageIndex = 2;
-
-            }
-            else
-            {
-                item.SubItems.Add(ir.Operation.CollectedObjects.Count.ToString());
-                item.ImageIndex = 0;
-            }
-            listViewMessages.EnsureVisible(listViewMessages.Items.Count - 1);
-        }
-
-        private void UpdateObjectGrid(InvokationResult ir)
-        {
-            if (ir.IsError())
-            {
-                return;
-            }
-            AddItemsFromCollectedObjects(ir.Operation.CollectedObjects);
-
-        }
-
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        private void AddItemsFromCollectedObjects(List<CloudObject> collectedObjects)
-        {
-            foreach (CloudObject obj in collectedObjects)
-            {
-                string key = obj.TypeName;
-                foreach (var existingItem in this.listViewMessages.Items.Find(key, false))
-                {
-                    if (CompareLogic.Equals(obj.Source, existingItem.Tag))
-                    {
-                        continue;
-                    }
-                }
-                ListViewItem item = this.listViewFound.Items.Add(key);
-                item.SubItems.Add(obj.Service);
-                item.SubItems.Add(obj.Region);
-                item.SubItems.Add(obj.FindPropertyValue("ownerid"));
-                item.SubItems.Add(obj.ToString());
-                item.Tag = obj;                
-            }
         }
 
         private void ShowErrorDiaglog(Exception e)
@@ -229,7 +181,7 @@ namespace heaven
                     {
                         foreach (RegionEndpoint region in RegionsString.ParseSystemNames(p.Regions).Items)
                         {
-                            scanner.Invokations.Enqueue(new OperationInvokation(op, region, creds, this.pageSize));
+                            scanner.Invokations.Enqueue(new OperationInvokation(op, region, creds, p.PageSize));
                         }
                     }
                 }
@@ -273,15 +225,14 @@ namespace heaven
         }
 
         private void ListViewFound_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.listViewFound.SelectedItems.Count > 0)
-            {
+        {                        
+            if (this.listViewFound.SelectedIndices.Count > 0)
+            {                
                 if (listViewFound.SelectedItems[0].Tag is CloudObject clobo)
                 {
                     //Highlighter highlighter = new Highlighter(new RtfEngine());                    
-                    this.propertyGridObject.SelectedObject = clobo;
-                    string source = JsonConvert.SerializeObject(clobo.Source, Formatting.Indented);
-                    this.rtbObject.Text = source;
+                    this.propertyGridObject.SelectedObject = clobo;                    
+                    this.rtbObject.Text = clobo.Source;
 
                     //this.rtbObject.Rtf = highlighter.Highlight("JavaScript", source);
                 }
@@ -293,127 +244,70 @@ namespace heaven
             FormProfiles formProfiles = new FormProfiles();
             formProfiles.Profile = this.profile;
             formProfiles.ShowDialog();
-            SaveProfileToFile();
+            FormAction("Saving profile", profile.Save);
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            SetStatus("Loading saved state...");
-            Cursor.Current = Cursors.WaitCursor;
-            try
-            {
-                LoadProfileFromFile();
-                LoadObjectsFromFile();
-            }
-            finally
-            {
-                Cursor.Current = Cursors.Default;
-                SetStatus("Ready");
-            }
-        }
-
-        private void SaveProfileToFile()
-        {
-            SetStatus("Saving...");
-            try
-            {
-                this.serializer.SaveProfile(profile);
-                SetStatus(String.Format("Profile {0} saved", profile.Name));
-            }
-            catch (Exception ex)
-            {
-                SetStatus(ex);
-            }
-        }
-
-        private void LoadProfileFromFile2()
-        {
-            try
-            {
-                using (StreamReader sr = new StreamReader("profile.json"))
-                {
-                    using (JsonReader reader = new JsonTextReader(sr))
-                    {
-                        JsonSerializer serializer = new JsonSerializer();
-                        this.profile = serializer.Deserialize<Profile>(reader);
-                        SetStatus(String.Format("Profile {0} loaded", profile.Name));
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                SetStatus(String.Format("Failed to load profile: %v, creating new", ex.Message));
-                this.profile = Profile.AllServices();
-            }
-        }
-
-        private void LoadProfileFromFile()
-        {
-            try
-            {                
-                this.profile = this.serializer.LoadProfile();             
-            }
-            catch (Exception ex)
-            {
-                SetStatus(String.Format("Failed to load profile: %v, creating new", ex.Message));
-                this.profile = Profile.AllServices();
-            }
-        }
-
-        #region ObjectsFile
-        private void SaveObjectsFile()
-        {
-            SetStatus("Saving...");
-            try
-            {
-                List<CloudObject> objects = new List<CloudObject>();
-                foreach (ListViewItem item in this.listViewFound.Items)
-                {
-                    objects.Add((CloudObject)item.Tag);
-                }
-                this.serializer.SaveCloudObjects(objects);                
-            }
-            catch (Exception ex)
-            {
-                SetStatus(ex);
-            }
-
+            FormAction("Loading profile...", LoadProfileFromFile, false);
+            FormAction("Loading objects..", LoadObjectsFromFile, false);            
         }
 
         private void LoadObjectsFromFile()
         {
-            SetStatus("Loading...");
             try
             {
-                List<CloudObject> objects = this.serializer.LoadCloudObjects();
-                AddItemsFromCollectedObjects(objects);
-                SetStatus("Done");
+                this.cloudObjects = CloudObjects.Load();
+                this.listViewFound.VirtualListSize = this.cloudObjects.Count;
+            }
+            catch(Exception)
+            {
+                this.cloudObjects = new CloudObjects();
+                throw;
+            }
+            
+        }
+
+        private void FormAction(string status, Action action, bool showMessageBox = true)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            SetStatus(status);
+            try
+            {
+                action.Invoke();
+                SetStatus("Ready");
             }
             catch (Exception ex)
             {
-                SetStatus(ex);
-            }
-        }
-
-        #endregion
-
-        private void SaveMessagesMenuItem_Click(object sender, EventArgs e)
-        {
-            string filename = "";
-            SaveFileDialog sfd = new SaveFileDialog();
-
-            sfd.Title = "SaveFileDialog Export2File";
-            sfd.Filter = "Text File (.txt) | *.txt";
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                filename = sfd.FileName.ToString();
-                if (filename != "")
+                if (showMessageBox)
                 {
-                    this.serializer.SaveListView(filename, listViewMessages);                    
+                    ShowErrorDiaglog(ex);
+                }
+                else
+                {
+                    SetStatus(ex.Message);
                 }
             }
+            finally
+            {
+                Cursor.Current = Cursors.Default;                
+            }
         }
+       
+        private void LoadProfileFromFile()
+        {
+            try
+            {
+                this.profile = Profile.Load("Default.json");
+            }
+            catch (Exception ex)
+            {
+                SetStatus(String.Format("Failed to load profile: %v, creating new", ex.Message));
+                this.profile = Profile.AllServices();
+            }
+        }
+
+       
 
         private void ToolStripButton1_Click(object sender, EventArgs e)
         {
@@ -433,7 +327,7 @@ namespace heaven
                 }
                 foreach (var region in form.SelectedRegions)
                 {                      
-                    scanner.Invokations.Enqueue(new OperationInvokation(form.Operation, region, this.creds, this.pageSize));
+                    scanner.Invokations.Enqueue(new OperationInvokation(form.Operation, region, this.creds, Settings.Default.PageSize));
                 }                                    
                 if (!backgroundWorker.IsBusy)
                 {
@@ -441,5 +335,18 @@ namespace heaven
                 }
             }
         }
+
+
+        private void ListViewFound_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
+        {
+            cloudObjects.RetrieveVirtualItem(e);
+        }
+
+        private void ListViewMessages_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
+        {
+            progressMessages.RetrieveVirtualItem(e);
+        }
+
+
     }
 }

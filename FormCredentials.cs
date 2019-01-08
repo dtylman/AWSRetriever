@@ -2,8 +2,9 @@
 using System.Windows.Forms;
 using Amazon.Runtime;
 using Amazon.Runtime.CredentialManagement;
+using Retriever.Properties;
 
-namespace heaven
+namespace Retriever
 {
     public partial class FormCredentials : Form
     {
@@ -61,16 +62,27 @@ namespace heaven
             }
         }
 
-        private void txtAccessKey_TextChanged(object sender, EventArgs e)
+
+        private void buttonOK_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtAccessKey.Text))
+            if (this.checkBoxSave.Checked)
             {
-                //this.txtProfile.Text = SharedCredentialsFile.DefaultProfileName; 
-            } else
-            {
-                //this.txtProfile.Text = "";
+                Settings.Default.SecretAccessKey = this.txtSecretKey.Text;
+                Settings.Default.SettingsKey = this.txtAccessKey.Text;
+                Settings.Default.Save();
             }
         }
 
+        private void FormCredentials_Load(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Settings.Default.SecretAccessKey))
+            {
+                this.txtSecretKey.Text = Settings.Default.SecretAccessKey;
+            }
+            if (!string.IsNullOrEmpty(Settings.Default.SettingsKey))
+            {
+                this.txtAccessKey.Text = Settings.Default.SettingsKey;
+            }
+        }
     }
 }        

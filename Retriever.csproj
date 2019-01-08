@@ -6,12 +6,15 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{20B2599D-0678-4501-BCD3-26BEC04FEB93}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>heaven</RootNamespace>
-    <AssemblyName>heaven</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>Retriever</RootNamespace>
+    <AssemblyName>AWSRetriever</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,15 +35,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Retriever.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Highlight, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Highlight.4.0.0\lib\net40\Highlight.dll</HintPath>
     </Reference>
     <Reference Include="KellermanSoftware.Compare-NET-Objects, Version=4.57.0.0, Culture=neutral, PublicKeyToken=d970ace04cc85217, processorArchitecture=MSIL">
       <HintPath>packages\CompareNETObjects.4.57.0\lib\net46\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
-    </Reference>
-    <Reference Include="Polenter.SharpSerializer, Version=3.0.1.0, Culture=neutral, PublicKeyToken=8f4f20011571ee5f, processorArchitecture=MSIL">
-      <HintPath>packages\SharpSerializer.3.0.1\lib\net452\Polenter.SharpSerializer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,7 +66,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppSerializer.cs" />
+    <Compile Include="Model\CloudObjects.cs" />
     <Compile Include="FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,27 +97,15 @@
     <Compile Include="FormRun.Designer.cs">
       <DependentUpon>FormRun.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperationControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="OperationControl.Designer.cs">
-      <DependentUpon>OperationControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Profile.cs" />
-    <Compile Include="ProfileRecord.cs" />
+    <Compile Include="Model\Profile.cs" />
+    <Compile Include="Model\ProfileRecord.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Model\ProgressMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="RegionsString.cs" />
-    <Compile Include="RegionsTextbox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="RegionsTextbox.Designer.cs">
-      <DependentUpon>RegionsTextbox.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
@@ -131,16 +122,10 @@
     <EmbeddedResource Include="FormRun.resx">
       <DependentUpon>FormRun.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OperationControl.resx">
-      <DependentUpon>OperationControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RegionsTextbox.resx">
-      <DependentUpon>RegionsTextbox.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -157,38 +142,37 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="heaven-2027161_960_720.jpg" />
-    <None Include="images\icons8-repeat-one-50.png" />
-    <None Include="images\icons8-menu-23.png" />
-    <None Include="images\icons8-menu-32.png" />
-    <None Include="images\icons8-term-50.png" />
-    <None Include="images\icons8-private-50.png" />
-    <None Include="images\icons8-save-50.png" />
-    <None Include="images\icons8-output-50.png" />
-    <None Include="images\icons8-object-50.png" />
-    <None Include="images\icons8-menu-50.png" />
-    <None Include="images\icons8-list-50.png" />
-    <None Include="images\icons8-help-50.png" />
-    <None Include="images\icons8-gear-50.png" />
-    <None Include="images\icons8-form-50.png" />
-    <None Include="images\icons8-error-50.png" />
-    <None Include="images\icons8-close-window-50.png" />
-    <None Include="images\icons8-checkmark-50.png" />
-    <None Include="images\icons8-process-50.png" />
-    <None Include="heaven-small.png" />
+    <None Include="Resources\icons8-repeat-one-50.png" />
+    <None Include="Resources\icons8-menu-23.png" />
+    <None Include="Resources\icons8-term-50.png" />
+    <None Include="Resources\icons8-private-50.png" />
+    <None Include="Resources\icons8-save-50.png" />
+    <None Include="Resources\icons8-output-50.png" />
+    <None Include="Resources\icons8-object-50.png" />
+    <None Include="Resources\icons8-menu-50.png" />
+    <None Include="Resources\icons8-list-50.png" />
+    <None Include="Resources\icons8-help-50.png" />
+    <None Include="Resources\icons8-gear-50.png" />
+    <None Include="Resources\icons8-form-50.png" />
+    <None Include="Resources\icons8-error-50.png" />
+    <None Include="Resources\icons8-close-window-50.png" />
+    <None Include="Resources\icons8-checkmark-50.png" />
+    <None Include="Resources\icons8-process-50.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="aws-sdk-net\sdk\src\Core\AWSSDK.Core.Net45.csproj">
       <Project>{0742b90b-4f9c-47c1-a1f3-c59434987f98}</Project>
       <Name>AWSSDK.Core.Net45</Name>
     </ProjectReference>
+    <ProjectReference Include="AWSRetriver.Controls\AWSRetriver.Controls.csproj">
+      <Project>{984ef6d3-aa85-4d8f-86fa-9be685c4f456}</Project>
+      <Name>AWSRetriver.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="CloudOps\CloudOps.csproj">
       <Project>{38dc0e7f-af8d-4a2e-8e7e-e42e3839d2bb}</Project>
       <Name>CloudOps</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

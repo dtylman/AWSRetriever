@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Amazon;
 
-namespace heaven
+namespace AWSRetriver.Controls
 {
-    internal class RegionsString
+    public class RegionsString
     {
         private readonly List<RegionEndpoint> items = new List<Amazon.RegionEndpoint>();
 

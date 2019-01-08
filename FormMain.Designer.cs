@@ -1,4 +1,4 @@
-﻿namespace heaven
+﻿namespace Retriever
 {
     partial class FormMain
     {
@@ -214,7 +214,7 @@
             // 
             // buttonScan
             // 
-            this.buttonScan.Image = global::heaven.Properties.Resources.Process50;
+            this.buttonScan.Image = global::Retriever.Properties.Resources.Process50;
             this.buttonScan.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonScan.Name = "buttonScan";
             this.buttonScan.Size = new System.Drawing.Size(61, 22);
@@ -223,7 +223,7 @@
             // 
             // buttonRun
             // 
-            this.buttonRun.Image = global::heaven.Properties.Resources.RepeatOne50;
+            this.buttonRun.Image = global::Retriever.Properties.Resources.RepeatOne50;
             this.buttonRun.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonRun.Name = "buttonRun";
             this.buttonRun.Size = new System.Drawing.Size(57, 22);
@@ -233,7 +233,7 @@
             // buttonStop
             // 
             this.buttonStop.Enabled = false;
-            this.buttonStop.Image = global::heaven.Properties.Resources.Private50;
+            this.buttonStop.Image = global::Retriever.Properties.Resources.Private50;
             this.buttonStop.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(51, 22);
@@ -277,7 +277,7 @@
             // 
             // btnManageProfiles
             // 
-            this.btnManageProfiles.Image = global::heaven.Properties.Resources.Term50;
+            this.btnManageProfiles.Image = global::Retriever.Properties.Resources.Term50;
             this.btnManageProfiles.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnManageProfiles.Name = "btnManageProfiles";
             this.btnManageProfiles.Size = new System.Drawing.Size(84, 22);
@@ -291,7 +291,7 @@
             // 
             // toolStripButtonClose
             // 
-            this.toolStripButtonClose.Image = global::heaven.Properties.Resources.CloseWindow50;
+            this.toolStripButtonClose.Image = global::Retriever.Properties.Resources.CloseWindow50;
             this.toolStripButtonClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonClose.Name = "toolStripButtonClose";
             this.toolStripButtonClose.Size = new System.Drawing.Size(56, 22);
@@ -351,6 +351,8 @@
             this.listViewFound.TabIndex = 0;
             this.listViewFound.UseCompatibleStateImageBehavior = false;
             this.listViewFound.View = System.Windows.Forms.View.Details;
+            this.listViewFound.VirtualMode = true;
+            this.listViewFound.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.ListViewFound_RetrieveVirtualItem);
             this.listViewFound.SelectedIndexChanged += new System.EventHandler(this.ListViewFound_SelectedIndexChanged);
             // 
             // ColumnType
@@ -437,6 +439,8 @@
             this.listViewMessages.TabIndex = 0;
             this.listViewMessages.UseCompatibleStateImageBehavior = false;
             this.listViewMessages.View = System.Windows.Forms.View.Details;
+            this.listViewMessages.VirtualMode = true;
+            this.listViewMessages.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.ListViewMessages_RetrieveVirtualItem);
             // 
             // columnHeader1
             // 
@@ -466,7 +470,6 @@
             this.saveMessagesMenuItem.Name = "saveMessagesMenuItem";
             this.saveMessagesMenuItem.Size = new System.Drawing.Size(98, 22);
             this.saveMessagesMenuItem.Text = "&Save";
-            this.saveMessagesMenuItem.Click += new System.EventHandler(this.SaveMessagesMenuItem_Click);
             // 
             // imageList
             // 

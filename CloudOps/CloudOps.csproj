@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CloudOps</RootNamespace>
     <AssemblyName>CloudOps</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -368,74 +372,73 @@
     <Compile Include="Generated\ECS\ListTasksOperation.cs" />
     <Compile Include="Generated\Inspector\ListAssessmentTemplatesOperation.cs" />
     <Compile Include="Generated\Glacier\ListPartsOperation.cs" />
-<Compile Include="Generated\Kinesis\DescribeStreamOperation.cs" />
-<Compile Include="Generated\CloudWatch\DescribeAlarmsForMetricOperation.cs" />
-<Compile Include="Generated\RDS\DescribeOptionGroupOptionsOperation.cs" />
-<Compile Include="Generated\ServiceCatalog\ListServiceActionsForProvisioningArtifactOperation.cs" />
-<Compile Include="Generated\StorageGateway\DescribeTapesOperation.cs" />
-<Compile Include="Generated\AppMesh\ListRoutesOperation.cs" />
-<Compile Include="Generated\AppMesh\ListVirtualRoutersOperation.cs" />
-<Compile Include="Generated\CodeCommit\ListPullRequestsOperation.cs" />
-<Compile Include="Generated\DynamoDB\ScanOperation.cs" />
-<Compile Include="Generated\ElastiCache\DescribeEngineDefaultParametersOperation.cs" />
-<Compile Include="Generated\CloudFormation\ListStackResourcesOperation.cs" />
-<Compile Include="Generated\ElasticBeanstalk\ListAvailableSolutionStacksOperation.cs" />
-<Compile Include="Generated\ResourceGroups\ListGroupResourcesOperation.cs" />
-<Compile Include="Generated\StepFunctions\ListExecutionsOperation.cs" />
-<Compile Include="Generated\CodeCommit\GetCommentsForComparedCommitOperation.cs" />
-<Compile Include="Generated\CodeDeploy\ListDeploymentGroupsOperation.cs" />
-<Compile Include="Generated\StorageGateway\ListVolumeRecoveryPointsOperation.cs" />
-<Compile Include="Generated\CodeCommit\DescribePullRequestEventsOperation.cs" />
-<Compile Include="Generated\CodeCommit\GetDifferencesOperation.cs" />
-<Compile Include="Generated\StepFunctions\GetExecutionHistoryOperation.cs" />
-<Compile Include="Generated\StorageGateway\DescribeTapeRecoveryPointsOperation.cs" />
-<Compile Include="Generated\StorageGateway\DescribeVTLDevicesOperation.cs" />
-<Compile Include="Generated\DatabaseMigrationService\DescribeReplicationInstanceTaskLogsOperation.cs" />
-<Compile Include="Generated\DatabaseMigrationService\DescribeTableStatisticsOperation.cs" />
-<Compile Include="Generated\ElasticLoadBalancing\DescribeInstanceHealthOperation.cs" />
-<Compile Include="Generated\Kinesis\ListStreamConsumersOperation.cs" />
-<Compile Include="Generated\RDS\ListTagsForResourceOperation.cs" />
-<Compile Include="Generated\CodeCommit\ListBranchesOperation.cs" />
-<Compile Include="Generated\CodeDeploy\ListDeploymentInstancesOperation.cs" />
-<Compile Include="Generated\DynamoDB\BatchGetItemOperation.cs" />
-<Compile Include="Generated\ServiceCatalog\ListPrincipalsForPortfolioOperation.cs" />
-<Compile Include="Generated\ServiceCatalog\ListResourcesForTagOptionOperation.cs" />
-<Compile Include="Generated\CodeDeploy\ListApplicationRevisionsOperation.cs" />
-<Compile Include="Generated\ResourceGroups\SearchResourcesOperation.cs" />
-<Compile Include="Generated\ServiceCatalog\ListConstraintsForPortfolioOperation.cs" />
-<Compile Include="Generated\RDS\DescribeEngineDefaultParametersOperation.cs" />
-<Compile Include="Generated\SimpleNotificationService\ListEndpointsByPlatformApplicationOperation.cs" />
-<Compile Include="Generated\ElastiCache\DescribeCacheParametersOperation.cs" />
-<Compile Include="Generated\ServiceCatalog\ListPortfoliosForProductOperation.cs" />
-<Compile Include="Generated\SimpleNotificationService\ListSubscriptionsByTopicOperation.cs" />
-<Compile Include="Generated\StorageGateway\DescribeStorediSCSIVolumesOperation.cs" />
-<Compile Include="Generated\CloudFormation\ListImportsOperation.cs" />
-<Compile Include="Generated\CloudFormation\DescribeStackResourceDriftsOperation.cs" />
-<Compile Include="Generated\DynamoDB\QueryOperation.cs" />
-<Compile Include="Generated\RDS\DescribeDBParametersOperation.cs" />
-<Compile Include="Generated\SageMaker\ListTagsOperation.cs" />
-<Compile Include="Generated\AppMesh\ListVirtualNodesOperation.cs" />
-<Compile Include="Generated\DatabaseMigrationService\DescribeSchemasOperation.cs" />
-<Compile Include="Generated\Glacier\ListVaultsOperation.cs" />
-<Compile Include="Generated\Redshift\DescribeClusterParametersOperation.cs" />
-<Compile Include="Generated\StorageGateway\DescribeCachediSCSIVolumesOperation.cs" />
-<Compile Include="Generated\Glacier\ListMultipartUploadsOperation.cs" />
-<Compile Include="Generated\S3\ListBucketsOperation.cs" />
-<Compile Include="Generated\ServiceCatalog\ListOrganizationPortfolioAccessOperation.cs" />
-<Compile Include="Generated\RDS\DescribeDBLogFilesOperation.cs" />
-<Compile Include="Generated\ServiceCatalog\ListProvisioningArtifactsForServiceActionOperation.cs" />
-<Compile Include="Generated\ServiceCatalog\ListLaunchPathsOperation.cs" />
-<Compile Include="Generated\Athena\GetQueryResultsOperation.cs" />
-<Compile Include="Generated\CodeCommit\GetCommentsForPullRequestOperation.cs" />
-<Compile Include="Generated\DirectConnect\DescribeVirtualGatewaysOperation.cs" />
-<Compile Include="Generated\Glacier\ListJobsOperation.cs" />
-<Compile Include="Generated\RDS\DescribeOrderableDBInstanceOptionsOperation.cs" />
-<Compile Include="Generated\RDS\DownloadDBLogFilePortionOperation.cs" />
-<Compile Include="Generated\DirectConnect\DescribeLocationsOperation.cs" />
-<Compile Include="Generated\SimpleEmail\ListVerifiedEmailAddressesOperation.cs" />
-<Compile Include="Generated\Redshift\DescribeDefaultClusterParametersOperation.cs" />
-<Compile Include="Generated\StorageGateway\ListLocalDisksOperation.cs" />
-
+    <Compile Include="Generated\Kinesis\DescribeStreamOperation.cs" />
+    <Compile Include="Generated\CloudWatch\DescribeAlarmsForMetricOperation.cs" />
+    <Compile Include="Generated\RDS\DescribeOptionGroupOptionsOperation.cs" />
+    <Compile Include="Generated\ServiceCatalog\ListServiceActionsForProvisioningArtifactOperation.cs" />
+    <Compile Include="Generated\StorageGateway\DescribeTapesOperation.cs" />
+    <Compile Include="Generated\AppMesh\ListRoutesOperation.cs" />
+    <Compile Include="Generated\AppMesh\ListVirtualRoutersOperation.cs" />
+    <Compile Include="Generated\CodeCommit\ListPullRequestsOperation.cs" />
+    <Compile Include="Generated\DynamoDB\ScanOperation.cs" />
+    <Compile Include="Generated\ElastiCache\DescribeEngineDefaultParametersOperation.cs" />
+    <Compile Include="Generated\CloudFormation\ListStackResourcesOperation.cs" />
+    <Compile Include="Generated\ElasticBeanstalk\ListAvailableSolutionStacksOperation.cs" />
+    <Compile Include="Generated\ResourceGroups\ListGroupResourcesOperation.cs" />
+    <Compile Include="Generated\StepFunctions\ListExecutionsOperation.cs" />
+    <Compile Include="Generated\CodeCommit\GetCommentsForComparedCommitOperation.cs" />
+    <Compile Include="Generated\CodeDeploy\ListDeploymentGroupsOperation.cs" />
+    <Compile Include="Generated\StorageGateway\ListVolumeRecoveryPointsOperation.cs" />
+    <Compile Include="Generated\CodeCommit\DescribePullRequestEventsOperation.cs" />
+    <Compile Include="Generated\CodeCommit\GetDifferencesOperation.cs" />
+    <Compile Include="Generated\StepFunctions\GetExecutionHistoryOperation.cs" />
+    <Compile Include="Generated\StorageGateway\DescribeTapeRecoveryPointsOperation.cs" />
+    <Compile Include="Generated\StorageGateway\DescribeVTLDevicesOperation.cs" />
+    <Compile Include="Generated\DatabaseMigrationService\DescribeReplicationInstanceTaskLogsOperation.cs" />
+    <Compile Include="Generated\DatabaseMigrationService\DescribeTableStatisticsOperation.cs" />
+    <Compile Include="Generated\ElasticLoadBalancing\DescribeInstanceHealthOperation.cs" />
+    <Compile Include="Generated\Kinesis\ListStreamConsumersOperation.cs" />
+    <Compile Include="Generated\RDS\ListTagsForResourceOperation.cs" />
+    <Compile Include="Generated\CodeCommit\ListBranchesOperation.cs" />
+    <Compile Include="Generated\CodeDeploy\ListDeploymentInstancesOperation.cs" />
+    <Compile Include="Generated\DynamoDB\BatchGetItemOperation.cs" />
+    <Compile Include="Generated\ServiceCatalog\ListPrincipalsForPortfolioOperation.cs" />
+    <Compile Include="Generated\ServiceCatalog\ListResourcesForTagOptionOperation.cs" />
+    <Compile Include="Generated\CodeDeploy\ListApplicationRevisionsOperation.cs" />
+    <Compile Include="Generated\ResourceGroups\SearchResourcesOperation.cs" />
+    <Compile Include="Generated\ServiceCatalog\ListConstraintsForPortfolioOperation.cs" />
+    <Compile Include="Generated\RDS\DescribeEngineDefaultParametersOperation.cs" />
+    <Compile Include="Generated\SimpleNotificationService\ListEndpointsByPlatformApplicationOperation.cs" />
+    <Compile Include="Generated\ElastiCache\DescribeCacheParametersOperation.cs" />
+    <Compile Include="Generated\ServiceCatalog\ListPortfoliosForProductOperation.cs" />
+    <Compile Include="Generated\SimpleNotificationService\ListSubscriptionsByTopicOperation.cs" />
+    <Compile Include="Generated\StorageGateway\DescribeStorediSCSIVolumesOperation.cs" />
+    <Compile Include="Generated\CloudFormation\ListImportsOperation.cs" />
+    <Compile Include="Generated\CloudFormation\DescribeStackResourceDriftsOperation.cs" />
+    <Compile Include="Generated\DynamoDB\QueryOperation.cs" />
+    <Compile Include="Generated\RDS\DescribeDBParametersOperation.cs" />
+    <Compile Include="Generated\SageMaker\ListTagsOperation.cs" />
+    <Compile Include="Generated\AppMesh\ListVirtualNodesOperation.cs" />
+    <Compile Include="Generated\DatabaseMigrationService\DescribeSchemasOperation.cs" />
+    <Compile Include="Generated\Glacier\ListVaultsOperation.cs" />
+    <Compile Include="Generated\Redshift\DescribeClusterParametersOperation.cs" />
+    <Compile Include="Generated\StorageGateway\DescribeCachediSCSIVolumesOperation.cs" />
+    <Compile Include="Generated\Glacier\ListMultipartUploadsOperation.cs" />
+    <Compile Include="Generated\S3\ListBucketsOperation.cs" />
+    <Compile Include="Generated\ServiceCatalog\ListOrganizationPortfolioAccessOperation.cs" />
+    <Compile Include="Generated\RDS\DescribeDBLogFilesOperation.cs" />
+    <Compile Include="Generated\ServiceCatalog\ListProvisioningArtifactsForServiceActionOperation.cs" />
+    <Compile Include="Generated\ServiceCatalog\ListLaunchPathsOperation.cs" />
+    <Compile Include="Generated\Athena\GetQueryResultsOperation.cs" />
+    <Compile Include="Generated\CodeCommit\GetCommentsForPullRequestOperation.cs" />
+    <Compile Include="Generated\DirectConnect\DescribeVirtualGatewaysOperation.cs" />
+    <Compile Include="Generated\Glacier\ListJobsOperation.cs" />
+    <Compile Include="Generated\RDS\DescribeOrderableDBInstanceOptionsOperation.cs" />
+    <Compile Include="Generated\RDS\DownloadDBLogFilePortionOperation.cs" />
+    <Compile Include="Generated\DirectConnect\DescribeLocationsOperation.cs" />
+    <Compile Include="Generated\SimpleEmail\ListVerifiedEmailAddressesOperation.cs" />
+    <Compile Include="Generated\Redshift\DescribeDefaultClusterParametersOperation.cs" />
+    <Compile Include="Generated\StorageGateway\ListLocalDisksOperation.cs" />
     <Compile Include="InvokationResult.cs" />
     <Compile Include="OperationFactory.cs" />
     <Compile Include="OperationInvokation.cs" />
@@ -1121,6 +1124,9 @@
       <Project>{08180d9b-00d5-4f9f-9b4c-0377ef1f7439}</Project>
       <Name>AWSSDK.XRay.Net45</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace heaven
+﻿namespace AWSRetriver.Controls
 {
     partial class RegionsTextbox
     {
@@ -57,7 +57,7 @@
             // button
             // 
             this.button.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button.Image = global::heaven.Properties.Resources.Menu23;
+            this.button.Image = global::AWSRetriver.Controls.Properties.Resources.icons8_menu_23;
             this.button.Location = new System.Drawing.Point(313, 7);
             this.button.Name = "button";
             this.button.Size = new System.Drawing.Size(23, 24);

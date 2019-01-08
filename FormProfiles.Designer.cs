@@ -1,4 +1,4 @@
-﻿namespace heaven
+﻿namespace Retriever
 {
     partial class FormProfiles
     {

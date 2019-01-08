@@ -1,4 +1,6 @@
-﻿namespace heaven
+﻿using AWSRetriver.Controls;
+
+namespace Retriever
 {
     partial class FormRun
     {
@@ -35,7 +37,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxOperation = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.regionsTextbox = new heaven.RegionsTextbox();
+            this.regionsTextbox = new AWSRetriver.Controls.RegionsTextbox();
             this.SuspendLayout();
             // 
             // comboServices
