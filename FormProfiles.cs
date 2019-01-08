@@ -89,6 +89,7 @@ namespace Retriever
         private void PopulateOperations(string serviceName)
         {
             Cursor.Current = Cursors.WaitCursor;
+            SuspendLayout();
             try
             {
                 this.panelOperations.Controls.Clear();
@@ -102,8 +103,8 @@ namespace Retriever
             }
             finally
             {
+                ResumeLayout();
                 Cursor.Current = Cursors.Default;
-
             }
         }
 
@@ -118,9 +119,14 @@ namespace Retriever
                 rc.CheckBox.Checked = p.Enabled;                
                 rc.LinkLabel.Text = op.Name;
                 rc.LinkLabel.Tag = op.Description;
-                rc.LinkLabel.Click += LinkLabel_Click;
+                string pageSize = p.PageSize.ToString();
+                if (p.PageSize == 0) {                 
+                    pageSize = Properties.Settings.Default.PageSize.ToString();
+                }
+                rc.TextPageSize.Text = pageSize;
+                rc.LinkLabel.Click += LinkLabel_Click;                
                 rc.RegionsTextbox.Regions = p.Regions;                
-                this.panelOperations.Controls.Add(rc);
+                panelOperations.Controls.Add(rc);
                 rc.Tag = p;
                 rc.Leave += Rc_Leave;
             }
@@ -132,6 +138,11 @@ namespace Retriever
             ProfileRecord p = recordControl.Tag as ProfileRecord;
             p.Enabled = recordControl.CheckBox.Checked;
             p.Regions = recordControl.RegionsTextbox.Regions;
+            int pageSize;
+            if (Int32.TryParse(recordControl.TextPageSize.Text, out pageSize))
+            {
+                p.PageSize = pageSize;
+            }
             this.profile.Set(p);
         }
 

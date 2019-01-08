@@ -14,7 +14,12 @@ namespace AWSRetriver.Controls
     {
         public ProfileRecordControl()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
+
+        public CheckBox CheckBox { get => chkEnabled;  }
+        public LinkLabel LinkLabel { get => labelName; }            
+        public RegionsTextbox RegionsTextbox { get => regionsTextbox; }
+        public MaskedTextBox TextPageSize { get => txtPageSize; }
     }
 }
