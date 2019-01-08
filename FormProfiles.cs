@@ -118,11 +118,8 @@ namespace Retriever
                 rc.AutoSize = true;
                 rc.CheckBox.Checked = p.Enabled;                
                 rc.LinkLabel.Text = op.Name;
-                rc.LinkLabel.Tag = op.Description;
-                string pageSize = p.PageSize.ToString();
-                if (p.PageSize == 0) {                 
-                    pageSize = Properties.Settings.Default.PageSize.ToString();
-                }
+                rc.LinkLabel.Tag = op.Description;                
+                string pageSize = p.PageSize.ToString();                
                 rc.TextPageSize.Text = pageSize;
                 rc.LinkLabel.Click += LinkLabel_Click;                
                 rc.RegionsTextbox.Regions = p.Regions;                
@@ -138,8 +135,7 @@ namespace Retriever
             ProfileRecord p = recordControl.Tag as ProfileRecord;
             p.Enabled = recordControl.CheckBox.Checked;
             p.Regions = recordControl.RegionsTextbox.Regions;
-            int pageSize;
-            if (Int32.TryParse(recordControl.TextPageSize.Text, out pageSize))
+            if (Int32.TryParse(recordControl.TextPageSize.Text, out int pageSize))
             {
                 p.PageSize = pageSize;
             }

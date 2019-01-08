@@ -5,37 +5,43 @@ namespace CloudOps
     public class InvokationResult
     {
         private Operation operation;
-        private readonly Exception ex;
+        private Exception ex;
+        private DateTime time;
+        private int progress;
+
+        public Operation Operation { get => operation; set => operation = value; }
+        public Exception Ex { get => ex; set => ex = value; }
+        public DateTime Time { get => time; set => time = value; }
+        public int Progress { get => progress; set => progress = value; }
+
+        public InvokationResult()
+        {
+
+        }
 
         public InvokationResult(Operation operation)
         {
-            this.Operation = operation;
+            this.operation = operation;
+            this.time = DateTime.Now;
         }
 
         public InvokationResult(Exception ex, Operation operation)
         {
-            this.Operation = operation;
+            this.operation = operation;
             this.ex = ex;
+            this.time = DateTime.Now;
         }
 
         public string ResultText()
-        {
-            string message = String.Format("{0} {1} {2}: ", operation.Name, operation.ServiceName, operation.Region.DisplayName);
+        {            
             if (IsError())
             {
-                message += string.Format("Error: {0}", this.ex.Message);
+                return string.Format("Error: {0}", this.ex.Message);
             } else
             {
-                message += string.Format("{0} items retrieved", this.operation.CollectedObjects.Count);
-            }
-            return message;
-        }
-
-        public Operation Operation { get => operation; set => operation = value; }
-
-        public Exception Ex => ex;
-
-        public int Progress { get; internal set; }
+                return string.Format("{0} items retrieved", this.operation.CollectedObjects.Count);
+            }            
+        }    
 
         public bool IsError()
         {

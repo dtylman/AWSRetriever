@@ -58,23 +58,24 @@ namespace Retriever
         {
             get
             {
-                return this.cmbProfile.SelectedItem.ToString();
+                if (cmbProfile.SelectedItem == null)
+                {
+                    return "";
+                }
+                return cmbProfile.SelectedItem.ToString();
             }
         }
 
-
-        private void buttonOK_Click(object sender, EventArgs e)
+        public bool SaveCredentials
         {
-            if (this.checkBoxSave.Checked)
+            get
             {
-                Settings.Default.SecretAccessKey = this.txtSecretKey.Text;
-                Settings.Default.SettingsKey = this.txtAccessKey.Text;
-                Settings.Default.Save();
+                return checkBoxSave.Checked;
             }
         }
 
         private void FormCredentials_Load(object sender, EventArgs e)
-        {
+        {            
             if (!string.IsNullOrEmpty(Settings.Default.SecretAccessKey))
             {
                 this.txtSecretKey.Text = Settings.Default.SecretAccessKey;

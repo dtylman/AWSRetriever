@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CloudObject.cs" />
+    <Compile Include="CloudObjectFields.cs" />
     <Compile Include="Generated\RDS\DescribeEventsOperation.cs" />
     <Compile Include="Generated\RDS\DescribeEventSubscriptionsOperation.cs" />
     <Compile Include="Generated\SecurityHub\GetFindingsOperation.cs" />

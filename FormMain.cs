@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -25,6 +23,7 @@ namespace Retriever
         public FormMain()
         {
             InitializeComponent();
+
             InitializeBackgroundWorker();
             scanner = new Scanner
             {
@@ -68,9 +67,9 @@ namespace Retriever
             {
                 this.cloudObjects.Update(ir);
                 this.listViewFound.VirtualListSize = this.cloudObjects.Count;
-                this.progressMessages.Add(ir);
+                this.progressMessages.Add(new ProgressMessage(ir));
                 this.listViewMessages.VirtualListSize = this.progressMessages.Count;
-                listViewMessages.EnsureVisible(this.progressMessages.Count);
+                listViewMessages.EnsureVisible(this.progressMessages.Count-1);
                 UpdateStatusBar(ir);
             }
             else
@@ -203,8 +202,14 @@ namespace Retriever
             FormCredentials formCredentials = new FormCredentials();
             DialogResult dr = formCredentials.ShowDialog(this);
             if (dr == DialogResult.OK)
-            {
+            {                
                 this.creds = formCredentials.Credentials;
+                if (formCredentials.SaveCredentials)
+                {
+                    Settings.Default.SecretAccessKey = this.creds.GetCredentials().AccessKey;
+                    Settings.Default.SettingsKey = this.creds.GetCredentials().SecretKey;
+                    Settings.Default.Save();
+                }
             }
         }
 
@@ -225,17 +230,12 @@ namespace Retriever
         }
 
         private void ListViewFound_SelectedIndexChanged(object sender, EventArgs e)
-        {                        
+        {
             if (this.listViewFound.SelectedIndices.Count > 0)
-            {                
-                if (listViewFound.SelectedItems[0].Tag is CloudObject clobo)
-                {
-                    //Highlighter highlighter = new Highlighter(new RtfEngine());                    
-                    this.propertyGridObject.SelectedObject = clobo;                    
-                    this.rtbObject.Text = clobo.Source;
-
-                    //this.rtbObject.Rtf = highlighter.Highlight("JavaScript", source);
-                }
+            {
+                CloudObject cobo = this.cloudObjects[this.listViewFound.SelectedIndices[0]];                
+                this.propertyGridObject.SelectedObject = cobo;
+                this.richTextBoxCobo.Text = cobo.Source;
             }
         }
 
@@ -250,7 +250,22 @@ namespace Retriever
         private void FormMain_Load(object sender, EventArgs e)
         {
             FormAction("Loading profile...", LoadProfileFromFile, false);
-            FormAction("Loading objects..", LoadObjectsFromFile, false);            
+            FormAction("Loading objects..", LoadObjectsFromFile, false);
+            FormAction("Loading messages..", LoadMessagesFromFile, false);
+        }
+
+        private void LoadMessagesFromFile()
+        {
+            try
+            {
+                this.progressMessages = ProgressMessages.Load();
+                this.listViewMessages.VirtualListSize = this.progressMessages.Count;
+            }
+            catch (Exception)
+            {
+                this.progressMessages = new ProgressMessages();
+                throw;
+            }
         }
 
         private void LoadObjectsFromFile()
@@ -347,6 +362,21 @@ namespace Retriever
             progressMessages.RetrieveVirtualItem(e);
         }
 
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cloudObjects.Clear();
+            listViewFound.VirtualListSize = 0;
+        }
 
+        private void clearToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            progressMessages.Clear();
+            listViewMessages.VirtualListSize = 0;
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.progressMessages.Save();
+        }
     }
 }

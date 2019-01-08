@@ -60,18 +60,16 @@
             this.ColumnType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnRegion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ColumnOwnerId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ColumnDetails = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuObjects = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listViewMessages = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnProgressAPI = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnProgressService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnProgressRegion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnProgressResult = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuMessages = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.saveMessagesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
@@ -79,8 +77,14 @@
             this.splitContainerBack = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.splitContainerObject = new System.Windows.Forms.SplitContainer();
-            this.rtbObject = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxCobo = new System.Windows.Forms.RichTextBox();
             this.propertyGridObject = new System.Windows.Forms.PropertyGrid();
+            this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnArn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.columnProgressTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -335,11 +339,12 @@
             // 
             this.listViewFound.AllowColumnReorder = true;
             this.listViewFound.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ColumnType,
             this.ColumnService,
+            this.ColumnType,
             this.ColumnRegion,
-            this.ColumnOwnerId,
-            this.ColumnDetails});
+            this.columnName,
+            this.columnID,
+            this.columnArn});
             this.listViewFound.ContextMenuStrip = this.contextMenuObjects;
             this.listViewFound.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewFound.FullRowSelect = true;
@@ -348,6 +353,7 @@
             this.listViewFound.MultiSelect = false;
             this.listViewFound.Name = "listViewFound";
             this.listViewFound.Size = new System.Drawing.Size(940, 364);
+            this.listViewFound.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listViewFound.TabIndex = 0;
             this.listViewFound.UseCompatibleStateImageBehavior = false;
             this.listViewFound.View = System.Windows.Forms.View.Details;
@@ -358,33 +364,27 @@
             // ColumnType
             // 
             this.ColumnType.Text = "Type";
+            this.ColumnType.Width = 120;
             // 
             // ColumnService
             // 
             this.ColumnService.Text = "Service";
+            this.ColumnService.Width = 120;
             // 
             // ColumnRegion
             // 
             this.ColumnRegion.Text = "Region";
-            // 
-            // ColumnOwnerId
-            // 
-            this.ColumnOwnerId.DisplayIndex = 4;
-            this.ColumnOwnerId.Text = "Owner";
-            // 
-            // ColumnDetails
-            // 
-            this.ColumnDetails.DisplayIndex = 3;
-            this.ColumnDetails.Text = "Details";
+            this.ColumnRegion.Width = 120;
             // 
             // contextMenuObjects
             // 
             this.contextMenuObjects.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewItemToolStripMenuItem,
             this.toolStripMenuItem3,
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.clearToolStripMenuItem});
             this.contextMenuObjects.Name = "contextMenuStripObjects";
-            this.contextMenuObjects.Size = new System.Drawing.Size(127, 54);
+            this.contextMenuObjects.Size = new System.Drawing.Size(127, 76);
             // 
             // viewItemToolStripMenuItem
             // 
@@ -421,10 +421,11 @@
             // 
             this.listViewMessages.AllowColumnReorder = true;
             this.listViewMessages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4});
+            this.columnProgressTime,
+            this.columnProgressAPI,
+            this.columnProgressService,
+            this.columnProgressRegion,
+            this.columnProgressResult});
             this.listViewMessages.ContextMenuStrip = this.contextMenuMessages;
             this.listViewMessages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewMessages.FullRowSelect = true;
@@ -442,33 +443,38 @@
             this.listViewMessages.VirtualMode = true;
             this.listViewMessages.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.ListViewMessages_RetrieveVirtualItem);
             // 
-            // columnHeader1
+            // columnProgressAPI
             // 
-            this.columnHeader1.Text = "API";
+            this.columnProgressAPI.Text = "API";
+            this.columnProgressAPI.Width = 120;
             // 
-            // columnHeader2
+            // columnProgressService
             // 
-            this.columnHeader2.Text = "Service";
+            this.columnProgressService.Text = "Service";
+            this.columnProgressService.Width = 120;
             // 
-            // columnHeader3
+            // columnProgressRegion
             // 
-            this.columnHeader3.Text = "Region";
+            this.columnProgressRegion.Text = "Region";
+            this.columnProgressRegion.Width = 120;
             // 
-            // columnHeader4
+            // columnProgressResult
             // 
-            this.columnHeader4.Text = "Result";
+            this.columnProgressResult.Text = "Result";
+            this.columnProgressResult.Width = 120;
             // 
             // contextMenuMessages
             // 
             this.contextMenuMessages.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveMessagesMenuItem});
+            this.saveMessagesMenuItem,
+            this.clearToolStripMenuItem1});
             this.contextMenuMessages.Name = "contextMenuMessages";
-            this.contextMenuMessages.Size = new System.Drawing.Size(99, 26);
+            this.contextMenuMessages.Size = new System.Drawing.Size(102, 48);
             // 
             // saveMessagesMenuItem
             // 
             this.saveMessagesMenuItem.Name = "saveMessagesMenuItem";
-            this.saveMessagesMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.saveMessagesMenuItem.Size = new System.Drawing.Size(101, 22);
             this.saveMessagesMenuItem.Text = "&Save";
             // 
             // imageList
@@ -536,7 +542,7 @@
             // 
             // splitContainerObject.Panel1
             // 
-            this.splitContainerObject.Panel1.Controls.Add(this.rtbObject);
+            this.splitContainerObject.Panel1.Controls.Add(this.richTextBoxCobo);
             // 
             // splitContainerObject.Panel2
             // 
@@ -546,16 +552,15 @@
             this.splitContainerObject.SplitterWidth = 5;
             this.splitContainerObject.TabIndex = 3;
             // 
-            // rtbObject
+            // richTextBoxCobo
             // 
-            this.rtbObject.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbObject.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbObject.Location = new System.Drawing.Point(0, 0);
-            this.rtbObject.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.rtbObject.Name = "rtbObject";
-            this.rtbObject.Size = new System.Drawing.Size(361, 289);
-            this.rtbObject.TabIndex = 0;
-            this.rtbObject.Text = "trte";
+            this.richTextBoxCobo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxCobo.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxCobo.Location = new System.Drawing.Point(0, 0);
+            this.richTextBoxCobo.Name = "richTextBoxCobo";
+            this.richTextBoxCobo.Size = new System.Drawing.Size(361, 289);
+            this.richTextBoxCobo.TabIndex = 0;
+            this.richTextBoxCobo.Text = "";
             // 
             // propertyGridObject
             // 
@@ -565,6 +570,40 @@
             this.propertyGridObject.Name = "propertyGridObject";
             this.propertyGridObject.Size = new System.Drawing.Size(361, 290);
             this.propertyGridObject.TabIndex = 2;
+            // 
+            // columnName
+            // 
+            this.columnName.Text = "Name";
+            this.columnName.Width = 120;
+            // 
+            // columnID
+            // 
+            this.columnID.Text = "ID";
+            this.columnID.Width = 120;
+            // 
+            // columnArn
+            // 
+            this.columnArn.Text = "ARN";
+            this.columnArn.Width = 120;
+            // 
+            // clearToolStripMenuItem
+            // 
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.clearToolStripMenuItem.Text = "&Clear";
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+            // 
+            // clearToolStripMenuItem1
+            // 
+            this.clearToolStripMenuItem1.Name = "clearToolStripMenuItem1";
+            this.clearToolStripMenuItem1.Size = new System.Drawing.Size(101, 22);
+            this.clearToolStripMenuItem1.Text = "&Clear";
+            this.clearToolStripMenuItem1.Click += new System.EventHandler(this.clearToolStripMenuItem1_Click);
+            // 
+            // columnProgressTime
+            // 
+            this.columnProgressTime.Text = "Time";
+            this.columnProgressTime.Width = 120;
             // 
             // FormMain
             // 
@@ -581,6 +620,7 @@
             this.Name = "FormMain";
             this.Text = "Heaven";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -641,28 +681,32 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RichTextBox rtbObject;
         private System.Windows.Forms.ListView listViewFound;
         private System.Windows.Forms.ListView listViewMessages;
         private System.Windows.Forms.ImageList imageList;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnProgressAPI;
+        private System.Windows.Forms.ColumnHeader columnProgressService;
+        private System.Windows.Forms.ColumnHeader columnProgressRegion;
+        private System.Windows.Forms.ColumnHeader columnProgressResult;
         private System.Windows.Forms.ColumnHeader ColumnType;
         private System.Windows.Forms.ColumnHeader ColumnService;
         private System.Windows.Forms.ColumnHeader ColumnRegion;
-        private System.Windows.Forms.ColumnHeader ColumnDetails;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripComboBox cmbProfiles;
         private System.Windows.Forms.ToolStripButton btnManageProfiles;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.SplitContainer splitContainerObject;
         private System.Windows.Forms.PropertyGrid propertyGridObject;
-        private System.Windows.Forms.ColumnHeader ColumnOwnerId;
         private System.Windows.Forms.ContextMenuStrip contextMenuMessages;
         private System.Windows.Forms.ToolStripMenuItem saveMessagesMenuItem;
         private System.Windows.Forms.ToolStripButton buttonRun;
+        private System.Windows.Forms.RichTextBox richTextBoxCobo;
+        private System.Windows.Forms.ColumnHeader columnName;
+        private System.Windows.Forms.ColumnHeader columnID;
+        private System.Windows.Forms.ColumnHeader columnArn;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem1;
+        private System.Windows.Forms.ColumnHeader columnProgressTime;
     }
 }
 

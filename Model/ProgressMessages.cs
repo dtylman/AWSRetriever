@@ -1,29 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using CloudOps;
+using Newtonsoft.Json;
 
 namespace Retriever
 {
     namespace Model
     {
-        public class ProgressMessages : List<InvokationResult>
+        public class ProgressMessages : List<ProgressMessage>
         {
             public void RetrieveVirtualItem(RetrieveVirtualItemEventArgs e)
             {
-                InvokationResult ir = this[e.ItemIndex];
-                e.Item = new ListViewItem(ir.Operation.Name);
-                e.Item.SubItems.Add(ir.Operation.ServiceName);
-                e.Item.SubItems.Add(ir.Operation.Region.DisplayName);                
-                if (ir.IsError())
+                ProgressMessage pm = this[e.ItemIndex];
+                e.Item = new ListViewItem(pm.Time.ToString());
+                e.Item.SubItems.Add(pm.Operation);
+                e.Item.SubItems.Add(pm.Service);
+                e.Item.SubItems.Add(pm.Region);
+                e.Item.SubItems.Add(pm.Result);
+                e.Item.ImageIndex = pm.ImageIndex;
+            }
+
+            internal static ProgressMessages Load()
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                using (StreamReader sr = new StreamReader("messages.json"))
+                using (JsonReader reader = new JsonTextReader(sr))
                 {
-                    e.Item.SubItems.Add(ir.Ex.Message);
-                    e.Item.ImageIndex = 2;                    
-                } else {
-                    e.Item.SubItems.Add(ir.ResultText());
-                    e.Item.ImageIndex = 0;
+                    return serializer.Deserialize<ProgressMessages>(reader);
                 }
-            }            
+            }
+
+            internal void Save()
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                using (StreamWriter sw = new StreamWriter("messages.json"))
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    writer.Formatting = Formatting.Indented;
+                    serializer.Serialize(writer, this);
+                }
+            }
         }
     }
 }
@@ -42,4 +60,20 @@ namespace Retriever
                 {
                     AppSerializer.SaveListView(filename, listViewMessages);                    
                 }
-            }*/
+
+            }
+            
+     
+       public void Save()
+            {
+              
+            }
+
+            public static CloudObjects Load()
+            {
+               
+
+            }
+     
+     
+     */

@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="heaven.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Retriever.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="AccessKeyID" Type="System.String" Scope="User">
@@ -9,7 +9,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="PageSize" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">18</Value>
     </Setting>
     <Setting Name="ConcurrentConnecitons" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">15</Value>

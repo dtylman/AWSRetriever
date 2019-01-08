@@ -17,11 +17,15 @@ namespace CloudOps
             this.operation = op;
             this.region = region;
             this.creds = creds;
-            this.pageSize = pageSize;   
+            this.pageSize = pageSize;
+            if (pageSize <= 0)
+            {
+                throw new ApplicationException("Page size must be larger than 0");
+            }
         }
         
         public InvokationResult Invoke(CancellationToken token)
-        {
+        {                
             this.operation.CancellationToken = token;
             this.operation.Region = region;
             try

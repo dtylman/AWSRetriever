@@ -39,9 +39,6 @@
     <StartupObject>Retriever.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Highlight, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Highlight.4.0.0\lib\net40\Highlight.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -96,6 +93,7 @@
     </Compile>
     <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\ProfileRecord.cs" />
+    <Compile Include="Model\ProgressMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Model\ProgressMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
