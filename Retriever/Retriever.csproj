@@ -158,15 +158,15 @@
     <None Include="Resources\icons8-process-50.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="aws-sdk-net\sdk\src\Core\AWSSDK.Core.Net45.csproj">
+    <ProjectReference Include="..\aws-sdk-net\sdk\src\Core\AWSSDK.Core.Net45.csproj">
       <Project>{0742b90b-4f9c-47c1-a1f3-c59434987f98}</Project>
       <Name>AWSSDK.Core.Net45</Name>
     </ProjectReference>
-    <ProjectReference Include="AWSRetriver.Controls\AWSRetriver.Controls.csproj">
+    <ProjectReference Include="..\AWSRetriver.Controls\AWSRetriver.Controls.csproj">
       <Project>{984ef6d3-aa85-4d8f-86fa-9be685c4f456}</Project>
       <Name>AWSRetriver.Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="CloudOps\CloudOps.csproj">
+    <ProjectReference Include="..\CloudOps\CloudOps.csproj">
       <Project>{38dc0e7f-af8d-4a2e-8e7e-e42e3839d2bb}</Project>
       <Name>CloudOps</Name>
     </ProjectReference>

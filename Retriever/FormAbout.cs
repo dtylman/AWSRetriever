@@ -103,7 +103,7 @@ namespace Retriever
 
         #endregion
 
-        private void linkLabel1_Click(object sender, EventArgs e)
+        private void LinkLabel1_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://icons8.com/license");
         }
