@@ -241,6 +241,11 @@ namespace Retriever
 
         private void BtnManageProfiles_Click(object sender, EventArgs e)
         {
+            ShowProfileDialog();
+        }
+
+        private void ShowProfileDialog()
+        {
             FormProfiles formProfiles = new FormProfiles();
             formProfiles.Profile = this.profile;
             formProfiles.ShowDialog();
@@ -313,12 +318,16 @@ namespace Retriever
         {
             try
             {
-                this.profile = Profile.Load("Default.json");
+                this.profile = Profile.Load("default");
             }
             catch (Exception ex)
             {
                 SetStatus(String.Format("Failed to load profile: %v, creating new", ex.Message));
-                this.profile = Profile.AllServices();
+                this.profile = Profile.AllServices();                
+            }
+            finally
+            {
+                this.txtProfileName.Text = this.profile.Name;
             }
         }
 
@@ -362,13 +371,13 @@ namespace Retriever
             progressMessages.RetrieveVirtualItem(e);
         }
 
-        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             cloudObjects.Clear();
             listViewFound.VirtualListSize = 0;
         }
 
-        private void clearToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void ClearToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             progressMessages.Clear();
             listViewMessages.VirtualListSize = 0;
@@ -377,6 +386,11 @@ namespace Retriever
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.progressMessages.Save();
+        }
+
+        private void ViewInProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

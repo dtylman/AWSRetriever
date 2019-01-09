@@ -46,32 +46,32 @@
             this.buttonRun = new System.Windows.Forms.ToolStripButton();
             this.buttonStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.lblFilter = new System.Windows.Forms.ToolStripLabel();
-            this.txtFilter = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.cmbProfiles = new System.Windows.Forms.ToolStripComboBox();
+            this.txtProfileName = new System.Windows.Forms.ToolStripTextBox();
             this.btnManageProfiles = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonClose = new System.Windows.Forms.ToolStripButton();
             this.splitContainerFront = new System.Windows.Forms.SplitContainer();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.listViewFound = new System.Windows.Forms.ListView();
-            this.ColumnType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnRegion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnArn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuObjects = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.viewItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listViewMessages = new System.Windows.Forms.ListView();
+            this.columnProgressTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnProgressAPI = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnProgressService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnProgressRegion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnProgressResult = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuMessages = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.saveMessagesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.splitContainerBack = new System.Windows.Forms.SplitContainer();
@@ -79,12 +79,8 @@
             this.splitContainerObject = new System.Windows.Forms.SplitContainer();
             this.richTextBoxCobo = new System.Windows.Forms.RichTextBox();
             this.propertyGridObject = new System.Windows.Forms.PropertyGrid();
-            this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnArn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.columnProgressTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.viewInProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -202,11 +198,8 @@
             this.buttonRun,
             this.buttonStop,
             this.toolStripSeparator1,
-            this.lblFilter,
-            this.txtFilter,
-            this.toolStripSeparator3,
             this.toolStripLabel1,
-            this.cmbProfiles,
+            this.txtProfileName,
             this.btnManageProfiles,
             this.toolStripSeparator2,
             this.toolStripButtonClose});
@@ -249,35 +242,17 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // lblFilter
-            // 
-            this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(36, 22);
-            this.lblFilter.Text = "Filter:";
-            // 
-            // txtFilter
-            // 
-            this.txtFilter.Name = "txtFilter";
-            this.txtFilter.Size = new System.Drawing.Size(200, 25);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(44, 22);
             this.toolStripLabel1.Text = "Profile:";
             // 
-            // cmbProfiles
+            // txtProfileName
             // 
-            this.cmbProfiles.Items.AddRange(new object[] {
-            "Default"});
-            this.cmbProfiles.Name = "cmbProfiles";
-            this.cmbProfiles.Size = new System.Drawing.Size(121, 25);
-            this.cmbProfiles.Text = "Default";
+            this.txtProfileName.Enabled = false;
+            this.txtProfileName.Name = "txtProfileName";
+            this.txtProfileName.Size = new System.Drawing.Size(100, 25);
             // 
             // btnManageProfiles
             // 
@@ -361,48 +336,55 @@
             this.listViewFound.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.ListViewFound_RetrieveVirtualItem);
             this.listViewFound.SelectedIndexChanged += new System.EventHandler(this.ListViewFound_SelectedIndexChanged);
             // 
-            // ColumnType
-            // 
-            this.ColumnType.Text = "Type";
-            this.ColumnType.Width = 120;
-            // 
             // ColumnService
             // 
             this.ColumnService.Text = "Service";
             this.ColumnService.Width = 120;
+            // 
+            // ColumnType
+            // 
+            this.ColumnType.Text = "Type";
+            this.ColumnType.Width = 120;
             // 
             // ColumnRegion
             // 
             this.ColumnRegion.Text = "Region";
             this.ColumnRegion.Width = 120;
             // 
+            // columnName
+            // 
+            this.columnName.Text = "Name";
+            this.columnName.Width = 120;
+            // 
+            // columnID
+            // 
+            this.columnID.Text = "ID";
+            this.columnID.Width = 120;
+            // 
+            // columnArn
+            // 
+            this.columnArn.Text = "ARN";
+            this.columnArn.Width = 120;
+            // 
             // contextMenuObjects
             // 
             this.contextMenuObjects.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewItemToolStripMenuItem,
             this.toolStripMenuItem3,
-            this.deleteToolStripMenuItem,
             this.clearToolStripMenuItem});
             this.contextMenuObjects.Name = "contextMenuStripObjects";
-            this.contextMenuObjects.Size = new System.Drawing.Size(127, 76);
-            // 
-            // viewItemToolStripMenuItem
-            // 
-            this.viewItemToolStripMenuItem.Name = "viewItemToolStripMenuItem";
-            this.viewItemToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.viewItemToolStripMenuItem.Text = "&View Item";
-            this.viewItemToolStripMenuItem.Click += new System.EventHandler(this.ViewItemToolStripMenuItem_Click);
+            this.contextMenuObjects.Size = new System.Drawing.Size(102, 32);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(123, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(98, 6);
             // 
-            // deleteToolStripMenuItem
+            // clearToolStripMenuItem
             // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.deleteToolStripMenuItem.Text = "&Delete";
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.clearToolStripMenuItem.Text = "&Clear";
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
@@ -443,6 +425,11 @@
             this.listViewMessages.VirtualMode = true;
             this.listViewMessages.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.ListViewMessages_RetrieveVirtualItem);
             // 
+            // columnProgressTime
+            // 
+            this.columnProgressTime.Text = "Time";
+            this.columnProgressTime.Width = 120;
+            // 
             // columnProgressAPI
             // 
             this.columnProgressAPI.Text = "API";
@@ -466,16 +453,18 @@
             // contextMenuMessages
             // 
             this.contextMenuMessages.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveMessagesMenuItem,
-            this.clearToolStripMenuItem1});
+            this.clearToolStripMenuItem1,
+            this.toolStripMenuItem2,
+            this.viewInProfileToolStripMenuItem});
             this.contextMenuMessages.Name = "contextMenuMessages";
-            this.contextMenuMessages.Size = new System.Drawing.Size(102, 48);
+            this.contextMenuMessages.Size = new System.Drawing.Size(181, 76);
             // 
-            // saveMessagesMenuItem
+            // clearToolStripMenuItem1
             // 
-            this.saveMessagesMenuItem.Name = "saveMessagesMenuItem";
-            this.saveMessagesMenuItem.Size = new System.Drawing.Size(101, 22);
-            this.saveMessagesMenuItem.Text = "&Save";
+            this.clearToolStripMenuItem1.Name = "clearToolStripMenuItem1";
+            this.clearToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.clearToolStripMenuItem1.Text = "&Clear";
+            this.clearToolStripMenuItem1.Click += new System.EventHandler(this.ClearToolStripMenuItem1_Click);
             // 
             // imageList
             // 
@@ -571,39 +560,17 @@
             this.propertyGridObject.Size = new System.Drawing.Size(361, 290);
             this.propertyGridObject.TabIndex = 2;
             // 
-            // columnName
+            // toolStripMenuItem2
             // 
-            this.columnName.Text = "Name";
-            this.columnName.Width = 120;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
             // 
-            // columnID
+            // viewInProfileToolStripMenuItem
             // 
-            this.columnID.Text = "ID";
-            this.columnID.Width = 120;
-            // 
-            // columnArn
-            // 
-            this.columnArn.Text = "ARN";
-            this.columnArn.Width = 120;
-            // 
-            // clearToolStripMenuItem
-            // 
-            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.clearToolStripMenuItem.Text = "&Clear";
-            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
-            // 
-            // clearToolStripMenuItem1
-            // 
-            this.clearToolStripMenuItem1.Name = "clearToolStripMenuItem1";
-            this.clearToolStripMenuItem1.Size = new System.Drawing.Size(101, 22);
-            this.clearToolStripMenuItem1.Text = "&Clear";
-            this.clearToolStripMenuItem1.Click += new System.EventHandler(this.clearToolStripMenuItem1_Click);
-            // 
-            // columnProgressTime
-            // 
-            this.columnProgressTime.Text = "Time";
-            this.columnProgressTime.Width = 120;
+            this.viewInProfileToolStripMenuItem.Name = "viewInProfileToolStripMenuItem";
+            this.viewInProfileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewInProfileToolStripMenuItem.Text = "View in Profile";
+            this.viewInProfileToolStripMenuItem.Click += new System.EventHandler(this.ViewInProfileToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -618,7 +585,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormMain";
-            this.Text = "Heaven";
+            this.Text = "AWS Retriever";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -668,13 +635,9 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.ToolStripMenuItem menuItemOptions;
         private System.Windows.Forms.ToolStripMenuItem menuItemSetCredentials;
-        private System.Windows.Forms.ToolStripMenuItem viewItemToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripLabel lblFilter;
-        private System.Windows.Forms.ToolStripTextBox txtFilter;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItemHelp;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         private System.Windows.Forms.SplitContainer splitContainerBack;
@@ -691,14 +654,11 @@
         private System.Windows.Forms.ColumnHeader ColumnType;
         private System.Windows.Forms.ColumnHeader ColumnService;
         private System.Windows.Forms.ColumnHeader ColumnRegion;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripComboBox cmbProfiles;
         private System.Windows.Forms.ToolStripButton btnManageProfiles;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.SplitContainer splitContainerObject;
         private System.Windows.Forms.PropertyGrid propertyGridObject;
         private System.Windows.Forms.ContextMenuStrip contextMenuMessages;
-        private System.Windows.Forms.ToolStripMenuItem saveMessagesMenuItem;
         private System.Windows.Forms.ToolStripButton buttonRun;
         private System.Windows.Forms.RichTextBox richTextBoxCobo;
         private System.Windows.Forms.ColumnHeader columnName;
@@ -707,6 +667,9 @@
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem1;
         private System.Windows.Forms.ColumnHeader columnProgressTime;
+        private System.Windows.Forms.ToolStripTextBox txtProfileName;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem viewInProfileToolStripMenuItem;
     }
 }
 

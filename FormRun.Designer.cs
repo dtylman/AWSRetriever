@@ -132,6 +132,7 @@ namespace Retriever
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(615, 479);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBoxOperation);
@@ -144,6 +145,7 @@ namespace Retriever
             this.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormRun";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Run Single Operation";
             this.Load += new System.EventHandler(this.FormRun_Load);
             this.ResumeLayout(false);

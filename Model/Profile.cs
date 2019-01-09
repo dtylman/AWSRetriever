@@ -24,7 +24,7 @@ namespace Retriever
             {
                 Profile p = new Profile()
                 {
-                    name = "Default"
+                    name = "everything"
                 };
                 string regions = RegionsString.All().Text();
                 foreach (Operation op in OperationFactory.All())
@@ -97,25 +97,24 @@ namespace Retriever
                     this[i].EnableRegion(region, enabled);
                 }
             }
-
+           
             public void Save()
             {
-                Save("");
+                Save(name);
             }
 
-            public void Save(string fileName)
+            public void Save(string name="default")
             {
-                string outFileName = fileName;
-                if (fileName == "")
+                if (string.IsNullOrEmpty(name))
                 {
-                    if ((this.name == null) || (this.name == ""))
-                    {
-                        this.name = "Default";
-                    }
-                    outFileName = this.Name + ".json";
+                    this.name = "default";
+                } else
+                {
+                    this.name = name;
                 }
+                
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamWriter sw = new StreamWriter(outFileName))
+                using (StreamWriter sw = new StreamWriter(this.name+".profile.json"))
                 using (JsonWriter writer = new JsonTextWriter(sw))
                 {
                     writer.Formatting = Formatting.Indented;
@@ -123,13 +122,16 @@ namespace Retriever
                 }
             }
 
-            public static Profile Load(string fileName)
+            public static Profile Load(string name = "default")
             {
+
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamReader sr = new StreamReader(fileName))
+                using (StreamReader sr = new StreamReader(name + ".profile.json"))
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
-                    return serializer.Deserialize<Profile>(reader);
+                    Profile p = serializer.Deserialize<Profile>(reader);
+                    p.Name = name;
+                    return p;
                 }
             }
         }

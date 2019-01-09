@@ -19,7 +19,7 @@ namespace Retriever
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
+         
         }
 
         #region Assembly Attribute Accessors
@@ -100,16 +100,12 @@ namespace Retriever
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
+
         #endregion
 
-        private void logoPictureBox_Click(object sender, EventArgs e)
+        private void linkLabel1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void textBoxDescription_TextChanged(object sender, EventArgs e)
-        {
-
+            System.Diagnostics.Process.Start("https://icons8.com/license");
         }
     }
 }
