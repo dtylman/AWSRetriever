@@ -7,30 +7,106 @@ using Amazon;
 using Amazon.Runtime;
 using AWSRetriver.Controls;
 using CloudOps;
+using NickAc.ModernUIDoneRight;
+using NickAc.ModernUIDoneRight.Forms;
+using NickAc.ModernUIDoneRight.Objects;
 using Retriever.Model;
 using Retriever.Properties;
 
 namespace Retriever
 {
-    public partial class FormMain : Form
+    public partial class FormMain : ModernForm
     {
         private AWSCredentials creds;
         private Scanner scanner;        
         private Profile profile;
         private CloudObjects cloudObjects = new CloudObjects();
         private ProgressMessages progressMessages = new ProgressMessages();
+        private SidebarTextItem scanItem;
 
         public FormMain()
         {
             InitializeComponent();
+            
+            AppAction closeItem = new AppAction();
+            closeItem.Image = Resources.CloseWindow50;
+            closeItem.Click += CloseItem_Click;
+            appBar.Actions.Add(closeItem);
+            
+            this.scanItem = new SidebarTextItem("Scan...");            
+            this.scanItem.Click += ScanItem_Click;
+            this.sidebarControl.Items.Add(this.scanItem);
 
+            SidebarTextItem runAction = new SidebarTextItem("Run...");
+            runAction.Click += RunAction_Click;
+            this.sidebarControl.Items.Add(runAction);
+
+            SidebarTextItem editProfileAction = new SidebarTextItem("Edit Profile..");
+            editProfileAction.Click += EditProfileAction_Click;
+            this.sidebarControl.Items.Add(editProfileAction);
             InitializeBackgroundWorker();
+
             scanner = new Scanner
             {
                 MaxTasks = Settings.Default.ConcurrentConnecitons,
                 TimeOut = Settings.Default.Timeout // 15 minutes default
             };
             scanner.Progress.ProgressChanged += Scanner_ProgressChanged;
+        }
+
+        private void EditProfileAction_Click(object sender, MouseEventArgs e)
+        {
+            ShowProfileDialog();
+        }
+
+        private void RunAction_Click(object sender, MouseEventArgs e)
+        {
+            FormRun form = new FormRun();
+            form.Profile = this.profile;
+            DialogResult dr = form.ShowDialog();
+            if (form.Operation == null)
+            {
+                SetStatus(new ApplicationException("No opeation selected"));
+                return;
+            }
+            if (dr == DialogResult.OK)
+            {
+                if (this.creds == null)
+                {
+                    ShowCredentialsDialog();
+                }
+                foreach (var region in form.SelectedRegions)
+                {
+                    scanner.Invokations.Enqueue(new OperationInvokation(form.Operation, region, this.creds, Settings.Default.PageSize));
+                }
+                if (!backgroundWorker.IsBusy)
+                {
+                    backgroundWorker.RunWorkerAsync();
+                }
+            }
+        }
+
+        private void ScanItem_Click(object sender, MouseEventArgs e)
+        {
+            if (this.creds == null)
+            {
+                ShowCredentialsDialog();
+            }
+            //statusLabel.Text = String.Empty;
+            //            this.buttonScan.Enabled = false;
+            //            this.buttonStop.Enabled = true;
+            this.listViewFound.Items.Clear();
+            this.listViewMessages.Items.Clear();
+            QueueItems();
+            if (!backgroundWorker.IsBusy)
+            {
+                backgroundWorker.RunWorkerAsync();
+            }
+        }
+
+        private void CloseItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         #region background worker
@@ -97,8 +173,8 @@ namespace Retriever
                 SetStatus("Done");
             }
 
-            buttonScan.Enabled = true;
-            buttonStop.Enabled = false;
+//            buttonScan.Enabled = true;
+//            buttonStop.Enabled = false;
 
             FormAction("Saving objects...", cloudObjects.Save);
         }
@@ -138,35 +214,7 @@ namespace Retriever
             {
                 backgroundWorker.ReportProgress(e.Progress, e);
             }
-        }
-
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void ToolStripButtonClose_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void ToolStripButtonLoad_Click(object sender, EventArgs e)
-        {
-            if (this.creds == null)
-            {
-                ShowCredentialsDialog();
-            }
-            statusLabel.Text = String.Empty;
-            this.buttonScan.Enabled = false;
-            this.buttonStop.Enabled = true;
-            this.listViewFound.Items.Clear();
-            this.listViewMessages.Items.Clear();
-            QueueItems();
-            if (!backgroundWorker.IsBusy)
-            {
-                backgroundWorker.RunWorkerAsync();
-            }
-        }
+        }              
 
         private void QueueItems()
         {
@@ -218,17 +266,6 @@ namespace Retriever
             ShowErrorDiaglog(new NotImplementedException());
         }
 
-        private void MenuItemAbout_Click(object sender, EventArgs e)
-        {
-            ShowAboutBox();
-        }
-
-        private void ShowAboutBox()
-        {
-            FormAbout formAbout = new FormAbout();
-            formAbout.ShowDialog();
-        }
-
         private void ListViewFound_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.listViewFound.SelectedIndices.Count > 0)
@@ -239,11 +276,7 @@ namespace Retriever
             }
         }
 
-        private void BtnManageProfiles_Click(object sender, EventArgs e)
-        {
-            ShowProfileDialog();
-        }
-
+        
         private void ShowProfileDialog()
         {
             FormProfiles formProfiles = new FormProfiles();
@@ -327,38 +360,12 @@ namespace Retriever
             }
             finally
             {
-                this.txtProfileName.Text = this.profile.Name;
+//                this.txtProfileName.Text = this.profile.Name;
             }
         }
 
        
-
-        private void ToolStripButton1_Click(object sender, EventArgs e)
-        {
-            FormRun form = new FormRun();
-            form.Profile = this.profile;
-            DialogResult dr = form.ShowDialog();
-            if (form.Operation == null)
-            {
-                SetStatus(new ApplicationException("No opeation selected"));
-                return;
-            }
-            if (dr == DialogResult.OK)
-            {
-                if (this.creds == null)
-                {
-                    ShowCredentialsDialog();
-                }
-                foreach (var region in form.SelectedRegions)
-                {                      
-                    scanner.Invokations.Enqueue(new OperationInvokation(form.Operation, region, this.creds, Settings.Default.PageSize));
-                }                                    
-                if (!backgroundWorker.IsBusy)
-                {
-                    backgroundWorker.RunWorkerAsync();
-                }
-            }
-        }
+       
 
 
         private void ListViewFound_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)

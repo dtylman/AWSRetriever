@@ -29,145 +29,179 @@
         private void InitializeComponent()
         {
             this.panelButtons = new System.Windows.Forms.Panel();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtAccessKey = new System.Windows.Forms.TextBox();
-            this.txtSecretKey = new System.Windows.Forms.TextBox();
-            this.cmbProfile = new System.Windows.Forms.ComboBox();
+            this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.checkBoxSave = new System.Windows.Forms.CheckBox();
+            this.cmbProfile = new System.Windows.Forms.ComboBox();
+            this.txtSecretKey = new System.Windows.Forms.TextBox();
+            this.txtAccessKey = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelButtons.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelButtons
             // 
-            this.panelButtons.Controls.Add(this.buttonCancel);
-            this.panelButtons.Controls.Add(this.buttonOK);
+            this.panelButtons.Controls.Add(this.modernButton2);
+            this.panelButtons.Controls.Add(this.modernButton1);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelButtons.Location = new System.Drawing.Point(0, 203);
+            this.panelButtons.Location = new System.Drawing.Point(1, 337);
+            this.panelButtons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(499, 54);
+            this.panelButtons.Size = new System.Drawing.Size(655, 76);
             this.panelButtons.TabIndex = 0;
             // 
-            // buttonCancel
+            // modernButton2
             // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(280, 15);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(87, 27);
-            this.buttonCancel.TabIndex = 1;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.modernButton2.CustomColorScheme = false;
+            this.modernButton2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.modernButton2.Location = new System.Drawing.Point(379, 27);
+            this.modernButton2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.modernButton2.Name = "modernButton2";
+            this.modernButton2.Size = new System.Drawing.Size(96, 32);
+            this.modernButton2.TabIndex = 3;
+            this.modernButton2.Text = "Cancel";
+            this.modernButton2.UseVisualStyleBackColor = true;
             // 
-            // buttonOK
+            // modernButton1
             // 
-            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(139, 14);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(87, 27);
-            this.buttonOK.TabIndex = 0;
-            this.buttonOK.Text = "OK";
-            this.buttonOK.UseVisualStyleBackColor = true;
+            this.modernButton1.CustomColorScheme = false;
+            this.modernButton1.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.modernButton1.Location = new System.Drawing.Point(216, 27);
+            this.modernButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.modernButton1.Name = "modernButton1";
+            this.modernButton1.Size = new System.Drawing.Size(96, 32);
+            this.modernButton1.TabIndex = 2;
+            this.modernButton1.Text = "OK";
+            this.modernButton1.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // panel1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "AWS Access Key:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 68);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "AWS Secret Key:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 122);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 15);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "or Profile:";
-            // 
-            // txtAccessKey
-            // 
-            this.txtAccessKey.Location = new System.Drawing.Point(139, 10);
-            this.txtAccessKey.Name = "txtAccessKey";
-            this.txtAccessKey.Size = new System.Drawing.Size(346, 23);
-            this.txtAccessKey.TabIndex = 6;
-            this.txtAccessKey.UseSystemPasswordChar = true;
-            // 
-            // txtSecretKey
-            // 
-            this.txtSecretKey.Location = new System.Drawing.Point(139, 65);
-            this.txtSecretKey.Name = "txtSecretKey";
-            this.txtSecretKey.Size = new System.Drawing.Size(346, 23);
-            this.txtSecretKey.TabIndex = 7;
-            this.txtSecretKey.UseSystemPasswordChar = true;
-            // 
-            // cmbProfile
-            // 
-            this.cmbProfile.FormattingEnabled = true;
-            this.cmbProfile.Location = new System.Drawing.Point(139, 119);
-            this.cmbProfile.Name = "cmbProfile";
-            this.cmbProfile.Size = new System.Drawing.Size(228, 23);
-            this.cmbProfile.TabIndex = 9;
+            this.panel1.Controls.Add(this.checkBoxSave);
+            this.panel1.Controls.Add(this.cmbProfile);
+            this.panel1.Controls.Add(this.txtSecretKey);
+            this.panel1.Controls.Add(this.txtAccessKey);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(1, 33);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(655, 304);
+            this.panel1.TabIndex = 1;
             // 
             // checkBoxSave
             // 
             this.checkBoxSave.AutoSize = true;
-            this.checkBoxSave.Location = new System.Drawing.Point(13, 167);
+            this.checkBoxSave.Location = new System.Drawing.Point(21, 232);
+            this.checkBoxSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBoxSave.Name = "checkBoxSave";
-            this.checkBoxSave.Size = new System.Drawing.Size(116, 19);
-            this.checkBoxSave.TabIndex = 10;
+            this.checkBoxSave.Size = new System.Drawing.Size(144, 25);
+            this.checkBoxSave.TabIndex = 17;
             this.checkBoxSave.Text = "Save Credentials";
             this.checkBoxSave.UseVisualStyleBackColor = true;
             // 
+            // cmbProfile
+            // 
+            this.cmbProfile.FormattingEnabled = true;
+            this.cmbProfile.Location = new System.Drawing.Point(183, 165);
+            this.cmbProfile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbProfile.Name = "cmbProfile";
+            this.cmbProfile.Size = new System.Drawing.Size(292, 29);
+            this.cmbProfile.TabIndex = 16;
+            // 
+            // txtSecretKey
+            // 
+            this.txtSecretKey.Location = new System.Drawing.Point(183, 90);
+            this.txtSecretKey.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSecretKey.Name = "txtSecretKey";
+            this.txtSecretKey.Size = new System.Drawing.Size(444, 29);
+            this.txtSecretKey.TabIndex = 15;
+            this.txtSecretKey.UseSystemPasswordChar = true;
+            // 
+            // txtAccessKey
+            // 
+            this.txtAccessKey.Location = new System.Drawing.Point(183, 13);
+            this.txtAccessKey.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAccessKey.Name = "txtAccessKey";
+            this.txtAccessKey.Size = new System.Drawing.Size(444, 29);
+            this.txtAccessKey.TabIndex = 14;
+            this.txtAccessKey.UseSystemPasswordChar = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 169);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 21);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "or Profile:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 94);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(122, 21);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "AWS Secret Key:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(22, 18);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 21);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "AWS Access Key:";
+            // 
             // FormCredentials
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 257);
+            this.ClientSize = new System.Drawing.Size(657, 414);
+            this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
+            this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
+            this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
+            this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
             this.ControlBox = false;
-            this.Controls.Add(this.checkBoxSave);
-            this.Controls.Add(this.cmbProfile);
-            this.Controls.Add(this.txtSecretKey);
-            this.Controls.Add(this.txtAccessKey);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelButtons);
-            this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Location = new System.Drawing.Point(0, 0);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MinimumSize = new System.Drawing.Size(123, 55);
             this.Name = "FormCredentials";
+            this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AWS Credentials";
             this.Load += new System.EventHandler(this.FormCredentials_Load);
             this.panelButtons.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel panelButtons;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtAccessKey;
-        private System.Windows.Forms.TextBox txtSecretKey;
-        private System.Windows.Forms.ComboBox cmbProfile;
+        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton2;
+        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton1;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox checkBoxSave;
+        private System.Windows.Forms.ComboBox cmbProfile;
+        private System.Windows.Forms.TextBox txtSecretKey;
+        private System.Windows.Forms.TextBox txtAccessKey;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

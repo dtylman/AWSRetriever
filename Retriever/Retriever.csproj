@@ -61,12 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\CloudObjects.cs" />
-    <Compile Include="FormAbout.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormAbout.Designer.cs">
-      <DependentUpon>FormAbout.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormCredentials.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,9 +96,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FormAbout.resx">
-      <DependentUpon>FormAbout.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormCredentials.resx">
       <DependentUpon>FormCredentials.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,7 +161,16 @@
       <Project>{38dc0e7f-af8d-4a2e-8e7e-e42e3839d2bb}</Project>
       <Name>CloudOps</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj">
+      <Project>{2b12bd1b-9601-4b60-9515-f9a756d10753}</Project>
+      <Name>ModernUIDoneRight</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\47231.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\47231-smaller.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

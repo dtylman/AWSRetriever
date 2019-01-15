@@ -1,13 +1,14 @@
 ﻿using Amazon;
 using AWSRetriver.Controls;
 using CloudOps;
+using NickAc.ModernUIDoneRight.Forms;
 using Retriever.Model;
 using System;
 using System.Windows.Forms;
 
 namespace Retriever
 {
-    public partial class FormProfiles : Form
+    public partial class FormProfiles : ModernForm
     {
         private Profile profile;
 

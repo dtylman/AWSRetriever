@@ -348,6 +348,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AWSRetriver.Controls", "AWS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retriever", "Retriever\Retriever.csproj", "{20B2599D-0678-4501-BCD3-26BEC04FEB93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernUIDoneRight", "..\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj", "{2B12BD1B-9601-4B60-9515-F9A756D10753}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1042,6 +1044,10 @@ Global
 		{20B2599D-0678-4501-BCD3-26BEC04FEB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20B2599D-0678-4501-BCD3-26BEC04FEB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20B2599D-0678-4501-BCD3-26BEC04FEB93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B12BD1B-9601-4B60-9515-F9A756D10753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B12BD1B-9601-4B60-9515-F9A756D10753}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B12BD1B-9601-4B60-9515-F9A756D10753}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B12BD1B-9601-4B60-9515-F9A756D10753}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

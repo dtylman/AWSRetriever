@@ -5,10 +5,11 @@ using Amazon;
 using CloudOps;
 using Retriever.Model;
 using AWSRetriver.Controls;
+using NickAc.ModernUIDoneRight.Forms;
 
 namespace Retriever
 {
-    public partial class FormRun : Form
+    public partial class FormRun : ModernForm
     {
         private Profile profile;
         
@@ -58,6 +59,36 @@ namespace Retriever
                 this.operation = Profile.FindOpeartion(pr);
             }
             this.selectedRegions = RegionsString.ParseSystemNames(regionsTextbox.Regions).Items;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboServices_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxOperation_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void regionsTextbox_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

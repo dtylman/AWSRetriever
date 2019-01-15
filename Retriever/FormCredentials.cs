@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Windows.Forms;
 using Amazon.Runtime;
 using Amazon.Runtime.CredentialManagement;
+using NickAc.ModernUIDoneRight.Forms;
 using Retriever.Properties;
 
 namespace Retriever
 {
-    public partial class FormCredentials : Form
+    public partial class FormCredentials : ModernForm
     {
         public FormCredentials()
         {
@@ -85,5 +85,6 @@ namespace Retriever
                 this.txtAccessKey.Text = Settings.Default.SettingsKey;
             }
         }
+       
     }
 }        
