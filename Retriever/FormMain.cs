@@ -45,7 +45,7 @@ namespace Retriever
             this.scanAction.Click += ScanAction_Click;
             this.sidebarControl.Items.Add(this.scanAction);
 
-            SidebarTextItem runAction = new SidebarTextItem("Run...");
+            SidebarTextItem runAction = new SidebarTextItem("Run Single Operation...");
             runAction.Click += RunAction_Click;
             this.sidebarControl.Items.Add(runAction);
 
@@ -122,21 +122,24 @@ namespace Retriever
 
         private void ScanAction_Click(object sender, MouseEventArgs e)
         {
-            if (this.scanning)
-            {
-                ModernMessageBox.ShowError(new ApplicationException("Scan in progress. Stop it first."));
-                return;
-            }
-            ValidateCredentials();
-            statusLabel.Text = String.Empty;
-            SetScanning(true);            
-            this.listViewFound.Items.Clear();
-            this.listViewMessages.Items.Clear();
-            QueueItems();
-            if (!backgroundWorker.IsBusy)
-            {
-                backgroundWorker.RunWorkerAsync();
-            }
+            FormAction("Scanning...", delegate
+             {
+                 if (this.scanning)
+                 {
+                     ModernMessageBox.ShowError(new ApplicationException("Scan in progress. Stop it first."));
+                     return;
+                 }
+                 ValidateCredentials();
+                 statusLabel.Text = String.Empty;
+                 SetScanning(true);
+                 this.listViewFound.Items.Clear();
+                 this.listViewMessages.Items.Clear();
+                 QueueItems();
+                 if (!backgroundWorker.IsBusy)
+                 {
+                     backgroundWorker.RunWorkerAsync();
+                 }
+             });
         }
 
         private void ValidateCredentials()
@@ -147,7 +150,10 @@ namespace Retriever
             }
             if (this.creds != null)
             {                
-                return;
+                if (this.creds.GetCredentials() != null)
+                {
+                    return;
+                }
             }
             throw new ApplicationException("Invalid credentials");
         }
