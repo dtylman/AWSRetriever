@@ -11,6 +11,7 @@ using CloudOps;
 using NickAc.ModernUIDoneRight;
 using NickAc.ModernUIDoneRight.Forms;
 using NickAc.ModernUIDoneRight.Objects;
+using NickAc.ModernUIDoneRight.Objects.MenuItems;
 using Retriever.Model;
 using Retriever.Properties;
 
@@ -30,12 +31,16 @@ namespace Retriever
         public FormMain()
         {
             InitializeComponent();
-            
+
+            AppBarMenuTextItem aboutAction = new AppBarMenuTextItem("About");
+            aboutAction.Click += AboutAction_Click;
+            appBar.MenuItems.Add(aboutAction);
+
             AppAction closeAction = new AppAction();
             closeAction.Image = Resources.CloseWindow50;
             closeAction.Click += CloseAction_Click;
             appBar.Actions.Add(closeAction);
-
+            
             this.stopAction = new AppAction();
             stopAction.Image = Resources.Private50;            
             stopAction.Click += StopAction_Click;
@@ -65,6 +70,12 @@ namespace Retriever
                 TimeOut = Settings.Default.Timeout // 15 minutes default
             };
             scanner.Progress.ProgressChanged += Scanner_ProgressChanged;
+        }
+
+        private void AboutAction_Click(object sender, EventArgs e)
+        {
+            FormAbout form = new FormAbout();
+            form.ShowDialog(this);
         }
 
         private void EditCredentialsAction_Click(object sender, MouseEventArgs e)
