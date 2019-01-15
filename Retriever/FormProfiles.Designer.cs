@@ -34,6 +34,8 @@
             this.columnService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tilePanelReborn2 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.panelOperations = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.txtDescription = new System.Windows.Forms.Label();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.gridBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -45,18 +47,17 @@
             this.columnDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tilePanelReborn1 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.tabPageRegions = new System.Windows.Forms.TabPage();
-            this.txtDescription = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.appBar = new NickAc.ModernUIDoneRight.Controls.AppBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridBindingSource)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPageOperatoins.SuspendLayout();
             this.tabPageRegions.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -76,7 +77,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.panelOperations);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Panel2.Controls.Add(this.toolStrip);
-            this.splitContainer1.Size = new System.Drawing.Size(1166, 563);
+            this.splitContainer1.Size = new System.Drawing.Size(1166, 513);
             this.splitContainer1.SplitterDistance = 260;
             this.splitContainer1.SplitterWidth = 6;
             this.splitContainer1.TabIndex = 0;
@@ -91,11 +92,12 @@
             this.listViewServices.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listViewServices.MultiSelect = false;
             this.listViewServices.Name = "listViewServices";
-            this.listViewServices.Size = new System.Drawing.Size(260, 531);
+            this.listViewServices.Size = new System.Drawing.Size(260, 481);
             this.listViewServices.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listViewServices.TabIndex = 1;
             this.listViewServices.UseCompatibleStateImageBehavior = false;
             this.listViewServices.View = System.Windows.Forms.View.Details;
+            this.listViewServices.SelectedIndexChanged += new System.EventHandler(this.ListViewServices_SelectedIndexChanged);
             // 
             // columnService
             // 
@@ -122,8 +124,26 @@
             this.panelOperations.Location = new System.Drawing.Point(0, 32);
             this.panelOperations.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.panelOperations.Name = "panelOperations";
-            this.panelOperations.Size = new System.Drawing.Size(900, 448);
+            this.panelOperations.Size = new System.Drawing.Size(900, 398);
             this.panelOperations.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.txtDescription);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 430);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(900, 83);
+            this.panel1.TabIndex = 3;
+            // 
+            // txtDescription
+            // 
+            this.txtDescription.AutoSize = true;
+            this.txtDescription.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescription.Location = new System.Drawing.Point(12, 11);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(0, 21);
+            this.txtDescription.TabIndex = 0;
             // 
             // toolStrip
             // 
@@ -150,11 +170,11 @@
             this.tabControl1.Controls.Add(this.tabPageOperatoins);
             this.tabControl1.Controls.Add(this.tabPageRegions);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(1, 33);
+            this.tabControl1.Location = new System.Drawing.Point(1, 83);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1182, 607);
+            this.tabControl1.Size = new System.Drawing.Size(1182, 557);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPageOperatoins
@@ -165,7 +185,7 @@
             this.tabPageOperatoins.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPageOperatoins.Name = "tabPageOperatoins";
             this.tabPageOperatoins.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPageOperatoins.Size = new System.Drawing.Size(1174, 573);
+            this.tabPageOperatoins.Size = new System.Drawing.Size(1174, 523);
             this.tabPageOperatoins.TabIndex = 1;
             this.tabPageOperatoins.Text = "Operations";
             this.tabPageOperatoins.UseVisualStyleBackColor = true;
@@ -185,7 +205,7 @@
             this.listViewProfileRecords.MultiSelect = false;
             this.listViewProfileRecords.Name = "listViewProfileRecords";
             this.listViewProfileRecords.ShowItemToolTips = true;
-            this.listViewProfileRecords.Size = new System.Drawing.Size(1166, 525);
+            this.listViewProfileRecords.Size = new System.Drawing.Size(1166, 475);
             this.listViewProfileRecords.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listViewProfileRecords.TabIndex = 1;
             this.listViewProfileRecords.UseCompatibleStateImageBehavior = false;
@@ -224,28 +244,24 @@
             this.tabPageRegions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPageRegions.Name = "tabPageRegions";
             this.tabPageRegions.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPageRegions.Size = new System.Drawing.Size(1174, 573);
+            this.tabPageRegions.Size = new System.Drawing.Size(1174, 523);
             this.tabPageRegions.TabIndex = 0;
             this.tabPageRegions.Text = "Regions";
             this.tabPageRegions.UseVisualStyleBackColor = true;
             // 
-            // txtDescription
+            // appBar
             // 
-            this.txtDescription.AutoSize = true;
-            this.txtDescription.Location = new System.Drawing.Point(12, 11);
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(52, 21);
-            this.txtDescription.TabIndex = 0;
-            this.txtDescription.Text = "label1";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.txtDescription);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 480);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(900, 83);
-            this.panel1.TabIndex = 3;
+            this.appBar.CastShadow = true;
+            this.appBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.appBar.HamburgerButtonSize = 32;
+            this.appBar.IconVisible = false;
+            this.appBar.Location = new System.Drawing.Point(1, 33);
+            this.appBar.Name = "appBar";
+            this.appBar.OverrideParentText = false;
+            this.appBar.Size = new System.Drawing.Size(1182, 50);
+            this.appBar.TabIndex = 1;
+            this.appBar.Text = "Profile Editor";
+            this.appBar.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             // 
             // FormProfiles
             // 
@@ -257,6 +273,7 @@
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.appBar);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Location = new System.Drawing.Point(0, 0);
@@ -267,21 +284,22 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Edit Profile";
+            this.Text = "Profile Editor";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormProfiles_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridBindingSource)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPageOperatoins.ResumeLayout(false);
             this.tabPageRegions.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -306,5 +324,6 @@
         private System.Windows.Forms.Panel panelOperations;
         private System.Windows.Forms.Label txtDescription;
         private System.Windows.Forms.Panel panel1;
+        private NickAc.ModernUIDoneRight.Controls.AppBar appBar;
     }
 }

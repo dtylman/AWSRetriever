@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -22,28 +23,40 @@ namespace Retriever
         private Profile profile;
         private CloudObjects cloudObjects = new CloudObjects();
         private ProgressMessages progressMessages = new ProgressMessages();
-        private SidebarTextItem scanItem;
+        private AppAction stopAction;
+        private SidebarTextItem scanAction;
+        private bool scanning;
 
         public FormMain()
         {
             InitializeComponent();
             
-            AppAction closeItem = new AppAction();
-            closeItem.Image = Resources.CloseWindow50;
-            closeItem.Click += CloseItem_Click;
-            appBar.Actions.Add(closeItem);
+            AppAction closeAction = new AppAction();
+            closeAction.Image = Resources.CloseWindow50;
+            closeAction.Click += CloseAction_Click;
+            appBar.Actions.Add(closeAction);
+
+            this.stopAction = new AppAction();
+            stopAction.Image = Resources.Private50;            
+            stopAction.Click += StopAction_Click;
+            appBar.Actions.Add(stopAction);                
             
-            this.scanItem = new SidebarTextItem("Scan...");            
-            this.scanItem.Click += ScanItem_Click;
-            this.sidebarControl.Items.Add(this.scanItem);
+            this.scanAction = new SidebarTextItem("Scan...");            
+            this.scanAction.Click += ScanAction_Click;
+            this.sidebarControl.Items.Add(this.scanAction);
 
             SidebarTextItem runAction = new SidebarTextItem("Run...");
             runAction.Click += RunAction_Click;
             this.sidebarControl.Items.Add(runAction);
 
-            SidebarTextItem editProfileAction = new SidebarTextItem("Edit Profile..");
+            SidebarTextItem editProfileAction = new SidebarTextItem("Edit Profile...");
             editProfileAction.Click += EditProfileAction_Click;
             this.sidebarControl.Items.Add(editProfileAction);
+
+            SidebarTextItem editCredentialsAction = new SidebarTextItem("Edit Credentials...");
+            editCredentialsAction.Click += EditCredentialsAction_Click;
+            this.sidebarControl.Items.Add(editCredentialsAction);
+
             InitializeBackgroundWorker();
 
             scanner = new Scanner
@@ -52,6 +65,27 @@ namespace Retriever
                 TimeOut = Settings.Default.Timeout // 15 minutes default
             };
             scanner.Progress.ProgressChanged += Scanner_ProgressChanged;
+        }
+
+        private void EditCredentialsAction_Click(object sender, MouseEventArgs e)
+        {
+            ShowCredentialsDialog();
+        }
+
+        private void StopAction_Click(object sender, EventArgs e)
+        {
+            if (!this.scanning)
+            {
+                ModernMessageBox.ShowError(new ApplicationException("Not scanning"));
+            }
+            FormAction("Stopping...", delegate ()
+            {
+                if (this.scanner != null)
+                {
+
+                    this.scanner.Cancel();
+                }
+            });            
         }
 
         private void EditProfileAction_Click(object sender, MouseEventArgs e)
@@ -86,15 +120,16 @@ namespace Retriever
             }
         }
 
-        private void ScanItem_Click(object sender, MouseEventArgs e)
+        private void ScanAction_Click(object sender, MouseEventArgs e)
         {
-            if (this.creds == null)
+            if (this.scanning)
             {
-                ShowCredentialsDialog();
+                ModernMessageBox.ShowError(new ApplicationException("Scan in progress. Stop it first."));
+                return;
             }
-            //statusLabel.Text = String.Empty;
-            //            this.buttonScan.Enabled = false;
-            //            this.buttonStop.Enabled = true;
+            ValidateCredentials();
+            statusLabel.Text = String.Empty;
+            SetScanning(true);            
             this.listViewFound.Items.Clear();
             this.listViewMessages.Items.Clear();
             QueueItems();
@@ -104,7 +139,32 @@ namespace Retriever
             }
         }
 
-        private void CloseItem_Click(object sender, EventArgs e)
+        private void ValidateCredentials()
+        {
+            if (this.creds == null)
+            {
+                ShowCredentialsDialog();
+            }
+            if (this.creds != null)
+            {                
+                return;
+            }
+            throw new ApplicationException("Invalid credentials");
+        }
+
+        private void SetScanning(bool value)
+        {
+            this.scanning = value;
+            if (value)
+            {
+                this.Cursor = Cursors.AppStarting;
+            } else
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+
+        private void CloseAction_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -161,7 +221,7 @@ namespace Retriever
             if (e.Error != null)
             {
                 SetStatus(e.Error);
-                ShowErrorDiaglog(e.Error);
+                ModernMessageBox.ShowError(e.Error);                
             }
             else if (e.Cancelled)
             {
@@ -173,8 +233,7 @@ namespace Retriever
                 SetStatus("Done");
             }
 
-//            buttonScan.Enabled = true;
-//            buttonStop.Enabled = false;
+            SetScanning(false);
 
             FormAction("Saving objects...", cloudObjects.Save);
         }
@@ -187,11 +246,7 @@ namespace Retriever
             this.statusLabel.Text = ir.ResultText();
         }
 
-        private void ShowErrorDiaglog(Exception e)
-        {
-            MessageBox.Show("Error:" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
+        
         private void SetStatus(Exception e)
         {
             SetStatus("Error: " + e.Message);
@@ -233,17 +288,7 @@ namespace Retriever
                     }
                 }
             }
-        }
-
-        private void ToolStripButtonStop_Click(object sender, EventArgs e)
-        {
-            this.scanner.Cancel();
-        }
-
-        private void MenuItemSetCredentials_Click(object sender, EventArgs e)
-        {
-            ShowCredentialsDialog();
-        }
+        }        
 
         private void ShowCredentialsDialog()
         {
@@ -263,7 +308,7 @@ namespace Retriever
 
         private void ViewItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowErrorDiaglog(new NotImplementedException());
+            ModernMessageBox.ShowError(new NotImplementedException());
         }
 
         private void ListViewFound_SelectedIndexChanged(object sender, EventArgs e)
@@ -334,7 +379,7 @@ namespace Retriever
             {
                 if (showMessageBox)
                 {
-                    ShowErrorDiaglog(ex);
+                    ModernMessageBox.ShowError(ex);
                 }
                 else
                 {
@@ -360,13 +405,27 @@ namespace Retriever
             }
             finally
             {
-//                this.txtProfileName.Text = this.profile.Name;
+                RefreshProfileName();
             }
         }
 
-       
-       
+        public string AssemblyProduct
+        {
+            get
+            {
+                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+                if (attributes.Length == 0)
+                {
+                    return "";
+                }
+                return ((AssemblyProductAttribute)attributes[0]).Product;
+            }
+        }
 
+        private void RefreshProfileName()
+        {
+            this.appBar.Text = String.Format("{0} - ('{1}' profile)", AssemblyProduct, this.profile.Name);
+        }
 
         private void ListViewFound_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
         {
@@ -395,9 +454,5 @@ namespace Retriever
             this.progressMessages.Save();
         }
 
-        private void ViewInProfileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

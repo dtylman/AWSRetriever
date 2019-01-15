@@ -61,34 +61,6 @@ namespace Retriever
             this.selectedRegions = RegionsString.ParseSystemNames(regionsTextbox.Regions).Items;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboServices_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBoxOperation_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void regionsTextbox_Load(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

@@ -88,6 +88,12 @@
     <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\ProfileRecord.cs" />
     <Compile Include="Model\ProgressMessage.cs" />
+    <Compile Include="ModernMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModernMessageBox.Designer.cs">
+      <DependentUpon>ModernMessageBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Model\ProgressMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormRun.resx">
       <DependentUpon>FormRun.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModernMessageBox.resx">
+      <DependentUpon>ModernMessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

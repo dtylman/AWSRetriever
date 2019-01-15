@@ -2,7 +2,9 @@
 using AWSRetriver.Controls;
 using CloudOps;
 using NickAc.ModernUIDoneRight.Forms;
+using NickAc.ModernUIDoneRight.Objects;
 using Retriever.Model;
+using Retriever.Properties;
 using System;
 using System.Windows.Forms;
 
@@ -17,7 +19,46 @@ namespace Retriever
         public FormProfiles()
         {
             InitializeComponent();
-            PopulateToolBar();            
+
+            AppAction closeAction = new AppAction();
+            closeAction.Click += CloseAction_Click;
+            closeAction.Image = Resources.CloseWindow50;
+            this.appBar.Actions.Add(closeAction);
+
+            AppAction exportProfileAction = new AppAction();
+            exportProfileAction.Image = Resources.Save50;
+            exportProfileAction.Click += ExportProfileAction_Click;
+            this.appBar.Actions.Add(exportProfileAction);
+
+            PopulateToolBar();
+
+        }
+
+        private void CloseAction_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void ExportProfileAction_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog savefile = new SaveFileDialog();
+            // set a default file name
+            savefile.FileName = this.profile.Name + ".profile.js";
+            // set filters - this can be done in properties as well
+            savefile.Filter = "Profile (*.profile.js)|*.profile.js";
+
+            if (savefile.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    this.profile.Save(savefile.FileName);
+                    ModernMessageBox.Show(String.Format("Saved to '{0}'.", savefile.FileName));
+                }
+                catch(Exception ex)
+                {
+                    ModernMessageBox.ShowError(ex);
+                }
+            }
         }
 
         private void PopulateToolBar()
@@ -119,6 +160,7 @@ namespace Retriever
                 rc.AutoSize = true;
                 rc.CheckBox.Checked = p.Enabled;                
                 rc.LinkLabel.Text = op.Name;
+                rc.LinkLabel.Font = this.Font;
                 rc.LinkLabel.Tag = op.Description;                
                 string pageSize = p.PageSize.ToString();                
                 rc.TextPageSize.Text = pageSize;
@@ -147,12 +189,7 @@ namespace Retriever
         {
             this.txtDescription.Text = (sender as LinkLabel).Tag.ToString();
         }
-
-        private void ListViewServices_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            PopulateSelectedServiceOperations();
-        }
-
+        
         private void ListViewProfileRecords_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             ProfileRecord profileRecord = e.Item.Tag as ProfileRecord;
@@ -166,6 +203,11 @@ namespace Retriever
         private void FormProfiles_Load(object sender, EventArgs e)
         {
             PopulateFromProfile();
+        }
+
+        private void ListViewServices_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateSelectedServiceOperations();
         }
     }
 }

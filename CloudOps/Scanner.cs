@@ -38,7 +38,10 @@ namespace CloudOps
                 OperationInvokation op;
                 this.invokations.TryDequeue(out op);
             }
-            this.cancellation.Cancel();
+            if (this.cancellation != null)
+            {
+                this.cancellation.Cancel();
+            }
         }
 
         public void Scan()

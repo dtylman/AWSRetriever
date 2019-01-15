@@ -297,8 +297,7 @@
             // 
             this.viewInProfileToolStripMenuItem.Name = "viewInProfileToolStripMenuItem";
             this.viewInProfileToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.viewInProfileToolStripMenuItem.Text = "View in Profile";
-            this.viewInProfileToolStripMenuItem.Click += new System.EventHandler(this.ViewInProfileToolStripMenuItem_Click);
+            this.viewInProfileToolStripMenuItem.Text = "View in Profile";            
             // 
             // imageList
             // 
