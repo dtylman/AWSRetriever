@@ -155,7 +155,7 @@
             // modernButton1
             // 
             this.modernButton1.CustomColorScheme = false;
-            this.modernButton1.Location = new System.Drawing.Point(295, 3);
+            this.modernButton1.Location = new System.Drawing.Point(465, 3);
             this.modernButton1.Name = "modernButton1";
             this.modernButton1.Size = new System.Drawing.Size(75, 23);
             this.modernButton1.TabIndex = 0;

@@ -348,7 +348,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AWSRetriver.Controls", "AWS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retriever", "Retriever\Retriever.csproj", "{20B2599D-0678-4501-BCD3-26BEC04FEB93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernUIDoneRight", "..\ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj", "{2B12BD1B-9601-4B60-9515-F9A756D10753}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernUIDoneRight", "ModernUIDoneRight\ModernUIDoneRight\ModernUIDoneRight.csproj", "{2B12BD1B-9601-4B60-9515-F9A756D10753}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
