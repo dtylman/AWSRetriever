@@ -19,29 +19,28 @@ namespace Retriever
         public FormProfiles()
         {
             InitializeComponent();
-            
+
+            PopulateToolBar();
+
             AppAction exportProfileAction = new AppAction();
             exportProfileAction.Image = Resources.Save50;
             exportProfileAction.Click += ExportProfileAction_Click;
             this.appBar.Actions.Add(exportProfileAction);
-
-            PopulateToolBar();
-
         }
-        
+
         private void ExportProfileAction_Click(object sender, EventArgs e)
         {
             SaveFileDialog savefile = new SaveFileDialog();
             // set a default file name
-            savefile.FileName = this.profile.Name + ".profile.js";
+            savefile.FileName = this.profile.Name;
             // set filters - this can be done in properties as well
-            savefile.Filter = "Profile (*.profile.js)|*.profile.js";
+            savefile.Filter = Profile.FileFilter;
 
             if (savefile.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    this.profile.Save(savefile.FileName);
+                    this.profile.SaveAs(savefile.FileName);
                     ModernMessageBox.Show(String.Format("Saved to '{0}'.", savefile.FileName));
                 }
                 catch(Exception ex)
@@ -76,6 +75,8 @@ namespace Retriever
 
         private void PopulateFromProfile()
         {
+            this.appBar.Text = String.Format("Editing {0}", this.profile.Path);
+
             foreach (string serviceName in this.profile.Services())
             {
                 ListViewItem item = listViewServices.Items.Add(serviceName);

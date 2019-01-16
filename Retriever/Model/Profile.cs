@@ -11,9 +11,33 @@ namespace Retriever
     {
         public class Profile : List<ProfileRecord>
         {
-            private string name;
+            private string path;
 
-            public string Name { get => name; set => name = value; }
+            public static string FileFilter
+            {
+                get
+                {
+                    return "Profile (*.profile.js)|*.profile.js";
+                }
+            }
+
+            public static string Extension
+            {
+                get
+                {
+                    return ".profile.js";
+                }
+            }
+
+            public string Name
+            {
+                get
+                {
+                    return System.IO.Path.GetFileNameWithoutExtension(this.Path);
+                }
+            }
+
+            public string Path { get => path;}
 
             public Profile()
             {
@@ -24,7 +48,7 @@ namespace Retriever
             {
                 Profile p = new Profile()
                 {
-                    name = "everything"
+                    path = System.IO.Path.Combine("everything", Profile.Extension)
                 };
                 string regions = RegionsString.All().Text();
                 foreach (Operation op in OperationFactory.All())
@@ -97,24 +121,16 @@ namespace Retriever
                     this[i].EnableRegion(region, enabled);
                 }
             }
-           
+            
             public void Save()
             {
-                Save(name);
+                SaveAs(this.Path);
             }
 
-            public void Save(string name="default")
-            {
-                if (string.IsNullOrEmpty(name))
-                {
-                    this.name = "default";
-                } else
-                {
-                    this.name = name;
-                }
-                
+            public void SaveAs(string newPath)
+            {                                
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamWriter sw = new StreamWriter(this.name+".profile.json"))
+                using (StreamWriter sw = new StreamWriter(newPath))
                 using (JsonWriter writer = new JsonTextWriter(sw))
                 {
                     writer.Formatting = Formatting.Indented;
@@ -122,15 +138,14 @@ namespace Retriever
                 }
             }
 
-            public static Profile Load(string name = "default")
-            {
-
+            public static Profile Load(string path)
+            {                
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamReader sr = new StreamReader(name + ".profile.json"))
+                using (StreamReader sr = new StreamReader(path))
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
                     Profile p = serializer.Deserialize<Profile>(reader);
-                    p.Name = name;
+                    p.path = path;
                     return p;
                 }
             }

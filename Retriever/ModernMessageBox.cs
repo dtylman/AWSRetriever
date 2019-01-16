@@ -21,7 +21,7 @@ namespace Retriever
         public static void ShowError(Exception error)
         {
             ModernMessageBox form = new ModernMessageBox();
-            form.label.Text = "Error: " + error.Message;
+            form.richTextBox1.Text = "Error: " + error.Message;
             form.Text = "Error";
             form.pictureBox.Image = Resources.Error50;
             form.ShowDialog();
@@ -30,7 +30,7 @@ namespace Retriever
         public static void Show(string text)
         {
             ModernMessageBox form = new ModernMessageBox();
-            form.label.Text = text;
+            form.richTextBox1.Text = text;
             form.Text = "Message";
             form.pictureBox.Image = Resources.CheckMark50;
             form.ShowDialog();

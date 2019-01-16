@@ -39,8 +39,13 @@ namespace Retriever
             this.stopAction = new AppAction();
             stopAction.Image = Resources.Private50;            
             stopAction.Click += StopAction_Click;            
-            appBar.Actions.Add(stopAction);                
-            
+            appBar.Actions.Add(stopAction);
+
+            AppAction loadProfileAction = new AppAction();
+            loadProfileAction.Image = Resources.Form50;
+            loadProfileAction.Click += LoadProfileAction_Click;
+            appBar.Actions.Add(loadProfileAction);
+
             this.scanAction = new SidebarTextItem("Scan...");                        
             this.scanAction.Click += ScanAction_Click;
             this.sidebarControl.Items.Add(this.scanAction);
@@ -65,6 +70,17 @@ namespace Retriever
                 TimeOut = Settings.Default.Timeout // 15 minutes default
             };
             scanner.Progress.ProgressChanged += Scanner_ProgressChanged;
+        }
+
+        private void LoadProfileAction_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = Profile.FileFilter;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.LoadProfile(openFileDialog.FileName, this.profile);               
+            }
         }
 
         private void AboutAction_Click(object sender, EventArgs e)
@@ -104,13 +120,14 @@ namespace Retriever
             FormRun form = new FormRun();
             form.Profile = this.profile;
             DialogResult dr = form.ShowDialog();
-            if (form.Operation == null)
-            {
-                SetStatus(new ApplicationException("No opeation selected"));
-                return;
-            }
+          
             if (dr == DialogResult.OK)
             {
+                if (form.Operation == null)
+                {
+                    SetStatus(new ApplicationException("No opeation selected"));
+                    return;
+                }
                 if (this.creds == null)
                 {
                     ShowCredentialsDialog();
@@ -339,7 +356,10 @@ namespace Retriever
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            FormAction("Loading profile...", LoadProfileFromFile, false);
+            FormAction("Loading profile...",
+                delegate {
+                    LoadProfile(Settings.Default.Profile, Profile.AllServices());
+                }, false);
             FormAction("Loading objects..", LoadObjectsFromFile, false);
             FormAction("Loading messages..", LoadMessagesFromFile, false);
         }
@@ -399,16 +419,18 @@ namespace Retriever
             }
         }
        
-        private void LoadProfileFromFile()
+        private void LoadProfile(string fileName ,Profile defaultProfile)
         {
             try
-            {
-                this.profile = Profile.Load("default");
+            {                
+                this.profile = Profile.Load(fileName);
+                Settings.Default.Profile = fileName;
             }
             catch (Exception ex)
             {
-                SetStatus(String.Format("Failed to load profile: %v, creating new", ex.Message));
-                this.profile = Profile.AllServices();                
+                ModernMessageBox.ShowError(
+                    new ApplicationException(String.Format("Failed to load profile '{0}': {1}, creating new.", fileName, ex.Message)));
+                this.profile = defaultProfile;
             }
             finally
             {
@@ -431,7 +453,7 @@ namespace Retriever
 
         private void RefreshProfileName()
         {
-            this.appBar.Text = String.Format("{0} - ('{1}' profile)", AssemblyProduct, this.profile.Name);
+            this.appBar.Text = String.Format("{0} - (Active Profile: '{1}')", AssemblyProduct, this.profile.Name);
         }
 
         private void ListViewFound_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)

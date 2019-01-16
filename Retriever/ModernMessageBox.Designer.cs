@@ -33,8 +33,8 @@
             this.panel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.modernButton = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.label = new System.Windows.Forms.Label();
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.modernShadowPanel1.SuspendLayout();
             this.panel.SuspendLayout();
@@ -63,7 +63,7 @@
             // 
             // panel
             // 
-            this.panel.Controls.Add(this.label);
+            this.panel.Controls.Add(this.richTextBox1);
             this.panel.Location = new System.Drawing.Point(68, 12);
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(524, 169);
@@ -74,7 +74,9 @@
             this.panel2.Controls.Add(this.modernButton);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 200);
+            this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(5);
             this.panel2.Size = new System.Drawing.Size(604, 49);
             this.panel2.TabIndex = 2;
             // 
@@ -88,15 +90,6 @@
             this.modernButton.Text = "Close";
             this.modernButton.UseVisualStyleBackColor = true;
             this.modernButton.Click += new System.EventHandler(this.modernButton1_Click);
-            // 
-            // label
-            // 
-            this.label.AutoSize = true;
-            this.label.Location = new System.Drawing.Point(14, 17);
-            this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(52, 21);
-            this.label.TabIndex = 0;
-            this.label.Text = "label1";
             // 
             // appBar1
             // 
@@ -112,6 +105,17 @@
             this.appBar1.Text = "appBar";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.richTextBox1.Location = new System.Drawing.Point(5, 5);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(514, 159);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
+            // 
             // ModernMessageBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -126,7 +130,7 @@
             this.Controls.Add(this.appBar1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Location = new System.Drawing.Point(0, 0);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(123, 55);
             this.Name = "ModernMessageBox";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -135,7 +139,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.modernShadowPanel1.ResumeLayout(false);
             this.panel.ResumeLayout(false);
-            this.panel.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -148,7 +151,7 @@
         private System.Windows.Forms.Panel panel2;
         private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton;
         private System.Windows.Forms.Panel panel;
-        private System.Windows.Forms.Label label;
         private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

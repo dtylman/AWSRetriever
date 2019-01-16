@@ -144,6 +144,7 @@ namespace Retriever
             this.modernButton2.TabIndex = 1;
             this.modernButton2.Text = "Run...";
             this.modernButton2.UseVisualStyleBackColor = true;
+            this.modernButton2.Click += ButtonOK_Click;
             // 
             // modernButton1
             // 
