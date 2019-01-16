@@ -19,12 +19,7 @@ namespace Retriever
         public FormProfiles()
         {
             InitializeComponent();
-
-            AppAction closeAction = new AppAction();
-            closeAction.Click += CloseAction_Click;
-            closeAction.Image = Resources.CloseWindow50;
-            this.appBar.Actions.Add(closeAction);
-
+            
             AppAction exportProfileAction = new AppAction();
             exportProfileAction.Image = Resources.Save50;
             exportProfileAction.Click += ExportProfileAction_Click;
@@ -33,12 +28,7 @@ namespace Retriever
             PopulateToolBar();
 
         }
-
-        private void CloseAction_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
+        
         private void ExportProfileAction_Click(object sender, EventArgs e)
         {
             SaveFileDialog savefile = new SaveFileDialog();

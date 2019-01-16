@@ -174,7 +174,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1182, 557);
+            this.tabControl1.Size = new System.Drawing.Size(1022, 728);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPageOperatoins
@@ -185,7 +185,7 @@
             this.tabPageOperatoins.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPageOperatoins.Name = "tabPageOperatoins";
             this.tabPageOperatoins.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPageOperatoins.Size = new System.Drawing.Size(1174, 523);
+            this.tabPageOperatoins.Size = new System.Drawing.Size(1014, 694);
             this.tabPageOperatoins.TabIndex = 1;
             this.tabPageOperatoins.Text = "Operations";
             this.tabPageOperatoins.UseVisualStyleBackColor = true;
@@ -205,7 +205,7 @@
             this.listViewProfileRecords.MultiSelect = false;
             this.listViewProfileRecords.Name = "listViewProfileRecords";
             this.listViewProfileRecords.ShowItemToolTips = true;
-            this.listViewProfileRecords.Size = new System.Drawing.Size(1166, 475);
+            this.listViewProfileRecords.Size = new System.Drawing.Size(1006, 646);
             this.listViewProfileRecords.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listViewProfileRecords.TabIndex = 1;
             this.listViewProfileRecords.UseCompatibleStateImageBehavior = false;
@@ -233,7 +233,7 @@
             this.tilePanelReborn1.Image = null;
             this.tilePanelReborn1.Location = new System.Drawing.Point(4, 5);
             this.tilePanelReborn1.Name = "tilePanelReborn1";
-            this.tilePanelReborn1.Size = new System.Drawing.Size(1166, 38);
+            this.tilePanelReborn1.Size = new System.Drawing.Size(1006, 38);
             this.tilePanelReborn1.TabIndex = 0;
             this.tilePanelReborn1.Text = "Opeartions";
             // 
@@ -258,7 +258,7 @@
             this.appBar.Location = new System.Drawing.Point(1, 33);
             this.appBar.Name = "appBar";
             this.appBar.OverrideParentText = false;
-            this.appBar.Size = new System.Drawing.Size(1182, 50);
+            this.appBar.Size = new System.Drawing.Size(1022, 50);
             this.appBar.TabIndex = 1;
             this.appBar.Text = "Profile Editor";
             this.appBar.TextFont = new System.Drawing.Font("Segoe UI", 14F);
@@ -267,7 +267,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 641);
+            this.ClientSize = new System.Drawing.Size(1024, 812);
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
@@ -285,7 +285,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Profile Editor";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormProfiles_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

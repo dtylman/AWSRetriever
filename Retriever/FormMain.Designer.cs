@@ -68,8 +68,8 @@
             this.appBar = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.sidebarControl = new NickAc.ModernUIDoneRight.Controls.SidebarControl();
             this.panelStatus = new System.Windows.Forms.Panel();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.statusLabel = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFront)).BeginInit();
             this.splitContainerFront.Panel1.SuspendLayout();
             this.splitContainerFront.Panel2.SuspendLayout();
@@ -106,7 +106,7 @@
             // splitContainerFront.Panel2
             // 
             this.splitContainerFront.Panel2.Controls.Add(this.modernShadowPanel2);
-            this.splitContainerFront.Size = new System.Drawing.Size(824, 710);
+            this.splitContainerFront.Size = new System.Drawing.Size(1008, 710);
             this.splitContainerFront.SplitterDistance = 453;
             this.splitContainerFront.SplitterWidth = 6;
             this.splitContainerFront.TabIndex = 3;
@@ -118,7 +118,7 @@
             this.modernShadowPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modernShadowPanel1.Location = new System.Drawing.Point(0, 0);
             this.modernShadowPanel1.Name = "modernShadowPanel1";
-            this.modernShadowPanel1.Size = new System.Drawing.Size(824, 453);
+            this.modernShadowPanel1.Size = new System.Drawing.Size(1008, 453);
             this.modernShadowPanel1.TabIndex = 2;
             // 
             // listViewFound
@@ -138,7 +138,7 @@
             this.listViewFound.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.listViewFound.MultiSelect = false;
             this.listViewFound.Name = "listViewFound";
-            this.listViewFound.Size = new System.Drawing.Size(824, 413);
+            this.listViewFound.Size = new System.Drawing.Size(1008, 413);
             this.listViewFound.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listViewFound.TabIndex = 0;
             this.listViewFound.UseCompatibleStateImageBehavior = false;
@@ -207,7 +207,7 @@
             this.tilePanelReborn2.Image = null;
             this.tilePanelReborn2.Location = new System.Drawing.Point(0, 0);
             this.tilePanelReborn2.Name = "tilePanelReborn2";
-            this.tilePanelReborn2.Size = new System.Drawing.Size(824, 40);
+            this.tilePanelReborn2.Size = new System.Drawing.Size(1008, 40);
             this.tilePanelReborn2.TabIndex = 1;
             this.tilePanelReborn2.Text = "Objects Found";
             // 
@@ -218,7 +218,7 @@
             this.modernShadowPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modernShadowPanel2.Location = new System.Drawing.Point(0, 0);
             this.modernShadowPanel2.Name = "modernShadowPanel2";
-            this.modernShadowPanel2.Size = new System.Drawing.Size(824, 251);
+            this.modernShadowPanel2.Size = new System.Drawing.Size(1008, 251);
             this.modernShadowPanel2.TabIndex = 0;
             // 
             // listViewMessages
@@ -239,7 +239,7 @@
             this.listViewMessages.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.listViewMessages.MultiSelect = false;
             this.listViewMessages.Name = "listViewMessages";
-            this.listViewMessages.Size = new System.Drawing.Size(824, 211);
+            this.listViewMessages.Size = new System.Drawing.Size(1008, 211);
             this.listViewMessages.SmallImageList = this.imageList;
             this.listViewMessages.TabIndex = 0;
             this.listViewMessages.UseCompatibleStateImageBehavior = false;
@@ -297,7 +297,7 @@
             // 
             this.viewInProfileToolStripMenuItem.Name = "viewInProfileToolStripMenuItem";
             this.viewInProfileToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.viewInProfileToolStripMenuItem.Text = "View in Profile";            
+            this.viewInProfileToolStripMenuItem.Text = "View in Profile";
             // 
             // imageList
             // 
@@ -327,7 +327,7 @@
             this.tilePanelReborn1.Image = null;
             this.tilePanelReborn1.Location = new System.Drawing.Point(0, 0);
             this.tilePanelReborn1.Name = "tilePanelReborn1";
-            this.tilePanelReborn1.Size = new System.Drawing.Size(824, 40);
+            this.tilePanelReborn1.Size = new System.Drawing.Size(1008, 40);
             this.tilePanelReborn1.TabIndex = 0;
             this.tilePanelReborn1.Text = "Messages";
             // 
@@ -339,7 +339,7 @@
             // splitContainerBack
             // 
             this.splitContainerBack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerBack.Location = new System.Drawing.Point(259, 85);
+            this.splitContainerBack.Location = new System.Drawing.Point(1, 85);
             this.splitContainerBack.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.splitContainerBack.Name = "splitContainerBack";
             // 
@@ -350,8 +350,8 @@
             // splitContainerBack.Panel2
             // 
             this.splitContainerBack.Panel2.Controls.Add(this.splitContainerObject);
-            this.splitContainerBack.Size = new System.Drawing.Size(1151, 710);
-            this.splitContainerBack.SplitterDistance = 824;
+            this.splitContainerBack.Size = new System.Drawing.Size(1409, 710);
+            this.splitContainerBack.SplitterDistance = 1008;
             this.splitContainerBack.SplitterWidth = 6;
             this.splitContainerBack.TabIndex = 4;
             // 
@@ -370,7 +370,7 @@
             // splitContainerObject.Panel2
             // 
             this.splitContainerObject.Panel2.Controls.Add(this.modernShadowPanel3);
-            this.splitContainerObject.Size = new System.Drawing.Size(321, 710);
+            this.splitContainerObject.Size = new System.Drawing.Size(395, 710);
             this.splitContainerObject.SplitterDistance = 350;
             this.splitContainerObject.SplitterWidth = 6;
             this.splitContainerObject.TabIndex = 3;
@@ -382,7 +382,7 @@
             this.modernShadowPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modernShadowPanel4.Location = new System.Drawing.Point(0, 0);
             this.modernShadowPanel4.Name = "modernShadowPanel4";
-            this.modernShadowPanel4.Size = new System.Drawing.Size(321, 350);
+            this.modernShadowPanel4.Size = new System.Drawing.Size(395, 350);
             this.modernShadowPanel4.TabIndex = 0;
             // 
             // richTextBoxCobo
@@ -391,7 +391,7 @@
             this.richTextBoxCobo.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBoxCobo.Location = new System.Drawing.Point(0, 34);
             this.richTextBoxCobo.Name = "richTextBoxCobo";
-            this.richTextBoxCobo.Size = new System.Drawing.Size(321, 316);
+            this.richTextBoxCobo.Size = new System.Drawing.Size(395, 316);
             this.richTextBoxCobo.TabIndex = 1;
             this.richTextBoxCobo.Text = "";
             // 
@@ -405,7 +405,7 @@
             this.tilePanelReborn3.Image = null;
             this.tilePanelReborn3.Location = new System.Drawing.Point(0, 0);
             this.tilePanelReborn3.Name = "tilePanelReborn3";
-            this.tilePanelReborn3.Size = new System.Drawing.Size(321, 34);
+            this.tilePanelReborn3.Size = new System.Drawing.Size(395, 34);
             this.tilePanelReborn3.TabIndex = 0;
             this.tilePanelReborn3.Text = "Object";
             // 
@@ -416,7 +416,7 @@
             this.modernShadowPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modernShadowPanel3.Location = new System.Drawing.Point(0, 0);
             this.modernShadowPanel3.Name = "modernShadowPanel3";
-            this.modernShadowPanel3.Size = new System.Drawing.Size(321, 354);
+            this.modernShadowPanel3.Size = new System.Drawing.Size(395, 354);
             this.modernShadowPanel3.TabIndex = 0;
             // 
             // propertyGridObject
@@ -425,7 +425,7 @@
             this.propertyGridObject.Location = new System.Drawing.Point(0, 35);
             this.propertyGridObject.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.propertyGridObject.Name = "propertyGridObject";
-            this.propertyGridObject.Size = new System.Drawing.Size(321, 319);
+            this.propertyGridObject.Size = new System.Drawing.Size(395, 319);
             this.propertyGridObject.TabIndex = 3;
             // 
             // tilePanelReborn4
@@ -438,7 +438,7 @@
             this.tilePanelReborn4.Image = null;
             this.tilePanelReborn4.Location = new System.Drawing.Point(0, 0);
             this.tilePanelReborn4.Name = "tilePanelReborn4";
-            this.tilePanelReborn4.Size = new System.Drawing.Size(321, 35);
+            this.tilePanelReborn4.Size = new System.Drawing.Size(395, 35);
             this.tilePanelReborn4.TabIndex = 0;
             this.tilePanelReborn4.Text = "Properties";
             // 
@@ -463,11 +463,12 @@
             this.sidebarControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.sidebarControl.ColorScheme = this.ColorScheme;
             this.sidebarControl.ContextMenuStrip = this.contextMenuMessages;
+            this.sidebarControl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sidebarControl.Dock = System.Windows.Forms.DockStyle.Left;
             this.sidebarControl.IsClosed = true;
             this.sidebarControl.Location = new System.Drawing.Point(1, 85);
             this.sidebarControl.Name = "sidebarControl";
-            this.sidebarControl.Size = new System.Drawing.Size(258, 747);
+            this.sidebarControl.Size = new System.Drawing.Size(258, 710);
             this.sidebarControl.TabIndex = 6;
             this.sidebarControl.Text = "sidebarControl";
             this.sidebarControl.TopBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(189)))), ((int)(((byte)(189)))));
@@ -479,18 +480,10 @@
             this.panelStatus.Controls.Add(this.statusLabel);
             this.panelStatus.Controls.Add(this.progressBar);
             this.panelStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelStatus.Location = new System.Drawing.Point(259, 795);
+            this.panelStatus.Location = new System.Drawing.Point(1, 795);
             this.panelStatus.Name = "panelStatus";
-            this.panelStatus.Size = new System.Drawing.Size(1151, 37);
+            this.panelStatus.Size = new System.Drawing.Size(1409, 37);
             this.panelStatus.TabIndex = 7;
-            // 
-            // progressBar
-            // 
-            this.progressBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.progressBar.Location = new System.Drawing.Point(558, 0);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(593, 37);
-            this.progressBar.TabIndex = 0;
             // 
             // statusLabel
             // 
@@ -501,6 +494,14 @@
             this.statusLabel.TabIndex = 1;
             this.statusLabel.Text = "label1";
             // 
+            // progressBar
+            // 
+            this.progressBar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.progressBar.Location = new System.Drawing.Point(816, 0);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(593, 37);
+            this.progressBar.TabIndex = 0;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -510,9 +511,9 @@
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
+            this.Controls.Add(this.sidebarControl);
             this.Controls.Add(this.splitContainerBack);
             this.Controls.Add(this.panelStatus);
-            this.Controls.Add(this.sidebarControl);
             this.Controls.Add(this.appBar);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Location = new System.Drawing.Point(0, 0);

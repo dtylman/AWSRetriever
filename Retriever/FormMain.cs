@@ -35,23 +35,18 @@ namespace Retriever
             AppBarMenuTextItem aboutAction = new AppBarMenuTextItem("About");
             aboutAction.Click += AboutAction_Click;
             appBar.MenuItems.Add(aboutAction);
-
-            AppAction closeAction = new AppAction();
-            closeAction.Image = Resources.CloseWindow50;
-            closeAction.Click += CloseAction_Click;
-            appBar.Actions.Add(closeAction);
             
             this.stopAction = new AppAction();
             stopAction.Image = Resources.Private50;            
-            stopAction.Click += StopAction_Click;
+            stopAction.Click += StopAction_Click;            
             appBar.Actions.Add(stopAction);                
             
-            this.scanAction = new SidebarTextItem("Scan...");            
+            this.scanAction = new SidebarTextItem("Scan...");                        
             this.scanAction.Click += ScanAction_Click;
             this.sidebarControl.Items.Add(this.scanAction);
 
             SidebarTextItem runAction = new SidebarTextItem("Run Single Operation...");
-            runAction.Click += RunAction_Click;
+            runAction.Click += RunAction_Click;            
             this.sidebarControl.Items.Add(runAction);
 
             SidebarTextItem editProfileAction = new SidebarTextItem("Edit Profile...");
@@ -179,12 +174,7 @@ namespace Retriever
             {
                 this.Cursor = Cursors.Default;
             }
-        }
-
-        private void CloseAction_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        }      
 
         #region background worker
 
