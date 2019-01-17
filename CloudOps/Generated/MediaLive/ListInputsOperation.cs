@@ -21,7 +21,11 @@ namespace CloudOps.MediaLive
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonMediaLiveClient client = new AmazonMediaLiveClient(creds, region);
+            AmazonMediaLiveConfig config = new AmazonMediaLiveConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonMediaLiveClient client = new AmazonMediaLiveClient(creds, config);
+            
             ListInputsResponse resp = new ListInputsResponse();
             do
             {

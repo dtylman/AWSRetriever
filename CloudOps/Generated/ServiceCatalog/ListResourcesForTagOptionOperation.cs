@@ -21,7 +21,11 @@ namespace CloudOps.ServiceCatalog
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonServiceCatalogClient client = new AmazonServiceCatalogClient(creds, region);
+            AmazonServiceCatalogConfig config = new AmazonServiceCatalogConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonServiceCatalogClient client = new AmazonServiceCatalogClient(creds, config);
+            
             ListResourcesForTagOptionResponse resp = new ListResourcesForTagOptionResponse();
             do
             {

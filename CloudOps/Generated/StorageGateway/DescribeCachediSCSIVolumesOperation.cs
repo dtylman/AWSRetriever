@@ -21,7 +21,11 @@ namespace CloudOps.StorageGateway
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonStorageGatewayClient client = new AmazonStorageGatewayClient(creds, region);
+            AmazonStorageGatewayConfig config = new AmazonStorageGatewayConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonStorageGatewayClient client = new AmazonStorageGatewayClient(creds, config);
+            
             DescribeCachediSCSIVolumesResponse resp = new DescribeCachediSCSIVolumesResponse();
             DescribeCachediSCSIVolumesRequest req = new DescribeCachediSCSIVolumesRequest
             {                    

@@ -21,7 +21,11 @@ namespace CloudOps.ElastiCache
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonElastiCacheClient client = new AmazonElastiCacheClient(creds, region);
+            AmazonElastiCacheConfig config = new AmazonElastiCacheConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonElastiCacheClient client = new AmazonElastiCacheClient(creds, config);
+            
             DescribeCacheSecurityGroupsResponse resp = new DescribeCacheSecurityGroupsResponse();
             do
             {

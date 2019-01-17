@@ -21,7 +21,11 @@ namespace CloudOps.{{.ServiceName}}
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            {{.ClientClassName}} client = new {{.ClientClassName}}(creds, region);
+            {{.ConfigClassName}} config = new {{.ConfigClassName}}();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            {{.ClientClassName}} client = new {{.ClientClassName}}(creds, config);
+            
             {{.ResponseClassName}} resp = new {{.ResponseClassName}}();
             do
             {

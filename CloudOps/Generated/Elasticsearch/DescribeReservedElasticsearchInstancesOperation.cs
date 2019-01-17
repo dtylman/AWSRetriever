@@ -21,7 +21,11 @@ namespace CloudOps.Elasticsearch
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonElasticsearchClient client = new AmazonElasticsearchClient(creds, region);
+            AmazonElasticsearchConfig config = new AmazonElasticsearchConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonElasticsearchClient client = new AmazonElasticsearchClient(creds, config);
+            
             DescribeReservedElasticsearchInstancesResponse resp = new DescribeReservedElasticsearchInstancesResponse();
             do
             {

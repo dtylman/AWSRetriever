@@ -21,7 +21,11 @@ namespace CloudOps.Redshift
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonRedshiftClient client = new AmazonRedshiftClient(creds, region);
+            AmazonRedshiftConfig config = new AmazonRedshiftConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonRedshiftClient client = new AmazonRedshiftClient(creds, config);
+            
             DescribeReservedNodesResponse resp = new DescribeReservedNodesResponse();
             do
             {

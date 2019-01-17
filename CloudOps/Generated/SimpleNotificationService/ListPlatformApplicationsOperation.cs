@@ -21,7 +21,11 @@ namespace CloudOps.SimpleNotificationService
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonSimpleNotificationServiceClient client = new AmazonSimpleNotificationServiceClient(creds, region);
+            AmazonSimpleNotificationServiceConfig config = new AmazonSimpleNotificationServiceConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonSimpleNotificationServiceClient client = new AmazonSimpleNotificationServiceClient(creds, config);
+            
             ListPlatformApplicationsResponse resp = new ListPlatformApplicationsResponse();
             do
             {

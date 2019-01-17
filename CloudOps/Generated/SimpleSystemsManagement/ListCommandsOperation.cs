@@ -21,7 +21,11 @@ namespace CloudOps.SimpleSystemsManagement
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonSimpleSystemsManagementClient client = new AmazonSimpleSystemsManagementClient(creds, region);
+            AmazonSimpleSystemsManagementConfig config = new AmazonSimpleSystemsManagementConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonSimpleSystemsManagementClient client = new AmazonSimpleSystemsManagementClient(creds, config);
+            
             ListCommandsResponse resp = new ListCommandsResponse();
             do
             {

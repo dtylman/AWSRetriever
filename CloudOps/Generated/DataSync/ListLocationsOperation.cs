@@ -21,7 +21,11 @@ namespace CloudOps.DataSync
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonDataSyncClient client = new AmazonDataSyncClient(creds, region);
+            AmazonDataSyncConfig config = new AmazonDataSyncConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonDataSyncClient client = new AmazonDataSyncClient(creds, config);
+            
             ListLocationsResponse resp = new ListLocationsResponse();
             do
             {

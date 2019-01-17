@@ -21,7 +21,11 @@ namespace CloudOps.EC2
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonEC2Client client = new AmazonEC2Client(creds, region);
+            AmazonEC2Config config = new AmazonEC2Config();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonEC2Client client = new AmazonEC2Client(creds, config);
+            
             DescribeExportTasksResponse resp = new DescribeExportTasksResponse();
             DescribeExportTasksRequest req = new DescribeExportTasksRequest
             {                    

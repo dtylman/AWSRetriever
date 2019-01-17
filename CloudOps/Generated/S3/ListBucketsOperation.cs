@@ -21,7 +21,11 @@ namespace CloudOps.S3
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonS3Client client = new AmazonS3Client(creds, region);
+            AmazonS3Config config = new AmazonS3Config();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonS3Client client = new AmazonS3Client(creds, config);
+            
             ListBucketsResponse resp = new ListBucketsResponse();
             ListBucketsRequest req = new ListBucketsRequest
             {                    

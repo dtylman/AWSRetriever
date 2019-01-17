@@ -21,7 +21,11 @@ namespace CloudOps.SecretsManager
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonSecretsManagerClient client = new AmazonSecretsManagerClient(creds, region);
+            AmazonSecretsManagerConfig config = new AmazonSecretsManagerConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonSecretsManagerClient client = new AmazonSecretsManagerClient(creds, config);
+            
             ListSecretsResponse resp = new ListSecretsResponse();
             do
             {

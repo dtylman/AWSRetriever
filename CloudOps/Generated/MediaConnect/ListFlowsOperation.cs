@@ -21,7 +21,11 @@ namespace CloudOps.MediaConnect
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonMediaConnectClient client = new AmazonMediaConnectClient(creds, region);
+            AmazonMediaConnectConfig config = new AmazonMediaConnectConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonMediaConnectClient client = new AmazonMediaConnectClient(creds, config);
+            
             ListFlowsResponse resp = new ListFlowsResponse();
             do
             {

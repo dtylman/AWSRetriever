@@ -21,7 +21,11 @@ namespace CloudOps.SQS
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonSQSClient client = new AmazonSQSClient(creds, region);
+            AmazonSQSConfig config = new AmazonSQSConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonSQSClient client = new AmazonSQSClient(creds, config);
+            
             ListQueuesResponse resp = new ListQueuesResponse();
             ListQueuesRequest req = new ListQueuesRequest
             {                    

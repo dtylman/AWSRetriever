@@ -21,14 +21,18 @@ namespace CloudOps.ElasticLoadBalancing
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonElasticLoadBalancingClient client = new AmazonElasticLoadBalancingClient(creds, region);
-            DescribeLoadBalancersResponse resp = new DescribeLoadBalancersResponse();            
+            AmazonElasticLoadBalancingConfig config = new AmazonElasticLoadBalancingConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonElasticLoadBalancingClient client = new AmazonElasticLoadBalancingClient(creds, config);
+            
+            DescribeLoadBalancersResponse resp = new DescribeLoadBalancersResponse();
             do
             {
                 DescribeLoadBalancersRequest req = new DescribeLoadBalancersRequest
                 {
-                    Marker = resp.NextMarker,
-                    PageSize = maxItems                                        
+                    Marker = resp.NextMarker
+                                        
                 };
 
                 resp = client.DescribeLoadBalancers(req);

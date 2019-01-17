@@ -21,7 +21,11 @@ namespace CloudOps.Lambda
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonLambdaClient client = new AmazonLambdaClient(creds, region);
+            AmazonLambdaConfig config = new AmazonLambdaConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonLambdaClient client = new AmazonLambdaClient(creds, config);
+            
             ListEventSourceMappingsResponse resp = new ListEventSourceMappingsResponse();
             do
             {

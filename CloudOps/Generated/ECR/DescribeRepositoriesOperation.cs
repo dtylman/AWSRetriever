@@ -21,7 +21,11 @@ namespace CloudOps.ECR
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonECRClient client = new AmazonECRClient(creds, region);
+            AmazonECRConfig config = new AmazonECRConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonECRClient client = new AmazonECRClient(creds, config);
+            
             DescribeRepositoriesResponse resp = new DescribeRepositoriesResponse();
             do
             {

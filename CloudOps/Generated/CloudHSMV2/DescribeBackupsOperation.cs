@@ -21,7 +21,11 @@ namespace CloudOps.CloudHSMV2
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonCloudHSMV2Client client = new AmazonCloudHSMV2Client(creds, region);
+            AmazonCloudHSMV2Config config = new AmazonCloudHSMV2Config();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonCloudHSMV2Client client = new AmazonCloudHSMV2Client(creds, config);
+            
             DescribeBackupsResponse resp = new DescribeBackupsResponse();
             do
             {

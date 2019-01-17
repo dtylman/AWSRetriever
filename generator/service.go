@@ -89,6 +89,11 @@ func (s *Service) ClientClassName() string {
 	return fmt.Sprintf("Amazon%sClient", s.ServiceName())
 }
 
+//ConfigClassName ...
+func (s *Service) ConfigClassName() string {
+	return fmt.Sprintf("Amazon%sConfig", s.ServiceName())
+}
+
 //NewOperation creates new operation
 func (s *Service) NewOperation(opName string) *Operation {
 	o := &Operation{

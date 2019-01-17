@@ -21,14 +21,17 @@ namespace CloudOps.Glacier
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonGlacierClient client = new AmazonGlacierClient(creds, region);
+            AmazonGlacierConfig config = new AmazonGlacierConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonGlacierClient client = new AmazonGlacierClient(creds, config);
+            
             ListMultipartUploadsResponse resp = new ListMultipartUploadsResponse();
             do
             {
                 ListMultipartUploadsRequest req = new ListMultipartUploadsRequest
                 {
                     Limit = maxItems
-                                        
                 };
 
                 resp = client.ListMultipartUploads(req);

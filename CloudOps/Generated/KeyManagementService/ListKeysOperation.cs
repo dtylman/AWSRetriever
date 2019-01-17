@@ -21,7 +21,11 @@ namespace CloudOps.KeyManagementService
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonKeyManagementServiceClient client = new AmazonKeyManagementServiceClient(creds, region);
+            AmazonKeyManagementServiceConfig config = new AmazonKeyManagementServiceConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonKeyManagementServiceClient client = new AmazonKeyManagementServiceClient(creds, config);
+            
             ListKeysResponse resp = new ListKeysResponse();
             do
             {

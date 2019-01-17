@@ -21,7 +21,11 @@ namespace CloudOps.Snowball
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonSnowballClient client = new AmazonSnowballClient(creds, region);
+            AmazonSnowballConfig config = new AmazonSnowballConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonSnowballClient client = new AmazonSnowballClient(creds, config);
+            
             ListJobsResponse resp = new ListJobsResponse();
             do
             {

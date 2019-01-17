@@ -21,7 +21,11 @@ namespace CloudOps.ServerlessApplicationRepository
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonServerlessApplicationRepositoryClient client = new AmazonServerlessApplicationRepositoryClient(creds, region);
+            AmazonServerlessApplicationRepositoryConfig config = new AmazonServerlessApplicationRepositoryConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonServerlessApplicationRepositoryClient client = new AmazonServerlessApplicationRepositoryClient(creds, config);
+            
             ListApplicationsResponse resp = new ListApplicationsResponse();
             do
             {

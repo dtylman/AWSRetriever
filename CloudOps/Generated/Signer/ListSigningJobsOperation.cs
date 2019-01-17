@@ -21,7 +21,11 @@ namespace CloudOps.Signer
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonSignerClient client = new AmazonSignerClient(creds, region);
+            AmazonSignerConfig config = new AmazonSignerConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonSignerClient client = new AmazonSignerClient(creds, config);
+            
             ListSigningJobsResponse resp = new ListSigningJobsResponse();
             do
             {

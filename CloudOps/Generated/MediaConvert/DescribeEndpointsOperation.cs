@@ -21,7 +21,11 @@ namespace CloudOps.MediaConvert
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonMediaConvertClient client = new AmazonMediaConvertClient(creds, region);
+            AmazonMediaConvertConfig config = new AmazonMediaConvertConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonMediaConvertClient client = new AmazonMediaConvertClient(creds, config);
+            
             DescribeEndpointsResponse resp = new DescribeEndpointsResponse();
             do
             {

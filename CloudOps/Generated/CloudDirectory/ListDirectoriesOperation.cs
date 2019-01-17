@@ -21,7 +21,11 @@ namespace CloudOps.CloudDirectory
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonCloudDirectoryClient client = new AmazonCloudDirectoryClient(creds, region);
+            AmazonCloudDirectoryConfig config = new AmazonCloudDirectoryConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonCloudDirectoryClient client = new AmazonCloudDirectoryClient(creds, config);
+            
             ListDirectoriesResponse resp = new ListDirectoriesResponse();
             do
             {

@@ -21,7 +21,11 @@ namespace CloudOps.Redshift
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonRedshiftClient client = new AmazonRedshiftClient(creds, region);
+            AmazonRedshiftConfig config = new AmazonRedshiftConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonRedshiftClient client = new AmazonRedshiftClient(creds, config);
+            
             DescribeDefaultClusterParametersResponse resp = new DescribeDefaultClusterParametersResponse();
             do
             {
@@ -40,9 +44,8 @@ namespace CloudOps.Redshift
                 {
                     AddObject(obj);
                 }
+            }           
                 
-            }
-            while (!string.IsNullOrEmpty(resp.DefaultClusterParameters.Marker));
-        }
+while (!string.IsNullOrEmpty(resp.DefaultClusterParameters.Marker));        }
     }
 }

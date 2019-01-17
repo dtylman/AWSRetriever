@@ -21,7 +21,11 @@ namespace CloudOps.AWSHealth
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonAWSHealthClient client = new AmazonAWSHealthClient(creds, region);
+            AmazonAWSHealthConfig config = new AmazonAWSHealthConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonAWSHealthClient client = new AmazonAWSHealthClient(creds, config);
+            
             DescribeEventTypesResponse resp = new DescribeEventTypesResponse();
             do
             {

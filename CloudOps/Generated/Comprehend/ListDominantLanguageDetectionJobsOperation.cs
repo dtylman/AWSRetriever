@@ -21,7 +21,11 @@ namespace CloudOps.Comprehend
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonComprehendClient client = new AmazonComprehendClient(creds, region);
+            AmazonComprehendConfig config = new AmazonComprehendConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonComprehendClient client = new AmazonComprehendClient(creds, config);
+            
             ListDominantLanguageDetectionJobsResponse resp = new ListDominantLanguageDetectionJobsResponse();
             do
             {

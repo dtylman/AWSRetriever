@@ -21,7 +21,11 @@ namespace CloudOps.SageMaker
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonSageMakerClient client = new AmazonSageMakerClient(creds, region);
+            AmazonSageMakerConfig config = new AmazonSageMakerConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonSageMakerClient client = new AmazonSageMakerClient(creds, config);
+            
             ListWorkteamsResponse resp = new ListWorkteamsResponse();
             do
             {

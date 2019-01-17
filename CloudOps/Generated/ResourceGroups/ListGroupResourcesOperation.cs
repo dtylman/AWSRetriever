@@ -21,7 +21,11 @@ namespace CloudOps.ResourceGroups
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonResourceGroupsClient client = new AmazonResourceGroupsClient(creds, region);
+            AmazonResourceGroupsConfig config = new AmazonResourceGroupsConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonResourceGroupsClient client = new AmazonResourceGroupsClient(creds, config);
+            
             ListGroupResourcesResponse resp = new ListGroupResourcesResponse();
             do
             {

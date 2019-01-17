@@ -21,7 +21,11 @@ namespace CloudOps.AppMesh
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonAppMeshClient client = new AmazonAppMeshClient(creds, region);
+            AmazonAppMeshConfig config = new AmazonAppMeshConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonAppMeshClient client = new AmazonAppMeshClient(creds, config);
+            
             ListMeshesResponse resp = new ListMeshesResponse();
             do
             {

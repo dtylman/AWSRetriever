@@ -21,7 +21,11 @@ namespace CloudOps.Inspector
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonInspectorClient client = new AmazonInspectorClient(creds, region);
+            AmazonInspectorConfig config = new AmazonInspectorConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonInspectorClient client = new AmazonInspectorClient(creds, config);
+            
             ListAssessmentTargetsResponse resp = new ListAssessmentTargetsResponse();
             do
             {

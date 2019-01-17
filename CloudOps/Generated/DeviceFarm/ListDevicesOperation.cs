@@ -21,7 +21,11 @@ namespace CloudOps.DeviceFarm
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonDeviceFarmClient client = new AmazonDeviceFarmClient(creds, region);
+            AmazonDeviceFarmConfig config = new AmazonDeviceFarmConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonDeviceFarmClient client = new AmazonDeviceFarmClient(creds, config);
+            
             ListDevicesResponse resp = new ListDevicesResponse();
             do
             {

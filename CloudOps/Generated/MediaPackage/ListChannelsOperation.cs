@@ -21,7 +21,11 @@ namespace CloudOps.MediaPackage
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonMediaPackageClient client = new AmazonMediaPackageClient(creds, region);
+            AmazonMediaPackageConfig config = new AmazonMediaPackageConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonMediaPackageClient client = new AmazonMediaPackageClient(creds, config);
+            
             ListChannelsResponse resp = new ListChannelsResponse();
             do
             {

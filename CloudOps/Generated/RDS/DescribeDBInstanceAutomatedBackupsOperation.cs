@@ -21,7 +21,11 @@ namespace CloudOps.RDS
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonRDSClient client = new AmazonRDSClient(creds, region);
+            AmazonRDSConfig config = new AmazonRDSConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonRDSClient client = new AmazonRDSClient(creds, config);
+            
             DescribeDBInstanceAutomatedBackupsResponse resp = new DescribeDBInstanceAutomatedBackupsResponse();
             do
             {

@@ -9,7 +9,7 @@ namespace CloudOps.RDS
     {
         public override string Name => "DownloadDBLogFilePortion";
 
-        public override string Description => "";
+        public override string Description => "Downloads all or a portion of the specified log file, up to 1 MB in size.";
  
         public override string RequestURI => "/";
 
@@ -21,7 +21,11 @@ namespace CloudOps.RDS
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonRDSClient client = new AmazonRDSClient(creds, region);
+            AmazonRDSConfig config = new AmazonRDSConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonRDSClient client = new AmazonRDSClient(creds, config);
+            
             DownloadDBLogFilePortionResponse resp = new DownloadDBLogFilePortionResponse();
             do
             {

@@ -21,7 +21,11 @@ namespace CloudOps.CodeCommit
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonCodeCommitClient client = new AmazonCodeCommitClient(creds, region);
+            AmazonCodeCommitConfig config = new AmazonCodeCommitConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonCodeCommitClient client = new AmazonCodeCommitClient(creds, config);
+            
             GetDifferencesResponse resp = new GetDifferencesResponse();
             do
             {

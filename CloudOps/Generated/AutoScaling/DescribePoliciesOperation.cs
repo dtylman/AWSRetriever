@@ -21,7 +21,11 @@ namespace CloudOps.AutoScaling
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonAutoScalingClient client = new AmazonAutoScalingClient(creds, region);
+            AmazonAutoScalingConfig config = new AmazonAutoScalingConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonAutoScalingClient client = new AmazonAutoScalingClient(creds, config);
+            
             DescribePoliciesResponse resp = new DescribePoliciesResponse();
             do
             {

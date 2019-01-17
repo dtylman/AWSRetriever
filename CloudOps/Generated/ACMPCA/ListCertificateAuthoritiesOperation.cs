@@ -21,7 +21,11 @@ namespace CloudOps.ACMPCA
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonACMPCAClient client = new AmazonACMPCAClient(creds, region);
+            AmazonACMPCAConfig config = new AmazonACMPCAConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonACMPCAClient client = new AmazonACMPCAClient(creds, config);
+            
             ListCertificateAuthoritiesResponse resp = new ListCertificateAuthoritiesResponse();
             do
             {

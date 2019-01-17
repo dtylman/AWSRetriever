@@ -21,7 +21,11 @@ namespace CloudOps.APIGateway
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonAPIGatewayClient client = new AmazonAPIGatewayClient(creds, region);
+            AmazonAPIGatewayConfig config = new AmazonAPIGatewayConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonAPIGatewayClient client = new AmazonAPIGatewayClient(creds, config);
+            
             GetUsagePlansResponse resp = new GetUsagePlansResponse();
             do
             {

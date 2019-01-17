@@ -21,7 +21,11 @@ namespace CloudOps.CodeDeploy
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonCodeDeployClient client = new AmazonCodeDeployClient(creds, region);
+            AmazonCodeDeployConfig config = new AmazonCodeDeployConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonCodeDeployClient client = new AmazonCodeDeployClient(creds, config);
+            
             ListDeploymentGroupsResponse resp = new ListDeploymentGroupsResponse();
             do
             {

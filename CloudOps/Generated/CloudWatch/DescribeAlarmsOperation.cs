@@ -21,7 +21,11 @@ namespace CloudOps.CloudWatch
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonCloudWatchClient client = new AmazonCloudWatchClient(creds, region);
+            AmazonCloudWatchConfig config = new AmazonCloudWatchConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonCloudWatchClient client = new AmazonCloudWatchClient(creds, config);
+            
             DescribeAlarmsResponse resp = new DescribeAlarmsResponse();
             do
             {

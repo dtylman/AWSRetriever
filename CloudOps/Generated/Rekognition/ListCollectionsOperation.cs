@@ -21,7 +21,11 @@ namespace CloudOps.Rekognition
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonRekognitionClient client = new AmazonRekognitionClient(creds, region);
+            AmazonRekognitionConfig config = new AmazonRekognitionConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonRekognitionClient client = new AmazonRekognitionClient(creds, config);
+            
             ListCollectionsResponse resp = new ListCollectionsResponse();
             do
             {

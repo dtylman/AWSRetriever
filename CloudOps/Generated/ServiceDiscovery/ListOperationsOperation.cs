@@ -21,7 +21,11 @@ namespace CloudOps.ServiceDiscovery
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonServiceDiscoveryClient client = new AmazonServiceDiscoveryClient(creds, region);
+            AmazonServiceDiscoveryConfig config = new AmazonServiceDiscoveryConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonServiceDiscoveryClient client = new AmazonServiceDiscoveryClient(creds, config);
+            
             ListOperationsResponse resp = new ListOperationsResponse();
             do
             {

@@ -21,7 +21,11 @@ namespace CloudOps.CloudFormation
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonCloudFormationClient client = new AmazonCloudFormationClient(creds, region);
+            AmazonCloudFormationConfig config = new AmazonCloudFormationConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonCloudFormationClient client = new AmazonCloudFormationClient(creds, config);
+            
             DescribeStackResourceDriftsResponse resp = new DescribeStackResourceDriftsResponse();
             do
             {

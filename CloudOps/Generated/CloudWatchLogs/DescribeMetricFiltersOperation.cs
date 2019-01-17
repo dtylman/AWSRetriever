@@ -21,7 +21,11 @@ namespace CloudOps.CloudWatchLogs
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonCloudWatchLogsClient client = new AmazonCloudWatchLogsClient(creds, region);
+            AmazonCloudWatchLogsConfig config = new AmazonCloudWatchLogsConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonCloudWatchLogsClient client = new AmazonCloudWatchLogsClient(creds, config);
+            
             DescribeMetricFiltersResponse resp = new DescribeMetricFiltersResponse();
             do
             {

@@ -21,7 +21,11 @@ namespace CloudOps.Route53
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonRoute53Client client = new AmazonRoute53Client(creds, region);
+            AmazonRoute53Config config = new AmazonRoute53Config();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonRoute53Client client = new AmazonRoute53Client(creds, config);
+            
             ListHostedZonesResponse resp = new ListHostedZonesResponse();
             do
             {

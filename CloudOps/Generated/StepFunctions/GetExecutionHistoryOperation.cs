@@ -21,7 +21,11 @@ namespace CloudOps.StepFunctions
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonStepFunctionsClient client = new AmazonStepFunctionsClient(creds, region);
+            AmazonStepFunctionsConfig config = new AmazonStepFunctionsConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonStepFunctionsClient client = new AmazonStepFunctionsClient(creds, config);
+            
             GetExecutionHistoryResponse resp = new GetExecutionHistoryResponse();
             do
             {

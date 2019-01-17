@@ -21,7 +21,11 @@ namespace CloudOps.Polly
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonPollyClient client = new AmazonPollyClient(creds, region);
+            AmazonPollyConfig config = new AmazonPollyConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonPollyClient client = new AmazonPollyClient(creds, config);
+            
             ListSpeechSynthesisTasksResponse resp = new ListSpeechSynthesisTasksResponse();
             do
             {

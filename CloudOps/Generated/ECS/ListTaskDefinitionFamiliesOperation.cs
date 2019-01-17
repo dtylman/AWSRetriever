@@ -21,7 +21,11 @@ namespace CloudOps.ECS
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonECSClient client = new AmazonECSClient(creds, region);
+            AmazonECSConfig config = new AmazonECSConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonECSClient client = new AmazonECSClient(creds, config);
+            
             ListTaskDefinitionFamiliesResponse resp = new ListTaskDefinitionFamiliesResponse();
             do
             {

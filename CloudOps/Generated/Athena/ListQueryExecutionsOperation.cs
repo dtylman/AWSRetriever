@@ -21,7 +21,11 @@ namespace CloudOps.Athena
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonAthenaClient client = new AmazonAthenaClient(creds, region);
+            AmazonAthenaConfig config = new AmazonAthenaConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonAthenaClient client = new AmazonAthenaClient(creds, config);
+            
             ListQueryExecutionsResponse resp = new ListQueryExecutionsResponse();
             do
             {

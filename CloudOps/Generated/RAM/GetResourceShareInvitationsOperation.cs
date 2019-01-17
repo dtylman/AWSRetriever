@@ -21,7 +21,11 @@ namespace CloudOps.RAM
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonRAMClient client = new AmazonRAMClient(creds, region);
+            AmazonRAMConfig config = new AmazonRAMConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonRAMClient client = new AmazonRAMClient(creds, config);
+            
             GetResourceShareInvitationsResponse resp = new GetResourceShareInvitationsResponse();
             do
             {

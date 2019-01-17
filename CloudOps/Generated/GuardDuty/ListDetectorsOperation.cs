@@ -21,7 +21,11 @@ namespace CloudOps.GuardDuty
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonGuardDutyClient client = new AmazonGuardDutyClient(creds, region);
+            AmazonGuardDutyConfig config = new AmazonGuardDutyConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonGuardDutyClient client = new AmazonGuardDutyClient(creds, config);
+            
             ListDetectorsResponse resp = new ListDetectorsResponse();
             do
             {

@@ -21,7 +21,11 @@ namespace CloudOps.ServerMigrationService
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonServerMigrationServiceClient client = new AmazonServerMigrationServiceClient(creds, region);
+            AmazonServerMigrationServiceConfig config = new AmazonServerMigrationServiceConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonServerMigrationServiceClient client = new AmazonServerMigrationServiceClient(creds, config);
+            
             GetConnectorsResponse resp = new GetConnectorsResponse();
             do
             {

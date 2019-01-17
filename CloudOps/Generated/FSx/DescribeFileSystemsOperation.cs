@@ -21,7 +21,11 @@ namespace CloudOps.FSx
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonFSxClient client = new AmazonFSxClient(creds, region);
+            AmazonFSxConfig config = new AmazonFSxConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonFSxClient client = new AmazonFSxClient(creds, config);
+            
             DescribeFileSystemsResponse resp = new DescribeFileSystemsResponse();
             do
             {

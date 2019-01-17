@@ -21,7 +21,11 @@ namespace CloudOps.PinpointEmail
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonPinpointEmailClient client = new AmazonPinpointEmailClient(creds, region);
+            AmazonPinpointEmailConfig config = new AmazonPinpointEmailConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonPinpointEmailClient client = new AmazonPinpointEmailClient(creds, config);
+            
             GetDedicatedIpsResponse resp = new GetDedicatedIpsResponse();
             do
             {

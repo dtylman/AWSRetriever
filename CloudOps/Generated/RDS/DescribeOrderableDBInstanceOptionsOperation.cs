@@ -9,7 +9,7 @@ namespace CloudOps.RDS
     {
         public override string Name => "DescribeOrderableDBInstanceOptions";
 
-        public override string Description => "";
+        public override string Description => "Returns a list of orderable DB instance options for the specified engine.";
  
         public override string RequestURI => "/";
 
@@ -21,7 +21,11 @@ namespace CloudOps.RDS
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonRDSClient client = new AmazonRDSClient(creds, region);
+            AmazonRDSConfig config = new AmazonRDSConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonRDSClient client = new AmazonRDSClient(creds, config);
+            
             DescribeOrderableDBInstanceOptionsResponse resp = new DescribeOrderableDBInstanceOptionsResponse();
             do
             {

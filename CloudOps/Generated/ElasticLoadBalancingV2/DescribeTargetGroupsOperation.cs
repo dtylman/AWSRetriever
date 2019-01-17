@@ -21,7 +21,11 @@ namespace CloudOps.ElasticLoadBalancingV2
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonElasticLoadBalancingV2Client client = new AmazonElasticLoadBalancingV2Client(creds, region);
+            AmazonElasticLoadBalancingV2Config config = new AmazonElasticLoadBalancingV2Config();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonElasticLoadBalancingV2Client client = new AmazonElasticLoadBalancingV2Client(creds, config);
+            
             DescribeTargetGroupsResponse resp = new DescribeTargetGroupsResponse();
             do
             {

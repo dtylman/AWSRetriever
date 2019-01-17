@@ -21,7 +21,11 @@ namespace CloudOps.Chime
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonChimeClient client = new AmazonChimeClient(creds, region);
+            AmazonChimeConfig config = new AmazonChimeConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonChimeClient client = new AmazonChimeClient(creds, config);
+            
             ListAccountsResponse resp = new ListAccountsResponse();
             do
             {

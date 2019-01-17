@@ -21,7 +21,11 @@ namespace CloudOps.Glue
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonGlueClient client = new AmazonGlueClient(creds, region);
+            AmazonGlueConfig config = new AmazonGlueConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonGlueClient client = new AmazonGlueClient(creds, config);
+            
             GetConnectionsResponse resp = new GetConnectionsResponse();
             do
             {

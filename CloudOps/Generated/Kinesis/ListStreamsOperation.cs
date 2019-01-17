@@ -21,7 +21,11 @@ namespace CloudOps.Kinesis
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonKinesisClient client = new AmazonKinesisClient(creds, region);
+            AmazonKinesisConfig config = new AmazonKinesisConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonKinesisClient client = new AmazonKinesisClient(creds, config);
+            
             ListStreamsResponse resp = new ListStreamsResponse();
             string lastStream = "";
             do

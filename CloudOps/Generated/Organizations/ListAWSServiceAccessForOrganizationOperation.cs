@@ -21,7 +21,11 @@ namespace CloudOps.Organizations
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonOrganizationsClient client = new AmazonOrganizationsClient(creds, region);
+            AmazonOrganizationsConfig config = new AmazonOrganizationsConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonOrganizationsClient client = new AmazonOrganizationsClient(creds, config);
+            
             ListAWSServiceAccessForOrganizationResponse resp = new ListAWSServiceAccessForOrganizationResponse();
             do
             {

@@ -21,7 +21,11 @@ namespace CloudOps.AlexaForBusiness
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonAlexaForBusinessClient client = new AmazonAlexaForBusinessClient(creds, region);
+            AmazonAlexaForBusinessConfig config = new AmazonAlexaForBusinessConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonAlexaForBusinessClient client = new AmazonAlexaForBusinessClient(creds, config);
+            
             ListConferenceProvidersResponse resp = new ListConferenceProvidersResponse();
             do
             {

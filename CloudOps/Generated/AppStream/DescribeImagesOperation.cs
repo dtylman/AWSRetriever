@@ -21,7 +21,11 @@ namespace CloudOps.AppStream
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonAppStreamClient client = new AmazonAppStreamClient(creds, region);
+            AmazonAppStreamConfig config = new AmazonAppStreamConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonAppStreamClient client = new AmazonAppStreamClient(creds, config);
+            
             DescribeImagesResponse resp = new DescribeImagesResponse();
             do
             {

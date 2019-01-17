@@ -21,7 +21,11 @@ namespace CloudOps.ApplicationDiscoveryService
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonApplicationDiscoveryServiceClient client = new AmazonApplicationDiscoveryServiceClient(creds, region);
+            AmazonApplicationDiscoveryServiceConfig config = new AmazonApplicationDiscoveryServiceConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonApplicationDiscoveryServiceClient client = new AmazonApplicationDiscoveryServiceClient(creds, config);
+            
             DescribeContinuousExportsResponse resp = new DescribeContinuousExportsResponse();
             do
             {

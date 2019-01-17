@@ -21,7 +21,11 @@ namespace CloudOps.DynamoDB
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonDynamoDBClient client = new AmazonDynamoDBClient(creds, region);
+            AmazonDynamoDBConfig config = new AmazonDynamoDBConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonDynamoDBClient client = new AmazonDynamoDBClient(creds, config);
+            
             ListTablesResponse resp = new ListTablesResponse();
             do
             {

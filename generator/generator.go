@@ -218,10 +218,9 @@ func (g *Generator) renderOperationClass(s *Service, o *Operation) error {
 	data["ServiceName"] = s.ServiceName()
 	data["ServiceID"] = s.ServiceID
 	data["OperationClassName"] = o.ClassName()
-	if err != nil {
-		return err
-	}
 	data["ClientClassName"] = s.ClientClassName()
+	data["ConfigClassName"] = s.ConfigClassName()
+
 	if (o.RequestClass == "") || (o.ResponseClass == "") {
 		return fmt.Errorf("Operation %v %v has no response or request class", s.ServiceName(), o.Name)
 	}

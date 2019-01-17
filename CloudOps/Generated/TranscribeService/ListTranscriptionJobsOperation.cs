@@ -21,7 +21,11 @@ namespace CloudOps.TranscribeService
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonTranscribeServiceClient client = new AmazonTranscribeServiceClient(creds, region);
+            AmazonTranscribeServiceConfig config = new AmazonTranscribeServiceConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonTranscribeServiceClient client = new AmazonTranscribeServiceClient(creds, config);
+            
             ListTranscriptionJobsResponse resp = new ListTranscriptionJobsResponse();
             do
             {

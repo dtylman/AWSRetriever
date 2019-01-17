@@ -21,7 +21,11 @@ namespace CloudOps.LexModelBuildingService
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonLexModelBuildingServiceClient client = new AmazonLexModelBuildingServiceClient(creds, region);
+            AmazonLexModelBuildingServiceConfig config = new AmazonLexModelBuildingServiceConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonLexModelBuildingServiceClient client = new AmazonLexModelBuildingServiceClient(creds, config);
+            
             GetIntentsResponse resp = new GetIntentsResponse();
             do
             {

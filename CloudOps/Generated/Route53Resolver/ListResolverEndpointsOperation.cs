@@ -21,7 +21,11 @@ namespace CloudOps.Route53Resolver
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonRoute53ResolverClient client = new AmazonRoute53ResolverClient(creds, region);
+            AmazonRoute53ResolverConfig config = new AmazonRoute53ResolverConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonRoute53ResolverClient client = new AmazonRoute53ResolverClient(creds, config);
+            
             ListResolverEndpointsResponse resp = new ListResolverEndpointsResponse();
             do
             {

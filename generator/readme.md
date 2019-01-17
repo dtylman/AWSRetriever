@@ -16,7 +16,7 @@ Apply the patches:
 
 ```bash
 cd ../CloudOps/Generated
-patch -p2 < first.patch
+patch -R -p3 < ../../generator/first.patch
 .
 . //second.patch and so forth 
 .

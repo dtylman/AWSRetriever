@@ -21,7 +21,11 @@ namespace CloudOps.DatabaseMigrationService
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonDatabaseMigrationServiceClient client = new AmazonDatabaseMigrationServiceClient(creds, region);
+            AmazonDatabaseMigrationServiceConfig config = new AmazonDatabaseMigrationServiceConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonDatabaseMigrationServiceClient client = new AmazonDatabaseMigrationServiceClient(creds, config);
+            
             DescribeReplicationTasksResponse resp = new DescribeReplicationTasksResponse();
             do
             {

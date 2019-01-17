@@ -21,7 +21,11 @@ namespace CloudOps.WorkDocs
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonWorkDocsClient client = new AmazonWorkDocsClient(creds, region);
+            AmazonWorkDocsConfig config = new AmazonWorkDocsConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonWorkDocsClient client = new AmazonWorkDocsClient(creds, config);
+            
             DescribeUsersResponse resp = new DescribeUsersResponse();
             do
             {

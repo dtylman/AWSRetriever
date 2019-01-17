@@ -21,7 +21,11 @@ namespace CloudOps.ResourceGroups
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonResourceGroupsClient client = new AmazonResourceGroupsClient(creds, region);
+            AmazonResourceGroupsConfig config = new AmazonResourceGroupsConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonResourceGroupsClient client = new AmazonResourceGroupsClient(creds, config);
+            
             ListGroupsResponse resp = new ListGroupsResponse();
             do
             {
@@ -40,10 +44,8 @@ namespace CloudOps.ResourceGroups
                 {
                     AddObject(obj);
                 }
-
-#pragma warning disable CS0618 // Type or member is obsolete
+                
                 foreach (var obj in resp.Groups)
-#pragma warning restore CS0618 // Type or member is obsolete
                 {
                     AddObject(obj);
                 }

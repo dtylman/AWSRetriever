@@ -21,7 +21,11 @@ namespace CloudOps.WorkSpaces
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonWorkSpacesClient client = new AmazonWorkSpacesClient(creds, region);
+            AmazonWorkSpacesConfig config = new AmazonWorkSpacesConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonWorkSpacesClient client = new AmazonWorkSpacesClient(creds, config);
+            
             DescribeWorkspaceBundlesResponse resp = new DescribeWorkspaceBundlesResponse();
             do
             {

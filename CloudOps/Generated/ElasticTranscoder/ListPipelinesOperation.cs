@@ -21,7 +21,11 @@ namespace CloudOps.ElasticTranscoder
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonElasticTranscoderClient client = new AmazonElasticTranscoderClient(creds, region);
+            AmazonElasticTranscoderConfig config = new AmazonElasticTranscoderConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonElasticTranscoderClient client = new AmazonElasticTranscoderClient(creds, config);
+            
             ListPipelinesResponse resp = new ListPipelinesResponse();
             do
             {

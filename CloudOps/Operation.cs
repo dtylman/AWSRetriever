@@ -17,11 +17,14 @@ namespace CloudOps
         public abstract string ServiceName { get; }
         public abstract string ServiceID { get; }
         private RegionEndpoint region;
+        private WebProxy proxy;
+
         public CancellationToken CancellationToken { get; internal set; }        
 
         public List<CloudObject> CollectedObjects => collectedObjects;
 
         public RegionEndpoint Region { get => region; set => region = value; }
+        public WebProxy Proxy { get => proxy; set => proxy = value; }
 
         private readonly List<CloudObject> collectedObjects = new List<CloudObject>();
 
@@ -53,6 +56,14 @@ namespace CloudOps
             Type t = obj.GetType();
             collectedObjects.Add(new CloudObject(Name,region: Region.SystemName, service: ServiceName,
                 typeName: t.Name, typeFullName: t.AssemblyQualifiedName, source: obj));
+        }
+
+        protected virtual void ConfigureClient(ClientConfig config)
+        {
+            if (this.Proxy != null)
+            {
+                config.SetWebProxy(Proxy);
+            }
         }
     }
 }

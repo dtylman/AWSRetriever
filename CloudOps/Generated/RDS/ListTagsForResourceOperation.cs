@@ -9,7 +9,7 @@ namespace CloudOps.RDS
     {
         public override string Name => "ListTagsForResource";
 
-        public override string Description => "";
+        public override string Description => "Lists all tags on an Amazon RDS resource. For an overview on tagging an Amazon RDS resource, see Tagging Amazon RDS Resources in the Amazon RDS User Guide.";
  
         public override string RequestURI => "/";
 
@@ -21,7 +21,11 @@ namespace CloudOps.RDS
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonRDSClient client = new AmazonRDSClient(creds, region);
+            AmazonRDSConfig config = new AmazonRDSConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonRDSClient client = new AmazonRDSClient(creds, config);
+            
             ListTagsForResourceResponse resp = new ListTagsForResourceResponse();
             ListTagsForResourceRequest req = new ListTagsForResourceRequest
             {                    

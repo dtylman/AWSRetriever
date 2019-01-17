@@ -9,7 +9,7 @@ namespace CloudOps.RDS
     {
         public override string Name => "DescribeOptionGroupOptions";
 
-        public override string Description => "";
+        public override string Description => "Describes all available options.";
  
         public override string RequestURI => "/";
 
@@ -21,7 +21,11 @@ namespace CloudOps.RDS
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonRDSClient client = new AmazonRDSClient(creds, region);
+            AmazonRDSConfig config = new AmazonRDSConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonRDSClient client = new AmazonRDSClient(creds, config);
+            
             DescribeOptionGroupOptionsResponse resp = new DescribeOptionGroupOptionsResponse();
             do
             {

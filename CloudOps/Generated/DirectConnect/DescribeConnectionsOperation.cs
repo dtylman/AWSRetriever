@@ -21,7 +21,11 @@ namespace CloudOps.DirectConnect
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonDirectConnectClient client = new AmazonDirectConnectClient(creds, region);
+            AmazonDirectConnectConfig config = new AmazonDirectConnectConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonDirectConnectClient client = new AmazonDirectConnectClient(creds, config);
+            
             DescribeConnectionsResponse resp = new DescribeConnectionsResponse();
             DescribeConnectionsRequest req = new DescribeConnectionsRequest
             {                    

@@ -21,7 +21,11 @@ namespace CloudOps.SecurityHub
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonSecurityHubClient client = new AmazonSecurityHubClient(creds, region);
+            AmazonSecurityHubConfig config = new AmazonSecurityHubConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonSecurityHubClient client = new AmazonSecurityHubClient(creds, config);
+            
             ListEnabledProductsForImportResponse resp = new ListEnabledProductsForImportResponse();
             do
             {

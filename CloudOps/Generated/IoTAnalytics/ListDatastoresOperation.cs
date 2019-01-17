@@ -21,7 +21,11 @@ namespace CloudOps.IoTAnalytics
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonIoTAnalyticsClient client = new AmazonIoTAnalyticsClient(creds, region);
+            AmazonIoTAnalyticsConfig config = new AmazonIoTAnalyticsConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonIoTAnalyticsClient client = new AmazonIoTAnalyticsClient(creds, config);
+            
             ListDatastoresResponse resp = new ListDatastoresResponse();
             do
             {

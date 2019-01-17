@@ -21,7 +21,11 @@ namespace CloudOps.CloudFront
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonCloudFrontClient client = new AmazonCloudFrontClient(creds, region);
+            AmazonCloudFrontConfig config = new AmazonCloudFrontConfig();
+            config.RegionEndpoint = region;
+            ConfigureClient(config);            
+            AmazonCloudFrontClient client = new AmazonCloudFrontClient(creds, config);
+            
             ListDistributionsResponse resp = new ListDistributionsResponse();
             do
             {
