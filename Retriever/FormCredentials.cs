@@ -66,16 +66,8 @@ namespace Retriever
             }
         }
 
-        public bool SaveCredentials
-        {
-            get
-            {
-                return checkBoxSave.Checked;
-            }
-        }
-
         private void FormCredentials_Load(object sender, EventArgs e)
-        {            
+        {
             if (!string.IsNullOrEmpty(Settings.Default.SecretAccessKey))
             {
                 this.txtSecretKey.Text = Settings.Default.SecretAccessKey;
@@ -84,7 +76,21 @@ namespace Retriever
             {
                 this.txtAccessKey.Text = Settings.Default.SettingsKey;
             }
+            if (!string.IsNullOrEmpty(Settings.Default.AWSUser))
+            {
+                this.cmbProfile.Text = Settings.Default.AWSUser;
+            }
         }
-       
+
+        private void modernButton1_Click(object sender, EventArgs e)
+        {
+            if (this.checkBoxSave.Checked)
+            {
+                Settings.Default.SecretAccessKey = this.txtSecretKey.Text;
+                Settings.Default.SettingsKey = this.txtAccessKey.Text;
+                Settings.Default.AWSUser = this.cmbProfile.Text;
+                Settings.Default.Save();
+            }
+        }
     }
 }        

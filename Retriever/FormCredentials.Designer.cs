@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.panelButtons = new System.Windows.Forms.Panel();
-            this.modernButton2 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
-            this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.btnCancel = new NickAc.ModernUIDoneRight.Controls.ModernButton();
+            this.btnSave = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBoxSave = new System.Windows.Forms.CheckBox();
             this.cmbProfile = new System.Windows.Forms.ComboBox();
@@ -45,38 +45,39 @@
             // 
             // panelButtons
             // 
-            this.panelButtons.Controls.Add(this.modernButton2);
-            this.panelButtons.Controls.Add(this.modernButton1);
+            this.panelButtons.Controls.Add(this.btnCancel);
+            this.panelButtons.Controls.Add(this.btnSave);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelButtons.Location = new System.Drawing.Point(1, 288);
+            this.panelButtons.Location = new System.Drawing.Point(1, 221);
             this.panelButtons.Margin = new System.Windows.Forms.Padding(4);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(655, 62);
+            this.panelButtons.Size = new System.Drawing.Size(639, 62);
             this.panelButtons.TabIndex = 0;
             // 
-            // modernButton2
+            // btnCancel
             // 
-            this.modernButton2.CustomColorScheme = false;
-            this.modernButton2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.modernButton2.Location = new System.Drawing.Point(183, 18);
-            this.modernButton2.Margin = new System.Windows.Forms.Padding(4);
-            this.modernButton2.Name = "modernButton2";
-            this.modernButton2.Size = new System.Drawing.Size(96, 32);
-            this.modernButton2.TabIndex = 3;
-            this.modernButton2.Text = "Cancel";
-            this.modernButton2.UseVisualStyleBackColor = true;
+            this.btnCancel.CustomColorScheme = false;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(419, 17);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(96, 32);
+            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // modernButton1
+            // btnSave
             // 
-            this.modernButton1.CustomColorScheme = false;
-            this.modernButton1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.modernButton1.Location = new System.Drawing.Point(379, 18);
-            this.modernButton1.Margin = new System.Windows.Forms.Padding(4);
-            this.modernButton1.Name = "modernButton1";
-            this.modernButton1.Size = new System.Drawing.Size(96, 32);
-            this.modernButton1.TabIndex = 2;
-            this.modernButton1.Text = "OK";
-            this.modernButton1.UseVisualStyleBackColor = true;
+            this.btnSave.CustomColorScheme = false;
+            this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnSave.Location = new System.Drawing.Point(523, 17);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(96, 32);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "OK";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.modernButton1_Click);
             // 
             // panel1
             // 
@@ -91,13 +92,13 @@
             this.panel1.Location = new System.Drawing.Point(1, 33);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(655, 255);
+            this.panel1.Size = new System.Drawing.Size(639, 188);
             this.panel1.TabIndex = 1;
             // 
             // checkBoxSave
             // 
             this.checkBoxSave.AutoSize = true;
-            this.checkBoxSave.Location = new System.Drawing.Point(18, 214);
+            this.checkBoxSave.Location = new System.Drawing.Point(475, 141);
             this.checkBoxSave.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxSave.Name = "checkBoxSave";
             this.checkBoxSave.Size = new System.Drawing.Size(144, 25);
@@ -108,7 +109,7 @@
             // cmbProfile
             // 
             this.cmbProfile.FormattingEnabled = true;
-            this.cmbProfile.Location = new System.Drawing.Point(175, 161);
+            this.cmbProfile.Location = new System.Drawing.Point(175, 142);
             this.cmbProfile.Margin = new System.Windows.Forms.Padding(4);
             this.cmbProfile.Name = "cmbProfile";
             this.cmbProfile.Size = new System.Drawing.Size(292, 29);
@@ -116,7 +117,7 @@
             // 
             // txtSecretKey
             // 
-            this.txtSecretKey.Location = new System.Drawing.Point(175, 90);
+            this.txtSecretKey.Location = new System.Drawing.Point(175, 83);
             this.txtSecretKey.Margin = new System.Windows.Forms.Padding(4);
             this.txtSecretKey.Name = "txtSecretKey";
             this.txtSecretKey.Size = new System.Drawing.Size(444, 29);
@@ -135,17 +136,17 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 164);
+            this.label3.Location = new System.Drawing.Point(13, 145);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 21);
+            this.label3.Size = new System.Drawing.Size(147, 21);
             this.label3.TabIndex = 13;
-            this.label3.Text = "or Profile:";
+            this.label3.Text = "or use exisitng user:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 93);
+            this.label2.Location = new System.Drawing.Point(14, 86);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(122, 21);
@@ -155,7 +156,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 29);
+            this.label1.Location = new System.Drawing.Point(14, 27);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(125, 21);
@@ -166,7 +167,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 351);
+            this.ClientSize = new System.Drawing.Size(641, 284);
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
@@ -193,8 +194,8 @@
         #endregion
 
         private System.Windows.Forms.Panel panelButtons;
-        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton2;
-        private NickAc.ModernUIDoneRight.Controls.ModernButton modernButton1;
+        private NickAc.ModernUIDoneRight.Controls.ModernButton btnCancel;
+        private NickAc.ModernUIDoneRight.Controls.ModernButton btnSave;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox checkBoxSave;
         private System.Windows.Forms.ComboBox cmbProfile;

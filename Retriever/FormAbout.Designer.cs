@@ -28,15 +28,15 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.labelProductName = new System.Windows.Forms.Label();
             this.labelVersion = new System.Windows.Forms.Label();
             this.labelCopyright = new System.Windows.Forms.Label();
             this.labelCompanyName = new System.Windows.Forms.Label();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
-            this.appBar = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.modernShadowPanel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
             this.modernButton1 = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.appBar = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.modernShadowPanel1.SuspendLayout();
@@ -65,8 +65,21 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(819, 390);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(819, 404);
             this.tableLayoutPanel.TabIndex = 0;
+            // 
+            // logoPictureBox
+            // 
+            this.logoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logoPictureBox.Image = global::Retriever.Properties.Resources.SmallerDog;
+            this.logoPictureBox.Location = new System.Drawing.Point(4, 4);
+            this.logoPictureBox.Margin = new System.Windows.Forms.Padding(4);
+            this.logoPictureBox.Name = "logoPictureBox";
+            this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 6);
+            this.logoPictureBox.Size = new System.Drawing.Size(262, 396);
+            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.logoPictureBox.TabIndex = 12;
+            this.logoPictureBox.TabStop = false;
             // 
             // labelProductName
             // 
@@ -83,7 +96,7 @@
             // labelVersion
             // 
             this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelVersion.Location = new System.Drawing.Point(278, 39);
+            this.labelVersion.Location = new System.Drawing.Point(278, 40);
             this.labelVersion.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
             this.labelVersion.MaximumSize = new System.Drawing.Size(0, 24);
             this.labelVersion.Name = "labelVersion";
@@ -95,7 +108,7 @@
             // labelCopyright
             // 
             this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCopyright.Location = new System.Drawing.Point(278, 78);
+            this.labelCopyright.Location = new System.Drawing.Point(278, 80);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
             this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 24);
             this.labelCopyright.Name = "labelCopyright";
@@ -107,7 +120,7 @@
             // labelCompanyName
             // 
             this.labelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCompanyName.Location = new System.Drawing.Point(278, 117);
+            this.labelCompanyName.Location = new System.Drawing.Point(278, 120);
             this.labelCompanyName.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
             this.labelCompanyName.MaximumSize = new System.Drawing.Size(0, 24);
             this.labelCompanyName.Name = "labelCompanyName";
@@ -116,18 +129,34 @@
             this.labelCompanyName.Text = "Company Name";
             this.labelCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // logoPictureBox
+            // modernShadowPanel1
             // 
-            this.logoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logoPictureBox.Image = global::Retriever.Properties.Resources.SmallerDog;
-            this.logoPictureBox.Location = new System.Drawing.Point(4, 4);
-            this.logoPictureBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 6);
-            this.logoPictureBox.Size = new System.Drawing.Size(262, 382);
-            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.logoPictureBox.TabIndex = 12;
-            this.logoPictureBox.TabStop = false;
+            this.modernShadowPanel1.Controls.Add(this.modernButton1);
+            this.modernShadowPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modernShadowPanel1.Location = new System.Drawing.Point(273, 365);
+            this.modernShadowPanel1.Name = "modernShadowPanel1";
+            this.modernShadowPanel1.Size = new System.Drawing.Size(543, 36);
+            this.modernShadowPanel1.TabIndex = 23;
+            // 
+            // modernButton1
+            // 
+            this.modernButton1.CustomColorScheme = false;
+            this.modernButton1.Location = new System.Drawing.Point(465, 3);
+            this.modernButton1.Name = "modernButton1";
+            this.modernButton1.Size = new System.Drawing.Size(75, 32);
+            this.modernButton1.TabIndex = 0;
+            this.modernButton1.Text = "Close";
+            this.modernButton1.UseVisualStyleBackColor = true;
+            this.modernButton1.Click += new System.EventHandler(this.modernButton1_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Location = new System.Drawing.Point(273, 163);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(543, 196);
+            this.textBox1.TabIndex = 24;
             // 
             // appBar
             // 
@@ -143,41 +172,12 @@
             this.appBar.Text = "About";
             this.appBar.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             // 
-            // modernShadowPanel1
-            // 
-            this.modernShadowPanel1.Controls.Add(this.modernButton1);
-            this.modernShadowPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.modernShadowPanel1.Location = new System.Drawing.Point(273, 354);
-            this.modernShadowPanel1.Name = "modernShadowPanel1";
-            this.modernShadowPanel1.Size = new System.Drawing.Size(543, 33);
-            this.modernShadowPanel1.TabIndex = 23;
-            // 
-            // modernButton1
-            // 
-            this.modernButton1.CustomColorScheme = false;
-            this.modernButton1.Location = new System.Drawing.Point(465, 3);
-            this.modernButton1.Name = "modernButton1";
-            this.modernButton1.Size = new System.Drawing.Size(75, 23);
-            this.modernButton1.TabIndex = 0;
-            this.modernButton1.Text = "Close";
-            this.modernButton1.UseVisualStyleBackColor = true;
-            this.modernButton1.Click += new System.EventHandler(this.modernButton1_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(273, 159);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(543, 189);
-            this.textBox1.TabIndex = 24;
-            // 
             // FormAbout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(821, 442);
+            this.ClientSize = new System.Drawing.Size(821, 456);
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
@@ -186,7 +186,7 @@
             this.Controls.Add(this.appBar);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Location = new System.Drawing.Point(0, 0);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(37, 39);

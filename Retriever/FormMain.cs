@@ -32,13 +32,32 @@ namespace Retriever
         {
             InitializeComponent();
 
+            PopulateActions();
+
+            InitializeBackgroundWorker();
+
+            InitializeScanner();
+        }
+
+        private void InitializeScanner()
+        {
+            scanner = new Scanner
+            {
+                MaxTasks = Settings.Default.ConcurrentConnecitons,
+                TimeOut = Settings.Default.Timeout // 15 minutes default
+            };
+            scanner.Progress.ProgressChanged += Scanner_ProgressChanged;
+        }
+
+        private void PopulateActions()
+        {
             AppBarMenuTextItem aboutAction = new AppBarMenuTextItem("About");
             aboutAction.Click += AboutAction_Click;
             appBar.MenuItems.Add(aboutAction);
-            
+
             this.stopAction = new AppAction();
-            stopAction.Image = Resources.Private50;            
-            stopAction.Click += StopAction_Click;            
+            stopAction.Image = Resources.Private50;
+            stopAction.Click += StopAction_Click;
             appBar.Actions.Add(stopAction);
 
             AppAction loadProfileAction = new AppAction();
@@ -46,12 +65,12 @@ namespace Retriever
             loadProfileAction.Click += LoadProfileAction_Click;
             appBar.Actions.Add(loadProfileAction);
 
-            this.scanAction = new SidebarTextItem("Scan...");                        
+            this.scanAction = new SidebarTextItem("Scan...");
             this.scanAction.Click += ScanAction_Click;
             this.sidebarControl.Items.Add(this.scanAction);
 
             SidebarTextItem runAction = new SidebarTextItem("Run Single Operation...");
-            runAction.Click += RunAction_Click;            
+            runAction.Click += RunAction_Click;
             this.sidebarControl.Items.Add(runAction);
 
             SidebarTextItem editProfileAction = new SidebarTextItem("Edit Profile...");
@@ -61,15 +80,16 @@ namespace Retriever
             SidebarTextItem editCredentialsAction = new SidebarTextItem("Edit Credentials...");
             editCredentialsAction.Click += EditCredentialsAction_Click;
             this.sidebarControl.Items.Add(editCredentialsAction);
+        }
 
-            InitializeBackgroundWorker();
-
-            scanner = new Scanner
-            {
-                MaxTasks = Settings.Default.ConcurrentConnecitons,
-                TimeOut = Settings.Default.Timeout // 15 minutes default
-            };
-            scanner.Progress.ProgressChanged += Scanner_ProgressChanged;
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            FormAction("Loading profile...",
+                delegate {
+                    LoadProfile(Settings.Default.Profile, Profile.AllServices());
+                }, false);
+            FormAction("Loading objects..", LoadObjectsFromFile, false);
+            FormAction("Loading messages..", LoadMessagesFromFile, false);
         }
 
         private void LoadProfileAction_Click(object sender, EventArgs e)
@@ -321,12 +341,6 @@ namespace Retriever
             if (dr == DialogResult.OK)
             {                
                 this.creds = formCredentials.Credentials;
-                if (formCredentials.SaveCredentials)
-                {
-                    Settings.Default.SecretAccessKey = this.creds.GetCredentials().AccessKey;
-                    Settings.Default.SettingsKey = this.creds.GetCredentials().SecretKey;
-                    Settings.Default.Save();
-                }
             }
         }
 
@@ -353,17 +367,7 @@ namespace Retriever
             formProfiles.ShowDialog();
             FormAction("Saving profile", profile.Save);
         }
-
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-            FormAction("Loading profile...",
-                delegate {
-                    LoadProfile(Settings.Default.Profile, Profile.AllServices());
-                }, false);
-            FormAction("Loading objects..", LoadObjectsFromFile, false);
-            FormAction("Loading messages..", LoadMessagesFromFile, false);
-        }
-
+      
         private void LoadMessagesFromFile()
         {
             try

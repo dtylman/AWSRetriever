@@ -94,5 +94,65 @@ namespace Retriever.Properties {
                 this["Profile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AWSUser {
+            get {
+                return ((string)(this["AWSUser"]));
+            }
+            set {
+                this["AWSUser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProxyHost {
+            get {
+                return ((string)(this["ProxyHost"]));
+            }
+            set {
+                this["ProxyHost"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1080")]
+        public int ProxyPort {
+            get {
+                return ((int)(this["ProxyPort"]));
+            }
+            set {
+                this["ProxyPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProxyUser {
+            get {
+                return ((string)(this["ProxyUser"]));
+            }
+            set {
+                this["ProxyUser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProxyPassword {
+            get {
+                return ((string)(this["ProxyPassword"]));
+            }
+            set {
+                this["ProxyPassword"] = value;
+            }
+        }
     }
 }

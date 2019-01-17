@@ -21,7 +21,7 @@ namespace CloudOps.CloudTrail
 
         public override void Invoke(AWSCredentials creds, RegionEndpoint region, int maxItems)
         {
-            AmazonCloudTrailClient client = new AmazonCloudTrailClient(creds, region);
+            AmazonCloudTrailClient client = new AmazonCloudTrailClient(creds, region);            
             DescribeTrailsResponse resp = new DescribeTrailsResponse();
             DescribeTrailsRequest req = new DescribeTrailsRequest
             {                    
