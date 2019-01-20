@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Net;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -20,13 +21,19 @@ namespace Retriever
     public partial class FormMain : ModernForm
     {
         private AWSCredentials creds;
-        private Scanner scanner;        
+        private Scanner scanner;
         private Profile profile;
         private CloudObjects cloudObjects = new CloudObjects();
         private ProgressMessages progressMessages = new ProgressMessages();
         private AppAction stopAction;
         private SidebarTextItem scanAction;
-        private bool scanning;
+        private enum ScannerState
+        {
+            Working,
+            Idle
+        }
+
+        private ScannerState scannerState = ScannerState.Idle;
 
         public FormMain()
         {
@@ -54,6 +61,7 @@ namespace Retriever
             AppBarMenuTextItem aboutAction = new AppBarMenuTextItem("About");
             aboutAction.Click += AboutAction_Click;
             appBar.MenuItems.Add(aboutAction);
+
 
             this.stopAction = new AppAction();
             stopAction.Image = Resources.Private50;
@@ -85,7 +93,8 @@ namespace Retriever
         private void FormMain_Load(object sender, EventArgs e)
         {
             FormAction("Loading profile...",
-                delegate {
+                delegate
+                {
                     LoadProfile(Settings.Default.Profile, Profile.AllServices());
                 }, false);
             FormAction("Loading objects..", LoadObjectsFromFile, false);
@@ -99,7 +108,7 @@ namespace Retriever
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                this.LoadProfile(openFileDialog.FileName, this.profile);               
+                this.LoadProfile(openFileDialog.FileName, this.profile);
             }
         }
 
@@ -111,12 +120,12 @@ namespace Retriever
 
         private void EditCredentialsAction_Click(object sender, MouseEventArgs e)
         {
-            ShowCredentialsDialog();
+            FormAction("Ready", ShowCredentialsDialog);
         }
 
         private void StopAction_Click(object sender, EventArgs e)
         {
-            if (!this.scanning)
+            if (this.scannerState==ScannerState.Idle)
             {
                 ModernMessageBox.ShowError(new ApplicationException("Not scanning"));
             }
@@ -127,20 +136,25 @@ namespace Retriever
 
                     this.scanner.Cancel();
                 }
-            });            
+            });
         }
 
         private void EditProfileAction_Click(object sender, MouseEventArgs e)
         {
-            ShowProfileDialog();
+            FormAction("Ready", ShowProfileDialog);
         }
 
         private void RunAction_Click(object sender, MouseEventArgs e)
         {
+            FormAction("Ready", ShowRunDialog);
+        }
+
+        private void ShowRunDialog()
+        {
             FormRun form = new FormRun();
             form.Profile = this.profile;
             DialogResult dr = form.ShowDialog();
-          
+
             if (dr == DialogResult.OK)
             {
                 if (form.Operation == null)
@@ -154,30 +168,32 @@ namespace Retriever
                 }
                 foreach (var region in form.SelectedRegions)
                 {
-                    scanner.Invokations.Enqueue(new OperationInvokation(form.Operation, region, this.creds, Settings.Default.PageSize));
+                    Operation op = form.Operation;
+                    op.Proxy = this.Proxy;
+                    scanner.Invokations.Enqueue(new OperationInvokation(op, region, this.creds, Settings.Default.PageSize));
                 }
                 if (!backgroundWorker.IsBusy)
-                {
+                {                    
                     backgroundWorker.RunWorkerAsync();
                 }
+                UpdateCursor();
             }
         }
 
         private void ScanAction_Click(object sender, MouseEventArgs e)
         {
+            if (this.scannerState==ScannerState.Working)
+            {
+                ModernMessageBox.ShowError(new ApplicationException("Scan in progress. Stop it first."));
+                return;
+            }
             FormAction("Scanning...", delegate
              {
-                 if (this.scanning)
-                 {
-                     ModernMessageBox.ShowError(new ApplicationException("Scan in progress. Stop it first."));
-                     return;
-                 }
                  ValidateCredentials();
-                 statusLabel.Text = String.Empty;
-                 SetScanning(true);
-                 this.listViewFound.Items.Clear();
-                 this.listViewMessages.Items.Clear();
-                 QueueItems();
+                 statusLabel.Text = String.Empty;                 
+                 ClearObjects();
+                 ClearProgressMessages();
+                 QueueOperations();
                  if (!backgroundWorker.IsBusy)
                  {
                      backgroundWorker.RunWorkerAsync();
@@ -192,7 +208,7 @@ namespace Retriever
                 ShowCredentialsDialog();
             }
             if (this.creds != null)
-            {                
+            {
                 if (this.creds.GetCredentials() != null)
                 {
                     return;
@@ -200,37 +216,38 @@ namespace Retriever
             }
             throw new ApplicationException("Invalid credentials");
         }
-
-        private void SetScanning(bool value)
-        {
-            this.scanning = value;
-            if (value)
+      
+        private void UpdateCursor()
+        {            
+            if (this.scannerState==ScannerState.Working)
             {
                 this.Cursor = Cursors.AppStarting;
-            } else
-            {
-                this.Cursor = Cursors.Default;
             }
-        }      
+            else
+            {
+                this.Cursor = Cursors.Default;             
+            }            
+        }
 
         #region background worker
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
+        {            
             if (creds == null)
             {
                 throw new ApplicationException("No Credentials are provided");
             }
-
             try
-            {              
+            {
+                this.scannerState = ScannerState.Working;
                 scanner.Scan();
-                // TODO: make sure all background events are processed (don't sure where i am missing a mutex...)                
-                Thread.Sleep(1000);
+                // TODO: make sure all background events are processed (don't sure where i am missing a mutex...)                                
+                Thread.Sleep(1000);                
             }
             finally
             {
-                backgroundWorker.ReportProgress(100, "Done");
+                backgroundWorker.ReportProgress(0, "Done");
+                this.scannerState = ScannerState.Idle;
             }
         }
 
@@ -249,7 +266,7 @@ namespace Retriever
                 this.listViewFound.VirtualListSize = this.cloudObjects.Count;
                 this.progressMessages.Add(new ProgressMessage(ir));
                 this.listViewMessages.VirtualListSize = this.progressMessages.Count;
-                listViewMessages.EnsureVisible(this.progressMessages.Count-1);
+                listViewMessages.EnsureVisible(this.progressMessages.Count - 1);
                 UpdateStatusBar(ir);
             }
             else
@@ -265,7 +282,7 @@ namespace Retriever
             if (e.Error != null)
             {
                 SetStatus(e.Error);
-                ModernMessageBox.ShowError(e.Error);                
+                ModernMessageBox.ShowError(e.Error);
             }
             else if (e.Cancelled)
             {
@@ -277,8 +294,7 @@ namespace Retriever
                 SetStatus("Done");
             }
 
-            SetScanning(false);
-
+            UpdateCursor();
             FormAction("Saving objects...", cloudObjects.Save);
         }
 
@@ -290,7 +306,7 @@ namespace Retriever
             this.statusLabel.Text = ir.ResultText();
         }
 
-        
+
         private void SetStatus(Exception e)
         {
             SetStatus("Error: " + e.Message);
@@ -313,11 +329,11 @@ namespace Retriever
             {
                 backgroundWorker.ReportProgress(e.Progress, e);
             }
-        }              
+        }
 
-        private void QueueItems()
+        private void QueueOperations()
         {
-            backgroundWorker.ReportProgress(0, "Queuing items...");
+            SetStatus("Queuing work items...");
             foreach (ProfileRecord p in this.profile)
             {
                 if (p.Enabled)
@@ -325,6 +341,7 @@ namespace Retriever
                     Operation op = Profile.FindOpeartion(p);
                     if (op != null)
                     {
+                        op.Proxy = this.Proxy;
                         foreach (RegionEndpoint region in RegionsString.ParseSystemNames(p.Regions).Items)
                         {
                             scanner.Invokations.Enqueue(new OperationInvokation(op, region, creds, p.PageSize));
@@ -332,14 +349,14 @@ namespace Retriever
                     }
                 }
             }
-        }        
+        }
 
         private void ShowCredentialsDialog()
         {
             FormCredentials formCredentials = new FormCredentials();
             DialogResult dr = formCredentials.ShowDialog(this);
             if (dr == DialogResult.OK)
-            {                
+            {
                 this.creds = formCredentials.Credentials;
             }
         }
@@ -353,13 +370,13 @@ namespace Retriever
         {
             if (this.listViewFound.SelectedIndices.Count > 0)
             {
-                CloudObject cobo = this.cloudObjects[this.listViewFound.SelectedIndices[0]];                
+                CloudObject cobo = this.cloudObjects[this.listViewFound.SelectedIndices[0]];
                 this.propertyGridObject.SelectedObject = cobo;
                 this.richTextBoxCobo.Text = cobo.Source;
             }
         }
 
-        
+
         private void ShowProfileDialog()
         {
             FormProfiles formProfiles = new FormProfiles();
@@ -367,7 +384,7 @@ namespace Retriever
             formProfiles.ShowDialog();
             FormAction("Saving profile", profile.Save);
         }
-      
+
         private void LoadMessagesFromFile()
         {
             try
@@ -389,16 +406,17 @@ namespace Retriever
                 this.cloudObjects = CloudObjects.Load();
                 this.listViewFound.VirtualListSize = this.cloudObjects.Count;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 this.cloudObjects = new CloudObjects();
                 throw;
             }
-            
+
         }
 
         private void FormAction(string status, Action action, bool showMessageBox = true)
         {
+            this.sidebarControl.HideSidebar();
             Cursor.Current = Cursors.WaitCursor;
             SetStatus(status);
             try
@@ -419,14 +437,14 @@ namespace Retriever
             }
             finally
             {
-                Cursor.Current = Cursors.Default;                
+                Cursor.Current = Cursors.Default;
             }
         }
-       
-        private void LoadProfile(string fileName ,Profile defaultProfile)
+
+        private void LoadProfile(string fileName, Profile defaultProfile)
         {
             try
-            {                
+            {
                 this.profile = Profile.Load(fileName);
                 Settings.Default.Profile = fileName;
             }
@@ -455,6 +473,21 @@ namespace Retriever
             }
         }
 
+        public WebProxy Proxy
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Settings.Default.ProxyHost))
+                {
+                    return null;
+                }
+                return new WebProxy(Settings.Default.ProxyHost, Settings.Default.ProxyPort)
+                {
+                    Credentials = new NetworkCredential(Settings.Default.ProxyUser, Settings.Default.ProxyPassword)
+                };
+            }
+        }
+
         private void RefreshProfileName()
         {
             this.appBar.Text = String.Format("{0} - (Active Profile: '{1}')", AssemblyProduct, this.profile.Name);
@@ -472,11 +505,21 @@ namespace Retriever
 
         private void ClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ClearObjects();
+        }
+
+        private void ClearObjects()
+        {
             cloudObjects.Clear();
             listViewFound.VirtualListSize = 0;
         }
 
         private void ClearToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ClearProgressMessages();
+        }
+
+        private void ClearProgressMessages()
         {
             progressMessages.Clear();
             listViewMessages.VirtualListSize = 0;
