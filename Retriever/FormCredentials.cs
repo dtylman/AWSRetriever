@@ -22,9 +22,9 @@ namespace Retriever
         {
             get
             {
-                if (!string.IsNullOrEmpty(this.AccessKey) && (!string.IsNullOrEmpty(this.SecretKey)))
+                if (!string.IsNullOrEmpty(this.AccessKeyID) && (!string.IsNullOrEmpty(this.SecretAccessKey)))
                 {
-                    return new BasicAWSCredentials(this.AccessKey, this.SecretKey);
+                    return new BasicAWSCredentials(this.AccessKeyID, this.SecretAccessKey);
                 }
                 else if (!string.IsNullOrEmpty(this.ProfileName))
                 {
@@ -46,13 +46,21 @@ namespace Retriever
             }
         }
 
-        public string AccessKey { get{
-            return  this.txtAccessKey.Text;
-        } }
+        public string AccessKeyID
+        {
+            get
+            {
+                return this.txtAccessKeyID.Text;
+            }
+        }
 
-        public string SecretKey { get {
-            return this.txtSecretKey.Text;
-        }}
+        public string SecretAccessKey
+        {
+            get
+            {
+                return this.txtSecretAccessKey.Text;
+            }
+        }
 
         public string ProfileName
         {
@@ -70,11 +78,11 @@ namespace Retriever
         {
             if (!string.IsNullOrEmpty(Configuration.Instance.SecretAccessKey))
             {
-                this.txtSecretKey.Text = Configuration.Instance.SecretAccessKey;
+                this.txtSecretAccessKey.Text = Configuration.Instance.SecretAccessKey;
             }
             if (!string.IsNullOrEmpty(Configuration.Instance.AccessKeyID))
             {
-                this.txtAccessKey.Text = Configuration.Instance.AccessKeyID;
+                this.txtAccessKeyID.Text = Configuration.Instance.AccessKeyID;
             }
             if (!string.IsNullOrEmpty(Configuration.Instance.AwsUser))
             {
@@ -86,8 +94,8 @@ namespace Retriever
         {
             if (this.checkBoxSave.Checked)
             {
-                Configuration.Instance.AccessKeyID= this.txtSecretKey.Text;
-                Configuration.Instance.SecretAccessKey = this.txtAccessKey.Text;
+                Configuration.Instance.AccessKeyID= this.txtAccessKeyID.Text; 
+                Configuration.Instance.SecretAccessKey = this.txtSecretAccessKey.Text; 
                 Configuration.Instance.AwsUser = this.cmbProfile.Text;
                 Configuration.Instance.Save();
             }

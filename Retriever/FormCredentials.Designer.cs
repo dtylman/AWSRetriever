@@ -34,8 +34,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBoxSave = new System.Windows.Forms.CheckBox();
             this.cmbProfile = new System.Windows.Forms.ComboBox();
-            this.txtSecretKey = new System.Windows.Forms.TextBox();
-            this.txtAccessKey = new System.Windows.Forms.TextBox();
+            this.txtSecretAccessKey = new System.Windows.Forms.TextBox();
+            this.txtAccessKeyID = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,14 +51,14 @@
             this.panelButtons.Location = new System.Drawing.Point(1, 221);
             this.panelButtons.Margin = new System.Windows.Forms.Padding(4);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(639, 62);
+            this.panelButtons.Size = new System.Drawing.Size(664, 62);
             this.panelButtons.TabIndex = 0;
             // 
             // btnCancel
             // 
             this.btnCancel.CustomColorScheme = false;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(419, 17);
+            this.btnCancel.Location = new System.Drawing.Point(451, 17);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(96, 32);
@@ -70,7 +70,7 @@
             // 
             this.btnSave.CustomColorScheme = false;
             this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnSave.Location = new System.Drawing.Point(523, 17);
+            this.btnSave.Location = new System.Drawing.Point(555, 17);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(96, 32);
@@ -83,8 +83,8 @@
             // 
             this.panel1.Controls.Add(this.checkBoxSave);
             this.panel1.Controls.Add(this.cmbProfile);
-            this.panel1.Controls.Add(this.txtSecretKey);
-            this.panel1.Controls.Add(this.txtAccessKey);
+            this.panel1.Controls.Add(this.txtSecretAccessKey);
+            this.panel1.Controls.Add(this.txtAccessKeyID);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
@@ -92,13 +92,13 @@
             this.panel1.Location = new System.Drawing.Point(1, 33);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(639, 188);
+            this.panel1.Size = new System.Drawing.Size(664, 188);
             this.panel1.TabIndex = 1;
             // 
             // checkBoxSave
             // 
             this.checkBoxSave.AutoSize = true;
-            this.checkBoxSave.Location = new System.Drawing.Point(475, 141);
+            this.checkBoxSave.Location = new System.Drawing.Point(507, 141);
             this.checkBoxSave.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxSave.Name = "checkBoxSave";
             this.checkBoxSave.Size = new System.Drawing.Size(144, 25);
@@ -109,29 +109,29 @@
             // cmbProfile
             // 
             this.cmbProfile.FormattingEnabled = true;
-            this.cmbProfile.Location = new System.Drawing.Point(175, 142);
+            this.cmbProfile.Location = new System.Drawing.Point(207, 142);
             this.cmbProfile.Margin = new System.Windows.Forms.Padding(4);
             this.cmbProfile.Name = "cmbProfile";
             this.cmbProfile.Size = new System.Drawing.Size(292, 29);
             this.cmbProfile.TabIndex = 16;
             // 
-            // txtSecretKey
+            // txtSecretAccessKey
             // 
-            this.txtSecretKey.Location = new System.Drawing.Point(175, 83);
-            this.txtSecretKey.Margin = new System.Windows.Forms.Padding(4);
-            this.txtSecretKey.Name = "txtSecretKey";
-            this.txtSecretKey.Size = new System.Drawing.Size(444, 29);
-            this.txtSecretKey.TabIndex = 15;
-            this.txtSecretKey.UseSystemPasswordChar = true;
+            this.txtSecretAccessKey.Location = new System.Drawing.Point(207, 83);
+            this.txtSecretAccessKey.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSecretAccessKey.Name = "txtSecretAccessKey";
+            this.txtSecretAccessKey.Size = new System.Drawing.Size(444, 29);
+            this.txtSecretAccessKey.TabIndex = 15;
+            this.txtSecretAccessKey.UseSystemPasswordChar = true;
             // 
-            // txtAccessKey
+            // txtAccessKeyID
             // 
-            this.txtAccessKey.Location = new System.Drawing.Point(175, 24);
-            this.txtAccessKey.Margin = new System.Windows.Forms.Padding(4);
-            this.txtAccessKey.Name = "txtAccessKey";
-            this.txtAccessKey.Size = new System.Drawing.Size(444, 29);
-            this.txtAccessKey.TabIndex = 14;
-            this.txtAccessKey.UseSystemPasswordChar = true;
+            this.txtAccessKeyID.Location = new System.Drawing.Point(207, 24);
+            this.txtAccessKeyID.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAccessKeyID.Name = "txtAccessKeyID";
+            this.txtAccessKeyID.Size = new System.Drawing.Size(444, 29);
+            this.txtAccessKeyID.TabIndex = 14;
+            this.txtAccessKeyID.UseSystemPasswordChar = true;
             // 
             // label3
             // 
@@ -149,9 +149,9 @@
             this.label2.Location = new System.Drawing.Point(14, 86);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 21);
+            this.label2.Size = new System.Drawing.Size(172, 21);
             this.label2.TabIndex = 12;
-            this.label2.Text = "AWS Secret Key:";
+            this.label2.Text = "AWS Secret Access Key:";
             // 
             // label1
             // 
@@ -159,15 +159,15 @@
             this.label1.Location = new System.Drawing.Point(14, 27);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 21);
+            this.label1.Size = new System.Drawing.Size(148, 21);
             this.label1.TabIndex = 11;
-            this.label1.Text = "AWS Access Key:";
+            this.label1.Text = "AWS Access Key ID: ";
             // 
             // FormCredentials
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 284);
+            this.ClientSize = new System.Drawing.Size(666, 284);
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
@@ -199,8 +199,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox checkBoxSave;
         private System.Windows.Forms.ComboBox cmbProfile;
-        private System.Windows.Forms.TextBox txtSecretKey;
-        private System.Windows.Forms.TextBox txtAccessKey;
+        private System.Windows.Forms.TextBox txtSecretAccessKey;
+        private System.Windows.Forms.TextBox txtAccessKeyID;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
