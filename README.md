@@ -1,4 +1,4 @@
-# AWSRetriever
+ AWSRetriever
 
 Lists all resources in a AWS account.
 
@@ -16,7 +16,7 @@ Lists all resources in a AWS account.
 
 ## Download & Run
 
-Download [awsretriever.0.0.2.3.zip](https://github.com/dtylman/AWSRetriever/releases/download/0.0.2.3/awsretriever.0.0.2.3.zip) suitable both for Windows or Linux.
+Download [the latest](https://github.com/dtylman/AWSRetriever/releases/) for Windows or Linux.
 
 ### Windows
 
