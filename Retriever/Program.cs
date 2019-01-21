@@ -13,7 +13,9 @@ namespace Retriever
         {            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Configuration.Load();
             Application.Run(new FormMain());
+            Configuration.Instance.Save();
         }
     }
 }

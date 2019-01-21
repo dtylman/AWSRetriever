@@ -50,8 +50,8 @@ namespace Retriever
         {
             scanner = new Scanner
             {
-                MaxTasks = Settings.Default.ConcurrentConnecitons,
-                TimeOut = Settings.Default.Timeout // 15 minutes default
+                MaxTasks = Configuration.Instance.ConcurrentConnecitons,
+                TimeOut = Configuration.Instance.Timeout // 15 minutes default
             };
             scanner.Progress.ProgressChanged += Scanner_ProgressChanged;
         }
@@ -88,6 +88,19 @@ namespace Retriever
             SidebarTextItem editCredentialsAction = new SidebarTextItem("Edit Credentials...");
             editCredentialsAction.Click += EditCredentialsAction_Click;
             this.sidebarControl.Items.Add(editCredentialsAction);
+
+            SidebarTextItem configureAction = new SidebarTextItem("Settings...");
+            configureAction.Click += ConfigureAction_Click;
+            this.sidebarControl.Items.Add(configureAction);
+        }
+
+        private void ConfigureAction_Click(object sender, MouseEventArgs e)
+        {
+            FormAction("Done", delegate
+             {
+                 FormConfig formConfig = new FormConfig();
+                 formConfig.ShowDialog();
+             });
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -95,7 +108,7 @@ namespace Retriever
             FormAction("Loading profile...",
                 delegate
                 {
-                    LoadProfile(Settings.Default.Profile, Profile.AllServices());
+                    LoadProfile(Configuration.Instance.Profile, Profile.AllServices());
                 }, false);
             FormAction("Loading objects..", LoadObjectsFromFile, false);
             FormAction("Loading messages..", LoadMessagesFromFile, false);
@@ -170,7 +183,7 @@ namespace Retriever
                 {
                     Operation op = form.Operation;
                     op.Proxy = this.Proxy;
-                    scanner.Invokations.Enqueue(new OperationInvokation(op, region, this.creds, Settings.Default.PageSize));
+                    scanner.Invokations.Enqueue(new OperationInvokation(op, region, this.creds, Configuration.Instance.PageSize));
                 }
                 if (!backgroundWorker.IsBusy)
                 {                    
@@ -446,7 +459,7 @@ namespace Retriever
             try
             {
                 this.profile = Profile.Load(fileName);
-                Settings.Default.Profile = fileName;
+                Configuration.Instance.Profile = fileName;
             }
             catch (Exception ex)
             {
@@ -477,13 +490,13 @@ namespace Retriever
         {
             get
             {
-                if (string.IsNullOrEmpty(Settings.Default.ProxyHost))
+                if (string.IsNullOrEmpty(Configuration.Instance.ProxyHost))
                 {
                     return null;
                 }
-                return new WebProxy(Settings.Default.ProxyHost, Settings.Default.ProxyPort)
+                return new WebProxy(Configuration.Instance.ProxyHost, Configuration.Instance.ProxyPort)
                 {
-                    Credentials = new NetworkCredential(Settings.Default.ProxyUser, Settings.Default.ProxyPassword)
+                    Credentials = new NetworkCredential(Configuration.Instance.ProxyUser, Configuration.Instance.ProxyPassword)
                 };
             }
         }

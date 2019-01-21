@@ -68,17 +68,17 @@ namespace Retriever
 
         private void FormCredentials_Load(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(Settings.Default.SecretAccessKey))
+            if (!string.IsNullOrEmpty(Configuration.Instance.SecretAccessKey))
             {
-                this.txtSecretKey.Text = Settings.Default.SecretAccessKey;
+                this.txtSecretKey.Text = Configuration.Instance.SecretAccessKey;
             }
-            if (!string.IsNullOrEmpty(Settings.Default.SettingsKey))
+            if (!string.IsNullOrEmpty(Configuration.Instance.AccessKeyID))
             {
-                this.txtAccessKey.Text = Settings.Default.SettingsKey;
+                this.txtAccessKey.Text = Configuration.Instance.AccessKeyID;
             }
-            if (!string.IsNullOrEmpty(Settings.Default.AWSUser))
+            if (!string.IsNullOrEmpty(Configuration.Instance.AwsUser))
             {
-                this.cmbProfile.Text = Settings.Default.AWSUser;
+                this.cmbProfile.Text = Configuration.Instance.AwsUser;
             }
         }
 
@@ -86,10 +86,10 @@ namespace Retriever
         {
             if (this.checkBoxSave.Checked)
             {
-                Settings.Default.SecretAccessKey = this.txtSecretKey.Text;
-                Settings.Default.SettingsKey = this.txtAccessKey.Text;
-                Settings.Default.AWSUser = this.cmbProfile.Text;
-                Settings.Default.Save();
+                Configuration.Instance.AccessKeyID= this.txtSecretKey.Text;
+                Configuration.Instance.SecretAccessKey = this.txtAccessKey.Text;
+                Configuration.Instance.AwsUser = this.cmbProfile.Text;
+                Configuration.Instance.Save();
             }
         }
     }

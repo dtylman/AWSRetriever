@@ -31,10 +31,10 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.modernShadowPanel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
             this.panel = new System.Windows.Forms.Panel();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.modernButton = new NickAc.ModernUIDoneRight.Controls.ModernButton();
             this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.modernShadowPanel1.SuspendLayout();
             this.panel.SuspendLayout();
@@ -69,6 +69,17 @@
             this.panel.Size = new System.Drawing.Size(524, 169);
             this.panel.TabIndex = 1;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.richTextBox1.Location = new System.Drawing.Point(5, 5);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(514, 159);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.modernButton);
@@ -83,9 +94,9 @@
             // modernButton
             // 
             this.modernButton.CustomColorScheme = false;
-            this.modernButton.Location = new System.Drawing.Point(267, 14);
+            this.modernButton.Location = new System.Drawing.Point(491, 8);
             this.modernButton.Name = "modernButton";
-            this.modernButton.Size = new System.Drawing.Size(75, 23);
+            this.modernButton.Size = new System.Drawing.Size(96, 32);
             this.modernButton.TabIndex = 0;
             this.modernButton.Text = "Close";
             this.modernButton.UseVisualStyleBackColor = true;
@@ -104,17 +115,6 @@
             this.appBar1.TabIndex = 2;
             this.appBar1.Text = "appBar";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.richTextBox1.Location = new System.Drawing.Point(5, 5);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(514, 159);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
             // 
             // ModernMessageBox
             // 

@@ -53,7 +53,7 @@ namespace Retriever
                 string regions = RegionsString.All().Text();
                 foreach (Operation op in OperationFactory.All())
                 {
-                    p.Add(new ProfileRecord(op.ServiceName, op.Name, regions, true, Settings.Default.PageSize));
+                    p.Add(new ProfileRecord(op.ServiceName, op.Name, regions, true, Configuration.Instance.PageSize));
                 }
 
                 return p;

@@ -141,9 +141,9 @@
             // modernButton1
             // 
             this.modernButton1.CustomColorScheme = false;
-            this.modernButton1.Location = new System.Drawing.Point(465, 3);
+            this.modernButton1.Location = new System.Drawing.Point(444, 1);
             this.modernButton1.Name = "modernButton1";
-            this.modernButton1.Size = new System.Drawing.Size(75, 32);
+            this.modernButton1.Size = new System.Drawing.Size(96, 32);
             this.modernButton1.TabIndex = 0;
             this.modernButton1.Text = "Close";
             this.modernButton1.UseVisualStyleBackColor = true;
