@@ -459,8 +459,8 @@
             // 
             // sidebarControl
             // 
-            this.sidebarControl.BackgroundImage = global::Retriever.Properties.Resources.SmallerDog;
-            this.sidebarControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.sidebarControl.BackgroundImage = global::Retriever.Properties.Resources.Korra;
+            this.sidebarControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.sidebarControl.ColorScheme = this.ColorScheme;
             this.sidebarControl.ContextMenuStrip = this.contextMenuMessages;
             this.sidebarControl.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -516,6 +516,7 @@
             this.Controls.Add(this.panelStatus);
             this.Controls.Add(this.appBar);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.MinimumSize = new System.Drawing.Size(108, 45);

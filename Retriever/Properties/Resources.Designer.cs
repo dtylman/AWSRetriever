@@ -123,6 +123,16 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Korra {
+            get {
+                object obj = ResourceManager.GetObject("Korra", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap List50 {
             get {
                 object obj = ResourceManager.GetObject("List50", resourceCulture);
@@ -196,6 +206,16 @@ namespace Retriever.Properties {
         internal static System.Drawing.Bitmap RepeatOne50 {
             get {
                 object obj = ResourceManager.GetObject("RepeatOne50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RoundKorra {
+            get {
+                object obj = ResourceManager.GetObject("RoundKorra", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
