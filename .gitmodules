@@ -3,4 +3,4 @@
 	url = https://github.com/aws/aws-sdk-net.git
 [submodule "ModernUIDoneRight"]
 	path = ModernUIDoneRight
-	url = https://github.com/NickAcPT/ModernUIDoneRight.git
+	url = https://github.com/dtylman/ModernUIDoneRight.git
