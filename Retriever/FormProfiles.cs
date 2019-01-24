@@ -1,6 +1,7 @@
 ﻿using Amazon;
 using AWSRetriver.Controls;
 using CloudOps;
+using NickAc.ModernUIDoneRight.Controls;
 using NickAc.ModernUIDoneRight.Forms;
 using NickAc.ModernUIDoneRight.Objects;
 using Retriever.Model;
@@ -22,8 +23,11 @@ namespace Retriever
 
             PopulateToolBar();
 
+            appBar.ToolTip = new ModernToolTip();
             AppAction exportProfileAction = new AppAction();
-            exportProfileAction.Image = Resources.Save50;
+            exportProfileAction.Image = Resources.Export50;
+            exportProfileAction.Cursor = Cursors.Hand;
+            exportProfileAction.ToolTip = "Save Profile As...";
             exportProfileAction.Click += ExportProfileAction_Click;
             this.appBar.Actions.Add(exportProfileAction);
         }

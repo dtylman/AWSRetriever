@@ -155,6 +155,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Content Include="korra_circle.ico" />
+    <None Include="Resources\icons8-export-50.png" />
+    <None Include="Resources\icons8-about-50.png" />
     <None Include="Resources\korra_circle.png" />
     <None Include="Resources\korra.png" />
     <EmbeddedResource Include="FormAbout.resx">

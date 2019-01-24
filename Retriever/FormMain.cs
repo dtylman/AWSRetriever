@@ -15,6 +15,7 @@ using NickAc.ModernUIDoneRight.Objects;
 using NickAc.ModernUIDoneRight.Objects.MenuItems;
 using Retriever.Model;
 using Retriever.Properties;
+using NickAc.ModernUIDoneRight.Controls;
 
 namespace Retriever
 {
@@ -60,18 +61,22 @@ namespace Retriever
         {
             AppAction aboutAction = new AppAction();
             aboutAction.Click += AboutAction_Click;
+            aboutAction.Image = Resources.About50;
+            aboutAction.Cursor = Cursors.Hand;
             aboutAction.ToolTip = "About AWSRetriever...";
             appBar.Actions.Add(aboutAction);
 
             AppAction stopAction = new AppAction();
             stopAction.Image = Resources.Private50;
             stopAction.Click += StopAction_Click;
+            stopAction.Cursor = Cursors.Hand;
             stopAction.ToolTip = "Stop Scanning";
             appBar.Actions.Add(stopAction);
 
             AppAction loadProfileAction = new AppAction();
             loadProfileAction.Image = Resources.Form50;
             loadProfileAction.Click += LoadProfileAction_Click;
+            loadProfileAction.Cursor = Cursors.Hand;
             loadProfileAction.ToolTip = "Loads a saved profile";
             appBar.Actions.Add(loadProfileAction);
 

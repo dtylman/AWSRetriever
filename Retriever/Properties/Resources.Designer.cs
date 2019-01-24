@@ -63,6 +63,16 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap About50 {
+            get {
+                object obj = ResourceManager.GetObject("About50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CheckMark50 {
             get {
                 object obj = ResourceManager.GetObject("CheckMark50", resourceCulture);
@@ -86,6 +96,16 @@ namespace Retriever.Properties {
         internal static System.Drawing.Bitmap Error50 {
             get {
                 object obj = ResourceManager.GetObject("Error50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Export50 {
+            get {
+                object obj = ResourceManager.GetObject("Export50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
