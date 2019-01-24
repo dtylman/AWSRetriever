@@ -25,8 +25,6 @@ namespace Retriever
         private Profile profile;
         private CloudObjects cloudObjects = new CloudObjects();
         private ProgressMessages progressMessages = new ProgressMessages();
-        private AppAction stopAction;
-        private SidebarTextItem scanAction;
         private enum ScannerState
         {
             Working,
@@ -38,6 +36,8 @@ namespace Retriever
         public FormMain()
         {
             InitializeComponent();
+
+            this.appBar.ToolTip = new ModernToolTip();            
 
             PopulateActions();
 
@@ -58,24 +58,26 @@ namespace Retriever
 
         private void PopulateActions()
         {
-            AppBarMenuTextItem aboutAction = new AppBarMenuTextItem("About");
+            AppAction aboutAction = new AppAction();
             aboutAction.Click += AboutAction_Click;
-            appBar.MenuItems.Add(aboutAction);
+            aboutAction.ToolTip = "About AWSRetriever...";
+            appBar.Actions.Add(aboutAction);
 
-
-            this.stopAction = new AppAction();
+            AppAction stopAction = new AppAction();
             stopAction.Image = Resources.Private50;
             stopAction.Click += StopAction_Click;
+            stopAction.ToolTip = "Stop Scanning";
             appBar.Actions.Add(stopAction);
 
             AppAction loadProfileAction = new AppAction();
             loadProfileAction.Image = Resources.Form50;
             loadProfileAction.Click += LoadProfileAction_Click;
+            loadProfileAction.ToolTip = "Loads a saved profile";
             appBar.Actions.Add(loadProfileAction);
 
-            this.scanAction = new SidebarTextItem("Scan...");
-            this.scanAction.Click += ScanAction_Click;
-            this.sidebarControl.Items.Add(this.scanAction);
+            SidebarTextItem scanAction = new SidebarTextItem("Scan...");
+            scanAction.Click += ScanAction_Click;
+            this.sidebarControl.Items.Add(scanAction);
 
             SidebarTextItem runAction = new SidebarTextItem("Run Single Operation...");
             runAction.Click += RunAction_Click;
