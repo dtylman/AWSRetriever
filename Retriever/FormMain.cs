@@ -15,6 +15,7 @@ using NickAc.ModernUIDoneRight.Objects;
 using Retriever.Model;
 using Retriever.Properties;
 using NickAc.ModernUIDoneRight.Controls;
+using System.Threading.Tasks;
 
 namespace Retriever
 {
@@ -42,10 +43,12 @@ namespace Retriever
             scanner = new Scanner
             {
                 MaxTasks = Configuration.Instance.ConcurrentConnecitons,
-                TimeOut = Configuration.Instance.Timeout // 15 minutes default
+                TimeOut = Configuration.Instance.Timeout
             };
-            scanner.Progress.ProgressChanged += Scanner_ProgressChanged;
+            scanner.Progress.ProgressChanged += Scanner_ProgressChanged;                        
         }
+
+
 
         private void PopulateActions()
         {
@@ -178,20 +181,12 @@ namespace Retriever
                     op.Proxy = this.Proxy;
                     scanner.Invokations.Enqueue(new OperationInvokation(op, region, this.creds, Configuration.Instance.PageSize));
                 }
-                if (!backgroundWorker.IsBusy)
-                {
-                    backgroundWorker.RunWorkerAsync();
-                }                
+                Start();
             }
         }
 
         private void ScanAction_Click(object sender, MouseEventArgs e)
         {
-            if (backgroundWorker.IsBusy)
-            {
-                ModernMessageBox.ShowError(new ApplicationException("Scan in progress. Stop it first."));
-                return;
-            }                
             FormAction("Scanning...", delegate
              {
                  ValidateCredentials();
@@ -199,10 +194,7 @@ namespace Retriever
                  ClearObjects();
                  ClearProgressMessages();
                  QueueOperations();
-                 if (!backgroundWorker.IsBusy)
-                 {
-                     backgroundWorker.RunWorkerAsync();
-                 }
+                 Start();
              });
         }
 
@@ -221,58 +213,9 @@ namespace Retriever
             }
             throw new ApplicationException("Invalid credentials");
         }        
-
-        #region background worker
-
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            if (creds == null)
-            {
-                throw new ApplicationException("No Credentials are provided");
-            }
-            scanner.Scan();
-        }
-
-
-        private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            if (e.UserState is InvokationResult ir)
-            {
-                this.cloudObjects.Update(ir);
-                this.listViewFound.VirtualListSize = this.cloudObjects.Count;
-                this.progressMessages.Add(new ProgressMessage(ir));
-                this.listViewMessages.VirtualListSize = this.progressMessages.Count;
-                listViewMessages.EnsureVisible(this.progressMessages.Count - 1);
-                UpdateStatusBar(ir);
-            }
-            else
-            {
-                //?!
-                Console.WriteLine(e);
-            }
-        }
-
-
-        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                SetStatus(e.Error);
-                ModernMessageBox.ShowError(e.Error);
-            }
-            else if (e.Cancelled)
-            {
-                SetStatus("Canceled");                
-            }
-            else
-            {
-                SetStatus("Done");
-            }            
-            FormAction("Saving objects...", cloudObjects.Save);
-        }
-
-        #endregion
-
+        
+        
+        
         private void UpdateStatusBar(InvokationResult ir)
         {
             this.progressBar.Value = ir.Progress;
@@ -291,18 +234,43 @@ namespace Retriever
 
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        private void Scanner_ProgressChanged(object sender, InvokationResult e)
+        private async void Start()
         {
-            if (backgroundWorker.CancellationPending)
+            if (!this.scanner.Running)
             {
-                return;
+                this.Cursor = Cursors.AppStarting;
+                try
+                {
+                    await Task.Run(() =>
+                    {
+                        this.scanner.Scan();
+                    });
+                }
+                catch (Exception ex)
+                {
+                    ModernMessageBox.ShowError(ex);
+                }
+                finally
+                {
+                    this.Cursor = Cursors.Default;
+                    this.progressBar.Value = 0;
+                    FormAction("Saving objects...", cloudObjects.Save);
+                }
             }
-            if (backgroundWorker.IsBusy) // only when it is working...
-            {        
-                backgroundWorker.ReportProgress(e.Progress, e);
-            }
-        }
+        }        
+
+        private void Scanner_ProgressChanged(object sender, InvokationResult ir)
+        {
+            this.Invoke((Action)delegate
+            {
+                this.cloudObjects.Update(ir);
+                this.listViewFound.VirtualListSize = this.cloudObjects.Count;
+                this.progressMessages.Add(new ProgressMessage(ir));
+                this.listViewMessages.VirtualListSize = this.progressMessages.Count;
+                listViewMessages.EnsureVisible(this.progressMessages.Count - 1);
+                UpdateStatusBar(ir);                
+            });
+        }        
 
         private void QueueOperations()
         {
@@ -505,7 +473,7 @@ namespace Retriever
             this.progressMessages.Save();
         }
 
-        private void runAgainToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RunAgainToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.listViewMessages.SelectedIndices.Count > 0)
             {
@@ -519,25 +487,12 @@ namespace Retriever
                     var region = RegionEndpoint.GetBySystemName(pm.RegionSystemName);
 
                     scanner.Invokations.Enqueue(new OperationInvokation(op, region, this.creds, pr.PageSize));
-                    if (!backgroundWorker.IsBusy)
-                    {
-                        backgroundWorker.RunWorkerAsync();
-                    }
+                    Start();
                 });
             }
         }
 
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            if (backgroundWorker.IsBusy)
-            {
-                this.Cursor = Cursors.AppStarting;
-                SetStatus("Running..");
-            } else
-            {
-                this.Cursor = Cursors.Default;
-                this.progressBar.Value = 0;
-            }            
-        }
+    
+        
     }
 }

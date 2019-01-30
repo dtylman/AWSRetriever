@@ -14,8 +14,7 @@ namespace CloudOps
         private CancellationTokenSource cancellation;
         private int maxTasks = 10;
         private readonly ConcurrentBag<CloudObject> collectedObjects = new ConcurrentBag<CloudObject>();
-        private readonly List<Task> tasks = new List<Task>();
-        
+        private readonly List<Task> tasks = new List<Task>();        
 
         public ConcurrentQueue<OperationInvokation> Invokations => invokations;
 
@@ -24,6 +23,14 @@ namespace CloudOps
         public int TimeOut { get; set; } = 1000 * 60 * 60;
         public ScannerProgress Progress { get => progress;  }
 
+        // true if scanner is running
+        public bool Running
+        {
+            get
+            {
+                return this.tasks.Count > 0;
+            }
+        }
         public ConcurrentBag<CloudObject> CollectedObjects => collectedObjects;
 
         void Queue(OperationInvokation operation)
@@ -68,6 +75,10 @@ namespace CloudOps
                 finally
                 {
                     Task.WaitAll(tasks.ToArray(), this.TimeOut, this.cancellation.Token);
+                    if (this.progress != null)
+                    {
+                        this.progress.ReportDone();
+                    }
                 }
             }
             finally

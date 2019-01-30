@@ -4,6 +4,8 @@ namespace CloudOps
 {
     public class ScannerProgress : Progress<InvokationResult>
     {
+        // happens then the scanner had finished
+        public event EventHandler Done;
         public int Total { get; internal set; }
 
         public void Report(int queueLen, InvokationResult result)
@@ -16,6 +18,13 @@ namespace CloudOps
             result.Progress = percent;
             OnReport(result);
         }
-        
+
+        internal void ReportDone()
+        {
+            if (this.Done != null)
+            {
+                this.Done.Invoke(this, new EventArgs());
+            }
+        }
     }
 }

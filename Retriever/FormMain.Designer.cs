@@ -57,7 +57,6 @@
             this.runAgainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.tilePanelReborn1 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
-            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.splitContainerBack = new System.Windows.Forms.SplitContainer();
             this.splitContainerObject = new System.Windows.Forms.SplitContainer();
             this.modernShadowPanel4 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
@@ -71,7 +70,6 @@
             this.panelStatus = new System.Windows.Forms.Panel();
             this.statusLabel = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFront)).BeginInit();
             this.splitContainerFront.Panel1.SuspendLayout();
             this.splitContainerFront.Panel2.SuspendLayout();
@@ -307,7 +305,7 @@
             this.runAgainToolStripMenuItem.Name = "runAgainToolStripMenuItem";
             this.runAgainToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.runAgainToolStripMenuItem.Text = "Run Again";
-            this.runAgainToolStripMenuItem.Click += new System.EventHandler(this.runAgainToolStripMenuItem_Click);
+            this.runAgainToolStripMenuItem.Click += new System.EventHandler(this.RunAgainToolStripMenuItem_Click);
             // 
             // imageList
             // 
@@ -340,14 +338,6 @@
             this.tilePanelReborn1.Size = new System.Drawing.Size(1008, 40);
             this.tilePanelReborn1.TabIndex = 0;
             this.tilePanelReborn1.Text = "Messages";
-            // 
-            // backgroundWorker
-            // 
-            this.backgroundWorker.WorkerReportsProgress = true;
-            this.backgroundWorker.WorkerSupportsCancellation = true;
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
-            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorker_ProgressChanged);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
             // 
             // splitContainerBack
             // 
@@ -514,13 +504,8 @@
             this.progressBar.Location = new System.Drawing.Point(816, 0);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(593, 37);
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.TabIndex = 0;
-            // 
-            // timer
-            // 
-            this.timer.Enabled = true;
-            this.timer.Interval = 2500;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // FormMain
             // 
@@ -572,7 +557,6 @@
         #endregion
         private System.Windows.Forms.SplitContainer splitContainerFront;
         private System.Windows.Forms.ContextMenuStrip contextMenuObjects;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.SplitContainer splitContainerBack;
         private System.Windows.Forms.ListView listViewFound;
@@ -611,7 +595,6 @@
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.ToolStripMenuItem runAgainToolStripMenuItem;
-        private System.Windows.Forms.Timer timer;
     }
 }
 
