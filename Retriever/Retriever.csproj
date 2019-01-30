@@ -30,7 +30,7 @@
     <ProductName>AWSRetriever</ProductName>
     <PublisherName>AWSRetriever</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>0.0.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -112,6 +112,12 @@
     <Compile Include="FormConfig.Designer.cs">
       <DependentUpon>FormConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormProfileEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProfileEditor.Designer.cs">
+      <DependentUpon>FormProfileEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\CloudObjects.cs" />
     <Compile Include="FormCredentials.cs">
       <SubType>Form</SubType>
@@ -154,7 +160,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="korra_circle.ico" />
+    <None Include="korra_circle.ico" />
     <None Include="Resources\icons8-export-50.png" />
     <None Include="Resources\icons8-about-50.png" />
     <None Include="Resources\korra_circle.png" />
@@ -170,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProfileEditor.resx">
+      <DependentUpon>FormProfileEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProfiles.resx">
       <DependentUpon>FormProfiles.cs</DependentUpon>

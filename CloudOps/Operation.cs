@@ -63,7 +63,7 @@ namespace CloudOps
             if (this.Proxy != null)
             {
                 config.SetWebProxy(Proxy);
-            }
+            }            
         }
     }
 }

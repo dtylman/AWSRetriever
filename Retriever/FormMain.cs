@@ -12,7 +12,6 @@ using CloudOps;
 using NickAc.ModernUIDoneRight;
 using NickAc.ModernUIDoneRight.Forms;
 using NickAc.ModernUIDoneRight.Objects;
-using NickAc.ModernUIDoneRight.Objects.MenuItems;
 using Retriever.Model;
 using Retriever.Properties;
 using NickAc.ModernUIDoneRight.Controls;
@@ -26,23 +25,14 @@ namespace Retriever
         private Profile profile;
         private CloudObjects cloudObjects = new CloudObjects();
         private ProgressMessages progressMessages = new ProgressMessages();
-        private enum ScannerState
-        {
-            Working,
-            Idle
-        }
-
-        private ScannerState scannerState = ScannerState.Idle;
 
         public FormMain()
         {
             InitializeComponent();
 
-            this.appBar.ToolTip = new ModernToolTip();            
+            this.appBar.ToolTip = new ModernToolTip();
 
-            PopulateActions();
-
-            InitializeBackgroundWorker();
+            PopulateActions();            
 
             InitializeScanner();
         }
@@ -80,23 +70,23 @@ namespace Retriever
             loadProfileAction.ToolTip = "Loads a saved profile";
             appBar.Actions.Add(loadProfileAction);
 
-            SidebarTextItem scanAction = new SidebarTextItem("Scan...");
+            SidebarTextItem scanAction = new SidebarTextItem("Full Scan");
             scanAction.Click += ScanAction_Click;
             this.sidebarControl.Items.Add(scanAction);
 
-            SidebarTextItem runAction = new SidebarTextItem("Run Single Operation...");
+            SidebarTextItem runAction = new SidebarTextItem("Run Single");
             runAction.Click += RunAction_Click;
             this.sidebarControl.Items.Add(runAction);
 
-            SidebarTextItem editProfileAction = new SidebarTextItem("Edit Profile...");
+            SidebarTextItem editProfileAction = new SidebarTextItem("Profile Editor");
             editProfileAction.Click += EditProfileAction_Click;
             this.sidebarControl.Items.Add(editProfileAction);
 
-            SidebarTextItem editCredentialsAction = new SidebarTextItem("Edit Credentials...");
+            SidebarTextItem editCredentialsAction = new SidebarTextItem("Set Credentials");
             editCredentialsAction.Click += EditCredentialsAction_Click;
             this.sidebarControl.Items.Add(editCredentialsAction);
 
-            SidebarTextItem configureAction = new SidebarTextItem("Settings...");
+            SidebarTextItem configureAction = new SidebarTextItem("Settings");
             configureAction.Click += ConfigureAction_Click;
             this.sidebarControl.Items.Add(configureAction);
         }
@@ -145,10 +135,6 @@ namespace Retriever
 
         private void StopAction_Click(object sender, EventArgs e)
         {
-            if (this.scannerState==ScannerState.Idle)
-            {
-                ModernMessageBox.ShowError(new ApplicationException("Not scanning"));
-            }
             FormAction("Stopping...", delegate ()
             {
                 if (this.scanner != null)
@@ -193,24 +179,23 @@ namespace Retriever
                     scanner.Invokations.Enqueue(new OperationInvokation(op, region, this.creds, Configuration.Instance.PageSize));
                 }
                 if (!backgroundWorker.IsBusy)
-                {                    
+                {
                     backgroundWorker.RunWorkerAsync();
-                }
-                UpdateCursor();
+                }                
             }
         }
 
         private void ScanAction_Click(object sender, MouseEventArgs e)
         {
-            if (this.scannerState==ScannerState.Working)
+            if (backgroundWorker.IsBusy)
             {
                 ModernMessageBox.ShowError(new ApplicationException("Scan in progress. Stop it first."));
                 return;
-            }
+            }                
             FormAction("Scanning...", delegate
              {
                  ValidateCredentials();
-                 statusLabel.Text = String.Empty;                 
+                 statusLabel.Text = String.Empty;
                  ClearObjects();
                  ClearProgressMessages();
                  QueueOperations();
@@ -235,48 +220,19 @@ namespace Retriever
                 }
             }
             throw new ApplicationException("Invalid credentials");
-        }
-      
-        private void UpdateCursor()
-        {            
-            if (this.scannerState==ScannerState.Working)
-            {
-                this.Cursor = Cursors.AppStarting;
-            }
-            else
-            {
-                this.Cursor = Cursors.Default;             
-            }            
-        }
+        }        
 
         #region background worker
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {            
+        {
             if (creds == null)
             {
                 throw new ApplicationException("No Credentials are provided");
             }
-            try
-            {
-                this.scannerState = ScannerState.Working;
-                scanner.Scan();
-                // TODO: make sure all background events are processed (don't sure where i am missing a mutex...)                                
-                Thread.Sleep(1000);                
-            }
-            finally
-            {
-                backgroundWorker.ReportProgress(0, "Done");
-                this.scannerState = ScannerState.Idle;
-            }
+            scanner.Scan();
         }
 
-        private void InitializeBackgroundWorker()
-        {
-            backgroundWorker.DoWork += new DoWorkEventHandler(BackgroundWorker_DoWork);
-            backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
-            backgroundWorker.ProgressChanged += new ProgressChangedEventHandler(BackgroundWorker_ProgressChanged);
-        }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -306,15 +262,12 @@ namespace Retriever
             }
             else if (e.Cancelled)
             {
-                SetStatus("Canceled");
-                this.progressBar.Value = 0;
+                SetStatus("Canceled");                
             }
             else
             {
                 SetStatus("Done");
-            }
-
-            UpdateCursor();
+            }            
             FormAction("Saving objects...", cloudObjects.Save);
         }
 
@@ -346,7 +299,7 @@ namespace Retriever
                 return;
             }
             if (backgroundWorker.IsBusy) // only when it is working...
-            {
+            {        
                 backgroundWorker.ReportProgress(e.Progress, e);
             }
         }
@@ -396,9 +349,11 @@ namespace Retriever
             }
         }
 
-
         private void ShowProfileDialog()
         {
+            FormProfileEditor form = new FormProfileEditor(this.profile);
+            form.ShowDialog();
+
             FormProfiles formProfiles = new FormProfiles();
             formProfiles.Profile = this.profile;
             formProfiles.ShowDialog();
@@ -550,5 +505,39 @@ namespace Retriever
             this.progressMessages.Save();
         }
 
+        private void runAgainToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.listViewMessages.SelectedIndices.Count > 0)
+            {
+                FormAction("Run Again...", delegate
+                {
+                    int idx = this.listViewMessages.SelectedIndices[0];
+                    ProgressMessage pm = this.progressMessages[idx];
+                    ProfileRecord pr = this.profile.Find(pm.Service, pm.Operation);
+                    Operation op = Profile.FindOpeartion(pr);
+                    op.Proxy = this.Proxy;
+                    var region = RegionEndpoint.GetBySystemName(pm.RegionSystemName);
+
+                    scanner.Invokations.Enqueue(new OperationInvokation(op, region, this.creds, pr.PageSize));
+                    if (!backgroundWorker.IsBusy)
+                    {
+                        backgroundWorker.RunWorkerAsync();
+                    }
+                });
+            }
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (backgroundWorker.IsBusy)
+            {
+                this.Cursor = Cursors.AppStarting;
+                SetStatus("Running..");
+            } else
+            {
+                this.Cursor = Cursors.Default;
+                this.progressBar.Value = 0;
+            }            
+        }
     }
 }

@@ -54,6 +54,7 @@
             this.clearToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.viewInProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runAgainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.tilePanelReborn1 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -70,6 +71,7 @@
             this.panelStatus = new System.Windows.Forms.Panel();
             this.statusLabel = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFront)).BeginInit();
             this.splitContainerFront.Panel1.SuspendLayout();
             this.splitContainerFront.Panel2.SuspendLayout();
@@ -277,9 +279,10 @@
             this.contextMenuMessages.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearToolStripMenuItem1,
             this.toolStripMenuItem2,
-            this.viewInProfileToolStripMenuItem});
+            this.viewInProfileToolStripMenuItem,
+            this.runAgainToolStripMenuItem});
             this.contextMenuMessages.Name = "contextMenuMessages";
-            this.contextMenuMessages.Size = new System.Drawing.Size(150, 54);
+            this.contextMenuMessages.Size = new System.Drawing.Size(150, 76);
             // 
             // clearToolStripMenuItem1
             // 
@@ -298,6 +301,13 @@
             this.viewInProfileToolStripMenuItem.Name = "viewInProfileToolStripMenuItem";
             this.viewInProfileToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.viewInProfileToolStripMenuItem.Text = "View in Profile";
+            // 
+            // runAgainToolStripMenuItem
+            // 
+            this.runAgainToolStripMenuItem.Name = "runAgainToolStripMenuItem";
+            this.runAgainToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.runAgainToolStripMenuItem.Text = "Run Again";
+            this.runAgainToolStripMenuItem.Click += new System.EventHandler(this.runAgainToolStripMenuItem_Click);
             // 
             // imageList
             // 
@@ -335,6 +345,9 @@
             // 
             this.backgroundWorker.WorkerReportsProgress = true;
             this.backgroundWorker.WorkerSupportsCancellation = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
             // 
             // splitContainerBack
             // 
@@ -456,6 +469,7 @@
             this.appBar.TabIndex = 5;
             this.appBar.Text = "AWS Retriever";
             this.appBar.TextFont = new System.Drawing.Font("Segoe UI", 14F);
+            this.appBar.ToolTip = null;
             // 
             // sidebarControl
             // 
@@ -501,6 +515,12 @@
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(593, 37);
             this.progressBar.TabIndex = 0;
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 2500;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // FormMain
             // 
@@ -590,6 +610,8 @@
         private System.Windows.Forms.PropertyGrid propertyGridObject;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.ToolStripMenuItem runAgainToolStripMenuItem;
+        private System.Windows.Forms.Timer timer;
     }
 }
 
