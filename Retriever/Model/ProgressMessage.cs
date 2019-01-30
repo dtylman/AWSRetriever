@@ -11,7 +11,8 @@ namespace Retriever.Model
         private DateTime time;
         private string operation;
         private string service;
-        private RegionEndpoint region;
+        private string regionSystemName;
+        private string regionDisplayName;
 
         public ProgressMessage()
         {
@@ -23,7 +24,8 @@ namespace Retriever.Model
             this.time = ir.Time;
             this.operation = ir.Operation.Name;
             this.service = ir.Operation.ServiceName;
-            this.region = ir.Operation.Region;
+            this.regionSystemName = ir.Operation.Region.SystemName;
+            this.regionDisplayName = ir.Operation.Region.DisplayName;
             if (ir.IsError())
             {
                 this.result = ir.Ex.Message;
@@ -40,29 +42,9 @@ namespace Retriever.Model
         public int ImageIndex { get => imageIndex; set => imageIndex = value; }
         public string Operation { get => operation; set => operation = value; }
         public string Service { get => service; set => service = value; }
-        public string Region
-        {
-            get
-            {
-                if (region != null)
-                {
-                    return region.DisplayName;
-                }
-                return "";
-            }
-        }
-
+        
         public DateTime Time { get => time; set => time = value; }
-        public string RegionSystemName
-        {
-            get
-            {
-                if (region != null)
-                {
-                    return region.SystemName;
-                }
-                return "";
-            }
-        }
+        public string RegionSystemName { get => regionSystemName; set => regionSystemName = value; }
+        public string Region { get => regionDisplayName; set => regionDisplayName = value; }
     }
 }
