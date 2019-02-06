@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.Core.3.3.31.7\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.S3, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.S3.3.3.31.15\lib\net45\AWSSDK.S3.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -77,13 +83,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\aws-sdk-net\sdk\src\Core\AWSSDK.Core.Net45.csproj">
-      <Project>{0742b90b-4f9c-47c1-a1f3-c59434987f98}</Project>
-      <Name>AWSSDK.Core.Net45</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
+    <None Include="Resources\icons8-menu-23.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icons8-menu-23.png" />
+    <Analyzer Include="..\packages\AWSSDK.S3.3.3.31.15\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

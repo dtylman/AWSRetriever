@@ -1,4 +1,4 @@
-#Generator
+# Generator
 
 Generates CloudOps classes from AWS sdk sources.
 
@@ -33,3 +33,9 @@ Creating patch files:
 ```bash
 diff -Naur <new-path> ../CloudOps/Generated > [number].patch
 ```
+
+## AWS SDK Release
+
+Based on AWS SDK [3.3.434.0](https://github.com/aws/aws-sdk-net/releases/tag/3.3.434.0)
+
+Sources [link](https://github.com/aws/aws-sdk-net/archive/3.3.434.0.tar.gz) for the generator.
