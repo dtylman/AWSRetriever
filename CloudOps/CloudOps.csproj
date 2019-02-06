@@ -485,6 +485,84 @@
     <Reference Include="AWSSDK.Chime">
       <HintPath>..\packages\AWSSDK.Chime.3.3.1.19\lib\net45\AWSSDK.Chime.dll</HintPath>
     </Reference>
+    <Reference Include="AWSSDK.PinpointEmail">
+      <HintPath>..\packages\AWSSDK.PinpointEmail.3.3.1.13\lib\net45\AWSSDK.PinpointEmail.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Amplify">
+      <HintPath>..\packages\AWSSDK.Amplify.3.3.0.16\lib\net45\AWSSDK.Amplify.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.ApiGatewayManagementApi">
+      <HintPath>..\packages\AWSSDK.ApiGatewayManagementApi.3.3.1.3\lib\net45\AWSSDK.ApiGatewayManagementApi.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.AppMesh">
+      <HintPath>..\packages\AWSSDK.AppMesh.3.3.0.16\lib\net45\AWSSDK.AppMesh.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Backup">
+      <HintPath>..\packages\AWSSDK.Backup.3.3.0.5\lib\net45\AWSSDK.Backup.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.ComprehendMedical">
+      <HintPath>..\packages\AWSSDK.ComprehendMedical.3.3.0.16\lib\net45\AWSSDK.ComprehendMedical.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.DataSync">
+      <HintPath>..\packages\AWSSDK.DataSync.3.3.0.16\lib\net45\AWSSDK.DataSync.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.DocDB">
+      <HintPath>..\packages\AWSSDK.DocDB.3.3.0.6\lib\net45\AWSSDK.DocDB.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.FSx">
+      <HintPath>..\packages\AWSSDK.FSx.3.3.0.16\lib\net45\AWSSDK.FSx.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.GlobalAccelerator">
+      <HintPath>..\packages\AWSSDK.GlobalAccelerator.3.3.0.17\lib\net45\AWSSDK.GlobalAccelerator.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Kafka">
+      <HintPath>..\packages\AWSSDK.Kafka.3.3.0.16\lib\net45\AWSSDK.Kafka.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.KinesisAnalyticsV2">
+      <HintPath>..\packages\AWSSDK.KinesisAnalyticsV2.3.3.0.16\lib\net45\AWSSDK.KinesisAnalyticsV2.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.LicenseManager">
+      <HintPath>..\packages\AWSSDK.LicenseManager.3.3.0.16\lib\net45\AWSSDK.LicenseManager.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.MediaConnect">
+      <HintPath>..\packages\AWSSDK.MediaConnect.3.3.1.1\lib\net45\AWSSDK.MediaConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.PinpointSMSVoice">
+      <HintPath>..\packages\AWSSDK.PinpointSMSVoice.3.3.2.2\lib\net45\AWSSDK.PinpointSMSVoice.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.QuickSight">
+      <HintPath>..\packages\AWSSDK.QuickSight.3.3.1.12\lib\net45\AWSSDK.QuickSight.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.RDSDataService">
+      <HintPath>..\packages\AWSSDK.RDSDataService.3.3.1.5\lib\net45\AWSSDK.RDSDataService.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.RAM">
+      <HintPath>..\packages\AWSSDK.RAM.3.3.0.17\lib\net45\AWSSDK.RAM.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.RoboMaker">
+      <HintPath>..\packages\AWSSDK.RoboMaker.3.3.0.16\lib\net45\AWSSDK.RoboMaker.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Route53Resolver">
+      <HintPath>..\packages\AWSSDK.Route53Resolver.3.3.0.17\lib\net45\AWSSDK.Route53Resolver.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.S3Control">
+      <HintPath>..\packages\AWSSDK.S3Control.3.3.0.17\lib\net45\AWSSDK.S3Control.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.SecurityHub">
+      <HintPath>..\packages\AWSSDK.SecurityHub.3.3.0.16\lib\net45\AWSSDK.SecurityHub.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Signer">
+      <HintPath>..\packages\AWSSDK.Signer.3.3.0.38\lib\net45\AWSSDK.Signer.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Transfer">
+      <HintPath>..\packages\AWSSDK.Transfer.3.3.0.16\lib\net45\AWSSDK.Transfer.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.WorkLink">
+      <HintPath>..\packages\AWSSDK.WorkLink.3.3.0.3\lib\net45\AWSSDK.WorkLink.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Extensions.CognitoAuthentication">
+      <HintPath>..\packages\AWSSDK.Extensions.CognitoAuthentication.0.9.4\lib\net45\AWSSDK.Extensions.CognitoAuthentication.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CloudObject.cs" />
