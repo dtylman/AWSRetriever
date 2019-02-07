@@ -976,7 +976,6 @@
     <Compile Include="Generated\StorageGateway\ListLocalDisksOperation.cs" />
     <Compile Include="InvokationResult.cs" />
     <Compile Include="OperationFactory.cs" />
-    <Compile Include="OperationInvokation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scanner.cs" />
     <Compile Include="Operation.cs" />

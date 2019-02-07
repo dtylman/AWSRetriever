@@ -2,13 +2,13 @@
 
 namespace CloudOps
 {
-    public class ScannerProgress : Progress<InvokationResult>
+    public class ScannerProgress : Progress<OperationResult>
     {
         // happens then the scanner had finished
         public event EventHandler Done;
         public int Total { get; internal set; }
 
-        public void Report(int queueLen, InvokationResult result)
+        public void Report(int queueLen, OperationResult result)
         {
             int percent = 0;
             if (this.Total > 0)

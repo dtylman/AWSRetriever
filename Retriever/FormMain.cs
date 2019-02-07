@@ -179,10 +179,8 @@ namespace Retriever
                     ShowCredentialsDialog();
                 }
                 foreach (var region in form.SelectedRegions)
-                {
-                    Operation op = form.Operation;
-                    op.Proxy = this.Proxy;
-                    scanner.Invokations.Enqueue(new OperationInvokation(op, region, this.creds, Configuration.Instance.PageSize));
+                {                    
+                    scanner.Invokations.Enqueue(form.Operation.Clone(this.Proxy, region, this.creds, Configuration.Instance.PageSize));
                 }
                 Start();
             }
@@ -219,7 +217,7 @@ namespace Retriever
         
         
         
-        private void UpdateStatusBar(InvokationResult ir)
+        private void UpdateStatusBar(OperationResult ir)
         {
             this.progressBar.Value = ir.Progress;
             this.statusLabel.Text = ir.ResultText();
@@ -262,7 +260,7 @@ namespace Retriever
             }
         }        
 
-        private void Scanner_ProgressChanged(object sender, InvokationResult ir)
+        private void Scanner_ProgressChanged(object sender, OperationResult ir)
         {
             this.Invoke((Action)delegate
             {
@@ -285,10 +283,9 @@ namespace Retriever
                     Operation op = Profile.FindOpeartion(p);
                     if (op != null)
                     {
-                        op.Proxy = this.Proxy;
                         foreach (RegionEndpoint region in RegionsString.ParseSystemNames(p.Regions).Items)
                         {
-                            scanner.Invokations.Enqueue(new OperationInvokation(op, region, creds, p.PageSize));
+                            scanner.Invokations.Enqueue(op.Clone(this.Proxy, region, this.creds, p.PageSize));                            
                         }
                     }
                 }
@@ -481,11 +478,9 @@ namespace Retriever
                     int idx = this.listViewMessages.SelectedIndices[0];
                     ProgressMessage pm = this.progressMessages[idx];
                     ProfileRecord pr = this.profile.Find(pm.Service, pm.Operation);
-                    Operation op = Profile.FindOpeartion(pr);
-                    op.Proxy = this.Proxy;
+                    Operation op = Profile.FindOpeartion(pr);                    
                     var region = RegionEndpoint.GetBySystemName(pm.RegionSystemName);
-
-                    scanner.Invokations.Enqueue(new OperationInvokation(op, region, this.creds, pr.PageSize));
+                    scanner.Invokations.Enqueue(op.Clone(this.Proxy, region, this.creds, pr.PageSize));
                     Start();
                 });
             }

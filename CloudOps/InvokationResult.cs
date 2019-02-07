@@ -2,7 +2,7 @@
 
 namespace CloudOps
 {
-    public class InvokationResult
+    public class OperationResult
     {
         private Operation operation;
         private Exception ex;
@@ -14,18 +14,18 @@ namespace CloudOps
         public DateTime Time { get => time; set => time = value; }
         public int Progress { get => progress; set => progress = value; }
 
-        public InvokationResult()
+        public OperationResult()
         {
 
         }
 
-        public InvokationResult(Operation operation)
+        public OperationResult(Operation operation)
         {
             this.operation = operation;
             this.time = DateTime.Now;
         }
 
-        public InvokationResult(Exception ex, Operation operation)
+        public OperationResult(Exception ex, Operation operation)
         {
             this.operation = operation;
             this.ex = ex;

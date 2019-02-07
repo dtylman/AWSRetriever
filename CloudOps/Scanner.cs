@@ -9,14 +9,14 @@ namespace CloudOps
 {
     public class Scanner
     {
-        private readonly ConcurrentQueue<OperationInvokation> invokations = new ConcurrentQueue<OperationInvokation>();
+        private readonly ConcurrentQueue<Operation> invokations = new ConcurrentQueue<Operation>();
         private readonly ScannerProgress progress = new ScannerProgress();        
         private CancellationTokenSource cancellation;
         private int maxTasks = 10;
         private readonly ConcurrentBag<CloudObject> collectedObjects = new ConcurrentBag<CloudObject>();
         private readonly List<Task> tasks = new List<Task>();        
 
-        public ConcurrentQueue<OperationInvokation> Invokations => invokations;
+        public ConcurrentQueue<Operation> Invokations => invokations;
 
         public int MaxTasks { get => maxTasks; set => maxTasks = value; }
         //in milliseconds
@@ -32,7 +32,7 @@ namespace CloudOps
             }
         }        
 
-        void Queue(OperationInvokation operation)
+        void Queue(Operation operation)
         {
             this.Invokations.Enqueue(operation);
         }
@@ -41,8 +41,7 @@ namespace CloudOps
         {
             while (!this.invokations.IsEmpty)
             {
-                OperationInvokation op;
-                this.invokations.TryDequeue(out op);
+                this.invokations.TryDequeue(out Operation op);
             }
             if (this.cancellation != null)
             {
@@ -98,9 +97,9 @@ namespace CloudOps
                         this.cancellation.Token.ThrowIfCancellationRequested();
                     }
 
-                    if (invokations.TryDequeue(out OperationInvokation invokation))
+                    if (invokations.TryDequeue(out Operation invokation))
                     {
-                        InvokationResult result = invokation.Invoke(this.cancellation.Token);                        
+                        OperationResult result = invokation.Invoke(this.cancellation.Token);                        
                         ReportProgress(result);
                     }
                 }                
@@ -108,7 +107,7 @@ namespace CloudOps
         }
         
 
-        private void ReportProgress(InvokationResult result)
+        private void ReportProgress(OperationResult result)
         {
             if (this.progress != null)
             {

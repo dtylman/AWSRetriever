@@ -19,7 +19,7 @@ namespace Retriever.Model
 
         }
 
-        public ProgressMessage(InvokationResult ir)
+        public ProgressMessage(OperationResult ir)
         {
             this.time = ir.Time;
             this.operation = ir.Operation.Name;

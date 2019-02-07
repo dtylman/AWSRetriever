@@ -18,14 +18,17 @@ namespace CloudOps
         public abstract string ServiceName { get; }
         public abstract string ServiceID { get; }
         private RegionEndpoint region;
+        private AWSCredentials creds;
+        private int maxItems;
         private WebProxy proxy;
 
-        public CancellationToken CancellationToken { get; internal set; }        
-        
-        public ConcurrentBag<CloudObject> CollectedObjects => collectedObjects;
-
-        public RegionEndpoint Region { get => region; set => region = value; }
+        public CancellationToken CancellationToken { get; internal set; }                
+        public ConcurrentBag<CloudObject> CollectedObjects => collectedObjects;        
         public WebProxy Proxy { get => proxy; set => proxy = value; }
+        public RegionEndpoint Region { get => region; set => region = value; }
+       
+        public int MaxItems { get => maxItems; set => maxItems = value; }
+        public AWSCredentials Creds { get => creds; set => creds = value; }
 
         private readonly ConcurrentBag<CloudObject> collectedObjects = new ConcurrentBag<CloudObject>();
 
@@ -37,8 +40,7 @@ namespace CloudOps
                 this.CancellationToken.ThrowIfCancellationRequested();
             }
 
-            int res;
-            if (Int32.TryParse(code, out res))
+            if (Int32.TryParse(code, out int res))
             {
                 if ((int)httpStatusCode == res)
                 {
@@ -64,7 +66,38 @@ namespace CloudOps
             if (this.Proxy != null)
             {
                 config.SetWebProxy(Proxy);
-            }            
+            }
+        }
+
+        public OperationResult Invoke(CancellationToken token)
+        {            
+            try
+            {
+                this.CancellationToken = token;
+                this.Invoke(this.creds, this.region, this.maxItems);
+                return new OperationResult(this);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult(ex, this);
+            }
+        }
+
+        /// <summary>
+        /// deep copies the operaiton overriding the provided fields.
+        /// </summary>
+        /// <param name="proxy"></param>
+        /// <param name="creds"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public Operation Clone(WebProxy proxy, RegionEndpoint region, AWSCredentials creds, int pageSize)
+        {
+            Operation op = (Operation)Activator.CreateInstance(GetType());
+            op.Region = region;
+            op.proxy = proxy;
+            op.creds = creds;
+            op.maxItems = pageSize;
+            return op;
         }
     }
 }

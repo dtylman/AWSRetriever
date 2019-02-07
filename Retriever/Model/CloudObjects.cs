@@ -52,7 +52,7 @@ namespace Retriever
 
             }
 
-            public void Update(InvokationResult ir)
+            public void Update(OperationResult ir)
             {
                 if (ir.IsError())
                 {

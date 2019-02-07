@@ -45,35 +45,3 @@ namespace Retriever
         }
     }
 }
-
-/*
- * string filename = "";
-            SaveFileDialog sfd = new SaveFileDialog();
-
-            sfd.Title = "SaveFileDialog Export2File";
-            sfd.Filter = "Text File (.txt) | *.txt";
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                filename = sfd.FileName.ToString();
-                if (filename != "")
-                {
-                    AppSerializer.SaveListView(filename, listViewMessages);                    
-                }
-
-            }
-            
-     
-       public void Save()
-            {
-              
-            }
-
-            public static CloudObjects Load()
-            {
-               
-
-            }
-     
-     
-     */
