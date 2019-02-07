@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Linq;
 using CloudOps;
 using Newtonsoft.Json;
+using System;
 
 namespace Retriever
 {
@@ -13,8 +14,13 @@ namespace Retriever
         {
             public void Save()
             {
+                Save("objects.json");
+            }
+
+            public void Save(string fileName)
+            {
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamWriter sw = new StreamWriter("objects.json"))
+                using (StreamWriter sw = new StreamWriter(fileName))
                 using (JsonWriter writer = new JsonTextWriter(sw))
                 {
                     writer.Formatting = Formatting.Indented;
@@ -61,7 +67,27 @@ namespace Retriever
                     }
                 }
             }
-            
+
+            /// <summary>
+            /// Save only the AWS objects to a file specified by filename
+            /// </summary>
+            /// <param name="fileName"></param>
+            public void Export(string fileName)
+            {
+                using (StreamWriter sw = new StreamWriter(fileName))
+                {
+                    sw.WriteLine("[")                        ;
+                    foreach (CloudObject cobo in this)
+                    {
+                        sw.WriteLine("" +
+                            "  {" +
+                            "  \"Type\" : \"" + cobo.TypeName + "\",");
+                        sw.WriteLine(                         
+                            "  \"Source\" : " + cobo.Source + ",},");
+                    }
+                    sw.WriteLine("]");
+                }
+            }
         }
     }
 }

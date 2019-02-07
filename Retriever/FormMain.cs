@@ -150,7 +150,10 @@ namespace Retriever
 
         private void EditProfileAction_Click(object sender, MouseEventArgs e)
         {
-            FormAction("Ready", ShowProfileDialog);
+            FormAction("Ready",  delegate()
+            {
+                ShowProfileDialog(null, null);
+            });
         }
 
         private void RunAction_Click(object sender, MouseEventArgs e)
@@ -317,14 +320,10 @@ namespace Retriever
             }
         }
 
-        private void ShowProfileDialog()
+        private void ShowProfileDialog(string service, string operation)
         {
-            FormProfileEditor form = new FormProfileEditor(this.profile);
-            form.ShowDialog();
-
-            FormProfiles formProfiles = new FormProfiles();
-            formProfiles.Profile = this.profile;
-            formProfiles.ShowDialog();
+            FormProfileEditor form = new FormProfileEditor(this.profile, service, operation);            
+            form.ShowDialog();                        
             FormAction("Saving profile", profile.Save);
         }
 
@@ -492,7 +491,29 @@ namespace Retriever
             }
         }
 
-    
-        
+        private void ViewInProfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listViewMessages.SelectedIndices.Count > 0)
+            {
+                ProgressMessage pm = this.progressMessages[listViewMessages.SelectedIndices[0]];
+                ShowProfileDialog(pm.Service, pm.Operation);                
+            }
+        }
+
+        private void SaveResultsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAction("Ready", delegate ()
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.DefaultExt = ".js";
+                saveFileDialog.Filter = "JSON (*.js)|*.js";                
+                DialogResult dr = saveFileDialog.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    this.cloudObjects.Export(saveFileDialog.FileName);
+                    ModernMessageBox.Show(string.Format("Saved to '{0}'", saveFileDialog.FileName));
+                }
+            });            
+        }
     }
 }

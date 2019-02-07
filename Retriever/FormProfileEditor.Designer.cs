@@ -35,24 +35,24 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listOperations = new System.Windows.Forms.ListBox();
             this.tilePanelReborn2 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.chkEnabled = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.regionsTextbox1 = new AWSRetriver.Controls.RegionsTextbox();
             this.tilePanelReborn4 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.tilePanelOpertaion = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.chkEnabled = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // appBar
@@ -155,6 +155,70 @@
             this.tilePanelReborn2.TabIndex = 0;
             this.tilePanelReborn2.Text = "Operations";
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.richTextBox1);
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 38);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(3);
+            this.panel2.Size = new System.Drawing.Size(702, 188);
+            this.panel2.TabIndex = 5;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 3);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(696, 98);
+            this.richTextBox1.TabIndex = 9;
+            this.richTextBox1.Text = "";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.maskedTextBox1);
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.chkEnabled);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(3, 101);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(696, 84);
+            this.panel4.TabIndex = 10;
+            // 
+            // maskedTextBox1
+            // 
+            this.maskedTextBox1.Location = new System.Drawing.Point(149, 40);
+            this.maskedTextBox1.Mask = "000";
+            this.maskedTextBox1.Name = "maskedTextBox1";
+            this.maskedTextBox1.Size = new System.Drawing.Size(41, 29);
+            this.maskedTextBox1.TabIndex = 10;
+            this.maskedTextBox1.ValidatingType = typeof(int);
+            this.maskedTextBox1.TextChanged += new System.EventHandler(this.MaskedTextBox1_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(138, 21);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Request Page Size:";
+            // 
+            // chkEnabled
+            // 
+            this.chkEnabled.AutoSize = true;
+            this.chkEnabled.Location = new System.Drawing.Point(12, 15);
+            this.chkEnabled.Name = "chkEnabled";
+            this.chkEnabled.Size = new System.Drawing.Size(84, 25);
+            this.chkEnabled.TabIndex = 8;
+            this.chkEnabled.Text = "Enabled";
+            this.chkEnabled.UseVisualStyleBackColor = true;
+            this.chkEnabled.CheckedChanged += new System.EventHandler(this.ChkEnabled_CheckedChanged);
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.regionsTextbox1);
@@ -175,6 +239,7 @@
             this.regionsTextbox1.Regions = "";
             this.regionsTextbox1.Size = new System.Drawing.Size(702, 291);
             this.regionsTextbox1.TabIndex = 1;
+            this.regionsTextbox1.Leave += new System.EventHandler(this.RegionsTextbox1_Leave);
             // 
             // tilePanelReborn4
             // 
@@ -203,68 +268,6 @@
             this.tilePanelOpertaion.Size = new System.Drawing.Size(702, 35);
             this.tilePanelOpertaion.TabIndex = 0;
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 3);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(696, 98);
-            this.richTextBox1.TabIndex = 9;
-            this.richTextBox1.Text = "";
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.maskedTextBox1);
-            this.panel4.Controls.Add(this.label1);
-            this.panel4.Controls.Add(this.chkEnabled);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(3, 101);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(696, 84);
-            this.panel4.TabIndex = 10;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.richTextBox1);
-            this.panel2.Controls.Add(this.panel4);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 38);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(3);
-            this.panel2.Size = new System.Drawing.Size(702, 188);
-            this.panel2.TabIndex = 5;
-            // 
-            // maskedTextBox1
-            // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(149, 40);
-            this.maskedTextBox1.Mask = "000";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(26, 29);
-            this.maskedTextBox1.TabIndex = 10;
-            this.maskedTextBox1.ValidatingType = typeof(int);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 21);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Request Page Size:";
-            // 
-            // chkEnabled
-            // 
-            this.chkEnabled.AutoSize = true;
-            this.chkEnabled.Location = new System.Drawing.Point(12, 15);
-            this.chkEnabled.Name = "chkEnabled";
-            this.chkEnabled.Size = new System.Drawing.Size(84, 25);
-            this.chkEnabled.TabIndex = 8;
-            this.chkEnabled.Text = "Enabled";
-            this.chkEnabled.UseVisualStyleBackColor = true;
-            // 
             // FormProfileEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -290,11 +293,11 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }

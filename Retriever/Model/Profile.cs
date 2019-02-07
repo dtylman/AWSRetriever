@@ -33,7 +33,9 @@ namespace Retriever
             {
                 get
                 {
-                    return System.IO.Path.GetFileNameWithoutExtension(this.Path);
+                    //the file name has two extensions... (.profile.js).
+                    return System.IO.Path.GetFileNameWithoutExtension(
+                        System.IO.Path.GetFileNameWithoutExtension(this.Path));
                 }
             }
 

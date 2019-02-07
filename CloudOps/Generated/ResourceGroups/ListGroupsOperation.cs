@@ -43,13 +43,7 @@ namespace CloudOps.ResourceGroups
                 foreach (var obj in resp.GroupIdentifiers)
                 {
                     AddObject(obj);
-                }
-                
-                foreach (var obj in resp.Groups)
-                {
-                    AddObject(obj);
-                }
-                
+                }                               
             }
             while (!string.IsNullOrEmpty(resp.NextToken));
         }

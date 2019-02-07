@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
@@ -20,13 +21,13 @@ namespace CloudOps
         private WebProxy proxy;
 
         public CancellationToken CancellationToken { get; internal set; }        
-
-        public List<CloudObject> CollectedObjects => collectedObjects;
+        
+        public ConcurrentBag<CloudObject> CollectedObjects => collectedObjects;
 
         public RegionEndpoint Region { get => region; set => region = value; }
         public WebProxy Proxy { get => proxy; set => proxy = value; }
 
-        private readonly List<CloudObject> collectedObjects = new List<CloudObject>();
+        private readonly ConcurrentBag<CloudObject> collectedObjects = new ConcurrentBag<CloudObject>();
 
 
         protected virtual void CheckError(HttpStatusCode httpStatusCode, string code)

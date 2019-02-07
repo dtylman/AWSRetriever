@@ -70,6 +70,7 @@
             this.panelStatus = new System.Windows.Forms.Panel();
             this.statusLabel = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.saveResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFront)).BeginInit();
             this.splitContainerFront.Panel1.SuspendLayout();
             this.splitContainerFront.Panel2.SuspendLayout();
@@ -180,20 +181,21 @@
             // contextMenuObjects
             // 
             this.contextMenuObjects.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveResultsToolStripMenuItem,
             this.toolStripMenuItem3,
             this.clearToolStripMenuItem});
             this.contextMenuObjects.Name = "contextMenuStripObjects";
-            this.contextMenuObjects.Size = new System.Drawing.Size(102, 32);
+            this.contextMenuObjects.Size = new System.Drawing.Size(181, 76);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(98, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(177, 6);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clearToolStripMenuItem.Text = "&Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItem_Click);
             // 
@@ -299,6 +301,7 @@
             this.viewInProfileToolStripMenuItem.Name = "viewInProfileToolStripMenuItem";
             this.viewInProfileToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.viewInProfileToolStripMenuItem.Text = "View in Profile";
+            this.viewInProfileToolStripMenuItem.Click += new System.EventHandler(this.ViewInProfileToolStripMenuItem_Click);
             // 
             // runAgainToolStripMenuItem
             // 
@@ -507,6 +510,13 @@
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.TabIndex = 0;
             // 
+            // saveResultsToolStripMenuItem
+            // 
+            this.saveResultsToolStripMenuItem.Name = "saveResultsToolStripMenuItem";
+            this.saveResultsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveResultsToolStripMenuItem.Text = "Save Results";
+            this.saveResultsToolStripMenuItem.Click += new System.EventHandler(this.SaveResultsToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -595,6 +605,7 @@
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.ToolStripMenuItem runAgainToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveResultsToolStripMenuItem;
     }
 }
 

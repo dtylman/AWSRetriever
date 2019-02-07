@@ -30,8 +30,7 @@ namespace CloudOps
             {
                 return this.tasks.Count > 0;
             }
-        }
-        public ConcurrentBag<CloudObject> CollectedObjects => collectedObjects;
+        }        
 
         void Queue(OperationInvokation operation)
         {
@@ -101,11 +100,7 @@ namespace CloudOps
 
                     if (invokations.TryDequeue(out OperationInvokation invokation))
                     {
-                        InvokationResult result = invokation.Invoke(this.cancellation.Token);
-                        foreach (CloudObject cloudObject in result.Operation.CollectedObjects)
-                        {
-                            this.CollectedObjects.Add(cloudObject);
-                        }
+                        InvokationResult result = invokation.Invoke(this.cancellation.Token);                        
                         ReportProgress(result);
                     }
                 }                

@@ -1,12 +1,18 @@
 ﻿using CloudOps;
+using NickAc.ModernUIDoneRight.Controls;
 using NickAc.ModernUIDoneRight.Forms;
+using NickAc.ModernUIDoneRight.Objects;
 using Retriever.Model;
+using Retriever.Properties;
+using System;
+using System.Windows.Forms;
 
 namespace Retriever
 {
     public partial class FormProfileEditor : ModernForm
     {
         private Profile profile;
+        private ProfileRecord selectedProfileRecord;
 
         public string SelectedService
         {
@@ -32,14 +38,50 @@ namespace Retriever
             }
         }
 
-        public FormProfileEditor(Profile profile)
+        public FormProfileEditor(Profile profile, string selectedService, string selectedOperation)
         {
-            InitializeComponent();
-            this.splitContainer1.Panel2.Hide();
             this.profile = profile;
-            foreach (var service in profile.Services())
+
+            InitializeComponent();            
+
+            appBar.Text = String.Format("Editing '{0}'", this.profile.Name);
+            appBar.ToolTip = new ModernToolTip();
+            AppAction saveProfileAction = new AppAction();
+            saveProfileAction.Image = Resources.Output50;
+            saveProfileAction.Cursor = Cursors.Hand;
+            saveProfileAction.ToolTip = "Save Profile As...";
+            saveProfileAction.Click += SaveProfileAction_Click;
+            this.appBar.Actions.Add(saveProfileAction);
+
+            this.splitContainer1.Panel2.Hide();            
+            foreach (string service in profile.Services())
             {
-                this.listServices.Items.Add(service);
+                this.listServices.Items.Add(service);                
+            }
+            if ((selectedService != null) && (selectedOperation != null))
+            {
+                this.listServices.SelectedItem = selectedService;
+                this.listOperations.SelectedItem = selectedOperation;
+            }
+        }
+
+        private void SaveProfileAction_Click(object sender, System.EventArgs e)
+        {
+            SaveFileDialog savefile = new SaveFileDialog();           
+            savefile.FileName = this.profile.Name;            
+            savefile.Filter = Profile.FileFilter;
+
+            if (savefile.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    this.profile.SaveAs(savefile.FileName);
+                    ModernMessageBox.Show(String.Format("Saved to '{0}'.", savefile.FileName));
+                }
+                catch (Exception ex)
+                {
+                    ModernMessageBox.ShowError(ex);
+                }
             }
         }
 
@@ -70,19 +112,45 @@ namespace Retriever
             {
                 return;
             }            
-            ProfileRecord p = this.profile.Find(service, operation);
-            if (p != null)
+            this.selectedProfileRecord = this.profile.Find(service, operation);
+            if (selectedProfileRecord != null)
             {
-                Operation op = Profile.FindOpeartion(p);                
+                Operation op = Profile.FindOpeartion(selectedProfileRecord);                
                 this.tilePanelOpertaion.Text = op.Name;                
                 this.richTextBox1.Text = op.Description;
-                this.chkEnabled.Checked = p.Enabled;
-                this.maskedTextBox1.Text = p.PageSize.ToString();
-                this.regionsTextbox1.Regions = p.Regions;
+                this.chkEnabled.Checked = selectedProfileRecord.Enabled;
+                this.maskedTextBox1.Text = selectedProfileRecord.PageSize.ToString();
+                this.regionsTextbox1.Regions = selectedProfileRecord.Regions;
                 this.splitContainer1.Panel2.Show();
 
             }
         }
-    }
 
+        private void ChkEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.selectedProfileRecord != null)
+            {
+                this.selectedProfileRecord.Enabled = this.chkEnabled.Checked;
+            }
+        }
+
+        private void RegionsTextbox1_Leave(object sender, EventArgs e)
+        {
+            if (this.selectedProfileRecord != null)
+            {
+                this.selectedProfileRecord.Regions = this.regionsTextbox1.Regions;
+            }
+        }
+
+        private void MaskedTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (this.selectedProfileRecord != null)
+            {
+                if (Int32.TryParse(this.maskedTextBox1.Text, out int pageSize))
+                {
+                    selectedProfileRecord.PageSize = pageSize;
+                }
+            }
+        }
+    }
 }
