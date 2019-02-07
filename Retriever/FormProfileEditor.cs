@@ -1,7 +1,9 @@
-﻿using CloudOps;
+﻿using Amazon;
+using CloudOps;
 using NickAc.ModernUIDoneRight.Controls;
 using NickAc.ModernUIDoneRight.Forms;
 using NickAc.ModernUIDoneRight.Objects;
+using NickAc.ModernUIDoneRight.Objects.MenuItems;
 using Retriever.Model;
 using Retriever.Properties;
 using System;
@@ -46,6 +48,14 @@ namespace Retriever
 
             appBar.Text = String.Format("Editing '{0}'", this.profile.Name);
             appBar.ToolTip = new ModernToolTip();
+
+            foreach (var r in RegionEndpoint.EnumerableAllRegions)
+            {                
+                AppBarMenuItem regionMenuItem = new AppBarMenuTextItem(r.SystemName);
+                regionMenuItem.Click += RegionMenuItem_Click;                   
+                appBar.MenuItems.Add(regionMenuItem);
+            }
+
             AppAction saveProfileAction = new AppAction();
             saveProfileAction.Image = Resources.Output50;
             saveProfileAction.Cursor = Cursors.Hand;
@@ -63,6 +73,11 @@ namespace Retriever
                 this.listServices.SelectedItem = selectedService;
                 this.listOperations.SelectedItem = selectedOperation;
             }
+        }
+
+        private void RegionMenuItem_Click(object sender, EventArgs e)
+        {
+            // (sender as AppBarMenuTextItem).Text
         }
 
         private void SaveProfileAction_Click(object sender, System.EventArgs e)
