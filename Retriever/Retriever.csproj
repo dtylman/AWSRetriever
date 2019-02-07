@@ -160,6 +160,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="app.config" />
     <None Include="korra_circle.ico" />
     <None Include="Resources\icons8-export-50.png" />
     <None Include="Resources\icons8-about-50.png" />
