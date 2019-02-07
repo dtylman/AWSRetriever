@@ -122,6 +122,12 @@
     <Compile Include="FormProfileEditor.Designer.cs">
       <DependentUpon>FormProfileEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormRegions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRegions.Designer.cs">
+      <DependentUpon>FormRegions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\CloudObjects.cs" />
     <Compile Include="FormCredentials.cs">
       <SubType>Form</SubType>
@@ -178,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormProfileEditor.resx">
       <DependentUpon>FormProfileEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRegions.resx">
+      <DependentUpon>FormRegions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRun.resx">
       <DependentUpon>FormRun.cs</DependentUpon>

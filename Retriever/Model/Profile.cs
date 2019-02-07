@@ -116,6 +116,18 @@ namespace Retriever
                 }
             }
 
+            public bool RegionEnabled(string systemName)
+            {
+                foreach (ProfileRecord pr in this)
+                {
+                    if (pr.RegionEnabled(systemName))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
             public void EnableRegion(string region, bool enabled)
             {
                 for (int i = 0; i < this.Count; i++)

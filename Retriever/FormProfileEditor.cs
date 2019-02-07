@@ -49,13 +49,13 @@ namespace Retriever
             appBar.Text = String.Format("Editing '{0}'", this.profile.Name);
             appBar.ToolTip = new ModernToolTip();
 
-            foreach (var r in RegionEndpoint.EnumerableAllRegions)
-            {                
-                AppBarMenuItem regionMenuItem = new AppBarMenuTextItem(r.SystemName);
-                regionMenuItem.Click += RegionMenuItem_Click;                   
-                appBar.MenuItems.Add(regionMenuItem);
-            }
-
+            AppAction regionAction = new AppAction();
+            regionAction.Image = Resources.Gear50;
+            regionAction.Cursor = Cursors.Hand;
+            regionAction.ToolTip = "Regions Editor";
+            regionAction.Click += RegionAction_Click;
+            this.appBar.Actions.Add(regionAction);
+            
             AppAction saveProfileAction = new AppAction();
             saveProfileAction.Image = Resources.Output50;
             saveProfileAction.Cursor = Cursors.Hand;
@@ -75,9 +75,10 @@ namespace Retriever
             }
         }
 
-        private void RegionMenuItem_Click(object sender, EventArgs e)
+        private void RegionAction_Click(object sender, EventArgs e)
         {
-            // (sender as AppBarMenuTextItem).Text
+            FormRegions formRegions = new FormRegions(this.profile);
+            formRegions.ShowDialog();
         }
 
         private void SaveProfileAction_Click(object sender, System.EventArgs e)

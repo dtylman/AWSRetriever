@@ -1,4 +1,5 @@
-﻿using AWSRetriver.Controls;
+﻿using System;
+using AWSRetriver.Controls;
 
 namespace Retriever
 {
@@ -44,6 +45,11 @@ namespace Retriever
                     rs.RemoveSystemName(region);
                 }
                 this.regions = rs.Text();
+            }
+
+            public bool RegionEnabled(string systemName)
+            {
+                return this.regions.Contains(systemName);
             }
         }
     }
