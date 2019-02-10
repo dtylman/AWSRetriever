@@ -31,10 +31,18 @@ namespace Retriever
 
         public static bool TryAttachConsole()
         {
-            IntPtr ptr = GetForegroundWindow();
-            GetWindowThreadProcessId(ptr, out int u);
-            Process process = Process.GetProcessById(u);
-            return AttachConsole(process.Id);
+            try
+            {
+                IntPtr ptr = GetForegroundWindow();
+                GetWindowThreadProcessId(ptr, out int u);
+                Process process = Process.GetProcessById(u);
+                return AttachConsole(process.Id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;             
+            }
         }
 
         /// <summary>
