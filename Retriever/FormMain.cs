@@ -60,14 +60,14 @@ namespace Retriever
             appBar.Actions.Add(aboutAction);
 
             AppAction stopAction = new AppAction();
-            stopAction.Image = Resources.Private50;
+            stopAction.Image = Resources.Stop50;
             stopAction.Click += StopAction_Click;
             stopAction.Cursor = Cursors.Hand;
             stopAction.ToolTip = "Stop Scanning";
             appBar.Actions.Add(stopAction);
 
             AppAction loadProfileAction = new AppAction();
-            loadProfileAction.Image = Resources.Form50;
+            loadProfileAction.Image = Resources.Import50;
             loadProfileAction.Click += LoadProfileAction_Click;
             loadProfileAction.Cursor = Cursors.Hand;
             loadProfileAction.ToolTip = "Loads a saved profile";
@@ -509,6 +509,16 @@ namespace Retriever
                     ModernMessageBox.Show(string.Format("Saved to '{0}'", saveFileDialog.FileName));
                 }
             });            
+        }
+
+        private void ListViewMessages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listViewMessages.SelectedIndices.Count > 0)
+            {
+                ProgressMessage pom = this.progressMessages[this.listViewMessages.SelectedIndices[0]];
+                this.propertyGridObject.SelectedObject = pom;
+                this.richTextBoxCobo.Text = pom.Result;
+            }
         }
     }
 }

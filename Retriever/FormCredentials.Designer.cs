@@ -39,6 +39,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.appBar1 = new NickAc.ModernUIDoneRight.Controls.AppBar();
             this.panelButtons.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -48,7 +49,7 @@
             this.panelButtons.Controls.Add(this.btnCancel);
             this.panelButtons.Controls.Add(this.btnSave);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelButtons.Location = new System.Drawing.Point(1, 221);
+            this.panelButtons.Location = new System.Drawing.Point(1, 278);
             this.panelButtons.Margin = new System.Windows.Forms.Padding(4);
             this.panelButtons.Name = "panelButtons";
             this.panelButtons.Size = new System.Drawing.Size(664, 62);
@@ -61,7 +62,7 @@
             this.btnCancel.Location = new System.Drawing.Point(451, 17);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(96, 32);
+            this.btnCancel.Size = new System.Drawing.Size(100, 32);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -73,7 +74,7 @@
             this.btnSave.Location = new System.Drawing.Point(555, 17);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(96, 32);
+            this.btnSave.Size = new System.Drawing.Size(100, 32);
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "OK";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -89,10 +90,10 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(1, 33);
+            this.panel1.Location = new System.Drawing.Point(1, 83);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(664, 188);
+            this.panel1.Size = new System.Drawing.Size(664, 195);
             this.panel1.TabIndex = 1;
             // 
             // checkBoxSave
@@ -163,17 +164,33 @@
             this.label1.TabIndex = 11;
             this.label1.Text = "AWS Access Key ID: ";
             // 
+            // appBar1
+            // 
+            this.appBar1.CastShadow = true;
+            this.appBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.appBar1.HamburgerButtonSize = 32;
+            this.appBar1.IconVisible = false;
+            this.appBar1.Location = new System.Drawing.Point(1, 33);
+            this.appBar1.Name = "appBar1";
+            this.appBar1.OverrideParentText = false;
+            this.appBar1.Size = new System.Drawing.Size(664, 50);
+            this.appBar1.TabIndex = 2;
+            this.appBar1.Text = "AWS Credentials";
+            this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
+            this.appBar1.ToolTip = null;
+            // 
             // FormCredentials
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(666, 284);
+            this.ClientSize = new System.Drawing.Size(666, 341);
             this.ColorScheme.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(64)))), ((int)(((byte)(101)))));
             this.ColorScheme.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(100)))), ((int)(((byte)(158)))));
             this.ColorScheme.PrimaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(119)))), ((int)(((byte)(189)))));
             this.ColorScheme.SecondaryColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(75)))), ((int)(((byte)(120)))));
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.appBar1);
             this.Controls.Add(this.panelButtons);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Location = new System.Drawing.Point(0, 0);
@@ -183,6 +200,7 @@
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AWS Credentials";
+            this.TitlebarVisible = false;
             this.Load += new System.EventHandler(this.FormCredentials_Load);
             this.panelButtons.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -204,5 +222,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private NickAc.ModernUIDoneRight.Controls.AppBar appBar1;
     }
 }

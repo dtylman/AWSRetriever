@@ -40,6 +40,7 @@
             this.columnID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnArn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuObjects = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.saveResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tilePanelReborn2 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
@@ -66,11 +67,10 @@
             this.propertyGridObject = new System.Windows.Forms.PropertyGrid();
             this.tilePanelReborn4 = new NickAc.ModernUIDoneRight.Controls.TilePanelReborn();
             this.appBar = new NickAc.ModernUIDoneRight.Controls.AppBar();
-            this.sidebarControl = new NickAc.ModernUIDoneRight.Controls.SidebarControl();
             this.panelStatus = new System.Windows.Forms.Panel();
             this.statusLabel = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.saveResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sidebarControl = new NickAc.ModernUIDoneRight.Controls.SidebarControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerFront)).BeginInit();
             this.splitContainerFront.Panel1.SuspendLayout();
             this.splitContainerFront.Panel2.SuspendLayout();
@@ -107,8 +107,8 @@
             // splitContainerFront.Panel2
             // 
             this.splitContainerFront.Panel2.Controls.Add(this.modernShadowPanel2);
-            this.splitContainerFront.Size = new System.Drawing.Size(1008, 710);
-            this.splitContainerFront.SplitterDistance = 453;
+            this.splitContainerFront.Size = new System.Drawing.Size(1008, 712);
+            this.splitContainerFront.SplitterDistance = 454;
             this.splitContainerFront.SplitterWidth = 6;
             this.splitContainerFront.TabIndex = 3;
             // 
@@ -119,7 +119,7 @@
             this.modernShadowPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modernShadowPanel1.Location = new System.Drawing.Point(0, 0);
             this.modernShadowPanel1.Name = "modernShadowPanel1";
-            this.modernShadowPanel1.Size = new System.Drawing.Size(1008, 453);
+            this.modernShadowPanel1.Size = new System.Drawing.Size(1008, 454);
             this.modernShadowPanel1.TabIndex = 2;
             // 
             // listViewFound
@@ -139,7 +139,7 @@
             this.listViewFound.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.listViewFound.MultiSelect = false;
             this.listViewFound.Name = "listViewFound";
-            this.listViewFound.Size = new System.Drawing.Size(1008, 413);
+            this.listViewFound.Size = new System.Drawing.Size(1008, 414);
             this.listViewFound.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listViewFound.TabIndex = 0;
             this.listViewFound.UseCompatibleStateImageBehavior = false;
@@ -185,17 +185,24 @@
             this.toolStripMenuItem3,
             this.clearToolStripMenuItem});
             this.contextMenuObjects.Name = "contextMenuStripObjects";
-            this.contextMenuObjects.Size = new System.Drawing.Size(181, 76);
+            this.contextMenuObjects.Size = new System.Drawing.Size(139, 54);
+            // 
+            // saveResultsToolStripMenuItem
+            // 
+            this.saveResultsToolStripMenuItem.Name = "saveResultsToolStripMenuItem";
+            this.saveResultsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.saveResultsToolStripMenuItem.Text = "Save Results";
+            this.saveResultsToolStripMenuItem.Click += new System.EventHandler(this.SaveResultsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(135, 6);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.clearToolStripMenuItem.Text = "&Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItem_Click);
             // 
@@ -220,7 +227,7 @@
             this.modernShadowPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modernShadowPanel2.Location = new System.Drawing.Point(0, 0);
             this.modernShadowPanel2.Name = "modernShadowPanel2";
-            this.modernShadowPanel2.Size = new System.Drawing.Size(1008, 251);
+            this.modernShadowPanel2.Size = new System.Drawing.Size(1008, 252);
             this.modernShadowPanel2.TabIndex = 0;
             // 
             // listViewMessages
@@ -241,13 +248,14 @@
             this.listViewMessages.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.listViewMessages.MultiSelect = false;
             this.listViewMessages.Name = "listViewMessages";
-            this.listViewMessages.Size = new System.Drawing.Size(1008, 211);
+            this.listViewMessages.Size = new System.Drawing.Size(1008, 212);
             this.listViewMessages.SmallImageList = this.imageList;
             this.listViewMessages.TabIndex = 0;
             this.listViewMessages.UseCompatibleStateImageBehavior = false;
             this.listViewMessages.View = System.Windows.Forms.View.Details;
             this.listViewMessages.VirtualMode = true;
             this.listViewMessages.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.ListViewMessages_RetrieveVirtualItem);
+            this.listViewMessages.SelectedIndexChanged += new System.EventHandler(this.ListViewMessages_SelectedIndexChanged);
             // 
             // columnProgressTime
             // 
@@ -315,18 +323,7 @@
             this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList.Images.SetKeyName(0, "icons8-checkmark-50.png");
-            this.imageList.Images.SetKeyName(1, "icons8-close-window-50.png");
-            this.imageList.Images.SetKeyName(2, "icons8-error-50.png");
-            this.imageList.Images.SetKeyName(3, "icons8-form-50.png");
-            this.imageList.Images.SetKeyName(4, "icons8-gear-50.png");
-            this.imageList.Images.SetKeyName(5, "icons8-help-50.png");
-            this.imageList.Images.SetKeyName(6, "icons8-list-50.png");
-            this.imageList.Images.SetKeyName(7, "icons8-menu-50.png");
-            this.imageList.Images.SetKeyName(8, "icons8-object-50.png");
-            this.imageList.Images.SetKeyName(9, "icons8-output-50.png");
-            this.imageList.Images.SetKeyName(10, "icons8-process-50.png");
-            this.imageList.Images.SetKeyName(11, "icons8-save-50.png");
-            this.imageList.Images.SetKeyName(12, "icons8-private-50.png");
+            this.imageList.Images.SetKeyName(1, "icons8-error-50.png");
             // 
             // tilePanelReborn1
             // 
@@ -345,7 +342,7 @@
             // splitContainerBack
             // 
             this.splitContainerBack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerBack.Location = new System.Drawing.Point(1, 85);
+            this.splitContainerBack.Location = new System.Drawing.Point(1, 83);
             this.splitContainerBack.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.splitContainerBack.Name = "splitContainerBack";
             // 
@@ -356,7 +353,7 @@
             // splitContainerBack.Panel2
             // 
             this.splitContainerBack.Panel2.Controls.Add(this.splitContainerObject);
-            this.splitContainerBack.Size = new System.Drawing.Size(1409, 710);
+            this.splitContainerBack.Size = new System.Drawing.Size(1409, 712);
             this.splitContainerBack.SplitterDistance = 1008;
             this.splitContainerBack.SplitterWidth = 6;
             this.splitContainerBack.TabIndex = 4;
@@ -376,7 +373,7 @@
             // splitContainerObject.Panel2
             // 
             this.splitContainerObject.Panel2.Controls.Add(this.modernShadowPanel3);
-            this.splitContainerObject.Size = new System.Drawing.Size(395, 710);
+            this.splitContainerObject.Size = new System.Drawing.Size(395, 712);
             this.splitContainerObject.SplitterDistance = 350;
             this.splitContainerObject.SplitterWidth = 6;
             this.splitContainerObject.TabIndex = 3;
@@ -422,7 +419,7 @@
             this.modernShadowPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modernShadowPanel3.Location = new System.Drawing.Point(0, 0);
             this.modernShadowPanel3.Name = "modernShadowPanel3";
-            this.modernShadowPanel3.Size = new System.Drawing.Size(395, 354);
+            this.modernShadowPanel3.Size = new System.Drawing.Size(395, 356);
             this.modernShadowPanel3.TabIndex = 0;
             // 
             // propertyGridObject
@@ -431,7 +428,7 @@
             this.propertyGridObject.Location = new System.Drawing.Point(0, 35);
             this.propertyGridObject.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.propertyGridObject.Name = "propertyGridObject";
-            this.propertyGridObject.Size = new System.Drawing.Size(395, 319);
+            this.propertyGridObject.Size = new System.Drawing.Size(395, 321);
             this.propertyGridObject.TabIndex = 3;
             // 
             // tilePanelReborn4
@@ -458,29 +455,11 @@
             this.appBar.Location = new System.Drawing.Point(1, 33);
             this.appBar.Name = "appBar";
             this.appBar.OverrideParentText = false;
-            this.appBar.Size = new System.Drawing.Size(1409, 52);
+            this.appBar.Size = new System.Drawing.Size(1409, 50);
             this.appBar.TabIndex = 5;
             this.appBar.Text = "AWS Retriever";
             this.appBar.TextFont = new System.Drawing.Font("Segoe UI", 14F);
             this.appBar.ToolTip = null;
-            // 
-            // sidebarControl
-            // 
-            this.sidebarControl.BackgroundImage = global::Retriever.Properties.Resources.Korra;
-            this.sidebarControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.sidebarControl.ColorScheme = this.ColorScheme;
-            this.sidebarControl.ContextMenuStrip = this.contextMenuMessages;
-            this.sidebarControl.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.sidebarControl.Dock = System.Windows.Forms.DockStyle.Left;
-            this.sidebarControl.IsClosed = true;
-            this.sidebarControl.Location = new System.Drawing.Point(1, 85);
-            this.sidebarControl.Name = "sidebarControl";
-            this.sidebarControl.Size = new System.Drawing.Size(258, 710);
-            this.sidebarControl.TabIndex = 6;
-            this.sidebarControl.Text = "sidebarControl";
-            this.sidebarControl.TopBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(189)))), ((int)(((byte)(189)))));
-            this.sidebarControl.TopBarSize = 10;
-            this.sidebarControl.TopBarSpacing = 32;
             // 
             // panelStatus
             // 
@@ -510,12 +489,23 @@
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.TabIndex = 0;
             // 
-            // saveResultsToolStripMenuItem
+            // sidebarControl
             // 
-            this.saveResultsToolStripMenuItem.Name = "saveResultsToolStripMenuItem";
-            this.saveResultsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveResultsToolStripMenuItem.Text = "Save Results";
-            this.saveResultsToolStripMenuItem.Click += new System.EventHandler(this.SaveResultsToolStripMenuItem_Click);
+            this.sidebarControl.BackgroundImage = global::Retriever.Properties.Resources.Korra;
+            this.sidebarControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.sidebarControl.ColorScheme = this.ColorScheme;
+            this.sidebarControl.ContextMenuStrip = this.contextMenuMessages;
+            this.sidebarControl.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.sidebarControl.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sidebarControl.IsClosed = true;
+            this.sidebarControl.Location = new System.Drawing.Point(1, 83);
+            this.sidebarControl.Name = "sidebarControl";
+            this.sidebarControl.Size = new System.Drawing.Size(258, 712);
+            this.sidebarControl.TabIndex = 6;
+            this.sidebarControl.Text = "sidebarControl";
+            this.sidebarControl.TopBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(189)))), ((int)(((byte)(189)))));
+            this.sidebarControl.TopBarSize = 10;
+            this.sidebarControl.TopBarSpacing = 32;
             // 
             // FormMain
             // 

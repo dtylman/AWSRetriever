@@ -32,7 +32,7 @@ namespace Retriever
             ModernMessageBox form = new ModernMessageBox();
             form.richTextBox1.Text = text;
             form.Text = "Message";
-            form.pictureBox.Image = Resources.CheckMark50;
+            form.pictureBox.Image = Resources.OK50;
             form.ShowDialog();
         }
     }

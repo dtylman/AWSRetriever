@@ -172,6 +172,7 @@
             this.appBar.TabIndex = 1;
             this.appBar.Text = "About";
             this.appBar.TextFont = new System.Drawing.Font("Segoe UI", 14F);
+            this.appBar.ToolTip = null;
             // 
             // FormAbout
             // 

@@ -50,14 +50,14 @@ namespace Retriever
             appBar.ToolTip = new ModernToolTip();
 
             AppAction regionAction = new AppAction();
-            regionAction.Image = Resources.Gear50;
+            regionAction.Image = Resources.Regions50;
             regionAction.Cursor = Cursors.Hand;
             regionAction.ToolTip = "Regions Editor";
             regionAction.Click += RegionAction_Click;
             this.appBar.Actions.Add(regionAction);
             
             AppAction saveProfileAction = new AppAction();
-            saveProfileAction.Image = Resources.Output50;
+            saveProfileAction.Image = Resources.SaveAs50;
             saveProfileAction.Cursor = Cursors.Hand;
             saveProfileAction.ToolTip = "Save Profile As...";
             saveProfileAction.Click += SaveProfileAction_Click;

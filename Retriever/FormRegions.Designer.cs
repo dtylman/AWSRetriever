@@ -42,10 +42,10 @@
             this.appBar1.HamburgerButtonSize = 32;
             this.appBar1.IconVisible = false;
             this.appBar1.Location = new System.Drawing.Point(1, 33);
-            this.appBar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.appBar1.Margin = new System.Windows.Forms.Padding(4);
             this.appBar1.Name = "appBar1";
             this.appBar1.OverrideParentText = false;
-            this.appBar1.Size = new System.Drawing.Size(1027, 70);
+            this.appBar1.Size = new System.Drawing.Size(1027, 50);
             this.appBar1.TabIndex = 0;
             this.appBar1.Text = "Regions Editor";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
@@ -55,8 +55,8 @@
             // 
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(1, 103);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Location = new System.Drawing.Point(1, 83);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1027, 47);
             this.panel1.TabIndex = 1;
@@ -74,9 +74,9 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 150);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 130);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1027, 479);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1027, 499);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // FormRegions
@@ -93,7 +93,7 @@
             this.Controls.Add(this.appBar1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Location = new System.Drawing.Point(0, 0);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(123, 55);
             this.Name = "FormRegions";
             this.Text = "Regions Editor";

@@ -54,6 +54,7 @@
             this.appBar.TabIndex = 0;
             this.appBar.Text = "Configuration";
             this.appBar.TextFont = new System.Drawing.Font("Segoe UI", 14F);
+            this.appBar.ToolTip = null;
             // 
             // panel
             // 
@@ -71,7 +72,7 @@
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(806, 12);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(96, 32);
+            this.buttonCancel.Size = new System.Drawing.Size(100, 32);
             this.buttonCancel.TabIndex = 1;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -83,7 +84,7 @@
             this.buttonSave.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonSave.Location = new System.Drawing.Point(919, 12);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(96, 32);
+            this.buttonSave.Size = new System.Drawing.Size(100, 32);
             this.buttonSave.TabIndex = 0;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;

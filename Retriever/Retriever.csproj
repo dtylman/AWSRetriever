@@ -82,6 +82,9 @@
     <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
       <HintPath>..\packages\AWSSDK.Core.3.3.31.7\lib\net45\AWSSDK.Core.dll</HintPath>
     </Reference>
+    <Reference Include="FluentCommandLineParser, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentCommandLineParser.1.4.3\lib\net35\FluentCommandLineParser.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -165,9 +168,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Content Include="korra_circle.ico" />
+    <Content Include="Resources\icons8-about-50.png" />
+    <Content Include="Resources\icons8-box-important-50.png" />
+    <Content Include="Resources\icons8-checkmark-50.png" />
+    <Content Include="Resources\icons8-error-50.png" />
+    <Content Include="Resources\icons8-load-resume-template-50.png" />
+    <Content Include="Resources\icons8-map-editing-50.png" />
+    <Content Include="Resources\icons8-ok-50.png" />
+    <Content Include="Resources\icons8-private-50.png" />
+    <Content Include="Resources\icons8-save-as-50.png" />
+    <Content Include="Resources\icons8-xls-import-50.png" />
     <None Include="app.config" />
-    <None Include="Resources\icons8-export-50.png" />
-    <None Include="Resources\icons8-about-50.png" />
     <None Include="Resources\korra_circle.png" />
     <None Include="Resources\korra.png" />
     <EmbeddedResource Include="FormAbout.resx">
@@ -203,24 +214,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8-repeat-one-50.png" />
-    <None Include="Resources\icons8-menu-23.png" />
-    <None Include="Resources\icons8-term-50.png" />
-    <None Include="Resources\icons8-private-50.png" />
-    <None Include="Resources\icons8-save-50.png" />
-    <None Include="Resources\icons8-output-50.png" />
-    <None Include="Resources\icons8-object-50.png" />
-    <None Include="Resources\icons8-menu-50.png" />
-    <None Include="Resources\icons8-list-50.png" />
-    <None Include="Resources\icons8-help-50.png" />
-    <None Include="Resources\icons8-gear-50.png" />
-    <None Include="Resources\icons8-form-50.png" />
-    <None Include="Resources\icons8-error-50.png" />
-    <None Include="Resources\icons8-close-window-50.png" />
-    <None Include="Resources\icons8-checkmark-50.png" />
-    <None Include="Resources\icons8-process-50.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AWSRetriver.Controls\AWSRetriver.Controls.csproj">

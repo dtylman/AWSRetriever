@@ -65,7 +65,7 @@
             this.appBar.Margin = new System.Windows.Forms.Padding(4);
             this.appBar.Name = "appBar";
             this.appBar.OverrideParentText = false;
-            this.appBar.Size = new System.Drawing.Size(1259, 70);
+            this.appBar.Size = new System.Drawing.Size(1259, 50);
             this.appBar.TabIndex = 0;
             this.appBar.Text = "Profile Editor";
             this.appBar.TextFont = new System.Drawing.Font("Segoe UI", 14F);
@@ -76,9 +76,9 @@
             this.panel1.Controls.Add(this.listServices);
             this.panel1.Controls.Add(this.tilePanelReborn1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(1, 103);
+            this.panel1.Location = new System.Drawing.Point(1, 83);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(250, 555);
+            this.panel1.Size = new System.Drawing.Size(250, 575);
             this.panel1.TabIndex = 1;
             // 
             // listServices
@@ -88,7 +88,7 @@
             this.listServices.ItemHeight = 21;
             this.listServices.Location = new System.Drawing.Point(0, 35);
             this.listServices.Name = "listServices";
-            this.listServices.Size = new System.Drawing.Size(250, 520);
+            this.listServices.Size = new System.Drawing.Size(250, 540);
             this.listServices.Sorted = true;
             this.listServices.TabIndex = 1;
             this.listServices.SelectedIndexChanged += new System.EventHandler(this.ListServices_SelectedIndexChanged);
@@ -110,7 +110,7 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(251, 103);
+            this.splitContainer1.Location = new System.Drawing.Point(251, 83);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -125,7 +125,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.tilePanelOpertaion);
             this.splitContainer1.Panel2.Margin = new System.Windows.Forms.Padding(3);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(3);
-            this.splitContainer1.Size = new System.Drawing.Size(1009, 555);
+            this.splitContainer1.Size = new System.Drawing.Size(1009, 575);
             this.splitContainer1.SplitterDistance = 297;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -136,7 +136,7 @@
             this.listOperations.ItemHeight = 21;
             this.listOperations.Location = new System.Drawing.Point(0, 35);
             this.listOperations.Name = "listOperations";
-            this.listOperations.Size = new System.Drawing.Size(297, 520);
+            this.listOperations.Size = new System.Drawing.Size(297, 540);
             this.listOperations.Sorted = true;
             this.listOperations.TabIndex = 1;
             this.listOperations.SelectedIndexChanged += new System.EventHandler(this.ListOperations_SelectedIndexChanged);
@@ -163,7 +163,7 @@
             this.panel2.Location = new System.Drawing.Point(3, 38);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(3);
-            this.panel2.Size = new System.Drawing.Size(702, 188);
+            this.panel2.Size = new System.Drawing.Size(702, 208);
             this.panel2.TabIndex = 5;
             // 
             // richTextBox1
@@ -174,7 +174,7 @@
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(696, 98);
+            this.richTextBox1.Size = new System.Drawing.Size(696, 118);
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             // 
@@ -184,7 +184,7 @@
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.chkEnabled);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(3, 101);
+            this.panel4.Location = new System.Drawing.Point(3, 121);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(696, 84);
             this.panel4.TabIndex = 10;
@@ -224,7 +224,7 @@
             this.panel3.Controls.Add(this.regionsTextbox1);
             this.panel3.Controls.Add(this.tilePanelReborn4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(3, 226);
+            this.panel3.Location = new System.Drawing.Point(3, 246);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(702, 326);
             this.panel3.TabIndex = 6;

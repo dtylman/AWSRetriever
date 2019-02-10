@@ -73,26 +73,6 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap CheckMark50 {
-            get {
-                object obj = ResourceManager.GetObject("CheckMark50", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap CloseWindow50 {
-            get {
-                object obj = ResourceManager.GetObject("CloseWindow50", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Error50 {
             get {
                 object obj = ResourceManager.GetObject("Error50", resourceCulture);
@@ -103,9 +83,9 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Export50 {
+        internal static System.Drawing.Bitmap GreenOK50 {
             get {
-                object obj = ResourceManager.GetObject("Export50", resourceCulture);
+                object obj = ResourceManager.GetObject("GreenOK50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +93,9 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Form50 {
+        internal static System.Drawing.Bitmap icons8_map_editing_50 {
             get {
-                object obj = ResourceManager.GetObject("Form50", resourceCulture);
+                object obj = ResourceManager.GetObject("icons8_map_editing_50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,19 +103,9 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Gear50 {
+        internal static System.Drawing.Bitmap Import50 {
             get {
-                object obj = ResourceManager.GetObject("Gear50", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Help50 {
-            get {
-                object obj = ResourceManager.GetObject("Help50", resourceCulture);
+                object obj = ResourceManager.GetObject("Import50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +123,9 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap List50 {
+        internal static System.Drawing.Bitmap Load50 {
             get {
-                object obj = ResourceManager.GetObject("List50", resourceCulture);
+                object obj = ResourceManager.GetObject("Load50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +133,9 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Menu23 {
+        internal static System.Drawing.Bitmap OK50 {
             get {
-                object obj = ResourceManager.GetObject("Menu23", resourceCulture);
+                object obj = ResourceManager.GetObject("OK50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,59 +143,9 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Menu50 {
+        internal static System.Drawing.Bitmap Regions50 {
             get {
-                object obj = ResourceManager.GetObject("Menu50", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Objecto50 {
-            get {
-                object obj = ResourceManager.GetObject("Objecto50", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Output50 {
-            get {
-                object obj = ResourceManager.GetObject("Output50", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Private50 {
-            get {
-                object obj = ResourceManager.GetObject("Private50", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Process50 {
-            get {
-                object obj = ResourceManager.GetObject("Process50", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap RepeatOne50 {
-            get {
-                object obj = ResourceManager.GetObject("RepeatOne50", resourceCulture);
+                object obj = ResourceManager.GetObject("Regions50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -243,9 +163,9 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Save50 {
+        internal static System.Drawing.Bitmap SaveAs50 {
             get {
-                object obj = ResourceManager.GetObject("Save50", resourceCulture);
+                object obj = ResourceManager.GetObject("SaveAs50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -253,9 +173,19 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Term50 {
+        internal static System.Drawing.Bitmap Stop50 {
             get {
-                object obj = ResourceManager.GetObject("Term50", resourceCulture);
+                object obj = ResourceManager.GetObject("Stop50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YellowError50 {
+            get {
+                object obj = ResourceManager.GetObject("YellowError50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
