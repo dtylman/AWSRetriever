@@ -7,6 +7,7 @@ namespace Retriever.Model
     public class ProgressMessage
     {
         private string result;
+        private string error;
         private int imageIndex;
         private DateTime time;
         private string operation;
@@ -26,9 +27,11 @@ namespace Retriever.Model
             this.service = ir.Operation.ServiceName;
             this.regionSystemName = ir.Operation.Region.SystemName;
             this.regionDisplayName = ir.Operation.Region.DisplayName;
+            
             if (ir.IsError())
             {
                 this.result = ir.Ex.Message;
+                this.error = ir.Ex.ToString();
                 this.imageIndex = 2;
             }
             else
@@ -46,5 +49,6 @@ namespace Retriever.Model
         public DateTime Time { get => time; set => time = value; }
         public string RegionSystemName { get => regionSystemName; set => regionSystemName = value; }
         public string Region { get => regionDisplayName; set => regionDisplayName = value; }
+        public string Error { get => error; set => error = value; }
     }
 }

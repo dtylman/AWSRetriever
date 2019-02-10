@@ -73,7 +73,7 @@ namespace Retriever
             loadProfileAction.ToolTip = "Loads a saved profile";
             appBar.Actions.Add(loadProfileAction);
 
-            SidebarTextItem scanAction = new SidebarTextItem("Full Scan");
+            SidebarTextItem scanAction = new SidebarTextItem("Full Scan (by profile)");
             scanAction.Click += ScanAction_Click;
             this.sidebarControl.Items.Add(scanAction);
 
@@ -517,7 +517,14 @@ namespace Retriever
             {
                 ProgressMessage pom = this.progressMessages[this.listViewMessages.SelectedIndices[0]];
                 this.propertyGridObject.SelectedObject = pom;
-                this.richTextBoxCobo.Text = pom.Result;
+                if (!string.IsNullOrEmpty(pom.Error))
+                {
+                    this.richTextBoxCobo.Text = pom.Error;
+                }
+                else
+                {
+                    this.richTextBoxCobo.Text = pom.Result;
+                }
             }
         }
     }

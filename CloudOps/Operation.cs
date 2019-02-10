@@ -77,6 +77,16 @@ namespace CloudOps
                 this.Invoke(this.creds, this.region, this.maxItems);
                 return new OperationResult(this);
             }
+            catch (AmazonServiceException ase)
+            {
+                if (ase.Message== "A WebException with status NameResolutionFailure was thrown.")
+                {
+                    return new OperationResult(new CloudOpsException(
+                        String.Format("Operation {0}:{1} not found in region {2}",
+                        ServiceName, Name, this.region.DisplayName), ase), this);
+                }
+                return new OperationResult(ase, this);                
+            }
             catch (Exception ex)
             {
                 return new OperationResult(ex, this);
