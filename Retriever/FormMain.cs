@@ -178,9 +178,10 @@ namespace Retriever
                 {
                     ShowCredentialsDialog();
                 }
+                WebProxy proxy = Configuration.Instance.GetWebProxy();
                 foreach (var region in form.SelectedRegions)
                 {                    
-                    scanner.Invokations.Enqueue(form.Operation.Clone(this.Proxy, region, this.creds, Configuration.Instance.PageSize));
+                    scanner.Invokations.Enqueue(form.Operation.Clone(proxy, region, this.creds, Configuration.Instance.PageSize));
                 }
                 Start();
             }
@@ -279,13 +280,14 @@ namespace Retriever
             foreach (ProfileRecord p in this.profile)
             {
                 if (p.Enabled)
-                {
+                {                    
                     Operation op = Profile.FindOpeartion(p);
                     if (op != null)
                     {
+                        WebProxy proxy = Configuration.Instance.GetWebProxy();
                         foreach (RegionEndpoint region in RegionsString.ParseSystemNames(p.Regions).Items)
                         {
-                            scanner.Invokations.Enqueue(op.Clone(this.Proxy, region, this.creds, p.PageSize));                            
+                            scanner.Invokations.Enqueue(op.Clone(proxy, region, this.creds, p.PageSize));                            
                         }
                     }
                 }
@@ -411,21 +413,7 @@ namespace Retriever
                 return ((AssemblyProductAttribute)attributes[0]).Product;
             }
         }
-
-        public WebProxy Proxy
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Configuration.Instance.ProxyHost))
-                {
-                    return null;
-                }
-                return new WebProxy(Configuration.Instance.ProxyHost, Configuration.Instance.ProxyPort)
-                {
-                    Credentials = new NetworkCredential(Configuration.Instance.ProxyUser, Configuration.Instance.ProxyPassword)
-                };
-            }
-        }
+      
 
         private void RefreshProfileName()
         {
@@ -480,7 +468,7 @@ namespace Retriever
                     ProfileRecord pr = this.profile.Find(pm.Service, pm.Operation);
                     Operation op = Profile.FindOpeartion(pr);                    
                     var region = RegionEndpoint.GetBySystemName(pm.RegionSystemName);
-                    scanner.Invokations.Enqueue(op.Clone(this.Proxy, region, this.creds, pr.PageSize));
+                    scanner.Invokations.Enqueue(op.Clone(Configuration.Instance.GetWebProxy(), region, this.creds, pr.PageSize));
                     Start();
                 });
             }

@@ -1,7 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Amazon.Runtime;
+using Amazon.Runtime.CredentialManagement;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Net;
 
 namespace Retriever
 {
@@ -18,6 +21,7 @@ namespace Retriever
         private int proxyPort = 1080;
         private string proxyUser;
         private string proxyPassword;
+        private string configFileName;
 
         public static Configuration Instance { get => instance; }
 
@@ -33,11 +37,11 @@ namespace Retriever
         [Description("AWS User Profle to use")]
         public string AwsUser { get => awsUser; set => awsUser = value; }
         [Category("AWS")]
-        [Description("Default Page Size for Pagination Request (can be overriden by Profile)")]        
+        [Description("Default Page Size for Pagination Request (can be overriden by Profile)")]
         public int PageSize { get => pageSize; set => pageSize = value; }
 
         [Category("Connection")]
-        [Description("Number of concurrent connections when scanning.")]        
+        [Description("Number of concurrent connections when scanning.")]
         public int ConcurrentConnecitons { get => concurrentConnecitons; set => concurrentConnecitons = value; }
         [Category("Connection")]
         [Description("API call timeout")]
@@ -60,15 +64,17 @@ namespace Retriever
         [Description("Default profile file to load at startup")]
         public string Profile { get => profile; set => profile = value; }
 
-        private static Configuration instance;        
-
-        public static String ConfigFileName
+        public static string DefaultFileName
         {
             get
-            {                
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AWSRetriever","config.js");
+            {
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AWSRetriever", "config.js");
             }
         }
+
+        public string ConfigFileName { get => configFileName; set => configFileName = value; }
+
+        private static Configuration instance;
 
         public void Save()
         {
@@ -86,25 +92,63 @@ namespace Retriever
             }
         }
 
-      
 
-        public static void Load()
+
+        public static void Load(string configFileName)
         {
             try
             {
 
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamReader sr = new StreamReader(ConfigFileName))
+                using (StreamReader sr = new StreamReader(configFileName))
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
                     instance = serializer.Deserialize<Configuration>(reader);
+                    instance.ConfigFileName = configFileName;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 instance = new Configuration();
-            }            
+            }
+        }
+
+        public WebProxy GetWebProxy()
+        {
+            if (string.IsNullOrEmpty(Instance.ProxyHost))
+            {
+                return null;
+            }
+            return new WebProxy(Instance.ProxyHost, Instance.ProxyPort)
+            {
+                Credentials = new NetworkCredential(Instance.ProxyUser, Instance.ProxyPassword)
+            };
+        }
+
+        public AWSCredentials GetCredentials()
+        {
+            if (!string.IsNullOrEmpty(this.AccessKeyID) && (!string.IsNullOrEmpty(this.SecretAccessKey)))
+            {
+                return new BasicAWSCredentials(this.AccessKeyID, this.SecretAccessKey);
+            }
+            else if (!string.IsNullOrEmpty(this.awsUser))
+            {
+                SharedCredentialsFile credentialsFile = new SharedCredentialsFile();
+                if (!credentialsFile.TryGetProfile(awsUser, out CredentialProfile credentialProfile))
+                {
+                    throw new ApplicationException(string.Format("Profile '{0}' does not exists", awsUser));
+                }
+                if (!AWSCredentialsFactory.TryGetAWSCredentials(credentialProfile, credentialsFile, out AWSCredentials credentials))
+                {
+                    throw new ApplicationException(string.Format("Failed to get credentials for profile '{0}'", awsUser));
+                }
+                return credentials;
+            }
+            else
+            {
+                return FallbackCredentialsFactory.GetCredentials();
+            }
         }
     }
 }
