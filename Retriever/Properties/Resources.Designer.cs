@@ -93,16 +93,6 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_map_editing_50 {
-            get {
-                object obj = ResourceManager.GetObject("icons8_map_editing_50", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Import50 {
             get {
                 object obj = ResourceManager.GetObject("Import50", resourceCulture);
@@ -116,6 +106,16 @@ namespace Retriever.Properties {
         internal static System.Drawing.Bitmap Korra {
             get {
                 object obj = ResourceManager.GetObject("Korra", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap KorraCircle {
+            get {
+                object obj = ResourceManager.GetObject("KorraCircle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +143,9 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Regions50 {
+        internal static System.Drawing.Bitmap Regionss50 {
             get {
-                object obj = ResourceManager.GetObject("Regions50", resourceCulture);
+                object obj = ResourceManager.GetObject("Regionss50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,19 +153,9 @@ namespace Retriever.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap RoundKorra {
+        internal static System.Drawing.Bitmap Save50 {
             get {
-                object obj = ResourceManager.GetObject("RoundKorra", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SaveAs50 {
-            get {
-                object obj = ResourceManager.GetObject("SaveAs50", resourceCulture);
+                object obj = ResourceManager.GetObject("Save50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

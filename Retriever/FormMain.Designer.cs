@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            this.components = new System.ComponentModel.Container();            
             this.splitContainerFront = new System.Windows.Forms.SplitContainer();
             this.modernShadowPanel1 = new NickAc.ModernUIDoneRight.Controls.ModernShadowPanel();
             this.listViewFound = new System.Windows.Forms.ListView();
@@ -318,13 +317,6 @@
             this.runAgainToolStripMenuItem.Text = "Run Again";
             this.runAgainToolStripMenuItem.Click += new System.EventHandler(this.RunAgainToolStripMenuItem_Click);
             // 
-            // imageList
-            // 
-            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
-            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList.Images.SetKeyName(0, "icons8-checkmark-50.png");
-            this.imageList.Images.SetKeyName(1, "icons8-error-50.png");
-            // 
             // tilePanelReborn1
             // 
             this.tilePanelReborn1.BrandedTile = false;
@@ -521,7 +513,6 @@
             this.Controls.Add(this.panelStatus);
             this.Controls.Add(this.appBar);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.MinimumSize = new System.Drawing.Size(108, 45);

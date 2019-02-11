@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using System.Linq;
 using CloudOps;
 using Newtonsoft.Json;
-using System;
 
 namespace Retriever
 {
@@ -16,25 +15,40 @@ namespace Retriever
             {
                 Save("objects.json");
             }
-
+            
             public void Save(string fileName)
             {
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamWriter sw = new StreamWriter(fileName))
-                using (JsonWriter writer = new JsonTextWriter(sw))
+                StreamWriter sw = new StreamWriter(fileName);
+                try
                 {
-                    writer.Formatting = Formatting.Indented;
-                    serializer.Serialize(writer, this);
+                    using (JsonWriter writer = new JsonTextWriter(sw))
+                    {
+                        writer.Formatting = Formatting.Indented;
+                        serializer.Serialize(writer, this);
+                    }
+                }
+                finally
+                {
+                    sw.Close();
                 }
             }
 
+            
             public static CloudObjects Load()
             {
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamReader sr = new StreamReader("objects.json"))
-                using (JsonReader reader = new JsonTextReader(sr))
+                StreamReader sr = new StreamReader("objects.json");
+                try
                 {
-                    return serializer.Deserialize<CloudObjects>(reader);
+                    using (JsonReader reader = new JsonTextReader(sr))
+                    {
+                        return serializer.Deserialize<CloudObjects>(reader);
+                    }
+                }
+                finally
+                {
+                    sr.Close();
                 }
 
             }

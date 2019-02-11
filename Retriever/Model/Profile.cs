@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using CloudOps;
-using Retriever.Properties;
 using Newtonsoft.Json;
 using AWSRetriver.Controls;
 
@@ -144,23 +143,37 @@ namespace Retriever
             public void SaveAs(string newPath)
             {                                
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamWriter sw = new StreamWriter(newPath))
-                using (JsonWriter writer = new JsonTextWriter(sw))
+                StreamWriter sw = new StreamWriter(newPath);
+                try
                 {
-                    writer.Formatting = Formatting.Indented;
-                    serializer.Serialize(writer, this);
+                    using (JsonWriter writer = new JsonTextWriter(sw))
+                    {
+                        writer.Formatting = Formatting.Indented;
+                        serializer.Serialize(writer, this);
+                    }
+                }
+                finally
+                {
+                    sw.Close();
                 }
             }
 
             public static Profile Load(string path)
             {                
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamReader sr = new StreamReader(path))
-                using (JsonReader reader = new JsonTextReader(sr))
+                StreamReader sr = new StreamReader(path);
+                try
                 {
-                    Profile p = serializer.Deserialize<Profile>(reader);
-                    p.path = path;
-                    return p;
+                    using (JsonReader reader = new JsonTextReader(sr))
+                    {
+                        Profile p = serializer.Deserialize<Profile>(reader);
+                        p.path = path;
+                        return p;
+                    }
+                }
+                finally
+                {
+                    sr.Close();
                 }
             }
         }

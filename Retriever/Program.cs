@@ -6,6 +6,21 @@ using System.Windows.Forms;
 
 namespace Retriever
 {
+    public static class NativeMethods
+    {
+        [DllImport("kernel32", SetLastError = true)]
+        public static extern bool AttachConsole(int dwProcessId);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
+
+        [DllImport("kernel32.dll")]
+        public static extern bool FreeConsole();
+    }
+
     public class ProgramArgs
     {
         public string ConfigFile { get; set; }
@@ -16,32 +31,19 @@ namespace Retriever
 
     static class Program
     {
-
-        [DllImport("kernel32", SetLastError = true)]
-        static extern bool AttachConsole(int dwProcessId);
-
-        [DllImport("user32.dll")]
-        static extern IntPtr GetForegroundWindow();
-
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern uint GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
-
-        [DllImport("kernel32.dll")]
-        static extern bool FreeConsole();
-
         public static bool TryAttachConsole()
         {
             try
             {
-                IntPtr ptr = GetForegroundWindow();
-                GetWindowThreadProcessId(ptr, out int u);
+                IntPtr ptr = NativeMethods.GetForegroundWindow();
+                NativeMethods.GetWindowThreadProcessId(ptr, out int u);
                 Process process = Process.GetProcessById(u);
-                return AttachConsole(process.Id);
+                return NativeMethods.AttachConsole(process.Id);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return false;             
+                Console.Error.WriteLine(ex.Message);
+                return false;
             }
         }
 
@@ -49,7 +51,7 @@ namespace Retriever
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()        
+        static void Main()
         {
             bool consoleAttached = TryAttachConsole();
             try
@@ -60,10 +62,10 @@ namespace Retriever
             {
                 if (consoleAttached)
                 {
-                    FreeConsole();
+                    NativeMethods.FreeConsole();
                 }
             }
-            
+
         }
 
         private static void AppMain(bool consoleAttached)
@@ -80,7 +82,7 @@ namespace Retriever
             p.SetupHelp("h", "help").Callback(text =>
                 {
                     Console.WriteLine("Usage:");
-                    Console.WriteLine(text);                    
+                    Console.WriteLine(text);
                 });
             var result = p.Parse(Environment.GetCommandLineArgs());
             if (result.HasErrors)
@@ -107,6 +109,6 @@ namespace Retriever
             }
 
         }
-        
+
     }
 }

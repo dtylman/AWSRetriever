@@ -2,8 +2,6 @@
 using System.ComponentModel;
 using System.Net;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Windows.Forms;
 using Amazon;
 using Amazon.Runtime;
@@ -30,6 +28,20 @@ namespace Retriever
         public FormMain()
         {
             InitializeComponent();
+
+            try
+            {
+                ComponentResourceManager resources = new ComponentResourceManager(typeof(FormMain));
+                this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+                this.imageList.ImageStream = ((ImageListStreamer)resources.GetObject("imageList.ImageStream"));
+                this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+                this.imageList.Images.SetKeyName(0, "icons8-checkmark-50.png");
+                this.imageList.Images.SetKeyName(1, "icons8-error-50.png");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex);
+            }
 
             this.appBar.ToolTip = new ModernToolTip();
 
@@ -300,7 +312,7 @@ namespace Retriever
             DialogResult dr = formCredentials.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
-                this.creds = formCredentials.Credentials;
+                this.creds = formCredentials.GetCredentials(); 
             }
         }
 

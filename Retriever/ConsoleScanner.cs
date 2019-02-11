@@ -10,13 +10,14 @@ using System.Runtime.CompilerServices;
 
 namespace Retriever
 {
-    public class ConsoleScanner
+    public class ConsoleScanner 
     {
         private Profile profile;
         private StreamWriter swout;
         private Scanner scanner;
         private AWSCredentials creds;
-        
+
+
         public void Scan(string outputFile)
         {
             Console.WriteLine(String.Format("Writing to '{0}'", outputFile));

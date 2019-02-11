@@ -75,36 +75,52 @@ namespace Retriever
         public string ConfigFileName { get => configFileName; set => configFileName = value; }
 
         private static Configuration instance;
-
+        
         public void Save()
         {
+            if (string.IsNullOrEmpty(ConfigFileName))
+            {
+                ConfigFileName = DefaultFileName;
+            }
             string dirName = Path.GetDirectoryName(ConfigFileName);
-            if (!Directory.Exists(dirName))
+            if ((!string.IsNullOrEmpty(dirName)) && (!Directory.Exists(dirName)))
             {
                 Directory.CreateDirectory(dirName);
             }
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter(ConfigFileName))
-            using (JsonWriter writer = new JsonTextWriter(sw))
+            StreamWriter sw = new StreamWriter(ConfigFileName);
+            try
             {
-                writer.Formatting = Formatting.Indented;
-                serializer.Serialize(writer, this);
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    writer.Formatting = Formatting.Indented;
+                    serializer.Serialize(writer, this);
+                }
+            }
+            finally
+            {
+                sw.Close();
             }
         }
-
-
-
+        
         public static void Load(string configFileName)
         {
             try
             {
 
                 JsonSerializer serializer = new JsonSerializer();
-                using (StreamReader sr = new StreamReader(configFileName))
-                using (JsonReader reader = new JsonTextReader(sr))
+                StreamReader sr = new StreamReader(configFileName);
+                try
                 {
-                    instance = serializer.Deserialize<Configuration>(reader);
-                    instance.ConfigFileName = configFileName;
+                    using (JsonReader reader = new JsonTextReader(sr))
+                    {
+                        instance = serializer.Deserialize<Configuration>(reader);
+                        instance.ConfigFileName = configFileName;
+                    }
+                }
+                finally
+                {
+                    sr.Close();                    
                 }
             }
             catch (Exception ex)

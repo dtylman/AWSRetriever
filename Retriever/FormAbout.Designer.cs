@@ -72,7 +72,7 @@
             // 
             this.logoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.logoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logoPictureBox.Image = global::Retriever.Properties.Resources.RoundKorra;
+            this.logoPictureBox.Image = global::Retriever.Properties.Resources.KorraCircle;
             this.logoPictureBox.Location = new System.Drawing.Point(4, 4);
             this.logoPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.logoPictureBox.Name = "logoPictureBox";

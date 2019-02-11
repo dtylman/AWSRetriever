@@ -18,31 +18,28 @@ namespace Retriever
         /// Gets the credentials from the GUI
         /// </summary>
         /// <value>The credentials.</value>
-        public AWSCredentials Credentials
+        public AWSCredentials GetCredentials()
         {
-            get
+            if (!string.IsNullOrEmpty(this.AccessKeyID) && (!string.IsNullOrEmpty(this.SecretAccessKey)))
             {
-                if (!string.IsNullOrEmpty(this.AccessKeyID) && (!string.IsNullOrEmpty(this.SecretAccessKey)))
+                return new BasicAWSCredentials(this.AccessKeyID, this.SecretAccessKey);
+            }
+            else if (!string.IsNullOrEmpty(this.ProfileName))
+            {
+                SharedCredentialsFile credentialsFile = new SharedCredentialsFile();
+                if (!credentialsFile.TryGetProfile(ProfileName, out CredentialProfile credentialProfile))
                 {
-                    return new BasicAWSCredentials(this.AccessKeyID, this.SecretAccessKey);
+                    throw new ApplicationException(string.Format("Profile '{0}' does not exists", ProfileName));
                 }
-                else if (!string.IsNullOrEmpty(this.ProfileName))
+                if (!AWSCredentialsFactory.TryGetAWSCredentials(credentialProfile, credentialsFile, out AWSCredentials credentials))
                 {
-                    SharedCredentialsFile credentialsFile = new SharedCredentialsFile();
-                    if (!credentialsFile.TryGetProfile(ProfileName, out CredentialProfile credentialProfile))
-                    {
-                        throw new ApplicationException(string.Format("Profile '{0}' does not exists", ProfileName));
-                    }
-                    if (!AWSCredentialsFactory.TryGetAWSCredentials(credentialProfile, credentialsFile, out AWSCredentials credentials))
-                    {
-                        throw new ApplicationException(string.Format("Failed to get credentials for profile '{0}'", ProfileName));
-                    }
-                    return credentials;
+                    throw new ApplicationException(string.Format("Failed to get credentials for profile '{0}'", ProfileName));
                 }
-                else
-                {
-                    return FallbackCredentialsFactory.GetCredentials();
-                }
+                return credentials;
+            }
+            else
+            {
+                return FallbackCredentialsFactory.GetCredentials();
             }
         }
 
