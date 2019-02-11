@@ -183,8 +183,7 @@ namespace Retriever
             {
                 if (form.Operation == null)
                 {
-                    SetStatus(new ApplicationException("No opeation selected"));
-                    return;
+                    throw new ApplicationException("No opeation selected");                    
                 }
                 if (this.creds == null)
                 {

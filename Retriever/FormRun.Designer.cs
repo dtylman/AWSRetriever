@@ -55,9 +55,9 @@ namespace Retriever
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.comboServices);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(1, 51);
+            this.panel1.Location = new System.Drawing.Point(1, 83);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(906, 248);
+            this.panel1.Size = new System.Drawing.Size(906, 216);
             this.panel1.TabIndex = 8;
             // 
             // label3
@@ -144,6 +144,7 @@ namespace Retriever
             this.modernButton2.TabIndex = 1;
             this.modernButton2.Text = "Run...";
             this.modernButton2.UseVisualStyleBackColor = true;
+            this.modernButton2.Click += new System.EventHandler(this.ButtonOK_Click);
             // 
             // modernButton1
             // 
@@ -162,7 +163,7 @@ namespace Retriever
             this.appBar1.Dock = System.Windows.Forms.DockStyle.Top;
             this.appBar1.HamburgerButtonSize = 32;
             this.appBar1.IconVisible = false;
-            this.appBar1.Location = new System.Drawing.Point(1, 1);
+            this.appBar1.Location = new System.Drawing.Point(1, 33);
             this.appBar1.Name = "appBar1";
             this.appBar1.OverrideParentText = false;
             this.appBar1.Size = new System.Drawing.Size(906, 50);
