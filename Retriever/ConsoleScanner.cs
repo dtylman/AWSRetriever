@@ -18,8 +18,9 @@ namespace Retriever
         private AWSCredentials creds;
 
 
-        public void Scan(string outputFile)
+        public void Scan(string outputFile, string profile)
         {
+            Console.WriteLine(String.Format("Using profile: '{0}'", profile));
             Console.WriteLine(String.Format("Writing to '{0}'", outputFile));
             swout = new StreamWriter(outputFile);
             swout.WriteLine("[");
@@ -38,7 +39,7 @@ namespace Retriever
                     throw new ApplicationException(String.Format("No credentials provided. Edit in configuration file: '{0}'",
                         Configuration.Instance.ConfigFileName));
                 }                
-                this.profile = Profile.Load(Configuration.Instance.Profile);
+                this.profile = Profile.Load(profile);
                 QueueOperations();
                 Console.WriteLine("Scanning...");
                 this.scanner.Scan();               
@@ -57,15 +58,22 @@ namespace Retriever
                 e.Operation.ServiceName, e.Operation.Name, e.Operation.Region.SystemName, e.ResultText()));
             if (!e.IsError())
             {
-                foreach (CloudObject cobo in e.Operation.CollectedObjects)
-                {
-                    swout.WriteLine("" +
-                        "  {" +
-                        "  \"Type\" : \"" + cobo.TypeName + "\",");
-                    swout.WriteLine(
-                            "  \"Source\" : " + cobo.Source + ",},");
-
+                var iter = e.Operation.CollectedObjects.GetEnumerator();
+                do
+                {                    
+                    CloudObject cobo = iter.Current;
+                    if (cobo == null)
+                    {
+                        continue;
+                    }                    
+                    swout.WriteLine("{ \"Type\" : \"" + cobo.TypeName + "\",");
+                    swout.WriteLine("  \"Service\" : \"" + cobo.Service+ "\",");
+                    swout.WriteLine("  \"Region\" : \"" + cobo.Region+ "\",");
+                    swout.WriteLine("  \"Source\" : " + cobo.Source + "}");
+                    swout.WriteLine(",");
                 }
+                while (iter.MoveNext());
+                
                 swout.Flush();
             }
         }

@@ -58,6 +58,15 @@ namespace Retriever
             {
                 AppMain(consoleAttached);
             }
+            catch (Exception ex)
+            {
+                var debug = Environment.GetEnvironmentVariable("AWSRetriever_DEBUG");
+                if (!string.IsNullOrEmpty(debug))
+                {
+                    Console.WriteLine(ex);
+                }
+                Console.WriteLine(ex.Message);
+            }
             finally
             {
                 if (consoleAttached)
@@ -72,7 +81,7 @@ namespace Retriever
         {
             if (consoleAttached)
             {
-                Console.WriteLine("AWS Retriver");
+                Console.WriteLine("AWS Retriever");
             }
             FluentCommandLineParser<ProgramArgs> p = new FluentCommandLineParser<ProgramArgs>();
             p.Setup(arg => arg.RunNow).As('r', "run").SetDefault(false).WithDescription("Run now");
@@ -98,7 +107,12 @@ namespace Retriever
             if (p.Object.RunNow)
             {
                 ConsoleScanner cs = new ConsoleScanner();
-                cs.Scan(p.Object.OutFile);
+                string profile = p.Object.ProfileFile;
+                if (string.IsNullOrEmpty(profile))
+                {
+                    profile = Configuration.Instance.Profile;
+                }
+                cs.Scan(p.Object.OutFile,profile);
             }
             else
             {
