@@ -59,12 +59,17 @@ EC2 DescribeInternetGateways ca-central-1: 1 items retrieved
 ```
 
 The resulting `myobjects.json` file, holds a JSON array with the following structure:
-```json
+```js
 [
-{ "Type" : "InternetGateway", // the type of the object listed
-  "Service" : "EC2", // the service it was retrieved from
-  "Region" : "ap-northeast-2", // the region
-  "Source" : { //the object itself, will change according to the object
+  { 
+  // the type of the object listed
+  "Type" : "InternetGateway", 
+  // the service it was retrieved from
+  "Service" : "EC2", 
+  // the region
+  "Region" : "ap-northeast-2", 
+  //the object itself, will change according to the object
+  "Source" : { 
   "Attachments": [
     {
       "State": {
