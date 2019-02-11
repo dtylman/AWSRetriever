@@ -59,41 +59,52 @@ EC2 DescribeInternetGateways ca-central-1: 1 items retrieved
 ```
 
 The resulting `myobjects.json` file, holds a JSON array with the following structure:
-```json
+```js
 [
-{ "Type" : "InternetGateway", // the type of the object listed
-  "Service" : "EC2", // the service it was retrieved from
-  "Region" : "ap-northeast-2", // the region
-  "Source" : { //the object itself, will change according to the object
-  "Attachments": [
     {
-      "State": {
-        "Value": "available"
-      },
-      "VpcId": "vpc-e2e9f18a"
+        // the type of the object listed:
+        "Type": "InternetGateway",
+        // the service it was retrieved from:
+        "Service": "EC2",
+        // the region:
+        "Region": "ap-northeast-2",
+        //the object itself, will change according to the object:
+        "Source": {
+            "Attachments": [
+                {
+                    "State": {
+                        "Value": "available"
+                    },
+                    "VpcId": "vpc-e2e9f18a"
+                }
+            ],
+            "InternetGatewayId": "igw-0562ad6d",
+            "OwnerId": "000000000000",
+            "Tags": []
+        }
+    },
+    {
+    // more objects...
     }
-  ],
-  "InternetGatewayId": "igw-0562ad6d",
-  "OwnerId": "000000000000",
-  "Tags": []
-}}
-,
-.
-.
-.
+]
 ```
 
 ### Profile Record 
 
 Each profile record holds:
-```json
+```js
  {
-    "ServiceName": "EC2", // AWS service to execute
-    "Name": "DescribeInternetGateways", // Specific API to execute
-    "Regions": "ap-northeast-1 ap-northeast-2 ap-south-1 ap-southeast-1 ap-southeast-2 ca-central-1 eu-central-1 eu-north-1 eu-west-1 eu-west-2 eu-west-3 sa-east-1 us-east-1 us-east-2 us-west-1 us-west-2", // a list of regions to call 
-    "Enabled": true, // if false, this API is skipped
-    "PageSize": 18 // if this API supports paging, this value will be the page size for each request.
-  },
+    // AWS service to execute
+    "ServiceName": "EC2",
+    // Specific API to execute:
+    "Name": "DescribeInternetGateways",
+    // A list of regions to call:
+    "Regions": "ap-northeast-1 ap-northeast-2 ap-south-1 ap-southeast-1 ap-southeast-2 ca-central-1 eu-central-1 eu-north-1 eu-west-1 eu-west-2 eu-west-3 sa-east-1 us-east-1 us-east-2 us-west-1 us-west-2",
+    // if false, this API is skipped
+    "Enabled": true,
+    // if this API supports paging, this value will be the page size for each request.
+    "PageSize": 18
+}
 ```
 
 ## Download & Run
