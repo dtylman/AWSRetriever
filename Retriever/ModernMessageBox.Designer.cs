@@ -77,7 +77,7 @@
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(514, 159);
-            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             // 
             // panel2
@@ -115,6 +115,7 @@
             this.appBar1.TabIndex = 2;
             this.appBar1.Text = "appBar";
             this.appBar1.TextFont = new System.Drawing.Font("Segoe UI", 14F);
+            this.appBar1.ToolTip = null;
             // 
             // ModernMessageBox
             // 
@@ -136,6 +137,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "appBar";
             this.TitlebarVisible = false;
+            this.Load += new System.EventHandler(this.ModernMessageBox_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.modernShadowPanel1.ResumeLayout(false);
             this.panel.ResumeLayout(false);

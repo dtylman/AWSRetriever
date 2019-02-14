@@ -35,5 +35,10 @@ namespace Retriever
             form.pictureBox.Image = Resources.OK50;
             form.ShowDialog();
         }
+
+        private void ModernMessageBox_Load(object sender, EventArgs e)
+        {
+            modernButton.Focus();
+        }
     }
 }

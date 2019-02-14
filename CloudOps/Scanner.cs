@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
+using System.Diagnostics;
 
 namespace CloudOps
 {
@@ -96,11 +97,17 @@ namespace CloudOps
                     {
                         this.cancellation.Token.ThrowIfCancellationRequested();
                     }
-
-                    if (invokations.TryDequeue(out Operation invokation))
+                    try
                     {
-                        OperationResult result = invokation.Invoke(this.cancellation.Token);                        
-                        ReportProgress(result);
+                        if (invokations.TryDequeue(out Operation invokation))
+                        {
+                            OperationResult result = invokation.Invoke(this.cancellation.Token);
+                            ReportProgress(result);
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        Debug.Write(ex);
                     }
                 }                
             }, this.cancellation.Token);

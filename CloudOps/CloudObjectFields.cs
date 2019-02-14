@@ -14,13 +14,21 @@ namespace CloudOps
 
         public CloudObjectFields(Type type, object obj, string suffix)
         {
+            if ( (type==null) || (obj==null) || string.IsNullOrEmpty(suffix))
+            {
+                return;
+            }
             foreach (PropertyInfo p in type.GetProperties())
             {
                 if (p.CanRead)
                 {
                     if (p.Name.EndsWith(suffix))
                     {
-                        Add(p.Name, p.GetValue(obj).ToString());
+                        var val = p.GetValue(obj);
+                        if (val != null)
+                        {
+                            Add(p.Name, val.ToString());
+                        }
                     }
                 }
 
