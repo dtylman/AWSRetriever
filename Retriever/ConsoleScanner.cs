@@ -32,7 +32,7 @@ namespace Retriever
                     TimeOut = Configuration.Instance.Timeout
                 };
                 this.scanner.Progress.ProgressChanged += Progress_ProgressChanged;
-
+                
                 this.creds = Configuration.Instance.GetCredentials();
                 if (creds == null)
                 {
