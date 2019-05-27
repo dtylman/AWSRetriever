@@ -2,7 +2,7 @@
 
 Lists all resources in a AWS account.
 
-[![Build Status](https://dev.azure.com/dtylman/heaven/_apis/build/status/dtylman.heaven?branchName=master)](https://dev.azure.com/dtylman/heaven/_build/latest?definitionId=1?branchName=master)
+[![Build Status](https://dev.azure.com/dtylman/AWSRetriever/_apis/build/status/AWSRetriever?branchName=master)](https://dev.azure.com/dtylman/AWSRetriever/_build/latest?definitionId=2&branchName=master)
 
 ## Features
 
