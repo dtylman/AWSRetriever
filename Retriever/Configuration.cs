@@ -13,7 +13,7 @@ namespace Retriever
         private string accessKeyID;
         private string secretAccessKey;
         private int pageSize = 18;
-        private int concurrentConnecitons = 15;
+        private int concurrentConnections = 15;
         private int timeout = 900000;
         private string profile = "default.profile.js";
         private string awsUser;
@@ -42,7 +42,7 @@ namespace Retriever
 
         [Category("Connection")]
         [Description("Number of concurrent connections when scanning.")]
-        public int ConcurrentConnecitons { get => concurrentConnecitons; set => concurrentConnecitons = value; }
+        public int ConcurrentConnections { get => concurrentConnections; set => concurrentConnections = value; }
         [Category("Connection")]
         [Description("API call timeout")]
         public int Timeout { get => timeout; set => timeout = value; }

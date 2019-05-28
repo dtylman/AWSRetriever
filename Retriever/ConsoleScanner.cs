@@ -28,7 +28,7 @@ namespace Retriever
             {
                 this.scanner = new Scanner
                 {
-                    MaxTasks = Configuration.Instance.ConcurrentConnecitons,
+                    MaxTasks = Configuration.Instance.ConcurrentConnections,
                     TimeOut = Configuration.Instance.Timeout
                 };
                 this.scanner.Progress.ProgressChanged += Progress_ProgressChanged;
