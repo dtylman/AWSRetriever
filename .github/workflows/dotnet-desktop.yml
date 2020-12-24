@@ -57,7 +57,7 @@ jobs:
 
     env:
       Solution_Name: AWSRetriever.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
-
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     steps:
     - name: Checkout
       uses: actions/checkout@v2
