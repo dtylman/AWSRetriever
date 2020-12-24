@@ -12,9 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout reposistory
+      uses: actions/checkout@v2
     - name: Checkout submodules
-    - uses: textbook/git-checkout-submodule-action@master
+      uses: textbook/git-checkout-submodule-action@master
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
